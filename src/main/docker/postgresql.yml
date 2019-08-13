@@ -1,0 +1,11 @@
+version: '2'
+services:
+  etax-postgresql:
+    image: postgres:11.3
+    # volumes:
+    #     - ~/volumes/jhipster/etax/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=etax
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432

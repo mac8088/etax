@@ -1,0 +1,53 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "net.atos.etax",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.1.2",
+    "applicationType": "monolith",
+    "baseName": "etax",
+    "packageName": "net.atos.etax",
+    "packageFolder": "net/atos/etax",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "ZDVlN2IxOWVmMmQ4YjlmMTViYWJkMjA3MzkyZjg5NmYzYTZiMWIzODIzNDYzZjU0YWU2ZTc0ZjhhZWZhNjU5OWUyMDUwNWU3MWNlYWRjYjU1OTc4NDdjNTZiMzhlODNhMTMwMWYxODBiMjA4ZDA3ZDNkYzUyZTBmZTA3ZDU1NTg=",
+    "testFrameworks": ["gatling", "cucumber"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-vuejs",
+        "version": "1.1.0"
+      }
+    ],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "en",
+    "languages": ["en", "zh-cn"],
+    "blueprint": "generator-jhipster-vuejs",
+    "blueprintVersion": "1.1.0"
+  },
+  "generator-jhipster-vuejs": {
+    "jhipsterVersion": "6.1.2",
+    "applicationType": "monolith",
+    "baseName": "etax",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "vue",
+    "clientTheme": "none",
+    "clientThemeVariant": ""
+  }
+}
