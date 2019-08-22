@@ -18,6 +18,10 @@ logging:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
     net.atos.etax: DEBUG
+    org.flowable: DEBUG
+
+flowable:
+  async-executor-activate: false
 
 spring:
   profiles:
@@ -59,6 +63,7 @@ spring:
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
+    enabled: true
   mail:
     host: localhost
     port: 25
