@@ -2,7 +2,7 @@ package net.atos.etax;
 
 import net.atos.etax.config.ApplicationProperties;
 import net.atos.etax.config.DefaultProfileUtil;
-
+import net.atos.etax.service.MyService;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -104,19 +104,11 @@ public class EtaxApp implements InitializingBean {
     }
     
     @Bean
-    public CommandLineRunner init(final RepositoryService repositoryService,
-                                  final RuntimeService runtimeService,
-                                  final TaskService taskService) {
+    public CommandLineRunner init(final MyService myService) {
 
         return new CommandLineRunner() {
-            @Override
-            public void run(String... strings) throws Exception {
-                System.out.println("Number of process definitions : "
-                	+ repositoryService.createProcessDefinitionQuery().count());
-                System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
-                runtimeService.startProcessInstanceByKey("vacationRequest");
-                System.out.println("Number of tasks after process start: " 
-                	+ taskService.createTaskQuery().count());
+        	public void run(String... strings) throws Exception {
+            	myService.createDemoUsers();
             }
         };
     }

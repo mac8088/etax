@@ -60,13 +60,15 @@ spring:
       hibernate.cache.use_second_level_cache: true
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: false
+    hibernate:
+      ddl-auto: update
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
     enabled: true
   mail:
     host: localhost
-    port: 25
+    port: 2025
     username:
     password:
   messages:
