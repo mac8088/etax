@@ -1,0 +1,23 @@
+{
+  "etaxApp": {
+    "label": {
+      "home": {
+        "title": "Labels",
+        "createLabel": "创建新 Label",
+        "createOrEditLabel": "创建或编辑 Label",
+        "notFound": "No Label found"
+      },
+      "created": "Label {{ param }} 创建成功",
+      "updated": "Label {{ param }} 更新成功",
+      "deleted": "Label {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Label {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Label"
+      },
+      "label": "Label",
+      "operation": "Operation"
+    }
+  }
+}

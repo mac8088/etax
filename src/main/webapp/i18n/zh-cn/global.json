@@ -7,6 +7,9 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "数据",
+        "bankAccount": "Bank Account",
+        "label": "Label",
+        "operation": "Operation",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -131,5 +134,5 @@
     "idexists": "新建的 {{entityName}} 不能包含ID",
     "idnull": "Invalid ID"
   },
-  "footer": "这里是页脚"
+  "footer": "Atos China @2019"
 }

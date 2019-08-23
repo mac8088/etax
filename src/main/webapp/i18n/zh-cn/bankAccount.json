@@ -1,0 +1,25 @@
+{
+  "etaxApp": {
+    "bankAccount": {
+      "home": {
+        "title": "Bank Accounts",
+        "createLabel": "创建新 Bank Account",
+        "createOrEditLabel": "创建或编辑 Bank Account",
+        "notFound": "No Bank Account found"
+      },
+      "created": "Bank Account {{ param }} 创建成功",
+      "updated": "Bank Account {{ param }} 更新成功",
+      "deleted": "Bank Account {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Bank Account {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Bank Account"
+      },
+      "name": "Name",
+      "balance": "Balance",
+      "operation": "Operation",
+      "user": "User"
+    }
+  }
+}
