@@ -22,6 +22,8 @@ logging:
 
 flowable:
   async-executor-activate: false
+  idm:
+    password-encoder: spring_delegating
 
 spring:
   profiles:

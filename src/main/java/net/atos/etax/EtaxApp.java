@@ -6,9 +6,8 @@ import net.atos.etax.service.MyService;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
-import org.flowable.engine.RepositoryService;
-import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
+import org.flowable.spring.SpringProcessEngineConfiguration;
+import org.flowable.spring.boot.EngineConfigurationConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -110,6 +109,13 @@ public class EtaxApp implements InitializingBean {
         	public void run(String... strings) throws Exception {
             	myService.createDemoUsers();
             }
+        };
+    }
+    
+    @Bean
+    public EngineConfigurationConfigurer<SpringProcessEngineConfiguration> customProcessEngineConfigurer() {
+        return engineConfiguration -> {
+            engineConfiguration.setValidateFlowable5EntitiesEnabled(false);
         };
     }
 }
