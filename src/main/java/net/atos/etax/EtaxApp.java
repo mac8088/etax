@@ -2,7 +2,6 @@ package net.atos.etax;
 
 import net.atos.etax.config.ApplicationProperties;
 import net.atos.etax.config.DefaultProfileUtil;
-import net.atos.etax.service.MyService;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -100,16 +99,6 @@ public class EtaxApp implements InitializingBean {
             serverPort,
             contextPath,
             env.getActiveProfiles());
-    }
-    
-    @Bean
-    public CommandLineRunner init(final MyService myService) {
-
-        return new CommandLineRunner() {
-        	public void run(String... strings) throws Exception {
-            	myService.createDemoUsers();
-            }
-        };
     }
     
     @Bean

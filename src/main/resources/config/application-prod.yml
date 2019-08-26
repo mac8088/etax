@@ -18,6 +18,7 @@ logging:
     ROOT: INFO
     net.atos.etax: INFO
     io.github.jhipster: INFO
+    org.flowable: INFO
 
 management:
   metrics:
@@ -35,7 +36,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/etax
     username: etax
-    password:
+    password: etax
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -52,6 +53,7 @@ spring:
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
+    enabled: true
   mail:
     host: localhost
     port: 25
