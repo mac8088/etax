@@ -85,7 +85,6 @@ entity StdCodesGroup (std_codes_group) {
     touppercase String minlength(1) maxlength(1)
 }
 
-
 /**
 * The StdCodesProp entity.
 * all properties have been added to the standard code
