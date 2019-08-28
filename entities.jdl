@@ -1,5 +1,4 @@
 
-
 /**
 * The StdCodes entity.
 * Holds the list of elements in a group. Groups are defined in STD_CODES_GROUP.
@@ -60,7 +59,7 @@ entity StdCodesDesc (std_codes_desc) {
 */
 entity StdCodesGroup (std_codes_group) {
     /**Code of the group of codes */
-    groupCode String required maxlength(40),
+    groupCode String required unique maxlength(40),
     /**Group description (name of the list of codes) */
     groupDesc String required maxlength(255),
     /**System indicator. Can hold values ''Y'' or ''N''. When ''Y'', the elements of the group cannot be modified by end-users using the system configuration module. However, their description can be changed and they can be translated. */
@@ -119,10 +118,6 @@ enum ValueTypeIndicator {
 }
 
 relationship OneToMany {
-    StdCodesGroup{stdCodes} to StdCodes{stdCodesGroup(groupCode)}
-}
-
-relationship OneToMany {
+    StdCodesGroup{stdCodes} to StdCodes{stdCodesGroup(groupCode)},
     StdCodes{stdCodesDesc} to StdCodesDesc{stdCodes(internalCode)}
 }
-
