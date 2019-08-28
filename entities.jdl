@@ -117,3 +117,12 @@ enum OptionIndicator {
 enum ValueTypeIndicator {
     D, S, N, B
 }
+
+relationship OneToMany {
+    StdCodesGroup{stdCodes} to StdCodes{stdCodesGroup(groupCode)}
+}
+
+relationship OneToMany {
+    StdCodes{stdCodesDesc} to StdCodesDesc{stdCodes(internalCode)}
+}
+
