@@ -1,24 +1,4 @@
-entity BankAccount {
-  name String required,
-  balance BigDecimal required
-}
-entity Label {
-  label String required minlength(3)
-}
-entity Operation {
-  date ZonedDateTime required,
-  description String,
-  amount BigDecimal required
-}
-relationship OneToMany {
-  BankAccount{operation} to Operation{bankAccount(name)}
-}
-relationship ManyToOne {
-  BankAccount{user(login)} to User
-}
-relationship ManyToMany {
-  Operation{label(label)} to Label{operation}
-}
+
 
 /**
 * The StdCodes entity.
@@ -28,28 +8,28 @@ relationship ManyToMany {
 * i.e. it is not a system group.
 */
 entity StdCodes (std_codes) {
-	/**Code of the group of codes in STD_CODES_GROUP.*/
-	groupCode String required maxlength(40),
-	/**Identifies uniquely an element in a group. Unlike external codes, internal codes are not subject to translation and can therefore be used in programs.*/
-	internalCode String required maxlength(40),
-	/**Date at which the code becomes valid (inclusive).*/
-	startDate ZonedDateTime required,
-	/**Date at which the validity of the code ends. The code is valid on that date until midnight (hours are truncated). Must be greater than (or equal to) START_DATE.*/
-	endDate ZonedDateTime,
-	/**Reference of the parent code in multi-level lists. Used together with STD_CODES_GROUP.PARENT_GROUP_CODE to find the code in STD_CODES(GROUP_CODE, INTERNAL_CODE).*/
-	parentInternalCode String maxlength(40),
-	/**Internal comments. Optional. Not shown to end-users.*/
-	comments String maxlength(255),
-	/**Security level.*/
-	secLevel Integer required max(99),
-	/**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''D'' (Date).*/
-	codeValueDate LocalDate,
-	/**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''S'' (String).*/
-	codeValueString String maxlength(255),
-	/**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''B'' (Boolean).*/
-	codeValueBool Boolean,
-	/**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''N'' (Number)*/
-	codeValueNumber Integer
+    /**Code of the group of codes in STD_CODES_GROUP.*/
+    groupCode String required maxlength(40),
+    /**Identifies uniquely an element in a group. Unlike external codes, internal codes are not subject to translation and can therefore be used in programs.*/
+    internalCode String required maxlength(40),
+    /**Date at which the code becomes valid (inclusive).*/
+    startDate ZonedDateTime required,
+    /**Date at which the validity of the code ends. The code is valid on that date until midnight (hours are truncated). Must be greater than (or equal to) START_DATE.*/
+    endDate ZonedDateTime,
+    /**Reference of the parent code in multi-level lists. Used together with STD_CODES_GROUP.PARENT_GROUP_CODE to find the code in STD_CODES(GROUP_CODE, INTERNAL_CODE).*/
+    parentInternalCode String maxlength(40),
+    /**Internal comments. Optional. Not shown to end-users.*/
+    comments String maxlength(255),
+    /**Security level.*/
+    secLevel Integer required max(99),
+    /**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''D'' (Date).*/
+    codeValueDate LocalDate,
+    /**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''S'' (String).*/
+    codeValueString String maxlength(255),
+    /**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''B'' (Boolean).*/
+    codeValueBool Boolean,
+    /**Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''N'' (Number)*/
+    codeValueNumber Integer
 }
 
 /**
@@ -57,20 +37,20 @@ entity StdCodes (std_codes) {
 * Multilingual descriptions of the codes.
 */
 entity StdCodesDesc (std_codes_desc) {
-		/**Code of the group of codes in STD_CODES_GROUP. */
-		groupCode String required maxlength(40),
-		/**Internal code of the element in STD_CODES. */
-		internalCode String required maxlength(40),
-		/**Language of the description. */
-		langCode String required maxlength(10),
-		/**Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element. */
-		startDate ZonedDateTime required,
-		/**Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code. */
-		endDate ZonedDateTime,
-		/**External code displayed to the user for this language. Used in entry fields next to drop-down lists of values. Used only when STD_CODES_GROUP.EXTERNAL_CODE_REQUIRED = ''Y''. */
-		externalCode String maxlength(40),
-		/**Multilingual description of the element for this language. Used to populate lists of values. */
-		codeDesc String maxlength(500)
+    /**Code of the group of codes in STD_CODES_GROUP. */
+    groupCode String required maxlength(40),
+    /**Internal code of the element in STD_CODES. */
+    internalCode String required maxlength(40),
+    /**Language of the description. */
+    langCode String required maxlength(10),
+    /**Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element. */
+    startDate ZonedDateTime required,
+    /**Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code. */
+    endDate ZonedDateTime,
+    /**External code displayed to the user for this language. Used in entry fields next to drop-down lists of values. Used only when STD_CODES_GROUP.EXTERNAL_CODE_REQUIRED = ''Y''. */
+    externalCode String maxlength(40),
+    /**Multilingual description of the element for this language. Used to populate lists of values. */
+    codeDesc String maxlength(500)
 }
 
 /**
@@ -79,66 +59,66 @@ entity StdCodesDesc (std_codes_desc) {
 * Code groups represent lists of elements. Data in this table cannot be modified by end users.
 */
 entity StdCodesGroup (std_codes_group) {
-		/**Code of the group of codes */
-		groupCode String required maxlength(40),
-		/**Group description (name of the list of codes) */
-		groupDesc String required maxlength(255),
-		/**System indicator. Can hold values ''Y'' or ''N''. When ''Y'', the elements of the group cannot be modified by end-users using the system configuration module. However, their description can be changed and they can be translated. */
-		systemInd String required minlength(1) maxlength(1),
-		/**If the elements in this group have an associated security level. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a security level in STD_CODES.SEC_LEVEL. */
-		secLevelRequired String required minlength(1) maxlength(1),
-		/**If the elements in this group have a value. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a value and their type must be specified in VALUE_TYPE. */
-		valueRequired String required minlength(1) maxlength(1),
-		/**Type of the value of all the elements in this group. Can be one of ''D'' (Date), ''S'' (String), ''N'' (Number) or ''B'' (Boolean). Can be set only when CODES_VALUE_REQUIRED = ''Y''. */
-		valueType String minlength(1) maxlength(1),
-		/**Can hold values ''Y'' or ''N''. When ''N'', codes are never shown to end-users and don''t require an entry in STD_CODES_DESC. When ''Y'', EXTERNAL_CODE_REQUIRED must be set. */
-		descriptionRequired String required minlength(1) maxlength(1),
-		/**If the elements in this group are identified by a multilingual code shown to the user. Can hold values ''Y'' or ''N''. When set to ''Y'', the length of external codes must be specified in EXTERNAL_CODE_LENGTH. External codes are used as shortcuts in entry fields linked to drop-down lists of values. */
-		externalCodeRequired String minlength(1) maxlength(1),
-		/**Number of characters of the external codes. Can be set only when EXTERNAL_CODE_REQUIRED is ''Y''. */
-		externalCodeLength Integer,
-		/**If this group has a parent group. Can be set to ''Y'' or ''N''. When ''Y'', the parent group code must be specified in PARENT_GROUP_CODE. Used for multi-level lists of values. */
-		parentGroupRequired String required minlength(1) maxlength(1),
-		/**The code of the parent group. Must be set when PARENT_GROUP_REQUIRED is ''Y''. */
-		parentGroupCode String,
-		/**The shortcut code is shown by uppercase or not */
-		touppercase String minlength(1) maxlength(1)
+    /**Code of the group of codes */
+    groupCode String required maxlength(40),
+    /**Group description (name of the list of codes) */
+    groupDesc String required maxlength(255),
+    /**System indicator. Can hold values ''Y'' or ''N''. When ''Y'', the elements of the group cannot be modified by end-users using the system configuration module. However, their description can be changed and they can be translated. */
+    systemInd String required minlength(1) maxlength(1),
+    /**If the elements in this group have an associated security level. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a security level in STD_CODES.SEC_LEVEL. */
+    secLevelRequired String required minlength(1) maxlength(1),
+    /**If the elements in this group have a value. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a value and their type must be specified in VALUE_TYPE. */
+    valueRequired String required minlength(1) maxlength(1),
+    /**Type of the value of all the elements in this group. Can be one of ''D'' (Date), ''S'' (String), ''N'' (Number) or ''B'' (Boolean). Can be set only when CODES_VALUE_REQUIRED = ''Y''. */
+    valueType String minlength(1) maxlength(1),
+    /**Can hold values ''Y'' or ''N''. When ''N'', codes are never shown to end-users and don''t require an entry in STD_CODES_DESC. When ''Y'', EXTERNAL_CODE_REQUIRED must be set. */
+    descriptionRequired String required minlength(1) maxlength(1),
+    /**If the elements in this group are identified by a multilingual code shown to the user. Can hold values ''Y'' or ''N''. When set to ''Y'', the length of external codes must be specified in EXTERNAL_CODE_LENGTH. External codes are used as shortcuts in entry fields linked to drop-down lists of values. */
+    externalCodeRequired String minlength(1) maxlength(1),
+    /**Number of characters of the external codes. Can be set only when EXTERNAL_CODE_REQUIRED is ''Y''. */
+    externalCodeLength Integer,
+    /**If this group has a parent group. Can be set to ''Y'' or ''N''. When ''Y'', the parent group code must be specified in PARENT_GROUP_CODE. Used for multi-level lists of values. */
+    parentGroupRequired String required minlength(1) maxlength(1),
+    /**The code of the parent group. Must be set when PARENT_GROUP_REQUIRED is ''Y''. */
+    parentGroupCode String,
+    /**The shortcut code is shown by uppercase or not */
+    touppercase String minlength(1) maxlength(1)
 }
+
 
 /**
 * The StdCodesProp entity.
 * all properties have been added to the standard code
 */
 entity StdCodesProp (std_codes_prop) {
-	/**Code of the group of codes */
-	groupCode String required maxlength(40),
-	/**Internal code of the element in STD_CODES. */
-	internalCode String required maxlength(40),
-	/**Property code */
-	propCode String required maxlength(40),
-	/**Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element. */
-	startDate ZonedDateTime required,
-	/**Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code. */
-	endDate ZonedDateTime,
-	/**Date value for the property with a date property type */
-	valueDate LocalDate,
-	/**String value for the property with a string property type */
-	valueString String maxlength(255),
-	/**Boolean value for the property with a boolean property type */
-	valueBool Boolean,
-	/**Numeric value for the property with a numeric property type */
-	valueNumber Double
+    /**Code of the group of codes */
+    groupCode String required maxlength(40),
+    /**Internal code of the element in STD_CODES. */
+    internalCode String required maxlength(40),
+    /**Property code */
+    propCode String required maxlength(40),
+    /**Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element. */
+    startDate ZonedDateTime required,
+    /**Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code. */
+    endDate ZonedDateTime,
+    /**Date value for the property with a date property type */
+    valueDate LocalDate,
+    /**String value for the property with a string property type */
+    valueString String maxlength(255),
+    /**Boolean value for the property with a boolean property type */
+    valueBool Boolean,
+    /**Numeric value for the property with a numeric property type */
+    valueNumber Double
 }
 
-
 enum OptionIndicator {
-	Y, N
+    Y, N
 }
 
 enum BoolValueIndicator {
-	Y, N
+    Y, N
 }
 
 enum ValueTypeIndicator {
-	D, S, N, B
+    D, S, N, B
 }
