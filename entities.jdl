@@ -64,25 +64,25 @@ entity StdCodesGroup (std_codes_group) {
     /**Group description (name of the list of codes) */
     groupDesc String required maxlength(255),
     /**System indicator. Can hold values ''Y'' or ''N''. When ''Y'', the elements of the group cannot be modified by end-users using the system configuration module. However, their description can be changed and they can be translated. */
-    systemInd String required minlength(1) maxlength(1),
+    systemInd OptionIndicator required,
     /**If the elements in this group have an associated security level. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a security level in STD_CODES.SEC_LEVEL. */
-    secLevelRequired String required minlength(1) maxlength(1),
+    secLevelRequired OptionIndicator required,
     /**If the elements in this group have a value. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a value and their type must be specified in VALUE_TYPE. */
-    valueRequired String required minlength(1) maxlength(1),
+    valueRequired OptionIndicator required,
     /**Type of the value of all the elements in this group. Can be one of ''D'' (Date), ''S'' (String), ''N'' (Number) or ''B'' (Boolean). Can be set only when CODES_VALUE_REQUIRED = ''Y''. */
-    valueType String minlength(1) maxlength(1),
+    valueType ValueTypeIndicator,
     /**Can hold values ''Y'' or ''N''. When ''N'', codes are never shown to end-users and don''t require an entry in STD_CODES_DESC. When ''Y'', EXTERNAL_CODE_REQUIRED must be set. */
-    descriptionRequired String required minlength(1) maxlength(1),
+    descriptionRequired OptionIndicator required,
     /**If the elements in this group are identified by a multilingual code shown to the user. Can hold values ''Y'' or ''N''. When set to ''Y'', the length of external codes must be specified in EXTERNAL_CODE_LENGTH. External codes are used as shortcuts in entry fields linked to drop-down lists of values. */
-    externalCodeRequired String minlength(1) maxlength(1),
+    externalCodeRequired OptionIndicator,
     /**Number of characters of the external codes. Can be set only when EXTERNAL_CODE_REQUIRED is ''Y''. */
     externalCodeLength Integer,
     /**If this group has a parent group. Can be set to ''Y'' or ''N''. When ''Y'', the parent group code must be specified in PARENT_GROUP_CODE. Used for multi-level lists of values. */
-    parentGroupRequired String required minlength(1) maxlength(1),
+    parentGroupRequired OptionIndicator required,
     /**The code of the parent group. Must be set when PARENT_GROUP_REQUIRED is ''Y''. */
     parentGroupCode String,
     /**The shortcut code is shown by uppercase or not */
-    touppercase String minlength(1) maxlength(1)
+    touppercase Boolean
 }
 
 /**
@@ -111,10 +111,6 @@ entity StdCodesProp (std_codes_prop) {
 }
 
 enum OptionIndicator {
-    Y, N
-}
-
-enum BoolValueIndicator {
     Y, N
 }
 
