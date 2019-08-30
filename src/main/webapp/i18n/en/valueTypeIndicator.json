@@ -1,0 +1,11 @@
+{
+  "etaxApp": {
+    "ValueTypeIndicator": {
+      "null": "",
+      "D": "D",
+      "S": "S",
+      "N": "N",
+      "B": "B"
+    }
+  }
+}

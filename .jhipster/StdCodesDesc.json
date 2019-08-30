@@ -1,0 +1,85 @@
+{
+    "name": "StdCodesDesc",
+    "fields": [
+        {
+            "fieldName": "groupCode",
+            "javadoc": "Code of the group of codes in STD_CODES_GROUP.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "internalCode",
+            "javadoc": "Internal code of the element in STD_CODES.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "langCode",
+            "javadoc": "Language of the description.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "startDate",
+            "javadoc": "Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element.",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "javadoc": "Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code.",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "externalCode",
+            "javadoc": "External code displayed to the user for this language. Used in entry fields next to drop-down lists of values. Used only when STD_CODES_GROUP.EXTERNAL_CODE_REQUIRED = ''Y''.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "codeDesc",
+            "javadoc": "Multilingual description of the element for this language. Used to populate lists of values.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 500
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "stdCodes",
+            "otherEntityRelationshipName": "stdCodesDesc",
+            "relationshipName": "stdCodes",
+            "otherEntityField": "internalCode"
+        }
+    ],
+    "changelogDate": "20190828135618",
+    "javadoc": "The StdCodesDesc entity.\nMultilingual descriptions of the codes.",
+    "entityTableName": "std_codes_desc",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
