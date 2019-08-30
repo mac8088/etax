@@ -10,6 +10,10 @@
         "bankAccount": "Bank Account",
         "label": "Label",
         "operation": "Operation",
+        "stdCodes": "Std Codes",
+        "stdCodesDesc": "Std Codes Desc",
+        "stdCodesGroup": "Std Codes Group",
+        "stdCodesProp": "Std Codes Prop",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

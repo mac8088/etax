@@ -42,6 +42,30 @@ const Operation = () => import('../entities/operation/operation.vue');
 const OperationUpdate = () => import('../entities/operation/operation-update.vue');
 // prettier-ignore
 const OperationDetails = () => import('../entities/operation/operation-details.vue');
+// prettier-ignore
+const StdCodes = () => import('../entities/std-codes/std-codes.vue');
+// prettier-ignore
+const StdCodesUpdate = () => import('../entities/std-codes/std-codes-update.vue');
+// prettier-ignore
+const StdCodesDetails = () => import('../entities/std-codes/std-codes-details.vue');
+// prettier-ignore
+const StdCodesDesc = () => import('../entities/std-codes-desc/std-codes-desc.vue');
+// prettier-ignore
+const StdCodesDescUpdate = () => import('../entities/std-codes-desc/std-codes-desc-update.vue');
+// prettier-ignore
+const StdCodesDescDetails = () => import('../entities/std-codes-desc/std-codes-desc-details.vue');
+// prettier-ignore
+const StdCodesGroup = () => import('../entities/std-codes-group/std-codes-group.vue');
+// prettier-ignore
+const StdCodesGroupUpdate = () => import('../entities/std-codes-group/std-codes-group-update.vue');
+// prettier-ignore
+const StdCodesGroupDetails = () => import('../entities/std-codes-group/std-codes-group-details.vue');
+// prettier-ignore
+const StdCodesProp = () => import('../entities/std-codes-prop/std-codes-prop.vue');
+// prettier-ignore
+const StdCodesPropUpdate = () => import('../entities/std-codes-prop/std-codes-prop-update.vue');
+// prettier-ignore
+const StdCodesPropDetails = () => import('../entities/std-codes-prop/std-codes-prop-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -232,6 +256,106 @@ export default new Router({
       path: '/entity/operation/:operationId/view',
       name: 'OperationView',
       component: OperationDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/std-codes',
+      name: 'StdCodes',
+      component: StdCodes,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes/new',
+      name: 'StdCodesCreate',
+      component: StdCodesUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes/:stdCodesId/edit',
+      name: 'StdCodesEdit',
+      component: StdCodesUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes/:stdCodesId/view',
+      name: 'StdCodesView',
+      component: StdCodesDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/std-codes-desc',
+      name: 'StdCodesDesc',
+      component: StdCodesDesc,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-desc/new',
+      name: 'StdCodesDescCreate',
+      component: StdCodesDescUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-desc/:stdCodesDescId/edit',
+      name: 'StdCodesDescEdit',
+      component: StdCodesDescUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-desc/:stdCodesDescId/view',
+      name: 'StdCodesDescView',
+      component: StdCodesDescDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/std-codes-group',
+      name: 'StdCodesGroup',
+      component: StdCodesGroup,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-group/new',
+      name: 'StdCodesGroupCreate',
+      component: StdCodesGroupUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-group/:stdCodesGroupId/edit',
+      name: 'StdCodesGroupEdit',
+      component: StdCodesGroupUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-group/:stdCodesGroupId/view',
+      name: 'StdCodesGroupView',
+      component: StdCodesGroupDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/std-codes-prop',
+      name: 'StdCodesProp',
+      component: StdCodesProp,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-prop/new',
+      name: 'StdCodesPropCreate',
+      component: StdCodesPropUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-prop/:stdCodesPropId/edit',
+      name: 'StdCodesPropEdit',
+      component: StdCodesPropUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-prop/:stdCodesPropId/view',
+      name: 'StdCodesPropView',
+      component: StdCodesPropDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

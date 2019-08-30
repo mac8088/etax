@@ -26,6 +26,10 @@ import ConfigurationService from '@/admin/configuration/configuration.service';
 import BankAccountService from '@/entities/bank-account/bank-account.service';
 import LabelService from '@/entities/label/label.service';
 import OperationService from '@/entities/operation/operation.service';
+import StdCodesService from '@/entities/std-codes/std-codes.service';
+import StdCodesDescService from '@/entities/std-codes-desc/std-codes-desc.service';
+import StdCodesGroupService from '@/entities/std-codes-group/std-codes-group.service';
+import StdCodesPropService from '@/entities/std-codes-prop/std-codes-prop.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -84,6 +88,10 @@ new Vue({
     bankAccountService: () => new BankAccountService(),
     labelService: () => new LabelService(),
     operationService: () => new OperationService(),
+    stdCodesService: () => new StdCodesService(),
+    stdCodesDescService: () => new StdCodesDescService(),
+    stdCodesGroupService: () => new StdCodesGroupService(),
+    stdCodesPropService: () => new StdCodesPropService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },
