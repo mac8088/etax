@@ -1,6 +1,6 @@
 /**
-** Exchange Rate.
- */
+* Exchange Rate.
+*/
 entity ExchangeRate(adm_exchange_rate){
 	/**STD[CURRENCY], Source currency, for conversion considerations */
 	cstdCurrencyA String maxlength(40) required,
@@ -17,8 +17,8 @@ entity ExchangeRate(adm_exchange_rate){
 }
 
 /**
-** Public holiday.
- */
+* Public holiday.
+*/
 entity PublicHoliday(adm_public_holiday) {
 	/*STD[HOLIDAY_TTYPES] */
 	cstdHolidayTypes String maxlength(40),
@@ -75,8 +75,8 @@ entity Office(adm_office) {
 }
 
 /**
-** The Extension information for setting up and maintaining users.
- */
+* The Extension information for setting up and maintaining users.
+*/
 entity UserInfo(adm_user_info){
 	/**STD[ADM_SECTION], name of the administrative Section this user belongs to */
 	cstdAdmSection String maxlength(40) required,
@@ -133,19 +133,6 @@ entity UserInfo(adm_user_info){
 }
 
 /**
-** Entity for defining and maintaining applications.
- */
-entity Authority(jhi_authority){
-	name String required,
-	/**Decription of the application. */
-	desc String maxlength(200),
-	/**STD[MODULE], name of the module this application belongs to. */
-	module String maxlength(40),
-	/**Application Message ID in FF_MESSAGE. */
-	appMessage String maxlength(50)
-}
-
-/**
 * The relationship of Parent office and its children.
 */
 entity OfficeRelationship(adm_office_relationship) {
@@ -162,8 +149,8 @@ entity OfficeRelationship(adm_office_relationship) {
 }
 
 /**
-** This entity stores all of area codes of Tax Authority offices.
- */
+* This entity stores all of area codes of Tax Authority offices.
+*/
 entity OfficeCode(adm_office_code) {
 	/*Office ID */
 	officeId Integer required,
@@ -174,8 +161,8 @@ entity OfficeCode(adm_office_code) {
 }
 
 /**
-** Week working day.
- */
+* Week working day.
+*/
 entity WeekWorkingDay(adm_week_working_day) {
 	/*Tax Office ID */
 	officeId Integer required,
@@ -188,8 +175,8 @@ entity WeekWorkingDay(adm_week_working_day) {
 }
 
 /**
-** This entity stores relationships between Tax offices and functional offices.
- */
+* This entity stores relationships between Tax offices and functional offices.
+*/
 entity TaxFuncOffice(adm_tax_func_office){
 	/*Tax Office ID */
 	taxOfficeId Integer required,
@@ -201,11 +188,56 @@ entity TaxFuncOffice(adm_tax_func_office){
 	endDate LocalDate
 }
 
+/**
+* This Resource entity (TS02_RESOURCE)
+*/
+entity Resource(adm_resource){
+	name String required
+}
+
+/**
+* This Profile entity (TS08_PROFILE)
+*/
+entity Profile(adm_profile){
+	name String required
+}
+
+/**
+* 简单模式, 用户和授权/角色的多对多映射:
+* Authority(Role) is TS01_APPLICATION entity, The mapping table of n..n with User is:
+* jhi_user_authority
+*/
 relationship ManyToMany {
-	Office{publicHolidayId} to PublicHoliday{officeId},
+	User{authority(name)} to Authority{User(login)},
+}
+
+/**
+* 复杂模式, 用户和用户组的多对多映射：
+* Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with User is:
+* adm_user_profile (TS11_USER_PROFILE)
+*/
+relationship ManyToMany {
+	User{profile(name)} to Profile{User(login)},
+}
+
+/**
+* 资源和授权/角色的多对多映射：
+* Resource is TS02_RESOURCE entity, The mapping table of n..n with Authority is:
+* adm_resource_authority (TS03_APPLICATION_RESOURCE)
+*/
+relationship ManyToMany {
+	Resource{authority(name)} to Authority {resource(name)}
+}
+
+/**
+* 用户组和角色/授权的多对多映射：
+* Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with Authority is:
+* adm_profile_authority (TS09_APPLICATION_OF_PROFILE)
+*/
+relationship ManyToMany {
+	Profile{authority(name)} to Authority{profile(name)}
 }
 
 relationship OneToOne{
 	UserInfo{user(login)} to User
 }
-
