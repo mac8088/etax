@@ -7,13 +7,13 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "数据",
-        "bankAccount": "Bank Account",
-        "label": "Label",
-        "operation": "Operation",
-        "stdCodes": "Std Codes",
-        "stdCodesDesc": "Std Codes Desc",
-        "stdCodesGroup": "Std Codes Group",
-        "stdCodesProp": "Std Codes Prop",
+        "bankAccount": "银行账户",
+        "label": "标签",
+        "operation": "操作",
+        "stdCodes": "基础数据",
+        "stdCodesDesc": "数据描述",
+        "stdCodesGroup": "数据分组",
+        "stdCodesProp": "数据属性",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -128,7 +128,7 @@
     }
   },
   "error": {
-    "internalServerError": "Internal server error",
+    "internalServerError": "服务器内部错误",
     "server.not.reachable": "服务器无法访问",
     "url.not.found": "Not found",
     "NotNull": "域 {{fieldName}} 不能为空!",

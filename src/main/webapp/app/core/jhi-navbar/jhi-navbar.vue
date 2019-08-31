@@ -38,19 +38,19 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.operation')">Operation</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/std-codes">
-                        <font-awesome-icon icon="asterisk" />
-                        <span v-text="$t('global.menu.entities.stdCodes')">StdCodes</span>
-                    </b-dropdown-item>
-                    <b-dropdown-item to="/entity/std-codes-desc">
-                        <font-awesome-icon icon="asterisk" />
-                        <span v-text="$t('global.menu.entities.stdCodesDesc')">StdCodesDesc</span>
-                    </b-dropdown-item>
-                    <b-dropdown-item to="/entity/std-codes-group">
+                    <b-dropdown-item to="/entity/std-codes-group" v-if="hasAnyAuthority('ROLE_ADMIN')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesGroup')">StdCodesGroup</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/std-codes-prop">
+                    <b-dropdown-item to="/entity/std-codes" v-if="hasAnyAuthority('ROLE_ADMIN')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.stdCodes')">StdCodes</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/std-codes-desc" v-if="hasAnyAuthority('ROLE_ADMIN')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.stdCodesDesc')">StdCodesDesc</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/std-codes-prop" v-if="hasAnyAuthority('ROLE_ADMIN')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesProp')">StdCodesProp</span>
                     </b-dropdown-item>
