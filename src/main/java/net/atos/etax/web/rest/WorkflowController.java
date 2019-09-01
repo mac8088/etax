@@ -1,27 +1,32 @@
 package net.atos.etax.web.rest;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.task.api.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RestController
+@RequestMapping("/api")
 public class WorkflowController {
     private static final Logger logger = LoggerFactory.getLogger(WorkflowController.class);
 
-    @Autowired
     private RuntimeService runtimeService;
 
-    @Autowired
     private TaskService taskService;
+    
+    public WorkflowController(RuntimeService runtimeService, TaskService raskService) {
+        this.runtimeService = runtimeService;
+        this.taskService = raskService;
+    }
 
     @GetMapping("/start-process")
     public String startProcess() {
