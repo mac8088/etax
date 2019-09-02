@@ -115,7 +115,7 @@ entity UserInfo(adm_user_info){
     /**Login time */
     loginTime ZonedDateTime,
     /**Times of password error when logon attempts */
-    attempt Integer  maxlength(99) required,
+    attempt Integer max(3) required,
     /**Flag indicates if it need to approve the change of user profiles */
     needApprove Boolean required,
     /**Logout time */
