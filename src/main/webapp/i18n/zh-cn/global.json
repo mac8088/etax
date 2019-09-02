@@ -14,6 +14,14 @@
         "stdCodesDesc": "数据描述",
         "stdCodesGroup": "数据分组",
         "stdCodesProp": "数据属性",
+        "exchangeRate": "汇率管理",
+        "publicHoliday": "公共假日",
+        "userInfo": "用户信息",
+        "office": "组织机构",
+        "officeRelationship": "机构关系维护",
+        "officeAreaCode": "机构区域维护",
+        "officeTaxFunc": "机构功能维护",
+        "officeWeekday": "机构工作日维护",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -104,7 +112,7 @@
       "cancel": "取消",
       "delete": "删除",
       "edit": "编辑",
-      "open": "Open",
+      "open": "打开",
       "save": "保存",
       "view": "查看"
     },
@@ -125,7 +133,8 @@
       "maxbytes": "本字段不多余 {{max}} 字符.",
       "pattern": "本字段必须符合模式 {{pattern}}.",
       "number": "本字段必须为数字.",
-      "datetimelocal": "本字段必须为日期和时间."
+      "datetimelocal": "本字段必须为日期和时间.",
+      "patternLogin": "此字段只能包含字母、数字和电子邮件地址."
     }
   },
   "error": {

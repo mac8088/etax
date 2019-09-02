@@ -16,14 +16,12 @@
         "stdCodesProp": "Std Codes Prop",
         "exchangeRate": "Exchange Rate",
         "publicHoliday": "Public Holiday",
-        "office": "Office",
         "userInfo": "User Info",
+        "office": "Office",
         "officeRelationship": "Office Relationship",
-        "officeCode": "Office Code",
-        "weekWorkingDay": "Week Working Day",
-        "taxFuncOffice": "Tax Func Office",
-        "resource": "Resource",
-        "profile": "Profile",
+        "officeAreaCode": "Office Area Code",
+        "officeTaxFunc": "Office Tax Func",
+        "officeWeekday": "Office Weekday",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
