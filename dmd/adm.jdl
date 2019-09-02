@@ -230,34 +230,34 @@ entity Profile(adm_profile){
 }
 
 /**
-* 简单模式, 用户和授权/角色的多对多映射:
+* Simple mode, multi-to-multi mapping of users and authorization/roles:
 * Authority(Role) is TS01_APPLICATION entity, The mapping table of n..n with User is:
 * jhi_user_authority
 */
-relationship ManyToMany {
-    User{authority(name)} to Authority{User(login)},
-}
+//relationship ManyToMany {
+//    User{authority(name)} to Authority{User(login)},
+//}
 
 /**
-* 复杂模式, 用户和用户组的多对多映射：
+* Complex patterns, multi-to-multi mapping of users and user groups
 * Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with User is:
 * adm_user_profile (TS11_USER_PROFILE)
 */
 relationship ManyToMany {
-    User{profile(name)} to Profile{User(login)},
+    Profile{User(login)} to User{profile(name)}
 }
 
 /**
-* 资源和授权/角色的多对多映射：
+* Multi-to-multi mapping of resources and authorization/roles
 * Resource is TS02_RESOURCE entity, The mapping table of n..n with Authority is:
 * adm_resource_authority (TS03_APPLICATION_RESOURCE)
 */
 relationship ManyToMany {
-    Resource{authority(name)} to Authority {resource(name)}
+    Resource{authority(name)} to Authority{resource(name)}
 }
 
 /**
-* 用户组和角色/授权的多对多映射：
+* Many-to-many mapping of household groups and roles/authorizations：
 * Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with Authority is:
 * adm_profile_authority (TS09_APPLICATION_OF_PROFILE)
 */
