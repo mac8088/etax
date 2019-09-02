@@ -1,0 +1,152 @@
+{
+    "name": "Office",
+    "fields": [
+        {
+            "fieldName": "cstdOfficeType",
+            "javadoc": "STD[OFFICE_TYPE]",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "name",
+            "javadoc": "Office name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "cstdClassifierCode",
+            "javadoc": "STD[CLASSIFIER_CODE]",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "effectiveDate",
+            "javadoc": "Effective date",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "expiryDate",
+            "javadoc": "Expiry date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "phone",
+            "javadoc": "Office telephone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "fax",
+            "javadoc": "Office fax number",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "stl",
+            "javadoc": "Office manager for signature",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 100
+        },
+        {
+            "fieldName": "mngOffice",
+            "javadoc": "Foreign key to another office that manages users of this office, It must have office type that allows Office Administrator(ADM-CFG: Allowed Users in Offices)",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "physicalAdr",
+            "javadoc": "Physical Address",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "postalAadr",
+            "javadoc": "Postal Address",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "pinCode",
+            "javadoc": "Postal Identification Number",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 15
+        },
+        {
+            "fieldName": "cstdWeekWorkingDay",
+            "javadoc": "Effective date",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "officeCode",
+            "javadoc": "Unique Office codee",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 7
+        },
+        {
+            "fieldName": "cstdOfficeSubType",
+            "javadoc": "STD[OFFICE_SUB_TYPE]",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdOfficeFuncType",
+            "javadoc": "STD[OFFICE_FUNC_TYPE],functional office type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "ccVersion",
+            "javadoc": "Version to control concurrency",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190902135644",
+    "javadoc": "The Office data segment holds the information of all the Tax Authority's offices that access the e-tax system.",
+    "entityTableName": "adm_office",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

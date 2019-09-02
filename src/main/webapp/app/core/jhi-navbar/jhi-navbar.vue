@@ -54,6 +54,38 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesProp')">StdCodesProp</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/entity/exchange-rate">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.exchangeRate')">ExchangeRate</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/public-holiday">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.publicHoliday')">PublicHoliday</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/office">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.office')">Office</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/office-relationship">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.officeRelationship')">OfficeRelationship</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/office-area-code">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.officeAreaCode')">OfficeAreaCode</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/office-tax-func">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.officeTaxFunc')">OfficeTaxFunc</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/office-weekday">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.officeWeekday')">OfficeWeekday</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/user-info">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.userInfo')">UserInfo</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown

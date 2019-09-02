@@ -1,0 +1,57 @@
+{
+  "etaxApp": {
+    "office": {
+      "home": {
+        "title": "Offices",
+        "createLabel": "创建新 Office",
+        "createOrEditLabel": "创建或编辑 Office",
+        "notFound": "No Office found"
+      },
+      "created": "Office {{ param }} 创建成功",
+      "updated": "Office {{ param }} 更新成功",
+      "deleted": "Office {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Office {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Office"
+      },
+      "cstdOfficeType": "Cstd Office Type",
+      "name": "Name",
+      "cstdClassifierCode": "Cstd Classifier Code",
+      "effectiveDate": "Effective Date",
+      "expiryDate": "Expiry Date",
+      "phone": "Phone",
+      "fax": "Fax",
+      "stl": "Stl",
+      "mngOffice": "Mng Office",
+      "physicalAdr": "Physical Adr",
+      "postalAadr": "Postal Aadr",
+      "pinCode": "Pin Code",
+      "cstdWeekWorkingDay": "Cstd Week Working Day",
+      "officeCode": "Office Code",
+      "cstdOfficeSubType": "Cstd Office Sub Type",
+      "cstdOfficeFuncType": "Cstd Office Func Type",
+      "ccVersion": "Cc Version",
+      "help": {
+        "cstdOfficeType": "STD[OFFICE_TYPE]",
+        "name": "Office name",
+        "cstdClassifierCode": "STD[CLASSIFIER_CODE]",
+        "effectiveDate": "Effective date",
+        "expiryDate": "Expiry date",
+        "phone": "Office telephone",
+        "fax": "Office fax number",
+        "stl": "Office manager for signature",
+        "mngOffice": "Foreign key to another office that manages users of this office, It must have office type that allows Office Administrator(ADM-CFG: Allowed Users in Offices)",
+        "physicalAdr": "Physical Address",
+        "postalAadr": "Postal Address",
+        "pinCode": "Postal Identification Number",
+        "cstdWeekWorkingDay": "Effective date",
+        "officeCode": "Unique Office codee",
+        "cstdOfficeSubType": "STD[OFFICE_SUB_TYPE]",
+        "cstdOfficeFuncType": "STD[OFFICE_FUNC_TYPE],functional office type",
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}

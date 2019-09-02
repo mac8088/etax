@@ -1,0 +1,29 @@
+{
+  "etaxApp": {
+    "officeRelationship": {
+      "home": {
+        "title": "Office Relationships",
+        "createLabel": "创建新 Office Relationship",
+        "createOrEditLabel": "创建或编辑 Office Relationship",
+        "notFound": "No Office Relationship found"
+      },
+      "created": "Office Relationship {{ param }} 创建成功",
+      "updated": "Office Relationship {{ param }} 更新成功",
+      "deleted": "Office Relationship {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Office Relationship {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Office Relationship"
+      },
+      "parentId": "Parent Id",
+      "chileId": "Chile Id",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "ccVersion": "Cc Version",
+      "help": {
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}

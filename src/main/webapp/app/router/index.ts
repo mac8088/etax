@@ -66,6 +66,54 @@ const StdCodesProp = () => import('../entities/std-codes-prop/std-codes-prop.vue
 const StdCodesPropUpdate = () => import('../entities/std-codes-prop/std-codes-prop-update.vue');
 // prettier-ignore
 const StdCodesPropDetails = () => import('../entities/std-codes-prop/std-codes-prop-details.vue');
+// prettier-ignore
+const ExchangeRate = () => import('../entities/exchange-rate/exchange-rate.vue');
+// prettier-ignore
+const ExchangeRateUpdate = () => import('../entities/exchange-rate/exchange-rate-update.vue');
+// prettier-ignore
+const ExchangeRateDetails = () => import('../entities/exchange-rate/exchange-rate-details.vue');
+// prettier-ignore
+const PublicHoliday = () => import('../entities/public-holiday/public-holiday.vue');
+// prettier-ignore
+const PublicHolidayUpdate = () => import('../entities/public-holiday/public-holiday-update.vue');
+// prettier-ignore
+const PublicHolidayDetails = () => import('../entities/public-holiday/public-holiday-details.vue');
+// prettier-ignore
+const Office = () => import('../entities/office/office.vue');
+// prettier-ignore
+const OfficeUpdate = () => import('../entities/office/office-update.vue');
+// prettier-ignore
+const OfficeDetails = () => import('../entities/office/office-details.vue');
+// prettier-ignore
+const OfficeRelationship = () => import('../entities/office-relationship/office-relationship.vue');
+// prettier-ignore
+const OfficeRelationshipUpdate = () => import('../entities/office-relationship/office-relationship-update.vue');
+// prettier-ignore
+const OfficeRelationshipDetails = () => import('../entities/office-relationship/office-relationship-details.vue');
+// prettier-ignore
+const OfficeAreaCode = () => import('../entities/office-area-code/office-area-code.vue');
+// prettier-ignore
+const OfficeAreaCodeUpdate = () => import('../entities/office-area-code/office-area-code-update.vue');
+// prettier-ignore
+const OfficeAreaCodeDetails = () => import('../entities/office-area-code/office-area-code-details.vue');
+// prettier-ignore
+const OfficeTaxFunc = () => import('../entities/office-tax-func/office-tax-func.vue');
+// prettier-ignore
+const OfficeTaxFuncUpdate = () => import('../entities/office-tax-func/office-tax-func-update.vue');
+// prettier-ignore
+const OfficeTaxFuncDetails = () => import('../entities/office-tax-func/office-tax-func-details.vue');
+// prettier-ignore
+const OfficeWeekday = () => import('../entities/office-weekday/office-weekday.vue');
+// prettier-ignore
+const OfficeWeekdayUpdate = () => import('../entities/office-weekday/office-weekday-update.vue');
+// prettier-ignore
+const OfficeWeekdayDetails = () => import('../entities/office-weekday/office-weekday-details.vue');
+// prettier-ignore
+const UserInfo = () => import('../entities/user-info/user-info.vue');
+// prettier-ignore
+const UserInfoUpdate = () => import('../entities/user-info/user-info-update.vue');
+// prettier-ignore
+const UserInfoDetails = () => import('../entities/user-info/user-info-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -356,6 +404,206 @@ export default new Router({
       path: '/entity/std-codes-prop/:stdCodesPropId/view',
       name: 'StdCodesPropView',
       component: StdCodesPropDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/exchange-rate',
+      name: 'ExchangeRate',
+      component: ExchangeRate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/exchange-rate/new',
+      name: 'ExchangeRateCreate',
+      component: ExchangeRateUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/exchange-rate/:exchangeRateId/edit',
+      name: 'ExchangeRateEdit',
+      component: ExchangeRateUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/exchange-rate/:exchangeRateId/view',
+      name: 'ExchangeRateView',
+      component: ExchangeRateDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/public-holiday',
+      name: 'PublicHoliday',
+      component: PublicHoliday,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/public-holiday/new',
+      name: 'PublicHolidayCreate',
+      component: PublicHolidayUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/public-holiday/:publicHolidayId/edit',
+      name: 'PublicHolidayEdit',
+      component: PublicHolidayUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/public-holiday/:publicHolidayId/view',
+      name: 'PublicHolidayView',
+      component: PublicHolidayDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/office',
+      name: 'Office',
+      component: Office,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office/new',
+      name: 'OfficeCreate',
+      component: OfficeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office/:officeId/edit',
+      name: 'OfficeEdit',
+      component: OfficeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office/:officeId/view',
+      name: 'OfficeView',
+      component: OfficeDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/office-relationship',
+      name: 'OfficeRelationship',
+      component: OfficeRelationship,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-relationship/new',
+      name: 'OfficeRelationshipCreate',
+      component: OfficeRelationshipUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-relationship/:officeRelationshipId/edit',
+      name: 'OfficeRelationshipEdit',
+      component: OfficeRelationshipUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-relationship/:officeRelationshipId/view',
+      name: 'OfficeRelationshipView',
+      component: OfficeRelationshipDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/office-area-code',
+      name: 'OfficeAreaCode',
+      component: OfficeAreaCode,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-area-code/new',
+      name: 'OfficeAreaCodeCreate',
+      component: OfficeAreaCodeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-area-code/:officeAreaCodeId/edit',
+      name: 'OfficeAreaCodeEdit',
+      component: OfficeAreaCodeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-area-code/:officeAreaCodeId/view',
+      name: 'OfficeAreaCodeView',
+      component: OfficeAreaCodeDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/office-tax-func',
+      name: 'OfficeTaxFunc',
+      component: OfficeTaxFunc,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-tax-func/new',
+      name: 'OfficeTaxFuncCreate',
+      component: OfficeTaxFuncUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-tax-func/:officeTaxFuncId/edit',
+      name: 'OfficeTaxFuncEdit',
+      component: OfficeTaxFuncUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-tax-func/:officeTaxFuncId/view',
+      name: 'OfficeTaxFuncView',
+      component: OfficeTaxFuncDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/office-weekday',
+      name: 'OfficeWeekday',
+      component: OfficeWeekday,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-weekday/new',
+      name: 'OfficeWeekdayCreate',
+      component: OfficeWeekdayUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-weekday/:officeWeekdayId/edit',
+      name: 'OfficeWeekdayEdit',
+      component: OfficeWeekdayUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-weekday/:officeWeekdayId/view',
+      name: 'OfficeWeekdayView',
+      component: OfficeWeekdayDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/user-info',
+      name: 'UserInfo',
+      component: UserInfo,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/user-info/new',
+      name: 'UserInfoCreate',
+      component: UserInfoUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/user-info/:userInfoId/edit',
+      name: 'UserInfoEdit',
+      component: UserInfoUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/user-info/:userInfoId/view',
+      name: 'UserInfoView',
+      component: UserInfoDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

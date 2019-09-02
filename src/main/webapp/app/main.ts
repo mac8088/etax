@@ -30,6 +30,14 @@ import StdCodesService from '@/entities/std-codes/std-codes.service';
 import StdCodesDescService from '@/entities/std-codes-desc/std-codes-desc.service';
 import StdCodesGroupService from '@/entities/std-codes-group/std-codes-group.service';
 import StdCodesPropService from '@/entities/std-codes-prop/std-codes-prop.service';
+import ExchangeRateService from '@/entities/exchange-rate/exchange-rate.service';
+import PublicHolidayService from '@/entities/public-holiday/public-holiday.service';
+import OfficeService from '@/entities/office/office.service';
+import OfficeRelationshipService from '@/entities/office-relationship/office-relationship.service';
+import OfficeAreaCodeService from '@/entities/office-area-code/office-area-code.service';
+import OfficeTaxFuncService from '@/entities/office-tax-func/office-tax-func.service';
+import OfficeWeekdayService from '@/entities/office-weekday/office-weekday.service';
+import UserInfoService from '@/entities/user-info/user-info.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -92,6 +100,14 @@ new Vue({
     stdCodesDescService: () => new StdCodesDescService(),
     stdCodesGroupService: () => new StdCodesGroupService(),
     stdCodesPropService: () => new StdCodesPropService(),
+    exchangeRateService: () => new ExchangeRateService(),
+    publicHolidayService: () => new PublicHolidayService(),
+    officeService: () => new OfficeService(),
+    officeRelationshipService: () => new OfficeRelationshipService(),
+    officeAreaCodeService: () => new OfficeAreaCodeService(),
+    officeTaxFuncService: () => new OfficeTaxFuncService(),
+    officeWeekdayService: () => new OfficeWeekdayService(),
+    userInfoService: () => new UserInfoService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

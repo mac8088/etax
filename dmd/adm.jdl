@@ -75,64 +75,6 @@ entity Office(adm_office) {
 }
 
 /**
-* The Extension information for setting up and maintaining users.
-*/
-entity UserInfo(adm_user_info){
-    /**STD[ADM_SECTION], name of the administrative Section this user belongs to */
-    cstdAdmSection String maxlength(40) required,
-    /**STD[SECURITY_LEVEL], ID of this user\'s Security Level */
-    cstdSecurityLevel String maxlength(40) required,
-    /**STD[USER_TYPE], type of user */
-    cstdUserType String maxlength(40) required,
-    /**General User Description - Free Format */
-    description String maxlength(200),
-    /**Middle name */
-    middleName String maxlength(50),
-    /**STD[GENDER], user gender */
-    gender String maxlength(40) required,
-    /**Phone number for user */
-    phoneNum String maxlength(50),
-    /**Fax number for user */
-    faxNum String maxlength(50),
-    /**Date from which the user account is active, i.e. the user can login */
-    effiectiveDate ZonedDateTime,
-    /**Date after which the user account is no longer active, i.e. the user can no longer login */
-    expiryDate ZonedDateTime,
-    /**Indicates whether this user is blocked after 3 failed login attemptsn */
-    blocked Boolean required,
-    /**Blocked reason */
-    blockedReason String maxlength(10) required,
-    /**Indicates user is forced to change password at login(changed by administrator) */
-    forcedPwdChange Boolean required,
-    /**STD[TITILES], Title to address the user */
-    cstdTitles String maxlength(40) required,
-    /**STD[STATUS] */
-    cstdStatus String maxlength(40) required,
-    /**STD[ADM_DIVISON] */
-    cstdAdmDivsison String maxlength(40) required,
-    /**Login status */
-    loginStatus String maxlength(20),
-    /**Login time */
-    loginTime ZonedDateTime,
-    /**Times of password error when logon attempts */
-    attempt Integer max(3) required,
-    /**Flag indicates if it need to approve the change of user profiles */
-    needApprove Boolean required,
-    /**Logout time */
-    logoutTime ZonedDateTime,
-    /**National ID */
-    nationalId String maxlength(10) required,
-    /**STD[ORGANIZATION_GRADE], Organizational Grade */
-    cstdOrganizationGrade String maxlength(40),
-    /**STD[EMPLOYMENT_TYPE], Employment Type */
-    cstdEmploymentType String maxlength(40),
-    /**Manuscript used to XAdES signature */
-    manuScript ImageBlob,
-    /**Version to control concurrency*/
-    ccVersion Integer
-}
-
-/**
 * The relationship of Parent office and its children.
 */
 entity OfficeRelationship(adm_office_relationship) {
@@ -151,7 +93,7 @@ entity OfficeRelationship(adm_office_relationship) {
 /**
 * This entity stores all of area codes of Tax Authority offices.
 */
-entity OfficeCode(adm_office_code) {
+entity OfficeAreaCode(adm_office_areacode) {
     /*Office ID */
     officeId Integer required,
     /*From PIN code */
@@ -161,29 +103,29 @@ entity OfficeCode(adm_office_code) {
 }
 
 /**
-* Week working day.
-*/
-entity WeekWorkingDay(adm_week_working_day) {
-    /*Tax Office ID */
-    officeId Integer required,
-    /*STD[WEEK_W_DAYS] */
-    cstdWeekworkingDay String required maxlength(40),
-    /*Start date */
-    startDate LocalDate,
-    /*End date */
-    endDate LocalDate
-}
-
-/**
 * This entity stores relationships between Tax offices and functional offices.
 */
-entity TaxFuncOffice(adm_tax_func_office){
+entity OfficeTaxFunc(adm_office_tax_func){
     /*Tax Office ID */
     taxOfficeId Integer required,
     /*Functional office ID */
     funcOfficeId Integer required,
     /*Start date */
     startDate LocalDate required,
+    /*End date */
+    endDate LocalDate
+}
+
+/**
+* Week working day.
+*/
+entity OfficeWeekday(adm_office_weekday) {
+    /*Tax Office ID */
+    officeId Integer required,
+    /*STD[WEEK_W_DAYS] */
+    cstdWeekworkingDay String required maxlength(40),
+    /*Start date */
+    startDate LocalDate,
     /*End date */
     endDate LocalDate
 }
@@ -263,6 +205,64 @@ relationship ManyToMany {
 */
 relationship ManyToMany {
     Profile{authority(name)} to Authority{profile(name)}
+}
+
+/**
+* The Extension information for setting up and maintaining users.
+*/
+entity UserInfo(adm_user_info){
+    /**STD[ADM_SECTION], name of the administrative Section this user belongs to */
+    cstdAdmSection String maxlength(40) required,
+    /**STD[SECURITY_LEVEL], ID of this user\'s Security Level */
+    cstdSecurityLevel String maxlength(40) required,
+    /**STD[USER_TYPE], type of user */
+    cstdUserType String maxlength(40) required,
+    /**General User Description - Free Format */
+    description String maxlength(200),
+    /**Middle name */
+    middleName String maxlength(50),
+    /**STD[GENDER], user gender */
+    gender String maxlength(40) required,
+    /**Phone number for user */
+    phoneNum String maxlength(50),
+    /**Fax number for user */
+    faxNum String maxlength(50),
+    /**Date from which the user account is active, i.e. the user can login */
+    effiectiveDate ZonedDateTime,
+    /**Date after which the user account is no longer active, i.e. the user can no longer login */
+    expiryDate ZonedDateTime,
+    /**Indicates whether this user is blocked after 3 failed login attemptsn */
+    blocked Boolean required,
+    /**Blocked reason */
+    blockedReason String maxlength(10) required,
+    /**Indicates user is forced to change password at login(changed by administrator) */
+    forcedPwdChange Boolean required,
+    /**STD[TITILES], Title to address the user */
+    cstdTitles String maxlength(40) required,
+    /**STD[STATUS] */
+    cstdStatus String maxlength(40) required,
+    /**STD[ADM_DIVISON] */
+    cstdAdmDivsison String maxlength(40) required,
+    /**Login status */
+    loginStatus String maxlength(20),
+    /**Login time */
+    loginTime ZonedDateTime,
+    /**Times of password error when logon attempts */
+    attempt Integer max(3) required,
+    /**Flag indicates if it need to approve the change of user profiles */
+    needApprove Boolean required,
+    /**Logout time */
+    logoutTime ZonedDateTime,
+    /**National ID */
+    nationalId String maxlength(10) required,
+    /**STD[ORGANIZATION_GRADE], Organizational Grade */
+    cstdOrganizationGrade String maxlength(40),
+    /**STD[EMPLOYMENT_TYPE], Employment Type */
+    cstdEmploymentType String maxlength(40),
+    /**Manuscript used to XAdES signature */
+    manuScript ImageBlob,
+    /**Version to control concurrency*/
+    ccVersion Integer
 }
 
 relationship OneToOne{

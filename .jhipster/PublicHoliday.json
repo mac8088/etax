@@ -1,0 +1,52 @@
+{
+    "name": "PublicHoliday",
+    "fields": [
+        {
+            "fieldName": "cstdHolidayTypes",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 70
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "workingFlag",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "countryWide",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "ccVersion",
+            "javadoc": "Version to control concurrency",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190902135643",
+    "javadoc": "Public holiday.",
+    "entityTableName": "adm_public_holiday",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
