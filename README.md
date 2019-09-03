@@ -126,7 +126,7 @@ Then, run a Sonar analysis:
 ./mvnw -Pprod clean test sonar:sonar
 ```
 
-For more information, refer to the [Code quality page][].
+For more information, refer to the [Code quality page][].....
 
 ## Using Docker to simplify development (optional)
 
