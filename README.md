@@ -69,7 +69,7 @@ Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/ven
 @import '~leaflet/dist/leaflet.scss';
 ```
 
-Note: there are still few other things remaining to do for Leaflet that we won't detail here.
+Note: there are still few other things remaining to do for Leaflet that we won't detail here....
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
