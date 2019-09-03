@@ -1,0 +1,76 @@
+{
+  "etaxApp": {
+    "userInfo": {
+      "home": {
+        "title": "User Infos",
+        "createLabel": "Create a new User Info",
+        "createOrEditLabel": "Create or edit a User Info",
+        "notFound": "No User Info found"
+      },
+      "created": "A new User Info is created with identifier {{ param }}",
+      "updated": "A User Info is updated with identifier {{ param }}",
+      "deleted": "A User Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete User Info {{ id }}?"
+      },
+      "detail": {
+        "title": "User Info"
+      },
+      "cstdAdmSection": "Cstd Adm Section",
+      "cstdSecurityLevel": "Cstd Security Level",
+      "cstdUserType": "Cstd User Type",
+      "description": "Description",
+      "middleName": "Middle Name",
+      "gender": "Gender",
+      "phoneNum": "Phone Num",
+      "faxNum": "Fax Num",
+      "effiectiveDate": "Effiective Date",
+      "expiryDate": "Expiry Date",
+      "blocked": "Blocked",
+      "blockedReason": "Blocked Reason",
+      "forcedPwdChange": "Forced Pwd Change",
+      "cstdTitles": "Cstd Titles",
+      "cstdStatus": "Cstd Status",
+      "cstdAdmDivsison": "Cstd Adm Divsison",
+      "loginStatus": "Login Status",
+      "loginTime": "Login Time",
+      "attempt": "Attempt",
+      "needApprove": "Need Approve",
+      "logoutTime": "Logout Time",
+      "nationalId": "National Id",
+      "cstdOrganizationGrade": "Cstd Organization Grade",
+      "cstdEmploymentType": "Cstd Employment Type",
+      "manuScript": "Manu Script",
+      "ccVersion": "Cc Version",
+      "user": "User",
+      "help": {
+        "cstdAdmSection": "STD[ADM_SECTION], name of the administrative Section this user belongs to",
+        "cstdSecurityLevel": "STD[SECURITY_LEVEL], ID of this user&#39;s Security Level",
+        "cstdUserType": "STD[USER_TYPE], type of user",
+        "description": "General User Description - Free Format",
+        "middleName": "Middle name",
+        "gender": "STD[GENDER], user gender",
+        "phoneNum": "Phone number for user",
+        "faxNum": "Fax number for user",
+        "effiectiveDate": "Date from which the user account is active, i.e. the user can login",
+        "expiryDate": "Date after which the user account is no longer active, i.e. the user can no longer login",
+        "blocked": "Indicates whether this user is blocked after 3 failed login attemptsn",
+        "blockedReason": "Blocked reason",
+        "forcedPwdChange": "Indicates user is forced to change password at login(changed by administrator)",
+        "cstdTitles": "STD[TITILES], Title to address the user",
+        "cstdStatus": "STD[STATUS]",
+        "cstdAdmDivsison": "STD[ADM_DIVISON]",
+        "loginStatus": "Login status",
+        "loginTime": "Login time",
+        "attempt": "Times of password error when logon attempts",
+        "needApprove": "Flag indicates if it need to approve the change of user profiles",
+        "logoutTime": "Logout time",
+        "nationalId": "National ID",
+        "cstdOrganizationGrade": "STD[ORGANIZATION_GRADE], Organizational Grade",
+        "cstdEmploymentType": "STD[EMPLOYMENT_TYPE], Employment Type",
+        "manuScript": "Manuscript used to XAdES signature",
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}

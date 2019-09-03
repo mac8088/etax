@@ -1,0 +1,41 @@
+{
+  "etaxApp": {
+    "stdCodesProp": {
+      "home": {
+        "title": "Std Codes Props",
+        "createLabel": "Create a new Std Codes Prop",
+        "createOrEditLabel": "Create or edit a Std Codes Prop",
+        "notFound": "No Std Codes Prop found"
+      },
+      "created": "A new Std Codes Prop is created with identifier {{ param }}",
+      "updated": "A Std Codes Prop is updated with identifier {{ param }}",
+      "deleted": "A Std Codes Prop is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Std Codes Prop {{ id }}?"
+      },
+      "detail": {
+        "title": "Std Codes Prop"
+      },
+      "groupCode": "Group Code",
+      "internalCode": "Internal Code",
+      "propCode": "Prop Code",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "valueDate": "Value Date",
+      "valueString": "Value String",
+      "valueBool": "Value Bool",
+      "valueNumber": "Value Number",
+      "help": {
+        "groupCode": "Code of the group of codes",
+        "internalCode": "Internal code of the element in STD_CODES.",
+        "propCode": "Property code",
+        "startDate": "Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element.",
+        "endDate": "Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code.",
+        "valueDate": "Date value for the property with a date property type",
+        "valueString": "String value for the property with a string property type",
+        "valueBool": "Boolean value for the property with a boolean property type",
+        "valueNumber": "Numeric value for the property with a numeric property type"
+      }
+    }
+  }
+}

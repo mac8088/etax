@@ -1,0 +1,24 @@
+{
+  "etaxApp": {
+    "officeAreaCode": {
+      "home": {
+        "title": "Office Area Codes",
+        "createLabel": "创建新 Office Area Code",
+        "createOrEditLabel": "创建或编辑 Office Area Code",
+        "notFound": "No Office Area Code found"
+      },
+      "created": "Office Area Code {{ param }} 创建成功",
+      "updated": "Office Area Code {{ param }} 更新成功",
+      "deleted": "Office Area Code {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Office Area Code {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Office Area Code"
+      },
+      "officeId": "Office Id",
+      "fromPin": "From Pin",
+      "toPin": "To Pin"
+    }
+  }
+}

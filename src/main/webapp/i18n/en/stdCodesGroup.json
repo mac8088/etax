@@ -1,0 +1,48 @@
+{
+  "etaxApp": {
+    "stdCodesGroup": {
+      "home": {
+        "title": "Std Codes Groups",
+        "createLabel": "Create a new Std Codes Group",
+        "createOrEditLabel": "Create or edit a Std Codes Group",
+        "notFound": "No Std Codes Group found"
+      },
+      "created": "A new Std Codes Group is created with identifier {{ param }}",
+      "updated": "A Std Codes Group is updated with identifier {{ param }}",
+      "deleted": "A Std Codes Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Std Codes Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Std Codes Group"
+      },
+      "groupCode": "Group Code",
+      "groupDesc": "Group Desc",
+      "systemInd": "System Ind",
+      "secLevelRequired": "Sec Level Required",
+      "valueRequired": "Value Required",
+      "valueType": "Value Type",
+      "descriptionRequired": "Description Required",
+      "externalCodeRequired": "External Code Required",
+      "externalCodeLength": "External Code Length",
+      "parentGroupRequired": "Parent Group Required",
+      "parentGroupCode": "Parent Group Code",
+      "touppercase": "Touppercase",
+      "stdCodes": "Std Codes",
+      "help": {
+        "groupCode": "Code of the group of codes",
+        "groupDesc": "Group description (name of the list of codes)",
+        "systemInd": "System indicator. Can hold values &#39;&#39;Y&#39;&#39; or &#39;&#39;N&#39;&#39;. When &#39;&#39;Y&#39;&#39;, the elements of the group cannot be modified by end-users using the system configuration module. However, their description can be changed and they can be translated.",
+        "secLevelRequired": "If the elements in this group have an associated security level. Can be set to &#39;&#39;Y&#39;&#39; or &#39;&#39;N&#39;&#39;. When &#39;&#39;Y&#39;&#39;, all the elements of the group must have a security level in STD_CODES.SEC_LEVEL.",
+        "valueRequired": "If the elements in this group have a value. Can be set to &#39;&#39;Y&#39;&#39; or &#39;&#39;N&#39;&#39;. When &#39;&#39;Y&#39;&#39;, all the elements of the group must have a value and their type must be specified in VALUE_TYPE.",
+        "valueType": "Type of the value of all the elements in this group. Can be one of &#39;&#39;D&#39;&#39; (Date), &#39;&#39;S&#39;&#39; (String), &#39;&#39;N&#39;&#39; (Number) or &#39;&#39;B&#39;&#39; (Boolean). Can be set only when CODES_VALUE_REQUIRED = &#39;&#39;Y&#39;&#39;.",
+        "descriptionRequired": "Can hold values &#39;&#39;Y&#39;&#39; or &#39;&#39;N&#39;&#39;. When &#39;&#39;N&#39;&#39;, codes are never shown to end-users and don&#39;&#39;t require an entry in STD_CODES_DESC. When &#39;&#39;Y&#39;&#39;, EXTERNAL_CODE_REQUIRED must be set.",
+        "externalCodeRequired": "If the elements in this group are identified by a multilingual code shown to the user. Can hold values &#39;&#39;Y&#39;&#39; or &#39;&#39;N&#39;&#39;. When set to &#39;&#39;Y&#39;&#39;, the length of external codes must be specified in EXTERNAL_CODE_LENGTH. External codes are used as shortcuts in entry fields linked to drop-down lists of values.",
+        "externalCodeLength": "Number of characters of the external codes. Can be set only when EXTERNAL_CODE_REQUIRED is &#39;&#39;Y&#39;&#39;.",
+        "parentGroupRequired": "If this group has a parent group. Can be set to &#39;&#39;Y&#39;&#39; or &#39;&#39;N&#39;&#39;. When &#39;&#39;Y&#39;&#39;, the parent group code must be specified in PARENT_GROUP_CODE. Used for multi-level lists of values.",
+        "parentGroupCode": "The code of the parent group. Must be set when PARENT_GROUP_REQUIRED is &#39;&#39;Y&#39;&#39;.",
+        "touppercase": "The shortcut code is shown by uppercase or not"
+      }
+    }
+  }
+}

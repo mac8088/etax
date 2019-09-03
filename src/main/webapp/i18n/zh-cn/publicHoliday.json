@@ -1,0 +1,30 @@
+{
+  "etaxApp": {
+    "publicHoliday": {
+      "home": {
+        "title": "Public Holidays",
+        "createLabel": "创建新 Public Holiday",
+        "createOrEditLabel": "创建或编辑 Public Holiday",
+        "notFound": "No Public Holiday found"
+      },
+      "created": "Public Holiday {{ param }} 创建成功",
+      "updated": "Public Holiday {{ param }} 更新成功",
+      "deleted": "Public Holiday {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Public Holiday {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Public Holiday"
+      },
+      "cstdHolidayTypes": "Cstd Holiday Types",
+      "description": "Description",
+      "date": "Date",
+      "workingFlag": "Working Flag",
+      "countryWide": "Country Wide",
+      "ccVersion": "Cc Version",
+      "help": {
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}

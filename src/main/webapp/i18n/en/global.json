@@ -10,6 +10,18 @@
         "bankAccount": "Bank Account",
         "label": "Label",
         "operation": "Operation",
+        "stdCodes": "Std Codes",
+        "stdCodesDesc": "Std Codes Desc",
+        "stdCodesGroup": "Std Codes Group",
+        "stdCodesProp": "Std Codes Prop",
+        "exchangeRate": "Exchange Rate",
+        "publicHoliday": "Public Holiday",
+        "userInfo": "User Info",
+        "office": "Office",
+        "officeRelationship": "Office Relationship",
+        "officeAreaCode": "Office Area Code",
+        "officeTaxFunc": "Office Tax Func",
+        "officeWeekday": "Office Weekday",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -32,6 +44,7 @@
         "audits": "Audits",
         "apidocs": "API",
         "database": "Database",
+        "modeler": "Flowable Modeler",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
       "language": "Language"

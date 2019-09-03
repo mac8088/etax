@@ -1,0 +1,33 @@
+{
+  "etaxApp": {
+    "exchangeRate": {
+      "home": {
+        "title": "Exchange Rates",
+        "createLabel": "创建新 Exchange Rate",
+        "createOrEditLabel": "创建或编辑 Exchange Rate",
+        "notFound": "No Exchange Rate found"
+      },
+      "created": "Exchange Rate {{ param }} 创建成功",
+      "updated": "Exchange Rate {{ param }} 更新成功",
+      "deleted": "Exchange Rate {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Exchange Rate {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Exchange Rate"
+      },
+      "cstdCurrencyA": "Cstd Currency A",
+      "cstdCurrencyB": "Cstd Currency B",
+      "rate": "Rate",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "ccVersion": "Cc Version",
+      "help": {
+        "cstdCurrencyA": "STD[CURRENCY], Source currency, for conversion considerations",
+        "cstdCurrencyB": "STD[CURRENCY], Source currency, for conversion considerations",
+        "rate": "Rate to apply (multiply) to the source currency amount to",
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}

@@ -50,6 +50,11 @@
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="desc" type="varchar(200)"/>
+            <column name="module" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_message" type="varchar(50)"/>
         </createTable>
 
         <createTable tableName="jhi_user_authority">

@@ -1,0 +1,25 @@
+{
+  "etaxApp": {
+    "officeWeekday": {
+      "home": {
+        "title": "Office Weekdays",
+        "createLabel": "Create a new Office Weekday",
+        "createOrEditLabel": "Create or edit a Office Weekday",
+        "notFound": "No Office Weekday found"
+      },
+      "created": "A new Office Weekday is created with identifier {{ param }}",
+      "updated": "A Office Weekday is updated with identifier {{ param }}",
+      "deleted": "A Office Weekday is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Office Weekday {{ id }}?"
+      },
+      "detail": {
+        "title": "Office Weekday"
+      },
+      "officeId": "Office Id",
+      "cstdWeekworkingDay": "Cstd Weekworking Day",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    }
+  }
+}

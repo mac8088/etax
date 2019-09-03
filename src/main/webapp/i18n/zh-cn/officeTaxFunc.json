@@ -1,0 +1,25 @@
+{
+  "etaxApp": {
+    "officeTaxFunc": {
+      "home": {
+        "title": "Office Tax Funcs",
+        "createLabel": "创建新 Office Tax Func",
+        "createOrEditLabel": "创建或编辑 Office Tax Func",
+        "notFound": "No Office Tax Func found"
+      },
+      "created": "Office Tax Func {{ param }} 创建成功",
+      "updated": "Office Tax Func {{ param }} 更新成功",
+      "deleted": "Office Tax Func {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Office Tax Func {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Office Tax Func"
+      },
+      "taxOfficeId": "Tax Office Id",
+      "funcOfficeId": "Func Office Id",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    }
+  }
+}

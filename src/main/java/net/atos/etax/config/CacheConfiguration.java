@@ -49,6 +49,20 @@ public class CacheConfiguration {
             createCache(cm, net.atos.etax.domain.Label.class.getName() + ".operations");
             createCache(cm, net.atos.etax.domain.Operation.class.getName());
             createCache(cm, net.atos.etax.domain.Operation.class.getName() + ".labels");
+            createCache(cm, net.atos.etax.domain.StdCodes.class.getName());
+            createCache(cm, net.atos.etax.domain.StdCodes.class.getName() + ".stdCodesDescs");
+            createCache(cm, net.atos.etax.domain.StdCodesDesc.class.getName());
+            createCache(cm, net.atos.etax.domain.StdCodesGroup.class.getName());
+            createCache(cm, net.atos.etax.domain.StdCodesGroup.class.getName() + ".stdCodes");
+            createCache(cm, net.atos.etax.domain.StdCodesProp.class.getName());
+            createCache(cm, net.atos.etax.domain.ExchangeRate.class.getName());
+            createCache(cm, net.atos.etax.domain.PublicHoliday.class.getName());
+            createCache(cm, net.atos.etax.domain.Office.class.getName());
+            createCache(cm, net.atos.etax.domain.OfficeRelationship.class.getName());
+            createCache(cm, net.atos.etax.domain.OfficeAreaCode.class.getName());
+            createCache(cm, net.atos.etax.domain.OfficeTaxFunc.class.getName());
+            createCache(cm, net.atos.etax.domain.OfficeWeekday.class.getName());
+            createCache(cm, net.atos.etax.domain.UserInfo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

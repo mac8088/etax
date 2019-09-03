@@ -1,0 +1,270 @@
+/**
+* Exchange Rate.
+*/
+entity ExchangeRate(adm_exchange_rate){
+    /**STD[CURRENCY], Source currency, for conversion considerations */
+    cstdCurrencyA String maxlength(40) required,
+    /**STD[CURRENCY], Source currency, for conversion considerations */
+    cstdCurrencyB String maxlength(40) required,
+    /**Rate to apply (multiply) to the source currency amount to */
+    rate Double required,
+    /*Validity Start date */
+    startDate LocalDate required,
+    /* Validity End date */
+    endDate LocalDate,
+    /**Version to control concurrency */
+    ccVersion Integer
+}
+
+/**
+* Public holiday.
+*/
+entity PublicHoliday(adm_public_holiday) {
+    /*STD[HOLIDAY_TTYPES] */
+    cstdHolidayTypes String maxlength(40),
+    /*Description for the public holiday entry */
+    description String maxlength(70),
+    /*Date of the day configured as (or lifted from) public holidaye */
+    date LocalDate required,
+    /*Flag to negate the effect of this record: If TRUE, the Date refers to a normally non-working day (weekend) which is actually a working day, If FALSE, the Date refers to a normally working day which is actually a holiday */
+    workingFlag Boolean,
+    /*If TRUE this is holiday for all tax offices */
+    countryWide Boolean,
+    /**Version to control concurrency */
+    ccVersion Integer
+}
+
+/**
+* The Office data segment holds the information of all the Tax Authority's offices that access the e-tax system.
+*/
+entity Office(adm_office) {
+    /**STD[OFFICE_TYPE] */
+    cstdOfficeType String required maxlength(40),
+    /**Office name */
+    name String required maxlength(50),
+    /**STD[CLASSIFIER_CODE] */
+    cstdClassifierCode String maxlength(40),
+    /**Effective date */
+    effectiveDate ZonedDateTime required,
+    /**Expiry date */
+    expiryDate ZonedDateTime,
+    /**Office telephone */
+    phone String maxlength(50),
+    /**Office fax number */
+    fax String maxlength(50),
+    /**Office manager for signature */
+    stl String maxlength(100),
+    /**Foreign key to another office that manages users of this office, It must have office type that allows Office Administrator(ADM-CFG: Allowed Users in Offices) */
+    mngOffice Integer,
+    /**Physical Address */
+    physicalAdr TextBlob,
+    /**Postal Address */
+    postalAadr TextBlob,
+    /**Postal Identification Number */
+    pinCode String maxlength(15),
+    /**Effective date */
+    cstdWeekWorkingDay String maxlength(40),
+    /**Unique Office codee */
+    officeCode String maxlength(7),
+    /**STD[OFFICE_SUB_TYPE] */
+    cstdOfficeSubType String maxlength(40),
+    /**STD[OFFICE_FUNC_TYPE],functional office type */
+    cstdOfficeFuncType String maxlength(40),
+    /**Version to control concurrency */
+    ccVersion Integer
+}
+
+/**
+* The relationship of Parent office and its children.
+*/
+entity OfficeRelationship(adm_office_relationship) {
+    /*Parent Office ID */
+    parentId Integer required,
+    /*Chile office ID */
+    chileId Integer required,
+    /*Start date */
+    startDate ZonedDateTime required,
+    /*End date */
+    endDate ZonedDateTime,
+    /**Version to control concurrency */
+    ccVersion Integer
+}
+
+/**
+* This entity stores all of area codes of Tax Authority offices.
+*/
+entity OfficeAreaCode(adm_office_areacode) {
+    /*Office ID */
+    officeId Integer required,
+    /*From PIN code */
+    fromPin String required maxlength(10),
+    /*To PIN code */
+    toPin String maxlength(10)
+}
+
+/**
+* This entity stores relationships between Tax offices and functional offices.
+*/
+entity OfficeTaxFunc(adm_office_tax_func){
+    /*Tax Office ID */
+    taxOfficeId Integer required,
+    /*Functional office ID */
+    funcOfficeId Integer required,
+    /*Start date */
+    startDate LocalDate required,
+    /*End date */
+    endDate LocalDate
+}
+
+/**
+* Week working day.
+*/
+entity OfficeWeekday(adm_office_weekday) {
+    /*Tax Office ID */
+    officeId Integer required,
+    /*STD[WEEK_W_DAYS] */
+    cstdWeekworkingDay String required maxlength(40),
+    /*Start date */
+    startDate LocalDate,
+    /*End date */
+    endDate LocalDate
+}
+
+/**
+* This Resource entity (TS02_RESOURCE)
+* The Resource segment holds all data related to a resource,
+* a resource is a functional unit on which access is controlled.
+* A User has access to either "all or nothing" of a resource functionality.
+*/
+entity Resource(adm_resource){
+    /*Name of the application resource */
+    name String required maxlength(200),
+    /*Short description of the application functionality */
+    description String maxlength(500),
+    /*STD[MODULE], name of the module this resource belongs to */
+    cstdModule String maxlength(40),
+    /*Type of the application resource */
+    resourceType String maxlength(40),
+    /*Type of the application resource */
+    resourceContent TextBlob
+}
+
+/**
+* This Profile entity (TS08_PROFILE)
+* The Profile data segment holds data for e-tax user profiles.
+* an e-tax profile is defines user access to e-ris transactions and data.
+*/
+entity Profile(adm_profile){
+    /*Name of the profile */
+    name String required unique maxlength(200),
+    /*Short description of the profile */
+    description String maxlength(500),
+    /*STD[MODULE], name of the module this resource belongs to */
+    cstdModule String maxlength(40) required,
+    /*STD[STATUS], name of the module this resource belongs to */
+    cstdStatus String maxlength(40),
+    /**Effective date */
+    effectiveDate ZonedDateTime required,
+    /**Expiry date */
+    expiryDate ZonedDateTime,
+    /*If defined, ID of the Supervisor Profile */
+    supvrProfile String maxlength(200)
+}
+
+/**
+* Simple mode, multi-to-multi mapping of users and authorization/roles:
+* Authority(Role) is TS01_APPLICATION entity, The mapping table of n..n with User is:
+* jhi_user_authority
+*/
+//relationship ManyToMany {
+//    User{authority(name)} to Authority{User(login)},
+//}
+
+/**
+* Complex patterns, multi-to-multi mapping of users and user groups
+* Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with User is:
+* adm_user_profile (TS11_USER_PROFILE)
+*/
+relationship ManyToMany {
+    Profile{User(login)} to User{profile(name)}
+}
+
+/**
+* Multi-to-multi mapping of resources and authorization/roles
+* Resource is TS02_RESOURCE entity, The mapping table of n..n with Authority is:
+* adm_resource_authority (TS03_APPLICATION_RESOURCE)
+*/
+relationship ManyToMany {
+    Resource{authority(name)} to Authority{resource(name)}
+}
+
+/**
+* Many-to-many mapping of household groups and roles/authorizations：
+* Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with Authority is:
+* adm_profile_authority (TS09_APPLICATION_OF_PROFILE)
+*/
+relationship ManyToMany {
+    Profile{authority(name)} to Authority{profile(name)}
+}
+
+/**
+* The Extension information for setting up and maintaining users.
+*/
+entity UserInfo(adm_user_info){
+    /**STD[ADM_SECTION], name of the administrative Section this user belongs to */
+    cstdAdmSection String maxlength(40) required,
+    /**STD[SECURITY_LEVEL], ID of this user\'s Security Level */
+    cstdSecurityLevel String maxlength(40) required,
+    /**STD[USER_TYPE], type of user */
+    cstdUserType String maxlength(40) required,
+    /**General User Description - Free Format */
+    description String maxlength(200),
+    /**Middle name */
+    middleName String maxlength(50),
+    /**STD[GENDER], user gender */
+    gender String maxlength(40) required,
+    /**Phone number for user */
+    phoneNum String maxlength(50),
+    /**Fax number for user */
+    faxNum String maxlength(50),
+    /**Date from which the user account is active, i.e. the user can login */
+    effiectiveDate ZonedDateTime,
+    /**Date after which the user account is no longer active, i.e. the user can no longer login */
+    expiryDate ZonedDateTime,
+    /**Indicates whether this user is blocked after 3 failed login attemptsn */
+    blocked Boolean required,
+    /**Blocked reason */
+    blockedReason String maxlength(10) required,
+    /**Indicates user is forced to change password at login(changed by administrator) */
+    forcedPwdChange Boolean required,
+    /**STD[TITILES], Title to address the user */
+    cstdTitles String maxlength(40) required,
+    /**STD[STATUS] */
+    cstdStatus String maxlength(40) required,
+    /**STD[ADM_DIVISON] */
+    cstdAdmDivsison String maxlength(40) required,
+    /**Login status */
+    loginStatus String maxlength(20),
+    /**Login time */
+    loginTime ZonedDateTime,
+    /**Times of password error when logon attempts */
+    attempt Integer max(3) required,
+    /**Flag indicates if it need to approve the change of user profiles */
+    needApprove Boolean required,
+    /**Logout time */
+    logoutTime ZonedDateTime,
+    /**National ID */
+    nationalId String maxlength(10) required,
+    /**STD[ORGANIZATION_GRADE], Organizational Grade */
+    cstdOrganizationGrade String maxlength(40),
+    /**STD[EMPLOYMENT_TYPE], Employment Type */
+    cstdEmploymentType String maxlength(40),
+    /**Manuscript used to XAdES signature */
+    manuScript ImageBlob,
+    /**Version to control concurrency*/
+    ccVersion Integer
+}
+
+relationship OneToOne{
+    UserInfo{user(login)} to User
+}

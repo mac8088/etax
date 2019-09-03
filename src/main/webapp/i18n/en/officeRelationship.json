@@ -1,0 +1,29 @@
+{
+  "etaxApp": {
+    "officeRelationship": {
+      "home": {
+        "title": "Office Relationships",
+        "createLabel": "Create a new Office Relationship",
+        "createOrEditLabel": "Create or edit a Office Relationship",
+        "notFound": "No Office Relationship found"
+      },
+      "created": "A new Office Relationship is created with identifier {{ param }}",
+      "updated": "A Office Relationship is updated with identifier {{ param }}",
+      "deleted": "A Office Relationship is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Office Relationship {{ id }}?"
+      },
+      "detail": {
+        "title": "Office Relationship"
+      },
+      "parentId": "Parent Id",
+      "chileId": "Chile Id",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "ccVersion": "Cc Version",
+      "help": {
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}
