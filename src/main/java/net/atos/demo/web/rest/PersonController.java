@@ -1,4 +1,4 @@
-package net.atos.etax.web.rest;
+package net.atos.demo.web.rest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.atos.etax.service.MyService;
+import net.atos.demo.service.PersonService;
 
 @RestController
-public class MyRestController {
+public class PersonController {
 
 	@Autowired
-	private MyService myService;
+	private PersonService personService;
 
-	@RequestMapping(value="/process", method= RequestMethod.POST)
-    public void startProcessInstance(@RequestBody StartProcessRepresentation startProcessRepresentation) {
-        myService.startProcess(startProcessRepresentation.getAssignee());
-    }
+	@RequestMapping(value = "/process", method = RequestMethod.POST)
+	public void startProcessInstance(@RequestBody StartProcessRepresentation startProcessRepresentation) {
+		personService.startProcess(startProcessRepresentation.getAssignee());
+	}
 
 	@RequestMapping(value = "/tasks", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<TaskRepresentation> getTasks(@RequestParam String assignee) {
-		List<Task> tasks = myService.getTasks(assignee);
+		List<Task> tasks = personService.getTasks(assignee);
 		List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
 		for (Task task : tasks) {
 			dtos.add(new TaskRepresentation(task.getId(), task.getName()));
@@ -37,17 +37,17 @@ public class MyRestController {
 
 	static class StartProcessRepresentation {
 
-        private String assignee;
+		private String assignee;
 
-        public String getAssignee() {
-            return assignee;
-        }
+		public String getAssignee() {
+			return assignee;
+		}
 
-        public void setAssignee(String assignee) {
-            this.assignee = assignee;
-        }
-    }
-	
+		public void setAssignee(String assignee) {
+			this.assignee = assignee;
+		}
+	}
+
 	static class TaskRepresentation {
 
 		private String id;

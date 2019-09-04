@@ -1,12 +1,14 @@
-package net.atos.etax.domain;
+package net.atos.demo.domain;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "cmn_person")
 public class Person {
 
 	@Id

@@ -1,4 +1,4 @@
-package net.atos.etax.service;
+package net.atos.demo.service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,13 +10,13 @@ import org.flowable.engine.TaskService;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
-import net.atos.etax.domain.Person;
-import net.atos.etax.repository.PersonRepository;
+import net.atos.demo.domain.Person;
+import net.atos.demo.repository.PersonRepository;
 
 @Service
-public class MyService {
+public class PersonService {
 
 	@Autowired
 	private RuntimeService runtimeService;
@@ -39,6 +39,7 @@ public class MyService {
 		return taskService.createTaskQuery().taskAssignee(assignee).list();
 	}
 
+	@Transactional
 	public void createDemoUsers() {
 		if (personRepository.findAll().size() == 0) {
 			personRepository.save(new Person("jbarrez", "Joram", "Barrez", new Date()));

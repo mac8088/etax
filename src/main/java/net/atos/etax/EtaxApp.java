@@ -1,8 +1,9 @@
 package net.atos.etax;
 
+import net.atos.demo.service.PersonService;
 import net.atos.etax.config.ApplicationProperties;
 import net.atos.etax.config.DefaultProfileUtil;
-import net.atos.etax.service.MyService;
+
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,10 +16,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -26,6 +31,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
+@ComponentScan({"net.atos.etax", "net.atos.bpm", "net.atos.demo"})
+@EntityScan({"net.atos.demo.domain", "net.atos.etax.domain"})
+@EnableJpaRepositories({"net.atos.demo.repository", "net.atos.etax.repository"})
+@Configuration
 @EnableAutoConfiguration(exclude = {org.flowable.spring.boot.FlowableSecurityAutoConfiguration.class}) 
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 public class EtaxApp implements InitializingBean {
@@ -103,8 +112,7 @@ public class EtaxApp implements InitializingBean {
     }
     
     @Bean
-    public CommandLineRunner init(final MyService myService) {
-
+    public CommandLineRunner init(final PersonService myService) {
         return new CommandLineRunner() {
         	public void run(String... strings) throws Exception {
             	myService.createDemoUsers();

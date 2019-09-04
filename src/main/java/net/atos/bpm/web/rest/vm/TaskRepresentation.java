@@ -1,4 +1,4 @@
-package net.atos.etax.web.rest;
+package net.atos.bpm.web.rest.vm;
 
 public class TaskRepresentation {
 	private String id;
