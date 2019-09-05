@@ -43,12 +43,6 @@ public class CacheConfiguration {
             createCache(cm, net.atos.etax.domain.User.class.getName());
             createCache(cm, net.atos.etax.domain.Authority.class.getName());
             createCache(cm, net.atos.etax.domain.User.class.getName() + ".authorities");
-            createCache(cm, net.atos.etax.domain.BankAccount.class.getName());
-            createCache(cm, net.atos.etax.domain.BankAccount.class.getName() + ".operations");
-            createCache(cm, net.atos.etax.domain.Label.class.getName());
-            createCache(cm, net.atos.etax.domain.Label.class.getName() + ".operations");
-            createCache(cm, net.atos.etax.domain.Operation.class.getName());
-            createCache(cm, net.atos.etax.domain.Operation.class.getName() + ".labels");
             createCache(cm, net.atos.etax.domain.StdCodes.class.getName());
             createCache(cm, net.atos.etax.domain.StdCodes.class.getName() + ".stdCodesDescs");
             createCache(cm, net.atos.etax.domain.StdCodesDesc.class.getName());
