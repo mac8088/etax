@@ -1,21 +1,40 @@
-entity BankAccount {
+entity BankAccount (cmn_bank_account){
   name String required,
   balance BigDecimal required
 }
-entity Label {
+
+entity Label (cmn_label){
   label String required minlength(3)
 }
-entity Operation {
+
+entity Operation (cmn_operation){
   date ZonedDateTime required,
   description String,
   amount BigDecimal required
 }
+
 relationship OneToMany {
   BankAccount{operation} to Operation{bankAccount(name)}
 }
+
 relationship ManyToOne {
   BankAccount{user(login)} to User
 }
+
 relationship ManyToMany {
   Operation{label(label)} to Label{operation}
 }
+
+// Set pagination options
+paginate BankAccount with pagination
+paginate Label with pager
+paginate Operation with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Label
+
+// Use JPA Criteria to filter entities
+filter BankAccount, Operation

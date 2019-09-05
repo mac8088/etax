@@ -24,13 +24,13 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.label.label')">Label</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('label')"><span v-text="$t('etaxApp.label.label')">Label</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="label in labels"
+                <tr v-for="label of orderBy(labels, propOrder, reverse === true ? 1 : -1)"
                     :key="label.id">
                     <td>
                         <router-link :to="{name: 'LabelView', params: {labelId: label.id}}">{{label.id}}</router-link>
@@ -69,6 +69,15 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-label" v-text="$t('entity.action.delete')" v-on:click="removeLabel()">Delete</button>
             </div>
         </b-modal>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div v-if="labels && labels.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 
