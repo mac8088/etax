@@ -129,7 +129,7 @@
                     <b-dropdown-item v-if="!inProduction"  href='./h2-console' target="_tab">
                         <font-awesome-icon icon="hdd" />
                         <span v-text="$t('global.menu.admin.database')">Database</span>
-                    </b-dropdown-item>
+                    </b-dropdown-item> 
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown id="languagesnavBarDropdown" right v-if="languages && Object.keys(languages).length > 1">
                     <span slot="button-content">
