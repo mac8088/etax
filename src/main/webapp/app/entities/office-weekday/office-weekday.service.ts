@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import buildPaginationQueryOpts from '@/shared/sort/sorts';
+
 import { IOfficeWeekday } from '@/shared/model/office-weekday.model';
 
 const baseApiUrl = 'api/office-weekdays';
@@ -13,9 +15,9 @@ export default class OfficeWeekdayService {
     });
   }
 
-  public retrieve(): Promise<any> {
+  public retrieve(paginationQuery?: any): Promise<any> {
     return new Promise<any>(resolve => {
-      axios.get(baseApiUrl).then(function(res) {
+      axios.get(baseApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`).then(function(res) {
         resolve(res);
       });
     });

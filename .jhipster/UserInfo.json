@@ -230,13 +230,13 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20190902135649",
+    "changelogDate": "20190905091742",
     "javadoc": "The Extension information for setting up and maintaining users.",
     "entityTableName": "adm_user_info",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

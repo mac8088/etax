@@ -139,13 +139,13 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190902135644",
+    "changelogDate": "20190905091737",
     "javadoc": "The Office data segment holds the information of all the Tax Authority's offices that access the e-tax system.",
     "entityTableName": "adm_office",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

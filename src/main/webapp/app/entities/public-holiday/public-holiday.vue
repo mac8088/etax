@@ -24,18 +24,18 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.publicHoliday.cstdHolidayTypes')">Cstd Holiday Types</span></th>
-                    <th><span v-text="$t('etaxApp.publicHoliday.description')">Description</span></th>
-                    <th><span v-text="$t('etaxApp.publicHoliday.date')">Date</span></th>
-                    <th><span v-text="$t('etaxApp.publicHoliday.workingFlag')">Working Flag</span></th>
-                    <th><span v-text="$t('etaxApp.publicHoliday.countryWide')">Country Wide</span></th>
-                    <th><span v-text="$t('etaxApp.publicHoliday.ccVersion')">Cc Version</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdHolidayTypes')"><span v-text="$t('etaxApp.publicHoliday.cstdHolidayTypes')">Cstd Holiday Types</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('description')"><span v-text="$t('etaxApp.publicHoliday.description')">Description</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('date')"><span v-text="$t('etaxApp.publicHoliday.date')">Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('workingFlag')"><span v-text="$t('etaxApp.publicHoliday.workingFlag')">Working Flag</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('countryWide')"><span v-text="$t('etaxApp.publicHoliday.countryWide')">Country Wide</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('ccVersion')"><span v-text="$t('etaxApp.publicHoliday.ccVersion')">Cc Version</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="publicHoliday in publicHolidays"
+                <tr v-for="publicHoliday of orderBy(publicHolidays, propOrder, reverse === true ? 1 : -1)"
                     :key="publicHoliday.id">
                     <td>
                         <router-link :to="{name: 'PublicHolidayView', params: {publicHolidayId: publicHoliday.id}}">{{publicHoliday.id}}</router-link>

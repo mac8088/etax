@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import buildPaginationQueryOpts from '@/shared/sort/sorts';
+
 import { IOfficeRelationship } from '@/shared/model/office-relationship.model';
 
 const baseApiUrl = 'api/office-relationships';
@@ -13,9 +15,9 @@ export default class OfficeRelationshipService {
     });
   }
 
-  public retrieve(): Promise<any> {
+  public retrieve(paginationQuery?: any): Promise<any> {
     return new Promise<any>(resolve => {
-      axios.get(baseApiUrl).then(function(res) {
+      axios.get(baseApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`).then(function(res) {
         resolve(res);
       });
     });

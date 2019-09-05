@@ -78,7 +78,7 @@ describe('Service Tests', () => {
         );
         const expected = Object.assign({}, returnedFromService);
         mockedAxios.get.mockReturnValue(Promise.resolve([returnedFromService]));
-        return service.retrieve().then(res => {
+        return service.retrieve({ sort: {}, page: 0, size: 10 }).then(res => {
           expect(res).toContainEqual(expected);
         });
       });

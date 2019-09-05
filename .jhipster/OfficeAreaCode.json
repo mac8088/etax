@@ -27,11 +27,11 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190902135646",
+    "changelogDate": "20190905091739",
     "javadoc": "This entity stores all of area codes of Tax Authority offices.",
     "entityTableName": "adm_office_areacode",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

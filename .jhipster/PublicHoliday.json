@@ -39,13 +39,13 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190902135643",
+    "changelogDate": "20190905091736",
     "javadoc": "Public holiday.",
     "entityTableName": "adm_public_holiday",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

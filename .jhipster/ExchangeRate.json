@@ -47,13 +47,13 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190902135642",
+    "changelogDate": "20190905091735",
     "javadoc": "Exchange Rate.",
     "entityTableName": "adm_exchange_rate",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

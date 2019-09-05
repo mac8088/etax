@@ -24,16 +24,16 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.officeTaxFunc.taxOfficeId')">Tax Office Id</span></th>
-                    <th><span v-text="$t('etaxApp.officeTaxFunc.funcOfficeId')">Func Office Id</span></th>
-                    <th><span v-text="$t('etaxApp.officeTaxFunc.startDate')">Start Date</span></th>
-                    <th><span v-text="$t('etaxApp.officeTaxFunc.endDate')">End Date</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('taxOfficeId')"><span v-text="$t('etaxApp.officeTaxFunc.taxOfficeId')">Tax Office Id</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('funcOfficeId')"><span v-text="$t('etaxApp.officeTaxFunc.funcOfficeId')">Func Office Id</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('etaxApp.officeTaxFunc.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('etaxApp.officeTaxFunc.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="officeTaxFunc in officeTaxFuncs"
+                <tr v-for="officeTaxFunc of orderBy(officeTaxFuncs, propOrder, reverse === true ? 1 : -1)"
                     :key="officeTaxFunc.id">
                     <td>
                         <router-link :to="{name: 'OfficeTaxFuncView', params: {officeTaxFuncId: officeTaxFunc.id}}">{{officeTaxFunc.id}}</router-link>
@@ -75,6 +75,15 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-officeTaxFunc" v-text="$t('entity.action.delete')" v-on:click="removeOfficeTaxFunc()">Delete</button>
             </div>
         </b-modal>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div v-if="officeTaxFuncs && officeTaxFuncs.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

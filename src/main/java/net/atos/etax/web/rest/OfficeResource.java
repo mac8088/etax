@@ -1,14 +1,23 @@
 package net.atos.etax.web.rest;
 
 import net.atos.etax.domain.Office;
-import net.atos.etax.repository.OfficeRepository;
+import net.atos.etax.service.OfficeService;
 import net.atos.etax.web.rest.errors.BadRequestAlertException;
+import net.atos.etax.service.dto.OfficeCriteria;
+import net.atos.etax.service.OfficeQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +42,13 @@ public class OfficeResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final OfficeRepository officeRepository;
+    private final OfficeService officeService;
 
-    public OfficeResource(OfficeRepository officeRepository) {
-        this.officeRepository = officeRepository;
+    private final OfficeQueryService officeQueryService;
+
+    public OfficeResource(OfficeService officeService, OfficeQueryService officeQueryService) {
+        this.officeService = officeService;
+        this.officeQueryService = officeQueryService;
     }
 
     /**
@@ -52,7 +64,7 @@ public class OfficeResource {
         if (office.getId() != null) {
             throw new BadRequestAlertException("A new office cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Office result = officeRepository.save(office);
+        Office result = officeService.save(office);
         return ResponseEntity.created(new URI("/api/offices/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -73,7 +85,7 @@ public class OfficeResource {
         if (office.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Office result = officeRepository.save(office);
+        Office result = officeService.save(office);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, office.getId().toString()))
             .body(result);
@@ -82,12 +94,30 @@ public class OfficeResource {
     /**
      * {@code GET  /offices} : get all the offices.
      *
+     * @param pageable the pagination information.
+     * @param queryParams a {@link MultiValueMap} query parameters.
+     * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of offices in body.
      */
     @GetMapping("/offices")
-    public List<Office> getAllOffices() {
-        log.debug("REST request to get all Offices");
-        return officeRepository.findAll();
+    public ResponseEntity<List<Office>> getAllOffices(OfficeCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get Offices by criteria: {}", criteria);
+        Page<Office> page = officeQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * {@code GET  /offices/count} : count all the offices.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/offices/count")
+    public ResponseEntity<Long> countOffices(OfficeCriteria criteria) {
+        log.debug("REST request to count Offices by criteria: {}", criteria);
+        return ResponseEntity.ok().body(officeQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -99,7 +129,7 @@ public class OfficeResource {
     @GetMapping("/offices/{id}")
     public ResponseEntity<Office> getOffice(@PathVariable Long id) {
         log.debug("REST request to get Office : {}", id);
-        Optional<Office> office = officeRepository.findById(id);
+        Optional<Office> office = officeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(office);
     }
 
@@ -112,7 +142,7 @@ public class OfficeResource {
     @DeleteMapping("/offices/{id}")
     public ResponseEntity<Void> deleteOffice(@PathVariable Long id) {
         log.debug("REST request to delete Office : {}", id);
-        officeRepository.deleteById(id);
+        officeService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

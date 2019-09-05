@@ -9,6 +9,13 @@ export default class PublicHoliday extends Vue {
   @Inject('alertService') private alertService: () => AlertService;
   @Inject('publicHolidayService') private publicHolidayService: () => PublicHolidayService;
   private removeId: number = null;
+  public itemsPerPage = 20;
+  public queryCount: number = null;
+  public page = 1;
+  public previousPage: number = null;
+  public propOrder = 'id';
+  public reverse = true;
+  public totalItems = 0;
   public publicHolidays: IPublicHoliday[] = [];
 
   public isFetching = false;
@@ -34,17 +41,25 @@ export default class PublicHoliday extends Vue {
   }
 
   public clear(): void {
+    this.page = 1;
     this.retrieveAllPublicHolidays();
   }
 
   public retrieveAllPublicHolidays(): void {
     this.isFetching = true;
 
+    const paginationQuery = {
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort()
+    };
     this.publicHolidayService()
-      .retrieve()
+      .retrieve(paginationQuery)
       .then(
         res => {
           this.publicHolidays = res.data;
+          this.totalItems = Number(res.headers['x-total-count']);
+          this.queryCount = this.totalItems;
           this.isFetching = false;
         },
         err => {
@@ -69,6 +84,30 @@ export default class PublicHoliday extends Vue {
         this.retrieveAllPublicHolidays();
         this.closeDialog();
       });
+  }
+
+  public sort(): Array<any> {
+    const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
+    if (this.propOrder !== 'id') {
+      result.push('id');
+    }
+    return result;
+  }
+
+  public loadPage(page: number): void {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.transition();
+    }
+  }
+
+  public transition(): void {
+    this.retrieveAllPublicHolidays();
+  }
+
+  public changeOrder(propOrder): void {
+    this.propOrder = propOrder;
+    this.reverse = !this.reverse;
   }
 
   public closeDialog(): void {

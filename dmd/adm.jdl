@@ -131,83 +131,6 @@ entity OfficeWeekday(adm_office_weekday) {
 }
 
 /**
-* This Resource entity (TS02_RESOURCE)
-* The Resource segment holds all data related to a resource,
-* a resource is a functional unit on which access is controlled.
-* A User has access to either "all or nothing" of a resource functionality.
-*/
-entity Resource(adm_resource){
-    /*Name of the application resource */
-    name String required maxlength(200),
-    /*Short description of the application functionality */
-    description String maxlength(500),
-    /*STD[MODULE], name of the module this resource belongs to */
-    cstdModule String maxlength(40),
-    /*Type of the application resource */
-    resourceType String maxlength(40),
-    /*Type of the application resource */
-    resourceContent TextBlob
-}
-
-/**
-* This Profile entity (TS08_PROFILE)
-* The Profile data segment holds data for e-tax user profiles.
-* an e-tax profile is defines user access to e-ris transactions and data.
-*/
-entity Profile(adm_profile){
-    /*Name of the profile */
-    name String required unique maxlength(200),
-    /*Short description of the profile */
-    description String maxlength(500),
-    /*STD[MODULE], name of the module this resource belongs to */
-    cstdModule String maxlength(40) required,
-    /*STD[STATUS], name of the module this resource belongs to */
-    cstdStatus String maxlength(40),
-    /**Effective date */
-    effectiveDate ZonedDateTime required,
-    /**Expiry date */
-    expiryDate ZonedDateTime,
-    /*If defined, ID of the Supervisor Profile */
-    supvrProfile String maxlength(200)
-}
-
-/**
-* Simple mode, multi-to-multi mapping of users and authorization/roles:
-* Authority(Role) is TS01_APPLICATION entity, The mapping table of n..n with User is:
-* jhi_user_authority
-*/
-//relationship ManyToMany {
-//    User{authority(name)} to Authority{User(login)},
-//}
-
-/**
-* Complex patterns, multi-to-multi mapping of users and user groups
-* Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with User is:
-* adm_user_profile (TS11_USER_PROFILE)
-*/
-relationship ManyToMany {
-    Profile{User(login)} to User{profile(name)}
-}
-
-/**
-* Multi-to-multi mapping of resources and authorization/roles
-* Resource is TS02_RESOURCE entity, The mapping table of n..n with Authority is:
-* adm_resource_authority (TS03_APPLICATION_RESOURCE)
-*/
-relationship ManyToMany {
-    Resource{authority(name)} to Authority{resource(name)}
-}
-
-/**
-* Many-to-many mapping of household groups and roles/authorizations：
-* Profile(Group) is TS08_PROFILE entity, The mapping table of n..n with Authority is:
-* adm_profile_authority (TS09_APPLICATION_OF_PROFILE)
-*/
-relationship ManyToMany {
-    Profile{authority(name)} to Authority{profile(name)}
-}
-
-/**
 * The Extension information for setting up and maintaining users.
 */
 entity UserInfo(adm_user_info){
@@ -268,3 +191,17 @@ entity UserInfo(adm_user_info){
 relationship OneToOne{
     UserInfo{user(login)} to User
 }
+
+// Set pagination options
+paginate Office, UserInfo with pagination
+paginate OfficeRelationship, OfficeAreaCode, OfficeTaxFunc, OfficeWeekday with pager
+paginate PublicHoliday, ExchangeRate with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except OfficeRelationship, OfficeAreaCode, OfficeTaxFunc, OfficeWeekday
+
+// Use JPA Criteria to filter entities
+filter PublicHoliday, ExchangeRate, Office, UserInfo

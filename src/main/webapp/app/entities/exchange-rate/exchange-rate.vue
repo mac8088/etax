@@ -24,18 +24,18 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.exchangeRate.cstdCurrencyA')">Cstd Currency A</span></th>
-                    <th><span v-text="$t('etaxApp.exchangeRate.cstdCurrencyB')">Cstd Currency B</span></th>
-                    <th><span v-text="$t('etaxApp.exchangeRate.rate')">Rate</span></th>
-                    <th><span v-text="$t('etaxApp.exchangeRate.startDate')">Start Date</span></th>
-                    <th><span v-text="$t('etaxApp.exchangeRate.endDate')">End Date</span></th>
-                    <th><span v-text="$t('etaxApp.exchangeRate.ccVersion')">Cc Version</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdCurrencyA')"><span v-text="$t('etaxApp.exchangeRate.cstdCurrencyA')">Cstd Currency A</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdCurrencyB')"><span v-text="$t('etaxApp.exchangeRate.cstdCurrencyB')">Cstd Currency B</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('rate')"><span v-text="$t('etaxApp.exchangeRate.rate')">Rate</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('etaxApp.exchangeRate.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('etaxApp.exchangeRate.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('ccVersion')"><span v-text="$t('etaxApp.exchangeRate.ccVersion')">Cc Version</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="exchangeRate in exchangeRates"
+                <tr v-for="exchangeRate of orderBy(exchangeRates, propOrder, reverse === true ? 1 : -1)"
                     :key="exchangeRate.id">
                     <td>
                         <router-link :to="{name: 'ExchangeRateView', params: {exchangeRateId: exchangeRate.id}}">{{exchangeRate.id}}</router-link>

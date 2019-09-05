@@ -24,29 +24,29 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.office.cstdOfficeType')">Cstd Office Type</span></th>
-                    <th><span v-text="$t('etaxApp.office.name')">Name</span></th>
-                    <th><span v-text="$t('etaxApp.office.cstdClassifierCode')">Cstd Classifier Code</span></th>
-                    <th><span v-text="$t('etaxApp.office.effectiveDate')">Effective Date</span></th>
-                    <th><span v-text="$t('etaxApp.office.expiryDate')">Expiry Date</span></th>
-                    <th><span v-text="$t('etaxApp.office.phone')">Phone</span></th>
-                    <th><span v-text="$t('etaxApp.office.fax')">Fax</span></th>
-                    <th><span v-text="$t('etaxApp.office.stl')">Stl</span></th>
-                    <th><span v-text="$t('etaxApp.office.mngOffice')">Mng Office</span></th>
-                    <th><span v-text="$t('etaxApp.office.physicalAdr')">Physical Adr</span></th>
-                    <th><span v-text="$t('etaxApp.office.postalAadr')">Postal Aadr</span></th>
-                    <th><span v-text="$t('etaxApp.office.pinCode')">Pin Code</span></th>
-                    <th><span v-text="$t('etaxApp.office.cstdWeekWorkingDay')">Cstd Week Working Day</span></th>
-                    <th><span v-text="$t('etaxApp.office.officeCode')">Office Code</span></th>
-                    <th><span v-text="$t('etaxApp.office.cstdOfficeSubType')">Cstd Office Sub Type</span></th>
-                    <th><span v-text="$t('etaxApp.office.cstdOfficeFuncType')">Cstd Office Func Type</span></th>
-                    <th><span v-text="$t('etaxApp.office.ccVersion')">Cc Version</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdOfficeType')"><span v-text="$t('etaxApp.office.cstdOfficeType')">Cstd Office Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('name')"><span v-text="$t('etaxApp.office.name')">Name</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdClassifierCode')"><span v-text="$t('etaxApp.office.cstdClassifierCode')">Cstd Classifier Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('effectiveDate')"><span v-text="$t('etaxApp.office.effectiveDate')">Effective Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('expiryDate')"><span v-text="$t('etaxApp.office.expiryDate')">Expiry Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('phone')"><span v-text="$t('etaxApp.office.phone')">Phone</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('fax')"><span v-text="$t('etaxApp.office.fax')">Fax</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('stl')"><span v-text="$t('etaxApp.office.stl')">Stl</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('mngOffice')"><span v-text="$t('etaxApp.office.mngOffice')">Mng Office</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('physicalAdr')"><span v-text="$t('etaxApp.office.physicalAdr')">Physical Adr</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('postalAadr')"><span v-text="$t('etaxApp.office.postalAadr')">Postal Aadr</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('pinCode')"><span v-text="$t('etaxApp.office.pinCode')">Pin Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdWeekWorkingDay')"><span v-text="$t('etaxApp.office.cstdWeekWorkingDay')">Cstd Week Working Day</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('officeCode')"><span v-text="$t('etaxApp.office.officeCode')">Office Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdOfficeSubType')"><span v-text="$t('etaxApp.office.cstdOfficeSubType')">Cstd Office Sub Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdOfficeFuncType')"><span v-text="$t('etaxApp.office.cstdOfficeFuncType')">Cstd Office Func Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('ccVersion')"><span v-text="$t('etaxApp.office.ccVersion')">Cc Version</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="office in offices"
+                <tr v-for="office of orderBy(offices, propOrder, reverse === true ? 1 : -1)"
                     :key="office.id">
                     <td>
                         <router-link :to="{name: 'OfficeView', params: {officeId: office.id}}">{{office.id}}</router-link>
@@ -101,6 +101,14 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-office" v-text="$t('entity.action.delete')" v-on:click="removeOffice()">Delete</button>
             </div>
         </b-modal>
+        <div v-if="offices && offices.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

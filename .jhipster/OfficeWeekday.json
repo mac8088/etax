@@ -27,11 +27,11 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190902135648",
+    "changelogDate": "20190905091741",
     "javadoc": "Week working day.",
     "entityTableName": "adm_office_weekday",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

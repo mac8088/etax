@@ -24,17 +24,17 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.officeRelationship.parentId')">Parent Id</span></th>
-                    <th><span v-text="$t('etaxApp.officeRelationship.chileId')">Chile Id</span></th>
-                    <th><span v-text="$t('etaxApp.officeRelationship.startDate')">Start Date</span></th>
-                    <th><span v-text="$t('etaxApp.officeRelationship.endDate')">End Date</span></th>
-                    <th><span v-text="$t('etaxApp.officeRelationship.ccVersion')">Cc Version</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('parentId')"><span v-text="$t('etaxApp.officeRelationship.parentId')">Parent Id</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('chileId')"><span v-text="$t('etaxApp.officeRelationship.chileId')">Chile Id</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('etaxApp.officeRelationship.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('etaxApp.officeRelationship.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('ccVersion')"><span v-text="$t('etaxApp.officeRelationship.ccVersion')">Cc Version</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="officeRelationship in officeRelationships"
+                <tr v-for="officeRelationship of orderBy(officeRelationships, propOrder, reverse === true ? 1 : -1)"
                     :key="officeRelationship.id">
                     <td>
                         <router-link :to="{name: 'OfficeRelationshipView', params: {officeRelationshipId: officeRelationship.id}}">{{officeRelationship.id}}</router-link>
@@ -77,6 +77,15 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-officeRelationship" v-text="$t('entity.action.delete')" v-on:click="removeOfficeRelationship()">Delete</button>
             </div>
         </b-modal>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div v-if="officeRelationships && officeRelationships.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

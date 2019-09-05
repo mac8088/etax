@@ -24,15 +24,15 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.officeAreaCode.officeId')">Office Id</span></th>
-                    <th><span v-text="$t('etaxApp.officeAreaCode.fromPin')">From Pin</span></th>
-                    <th><span v-text="$t('etaxApp.officeAreaCode.toPin')">To Pin</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('officeId')"><span v-text="$t('etaxApp.officeAreaCode.officeId')">Office Id</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('fromPin')"><span v-text="$t('etaxApp.officeAreaCode.fromPin')">From Pin</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('toPin')"><span v-text="$t('etaxApp.officeAreaCode.toPin')">To Pin</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="officeAreaCode in officeAreaCodes"
+                <tr v-for="officeAreaCode of orderBy(officeAreaCodes, propOrder, reverse === true ? 1 : -1)"
                     :key="officeAreaCode.id">
                     <td>
                         <router-link :to="{name: 'OfficeAreaCodeView', params: {officeAreaCodeId: officeAreaCode.id}}">{{officeAreaCode.id}}</router-link>
@@ -73,6 +73,15 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-officeAreaCode" v-text="$t('entity.action.delete')" v-on:click="removeOfficeAreaCode()">Delete</button>
             </div>
         </b-modal>
+        <!-- Pager is not implemented yet, so this is normal pagination instead -->
+        <div v-if="officeAreaCodes && officeAreaCodes.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

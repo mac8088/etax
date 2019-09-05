@@ -3,7 +3,10 @@ package net.atos.etax.web.rest;
 import net.atos.etax.EtaxApp;
 import net.atos.etax.domain.PublicHoliday;
 import net.atos.etax.repository.PublicHolidayRepository;
+import net.atos.etax.service.PublicHolidayService;
 import net.atos.etax.web.rest.errors.ExceptionTranslator;
+import net.atos.etax.service.dto.PublicHolidayCriteria;
+import net.atos.etax.service.PublicHolidayQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,6 +60,12 @@ public class PublicHolidayResourceIT {
     private PublicHolidayRepository publicHolidayRepository;
 
     @Autowired
+    private PublicHolidayService publicHolidayService;
+
+    @Autowired
+    private PublicHolidayQueryService publicHolidayQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -78,7 +87,7 @@ public class PublicHolidayResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PublicHolidayResource publicHolidayResource = new PublicHolidayResource(publicHolidayRepository);
+        final PublicHolidayResource publicHolidayResource = new PublicHolidayResource(publicHolidayService, publicHolidayQueryService);
         this.restPublicHolidayMockMvc = MockMvcBuilders.standaloneSetup(publicHolidayResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -226,6 +235,333 @@ public class PublicHolidayResourceIT {
 
     @Test
     @Transactional
+    public void getAllPublicHolidaysByCstdHolidayTypesIsEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where cstdHolidayTypes equals to DEFAULT_CSTD_HOLIDAY_TYPES
+        defaultPublicHolidayShouldBeFound("cstdHolidayTypes.equals=" + DEFAULT_CSTD_HOLIDAY_TYPES);
+
+        // Get all the publicHolidayList where cstdHolidayTypes equals to UPDATED_CSTD_HOLIDAY_TYPES
+        defaultPublicHolidayShouldNotBeFound("cstdHolidayTypes.equals=" + UPDATED_CSTD_HOLIDAY_TYPES);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCstdHolidayTypesIsInShouldWork() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where cstdHolidayTypes in DEFAULT_CSTD_HOLIDAY_TYPES or UPDATED_CSTD_HOLIDAY_TYPES
+        defaultPublicHolidayShouldBeFound("cstdHolidayTypes.in=" + DEFAULT_CSTD_HOLIDAY_TYPES + "," + UPDATED_CSTD_HOLIDAY_TYPES);
+
+        // Get all the publicHolidayList where cstdHolidayTypes equals to UPDATED_CSTD_HOLIDAY_TYPES
+        defaultPublicHolidayShouldNotBeFound("cstdHolidayTypes.in=" + UPDATED_CSTD_HOLIDAY_TYPES);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCstdHolidayTypesIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where cstdHolidayTypes is not null
+        defaultPublicHolidayShouldBeFound("cstdHolidayTypes.specified=true");
+
+        // Get all the publicHolidayList where cstdHolidayTypes is null
+        defaultPublicHolidayShouldNotBeFound("cstdHolidayTypes.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDescriptionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where description equals to DEFAULT_DESCRIPTION
+        defaultPublicHolidayShouldBeFound("description.equals=" + DEFAULT_DESCRIPTION);
+
+        // Get all the publicHolidayList where description equals to UPDATED_DESCRIPTION
+        defaultPublicHolidayShouldNotBeFound("description.equals=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDescriptionIsInShouldWork() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where description in DEFAULT_DESCRIPTION or UPDATED_DESCRIPTION
+        defaultPublicHolidayShouldBeFound("description.in=" + DEFAULT_DESCRIPTION + "," + UPDATED_DESCRIPTION);
+
+        // Get all the publicHolidayList where description equals to UPDATED_DESCRIPTION
+        defaultPublicHolidayShouldNotBeFound("description.in=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDescriptionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where description is not null
+        defaultPublicHolidayShouldBeFound("description.specified=true");
+
+        // Get all the publicHolidayList where description is null
+        defaultPublicHolidayShouldNotBeFound("description.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where date equals to DEFAULT_DATE
+        defaultPublicHolidayShouldBeFound("date.equals=" + DEFAULT_DATE);
+
+        // Get all the publicHolidayList where date equals to UPDATED_DATE
+        defaultPublicHolidayShouldNotBeFound("date.equals=" + UPDATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where date in DEFAULT_DATE or UPDATED_DATE
+        defaultPublicHolidayShouldBeFound("date.in=" + DEFAULT_DATE + "," + UPDATED_DATE);
+
+        // Get all the publicHolidayList where date equals to UPDATED_DATE
+        defaultPublicHolidayShouldNotBeFound("date.in=" + UPDATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where date is not null
+        defaultPublicHolidayShouldBeFound("date.specified=true");
+
+        // Get all the publicHolidayList where date is null
+        defaultPublicHolidayShouldNotBeFound("date.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where date greater than or equals to DEFAULT_DATE
+        defaultPublicHolidayShouldBeFound("date.greaterOrEqualThan=" + DEFAULT_DATE);
+
+        // Get all the publicHolidayList where date greater than or equals to UPDATED_DATE
+        defaultPublicHolidayShouldNotBeFound("date.greaterOrEqualThan=" + UPDATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where date less than or equals to DEFAULT_DATE
+        defaultPublicHolidayShouldNotBeFound("date.lessThan=" + DEFAULT_DATE);
+
+        // Get all the publicHolidayList where date less than or equals to UPDATED_DATE
+        defaultPublicHolidayShouldBeFound("date.lessThan=" + UPDATED_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByWorkingFlagIsEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where workingFlag equals to DEFAULT_WORKING_FLAG
+        defaultPublicHolidayShouldBeFound("workingFlag.equals=" + DEFAULT_WORKING_FLAG);
+
+        // Get all the publicHolidayList where workingFlag equals to UPDATED_WORKING_FLAG
+        defaultPublicHolidayShouldNotBeFound("workingFlag.equals=" + UPDATED_WORKING_FLAG);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByWorkingFlagIsInShouldWork() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where workingFlag in DEFAULT_WORKING_FLAG or UPDATED_WORKING_FLAG
+        defaultPublicHolidayShouldBeFound("workingFlag.in=" + DEFAULT_WORKING_FLAG + "," + UPDATED_WORKING_FLAG);
+
+        // Get all the publicHolidayList where workingFlag equals to UPDATED_WORKING_FLAG
+        defaultPublicHolidayShouldNotBeFound("workingFlag.in=" + UPDATED_WORKING_FLAG);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByWorkingFlagIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where workingFlag is not null
+        defaultPublicHolidayShouldBeFound("workingFlag.specified=true");
+
+        // Get all the publicHolidayList where workingFlag is null
+        defaultPublicHolidayShouldNotBeFound("workingFlag.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCountryWideIsEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where countryWide equals to DEFAULT_COUNTRY_WIDE
+        defaultPublicHolidayShouldBeFound("countryWide.equals=" + DEFAULT_COUNTRY_WIDE);
+
+        // Get all the publicHolidayList where countryWide equals to UPDATED_COUNTRY_WIDE
+        defaultPublicHolidayShouldNotBeFound("countryWide.equals=" + UPDATED_COUNTRY_WIDE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCountryWideIsInShouldWork() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where countryWide in DEFAULT_COUNTRY_WIDE or UPDATED_COUNTRY_WIDE
+        defaultPublicHolidayShouldBeFound("countryWide.in=" + DEFAULT_COUNTRY_WIDE + "," + UPDATED_COUNTRY_WIDE);
+
+        // Get all the publicHolidayList where countryWide equals to UPDATED_COUNTRY_WIDE
+        defaultPublicHolidayShouldNotBeFound("countryWide.in=" + UPDATED_COUNTRY_WIDE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCountryWideIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where countryWide is not null
+        defaultPublicHolidayShouldBeFound("countryWide.specified=true");
+
+        // Get all the publicHolidayList where countryWide is null
+        defaultPublicHolidayShouldNotBeFound("countryWide.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCcVersionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where ccVersion equals to DEFAULT_CC_VERSION
+        defaultPublicHolidayShouldBeFound("ccVersion.equals=" + DEFAULT_CC_VERSION);
+
+        // Get all the publicHolidayList where ccVersion equals to UPDATED_CC_VERSION
+        defaultPublicHolidayShouldNotBeFound("ccVersion.equals=" + UPDATED_CC_VERSION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCcVersionIsInShouldWork() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where ccVersion in DEFAULT_CC_VERSION or UPDATED_CC_VERSION
+        defaultPublicHolidayShouldBeFound("ccVersion.in=" + DEFAULT_CC_VERSION + "," + UPDATED_CC_VERSION);
+
+        // Get all the publicHolidayList where ccVersion equals to UPDATED_CC_VERSION
+        defaultPublicHolidayShouldNotBeFound("ccVersion.in=" + UPDATED_CC_VERSION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCcVersionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where ccVersion is not null
+        defaultPublicHolidayShouldBeFound("ccVersion.specified=true");
+
+        // Get all the publicHolidayList where ccVersion is null
+        defaultPublicHolidayShouldNotBeFound("ccVersion.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCcVersionIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where ccVersion greater than or equals to DEFAULT_CC_VERSION
+        defaultPublicHolidayShouldBeFound("ccVersion.greaterOrEqualThan=" + DEFAULT_CC_VERSION);
+
+        // Get all the publicHolidayList where ccVersion greater than or equals to UPDATED_CC_VERSION
+        defaultPublicHolidayShouldNotBeFound("ccVersion.greaterOrEqualThan=" + UPDATED_CC_VERSION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllPublicHolidaysByCcVersionIsLessThanSomething() throws Exception {
+        // Initialize the database
+        publicHolidayRepository.saveAndFlush(publicHoliday);
+
+        // Get all the publicHolidayList where ccVersion less than or equals to DEFAULT_CC_VERSION
+        defaultPublicHolidayShouldNotBeFound("ccVersion.lessThan=" + DEFAULT_CC_VERSION);
+
+        // Get all the publicHolidayList where ccVersion less than or equals to UPDATED_CC_VERSION
+        defaultPublicHolidayShouldBeFound("ccVersion.lessThan=" + UPDATED_CC_VERSION);
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultPublicHolidayShouldBeFound(String filter) throws Exception {
+        restPublicHolidayMockMvc.perform(get("/api/public-holidays?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(publicHoliday.getId().intValue())))
+            .andExpect(jsonPath("$.[*].cstdHolidayTypes").value(hasItem(DEFAULT_CSTD_HOLIDAY_TYPES)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].workingFlag").value(hasItem(DEFAULT_WORKING_FLAG.booleanValue())))
+            .andExpect(jsonPath("$.[*].countryWide").value(hasItem(DEFAULT_COUNTRY_WIDE.booleanValue())))
+            .andExpect(jsonPath("$.[*].ccVersion").value(hasItem(DEFAULT_CC_VERSION)));
+
+        // Check, that the count call also returns 1
+        restPublicHolidayMockMvc.perform(get("/api/public-holidays/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultPublicHolidayShouldNotBeFound(String filter) throws Exception {
+        restPublicHolidayMockMvc.perform(get("/api/public-holidays?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restPublicHolidayMockMvc.perform(get("/api/public-holidays/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingPublicHoliday() throws Exception {
         // Get the publicHoliday
         restPublicHolidayMockMvc.perform(get("/api/public-holidays/{id}", Long.MAX_VALUE))
@@ -236,7 +572,7 @@ public class PublicHolidayResourceIT {
     @Transactional
     public void updatePublicHoliday() throws Exception {
         // Initialize the database
-        publicHolidayRepository.saveAndFlush(publicHoliday);
+        publicHolidayService.save(publicHoliday);
 
         int databaseSizeBeforeUpdate = publicHolidayRepository.findAll().size();
 
@@ -291,7 +627,7 @@ public class PublicHolidayResourceIT {
     @Transactional
     public void deletePublicHoliday() throws Exception {
         // Initialize the database
-        publicHolidayRepository.saveAndFlush(publicHoliday);
+        publicHolidayService.save(publicHoliday);
 
         int databaseSizeBeforeDelete = publicHolidayRepository.findAll().size();
 

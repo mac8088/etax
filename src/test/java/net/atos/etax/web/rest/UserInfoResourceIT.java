@@ -2,8 +2,12 @@ package net.atos.etax.web.rest;
 
 import net.atos.etax.EtaxApp;
 import net.atos.etax.domain.UserInfo;
+import net.atos.etax.domain.User;
 import net.atos.etax.repository.UserInfoRepository;
+import net.atos.etax.service.UserInfoService;
 import net.atos.etax.web.rest.errors.ExceptionTranslator;
+import net.atos.etax.service.dto.UserInfoCriteria;
+import net.atos.etax.service.UserInfoQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -123,6 +127,12 @@ public class UserInfoResourceIT {
     private UserInfoRepository userInfoRepository;
 
     @Autowired
+    private UserInfoService userInfoService;
+
+    @Autowired
+    private UserInfoQueryService userInfoQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -144,7 +154,7 @@ public class UserInfoResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final UserInfoResource userInfoResource = new UserInfoResource(userInfoRepository);
+        final UserInfoResource userInfoResource = new UserInfoResource(userInfoService, userInfoQueryService);
         this.restUserInfoMockMvc = MockMvcBuilders.standaloneSetup(userInfoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -613,6 +623,1222 @@ public class UserInfoResourceIT {
 
     @Test
     @Transactional
+    public void getAllUserInfosByCstdAdmSectionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdAdmSection equals to DEFAULT_CSTD_ADM_SECTION
+        defaultUserInfoShouldBeFound("cstdAdmSection.equals=" + DEFAULT_CSTD_ADM_SECTION);
+
+        // Get all the userInfoList where cstdAdmSection equals to UPDATED_CSTD_ADM_SECTION
+        defaultUserInfoShouldNotBeFound("cstdAdmSection.equals=" + UPDATED_CSTD_ADM_SECTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdAdmSectionIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdAdmSection in DEFAULT_CSTD_ADM_SECTION or UPDATED_CSTD_ADM_SECTION
+        defaultUserInfoShouldBeFound("cstdAdmSection.in=" + DEFAULT_CSTD_ADM_SECTION + "," + UPDATED_CSTD_ADM_SECTION);
+
+        // Get all the userInfoList where cstdAdmSection equals to UPDATED_CSTD_ADM_SECTION
+        defaultUserInfoShouldNotBeFound("cstdAdmSection.in=" + UPDATED_CSTD_ADM_SECTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdAdmSectionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdAdmSection is not null
+        defaultUserInfoShouldBeFound("cstdAdmSection.specified=true");
+
+        // Get all the userInfoList where cstdAdmSection is null
+        defaultUserInfoShouldNotBeFound("cstdAdmSection.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdSecurityLevelIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdSecurityLevel equals to DEFAULT_CSTD_SECURITY_LEVEL
+        defaultUserInfoShouldBeFound("cstdSecurityLevel.equals=" + DEFAULT_CSTD_SECURITY_LEVEL);
+
+        // Get all the userInfoList where cstdSecurityLevel equals to UPDATED_CSTD_SECURITY_LEVEL
+        defaultUserInfoShouldNotBeFound("cstdSecurityLevel.equals=" + UPDATED_CSTD_SECURITY_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdSecurityLevelIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdSecurityLevel in DEFAULT_CSTD_SECURITY_LEVEL or UPDATED_CSTD_SECURITY_LEVEL
+        defaultUserInfoShouldBeFound("cstdSecurityLevel.in=" + DEFAULT_CSTD_SECURITY_LEVEL + "," + UPDATED_CSTD_SECURITY_LEVEL);
+
+        // Get all the userInfoList where cstdSecurityLevel equals to UPDATED_CSTD_SECURITY_LEVEL
+        defaultUserInfoShouldNotBeFound("cstdSecurityLevel.in=" + UPDATED_CSTD_SECURITY_LEVEL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdSecurityLevelIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdSecurityLevel is not null
+        defaultUserInfoShouldBeFound("cstdSecurityLevel.specified=true");
+
+        // Get all the userInfoList where cstdSecurityLevel is null
+        defaultUserInfoShouldNotBeFound("cstdSecurityLevel.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdUserTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdUserType equals to DEFAULT_CSTD_USER_TYPE
+        defaultUserInfoShouldBeFound("cstdUserType.equals=" + DEFAULT_CSTD_USER_TYPE);
+
+        // Get all the userInfoList where cstdUserType equals to UPDATED_CSTD_USER_TYPE
+        defaultUserInfoShouldNotBeFound("cstdUserType.equals=" + UPDATED_CSTD_USER_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdUserTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdUserType in DEFAULT_CSTD_USER_TYPE or UPDATED_CSTD_USER_TYPE
+        defaultUserInfoShouldBeFound("cstdUserType.in=" + DEFAULT_CSTD_USER_TYPE + "," + UPDATED_CSTD_USER_TYPE);
+
+        // Get all the userInfoList where cstdUserType equals to UPDATED_CSTD_USER_TYPE
+        defaultUserInfoShouldNotBeFound("cstdUserType.in=" + UPDATED_CSTD_USER_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdUserTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdUserType is not null
+        defaultUserInfoShouldBeFound("cstdUserType.specified=true");
+
+        // Get all the userInfoList where cstdUserType is null
+        defaultUserInfoShouldNotBeFound("cstdUserType.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByDescriptionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where description equals to DEFAULT_DESCRIPTION
+        defaultUserInfoShouldBeFound("description.equals=" + DEFAULT_DESCRIPTION);
+
+        // Get all the userInfoList where description equals to UPDATED_DESCRIPTION
+        defaultUserInfoShouldNotBeFound("description.equals=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByDescriptionIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where description in DEFAULT_DESCRIPTION or UPDATED_DESCRIPTION
+        defaultUserInfoShouldBeFound("description.in=" + DEFAULT_DESCRIPTION + "," + UPDATED_DESCRIPTION);
+
+        // Get all the userInfoList where description equals to UPDATED_DESCRIPTION
+        defaultUserInfoShouldNotBeFound("description.in=" + UPDATED_DESCRIPTION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByDescriptionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where description is not null
+        defaultUserInfoShouldBeFound("description.specified=true");
+
+        // Get all the userInfoList where description is null
+        defaultUserInfoShouldNotBeFound("description.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByMiddleNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where middleName equals to DEFAULT_MIDDLE_NAME
+        defaultUserInfoShouldBeFound("middleName.equals=" + DEFAULT_MIDDLE_NAME);
+
+        // Get all the userInfoList where middleName equals to UPDATED_MIDDLE_NAME
+        defaultUserInfoShouldNotBeFound("middleName.equals=" + UPDATED_MIDDLE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByMiddleNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where middleName in DEFAULT_MIDDLE_NAME or UPDATED_MIDDLE_NAME
+        defaultUserInfoShouldBeFound("middleName.in=" + DEFAULT_MIDDLE_NAME + "," + UPDATED_MIDDLE_NAME);
+
+        // Get all the userInfoList where middleName equals to UPDATED_MIDDLE_NAME
+        defaultUserInfoShouldNotBeFound("middleName.in=" + UPDATED_MIDDLE_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByMiddleNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where middleName is not null
+        defaultUserInfoShouldBeFound("middleName.specified=true");
+
+        // Get all the userInfoList where middleName is null
+        defaultUserInfoShouldNotBeFound("middleName.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByGenderIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where gender equals to DEFAULT_GENDER
+        defaultUserInfoShouldBeFound("gender.equals=" + DEFAULT_GENDER);
+
+        // Get all the userInfoList where gender equals to UPDATED_GENDER
+        defaultUserInfoShouldNotBeFound("gender.equals=" + UPDATED_GENDER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByGenderIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where gender in DEFAULT_GENDER or UPDATED_GENDER
+        defaultUserInfoShouldBeFound("gender.in=" + DEFAULT_GENDER + "," + UPDATED_GENDER);
+
+        // Get all the userInfoList where gender equals to UPDATED_GENDER
+        defaultUserInfoShouldNotBeFound("gender.in=" + UPDATED_GENDER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByGenderIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where gender is not null
+        defaultUserInfoShouldBeFound("gender.specified=true");
+
+        // Get all the userInfoList where gender is null
+        defaultUserInfoShouldNotBeFound("gender.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByPhoneNumIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where phoneNum equals to DEFAULT_PHONE_NUM
+        defaultUserInfoShouldBeFound("phoneNum.equals=" + DEFAULT_PHONE_NUM);
+
+        // Get all the userInfoList where phoneNum equals to UPDATED_PHONE_NUM
+        defaultUserInfoShouldNotBeFound("phoneNum.equals=" + UPDATED_PHONE_NUM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByPhoneNumIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where phoneNum in DEFAULT_PHONE_NUM or UPDATED_PHONE_NUM
+        defaultUserInfoShouldBeFound("phoneNum.in=" + DEFAULT_PHONE_NUM + "," + UPDATED_PHONE_NUM);
+
+        // Get all the userInfoList where phoneNum equals to UPDATED_PHONE_NUM
+        defaultUserInfoShouldNotBeFound("phoneNum.in=" + UPDATED_PHONE_NUM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByPhoneNumIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where phoneNum is not null
+        defaultUserInfoShouldBeFound("phoneNum.specified=true");
+
+        // Get all the userInfoList where phoneNum is null
+        defaultUserInfoShouldNotBeFound("phoneNum.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByFaxNumIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where faxNum equals to DEFAULT_FAX_NUM
+        defaultUserInfoShouldBeFound("faxNum.equals=" + DEFAULT_FAX_NUM);
+
+        // Get all the userInfoList where faxNum equals to UPDATED_FAX_NUM
+        defaultUserInfoShouldNotBeFound("faxNum.equals=" + UPDATED_FAX_NUM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByFaxNumIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where faxNum in DEFAULT_FAX_NUM or UPDATED_FAX_NUM
+        defaultUserInfoShouldBeFound("faxNum.in=" + DEFAULT_FAX_NUM + "," + UPDATED_FAX_NUM);
+
+        // Get all the userInfoList where faxNum equals to UPDATED_FAX_NUM
+        defaultUserInfoShouldNotBeFound("faxNum.in=" + UPDATED_FAX_NUM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByFaxNumIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where faxNum is not null
+        defaultUserInfoShouldBeFound("faxNum.specified=true");
+
+        // Get all the userInfoList where faxNum is null
+        defaultUserInfoShouldNotBeFound("faxNum.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByEffiectiveDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where effiectiveDate equals to DEFAULT_EFFIECTIVE_DATE
+        defaultUserInfoShouldBeFound("effiectiveDate.equals=" + DEFAULT_EFFIECTIVE_DATE);
+
+        // Get all the userInfoList where effiectiveDate equals to UPDATED_EFFIECTIVE_DATE
+        defaultUserInfoShouldNotBeFound("effiectiveDate.equals=" + UPDATED_EFFIECTIVE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByEffiectiveDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where effiectiveDate in DEFAULT_EFFIECTIVE_DATE or UPDATED_EFFIECTIVE_DATE
+        defaultUserInfoShouldBeFound("effiectiveDate.in=" + DEFAULT_EFFIECTIVE_DATE + "," + UPDATED_EFFIECTIVE_DATE);
+
+        // Get all the userInfoList where effiectiveDate equals to UPDATED_EFFIECTIVE_DATE
+        defaultUserInfoShouldNotBeFound("effiectiveDate.in=" + UPDATED_EFFIECTIVE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByEffiectiveDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where effiectiveDate is not null
+        defaultUserInfoShouldBeFound("effiectiveDate.specified=true");
+
+        // Get all the userInfoList where effiectiveDate is null
+        defaultUserInfoShouldNotBeFound("effiectiveDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByEffiectiveDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where effiectiveDate greater than or equals to DEFAULT_EFFIECTIVE_DATE
+        defaultUserInfoShouldBeFound("effiectiveDate.greaterOrEqualThan=" + DEFAULT_EFFIECTIVE_DATE);
+
+        // Get all the userInfoList where effiectiveDate greater than or equals to UPDATED_EFFIECTIVE_DATE
+        defaultUserInfoShouldNotBeFound("effiectiveDate.greaterOrEqualThan=" + UPDATED_EFFIECTIVE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByEffiectiveDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where effiectiveDate less than or equals to DEFAULT_EFFIECTIVE_DATE
+        defaultUserInfoShouldNotBeFound("effiectiveDate.lessThan=" + DEFAULT_EFFIECTIVE_DATE);
+
+        // Get all the userInfoList where effiectiveDate less than or equals to UPDATED_EFFIECTIVE_DATE
+        defaultUserInfoShouldBeFound("effiectiveDate.lessThan=" + UPDATED_EFFIECTIVE_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByExpiryDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where expiryDate equals to DEFAULT_EXPIRY_DATE
+        defaultUserInfoShouldBeFound("expiryDate.equals=" + DEFAULT_EXPIRY_DATE);
+
+        // Get all the userInfoList where expiryDate equals to UPDATED_EXPIRY_DATE
+        defaultUserInfoShouldNotBeFound("expiryDate.equals=" + UPDATED_EXPIRY_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByExpiryDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where expiryDate in DEFAULT_EXPIRY_DATE or UPDATED_EXPIRY_DATE
+        defaultUserInfoShouldBeFound("expiryDate.in=" + DEFAULT_EXPIRY_DATE + "," + UPDATED_EXPIRY_DATE);
+
+        // Get all the userInfoList where expiryDate equals to UPDATED_EXPIRY_DATE
+        defaultUserInfoShouldNotBeFound("expiryDate.in=" + UPDATED_EXPIRY_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByExpiryDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where expiryDate is not null
+        defaultUserInfoShouldBeFound("expiryDate.specified=true");
+
+        // Get all the userInfoList where expiryDate is null
+        defaultUserInfoShouldNotBeFound("expiryDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByExpiryDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where expiryDate greater than or equals to DEFAULT_EXPIRY_DATE
+        defaultUserInfoShouldBeFound("expiryDate.greaterOrEqualThan=" + DEFAULT_EXPIRY_DATE);
+
+        // Get all the userInfoList where expiryDate greater than or equals to UPDATED_EXPIRY_DATE
+        defaultUserInfoShouldNotBeFound("expiryDate.greaterOrEqualThan=" + UPDATED_EXPIRY_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByExpiryDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where expiryDate less than or equals to DEFAULT_EXPIRY_DATE
+        defaultUserInfoShouldNotBeFound("expiryDate.lessThan=" + DEFAULT_EXPIRY_DATE);
+
+        // Get all the userInfoList where expiryDate less than or equals to UPDATED_EXPIRY_DATE
+        defaultUserInfoShouldBeFound("expiryDate.lessThan=" + UPDATED_EXPIRY_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByBlockedIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where blocked equals to DEFAULT_BLOCKED
+        defaultUserInfoShouldBeFound("blocked.equals=" + DEFAULT_BLOCKED);
+
+        // Get all the userInfoList where blocked equals to UPDATED_BLOCKED
+        defaultUserInfoShouldNotBeFound("blocked.equals=" + UPDATED_BLOCKED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByBlockedIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where blocked in DEFAULT_BLOCKED or UPDATED_BLOCKED
+        defaultUserInfoShouldBeFound("blocked.in=" + DEFAULT_BLOCKED + "," + UPDATED_BLOCKED);
+
+        // Get all the userInfoList where blocked equals to UPDATED_BLOCKED
+        defaultUserInfoShouldNotBeFound("blocked.in=" + UPDATED_BLOCKED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByBlockedIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where blocked is not null
+        defaultUserInfoShouldBeFound("blocked.specified=true");
+
+        // Get all the userInfoList where blocked is null
+        defaultUserInfoShouldNotBeFound("blocked.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByBlockedReasonIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where blockedReason equals to DEFAULT_BLOCKED_REASON
+        defaultUserInfoShouldBeFound("blockedReason.equals=" + DEFAULT_BLOCKED_REASON);
+
+        // Get all the userInfoList where blockedReason equals to UPDATED_BLOCKED_REASON
+        defaultUserInfoShouldNotBeFound("blockedReason.equals=" + UPDATED_BLOCKED_REASON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByBlockedReasonIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where blockedReason in DEFAULT_BLOCKED_REASON or UPDATED_BLOCKED_REASON
+        defaultUserInfoShouldBeFound("blockedReason.in=" + DEFAULT_BLOCKED_REASON + "," + UPDATED_BLOCKED_REASON);
+
+        // Get all the userInfoList where blockedReason equals to UPDATED_BLOCKED_REASON
+        defaultUserInfoShouldNotBeFound("blockedReason.in=" + UPDATED_BLOCKED_REASON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByBlockedReasonIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where blockedReason is not null
+        defaultUserInfoShouldBeFound("blockedReason.specified=true");
+
+        // Get all the userInfoList where blockedReason is null
+        defaultUserInfoShouldNotBeFound("blockedReason.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByForcedPwdChangeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where forcedPwdChange equals to DEFAULT_FORCED_PWD_CHANGE
+        defaultUserInfoShouldBeFound("forcedPwdChange.equals=" + DEFAULT_FORCED_PWD_CHANGE);
+
+        // Get all the userInfoList where forcedPwdChange equals to UPDATED_FORCED_PWD_CHANGE
+        defaultUserInfoShouldNotBeFound("forcedPwdChange.equals=" + UPDATED_FORCED_PWD_CHANGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByForcedPwdChangeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where forcedPwdChange in DEFAULT_FORCED_PWD_CHANGE or UPDATED_FORCED_PWD_CHANGE
+        defaultUserInfoShouldBeFound("forcedPwdChange.in=" + DEFAULT_FORCED_PWD_CHANGE + "," + UPDATED_FORCED_PWD_CHANGE);
+
+        // Get all the userInfoList where forcedPwdChange equals to UPDATED_FORCED_PWD_CHANGE
+        defaultUserInfoShouldNotBeFound("forcedPwdChange.in=" + UPDATED_FORCED_PWD_CHANGE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByForcedPwdChangeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where forcedPwdChange is not null
+        defaultUserInfoShouldBeFound("forcedPwdChange.specified=true");
+
+        // Get all the userInfoList where forcedPwdChange is null
+        defaultUserInfoShouldNotBeFound("forcedPwdChange.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdTitlesIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdTitles equals to DEFAULT_CSTD_TITLES
+        defaultUserInfoShouldBeFound("cstdTitles.equals=" + DEFAULT_CSTD_TITLES);
+
+        // Get all the userInfoList where cstdTitles equals to UPDATED_CSTD_TITLES
+        defaultUserInfoShouldNotBeFound("cstdTitles.equals=" + UPDATED_CSTD_TITLES);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdTitlesIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdTitles in DEFAULT_CSTD_TITLES or UPDATED_CSTD_TITLES
+        defaultUserInfoShouldBeFound("cstdTitles.in=" + DEFAULT_CSTD_TITLES + "," + UPDATED_CSTD_TITLES);
+
+        // Get all the userInfoList where cstdTitles equals to UPDATED_CSTD_TITLES
+        defaultUserInfoShouldNotBeFound("cstdTitles.in=" + UPDATED_CSTD_TITLES);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdTitlesIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdTitles is not null
+        defaultUserInfoShouldBeFound("cstdTitles.specified=true");
+
+        // Get all the userInfoList where cstdTitles is null
+        defaultUserInfoShouldNotBeFound("cstdTitles.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdStatus equals to DEFAULT_CSTD_STATUS
+        defaultUserInfoShouldBeFound("cstdStatus.equals=" + DEFAULT_CSTD_STATUS);
+
+        // Get all the userInfoList where cstdStatus equals to UPDATED_CSTD_STATUS
+        defaultUserInfoShouldNotBeFound("cstdStatus.equals=" + UPDATED_CSTD_STATUS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdStatus in DEFAULT_CSTD_STATUS or UPDATED_CSTD_STATUS
+        defaultUserInfoShouldBeFound("cstdStatus.in=" + DEFAULT_CSTD_STATUS + "," + UPDATED_CSTD_STATUS);
+
+        // Get all the userInfoList where cstdStatus equals to UPDATED_CSTD_STATUS
+        defaultUserInfoShouldNotBeFound("cstdStatus.in=" + UPDATED_CSTD_STATUS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdStatus is not null
+        defaultUserInfoShouldBeFound("cstdStatus.specified=true");
+
+        // Get all the userInfoList where cstdStatus is null
+        defaultUserInfoShouldNotBeFound("cstdStatus.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdAdmDivsisonIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdAdmDivsison equals to DEFAULT_CSTD_ADM_DIVSISON
+        defaultUserInfoShouldBeFound("cstdAdmDivsison.equals=" + DEFAULT_CSTD_ADM_DIVSISON);
+
+        // Get all the userInfoList where cstdAdmDivsison equals to UPDATED_CSTD_ADM_DIVSISON
+        defaultUserInfoShouldNotBeFound("cstdAdmDivsison.equals=" + UPDATED_CSTD_ADM_DIVSISON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdAdmDivsisonIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdAdmDivsison in DEFAULT_CSTD_ADM_DIVSISON or UPDATED_CSTD_ADM_DIVSISON
+        defaultUserInfoShouldBeFound("cstdAdmDivsison.in=" + DEFAULT_CSTD_ADM_DIVSISON + "," + UPDATED_CSTD_ADM_DIVSISON);
+
+        // Get all the userInfoList where cstdAdmDivsison equals to UPDATED_CSTD_ADM_DIVSISON
+        defaultUserInfoShouldNotBeFound("cstdAdmDivsison.in=" + UPDATED_CSTD_ADM_DIVSISON);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdAdmDivsisonIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdAdmDivsison is not null
+        defaultUserInfoShouldBeFound("cstdAdmDivsison.specified=true");
+
+        // Get all the userInfoList where cstdAdmDivsison is null
+        defaultUserInfoShouldNotBeFound("cstdAdmDivsison.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginStatusIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginStatus equals to DEFAULT_LOGIN_STATUS
+        defaultUserInfoShouldBeFound("loginStatus.equals=" + DEFAULT_LOGIN_STATUS);
+
+        // Get all the userInfoList where loginStatus equals to UPDATED_LOGIN_STATUS
+        defaultUserInfoShouldNotBeFound("loginStatus.equals=" + UPDATED_LOGIN_STATUS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginStatusIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginStatus in DEFAULT_LOGIN_STATUS or UPDATED_LOGIN_STATUS
+        defaultUserInfoShouldBeFound("loginStatus.in=" + DEFAULT_LOGIN_STATUS + "," + UPDATED_LOGIN_STATUS);
+
+        // Get all the userInfoList where loginStatus equals to UPDATED_LOGIN_STATUS
+        defaultUserInfoShouldNotBeFound("loginStatus.in=" + UPDATED_LOGIN_STATUS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginStatusIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginStatus is not null
+        defaultUserInfoShouldBeFound("loginStatus.specified=true");
+
+        // Get all the userInfoList where loginStatus is null
+        defaultUserInfoShouldNotBeFound("loginStatus.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginTimeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginTime equals to DEFAULT_LOGIN_TIME
+        defaultUserInfoShouldBeFound("loginTime.equals=" + DEFAULT_LOGIN_TIME);
+
+        // Get all the userInfoList where loginTime equals to UPDATED_LOGIN_TIME
+        defaultUserInfoShouldNotBeFound("loginTime.equals=" + UPDATED_LOGIN_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginTimeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginTime in DEFAULT_LOGIN_TIME or UPDATED_LOGIN_TIME
+        defaultUserInfoShouldBeFound("loginTime.in=" + DEFAULT_LOGIN_TIME + "," + UPDATED_LOGIN_TIME);
+
+        // Get all the userInfoList where loginTime equals to UPDATED_LOGIN_TIME
+        defaultUserInfoShouldNotBeFound("loginTime.in=" + UPDATED_LOGIN_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginTimeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginTime is not null
+        defaultUserInfoShouldBeFound("loginTime.specified=true");
+
+        // Get all the userInfoList where loginTime is null
+        defaultUserInfoShouldNotBeFound("loginTime.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginTimeIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginTime greater than or equals to DEFAULT_LOGIN_TIME
+        defaultUserInfoShouldBeFound("loginTime.greaterOrEqualThan=" + DEFAULT_LOGIN_TIME);
+
+        // Get all the userInfoList where loginTime greater than or equals to UPDATED_LOGIN_TIME
+        defaultUserInfoShouldNotBeFound("loginTime.greaterOrEqualThan=" + UPDATED_LOGIN_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLoginTimeIsLessThanSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where loginTime less than or equals to DEFAULT_LOGIN_TIME
+        defaultUserInfoShouldNotBeFound("loginTime.lessThan=" + DEFAULT_LOGIN_TIME);
+
+        // Get all the userInfoList where loginTime less than or equals to UPDATED_LOGIN_TIME
+        defaultUserInfoShouldBeFound("loginTime.lessThan=" + UPDATED_LOGIN_TIME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByAttemptIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where attempt equals to DEFAULT_ATTEMPT
+        defaultUserInfoShouldBeFound("attempt.equals=" + DEFAULT_ATTEMPT);
+
+        // Get all the userInfoList where attempt equals to UPDATED_ATTEMPT
+        defaultUserInfoShouldNotBeFound("attempt.equals=" + UPDATED_ATTEMPT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByAttemptIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where attempt in DEFAULT_ATTEMPT or UPDATED_ATTEMPT
+        defaultUserInfoShouldBeFound("attempt.in=" + DEFAULT_ATTEMPT + "," + UPDATED_ATTEMPT);
+
+        // Get all the userInfoList where attempt equals to UPDATED_ATTEMPT
+        defaultUserInfoShouldNotBeFound("attempt.in=" + UPDATED_ATTEMPT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByAttemptIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where attempt is not null
+        defaultUserInfoShouldBeFound("attempt.specified=true");
+
+        // Get all the userInfoList where attempt is null
+        defaultUserInfoShouldNotBeFound("attempt.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByAttemptIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where attempt greater than or equals to DEFAULT_ATTEMPT
+        defaultUserInfoShouldBeFound("attempt.greaterOrEqualThan=" + DEFAULT_ATTEMPT);
+
+        // Get all the userInfoList where attempt greater than or equals to (DEFAULT_ATTEMPT + 1)
+        defaultUserInfoShouldNotBeFound("attempt.greaterOrEqualThan=" + (DEFAULT_ATTEMPT + 1));
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByAttemptIsLessThanSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where attempt less than or equals to DEFAULT_ATTEMPT
+        defaultUserInfoShouldNotBeFound("attempt.lessThan=" + DEFAULT_ATTEMPT);
+
+        // Get all the userInfoList where attempt less than or equals to (DEFAULT_ATTEMPT + 1)
+        defaultUserInfoShouldBeFound("attempt.lessThan=" + (DEFAULT_ATTEMPT + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByNeedApproveIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where needApprove equals to DEFAULT_NEED_APPROVE
+        defaultUserInfoShouldBeFound("needApprove.equals=" + DEFAULT_NEED_APPROVE);
+
+        // Get all the userInfoList where needApprove equals to UPDATED_NEED_APPROVE
+        defaultUserInfoShouldNotBeFound("needApprove.equals=" + UPDATED_NEED_APPROVE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByNeedApproveIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where needApprove in DEFAULT_NEED_APPROVE or UPDATED_NEED_APPROVE
+        defaultUserInfoShouldBeFound("needApprove.in=" + DEFAULT_NEED_APPROVE + "," + UPDATED_NEED_APPROVE);
+
+        // Get all the userInfoList where needApprove equals to UPDATED_NEED_APPROVE
+        defaultUserInfoShouldNotBeFound("needApprove.in=" + UPDATED_NEED_APPROVE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByNeedApproveIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where needApprove is not null
+        defaultUserInfoShouldBeFound("needApprove.specified=true");
+
+        // Get all the userInfoList where needApprove is null
+        defaultUserInfoShouldNotBeFound("needApprove.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLogoutTimeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where logoutTime equals to DEFAULT_LOGOUT_TIME
+        defaultUserInfoShouldBeFound("logoutTime.equals=" + DEFAULT_LOGOUT_TIME);
+
+        // Get all the userInfoList where logoutTime equals to UPDATED_LOGOUT_TIME
+        defaultUserInfoShouldNotBeFound("logoutTime.equals=" + UPDATED_LOGOUT_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLogoutTimeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where logoutTime in DEFAULT_LOGOUT_TIME or UPDATED_LOGOUT_TIME
+        defaultUserInfoShouldBeFound("logoutTime.in=" + DEFAULT_LOGOUT_TIME + "," + UPDATED_LOGOUT_TIME);
+
+        // Get all the userInfoList where logoutTime equals to UPDATED_LOGOUT_TIME
+        defaultUserInfoShouldNotBeFound("logoutTime.in=" + UPDATED_LOGOUT_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLogoutTimeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where logoutTime is not null
+        defaultUserInfoShouldBeFound("logoutTime.specified=true");
+
+        // Get all the userInfoList where logoutTime is null
+        defaultUserInfoShouldNotBeFound("logoutTime.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLogoutTimeIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where logoutTime greater than or equals to DEFAULT_LOGOUT_TIME
+        defaultUserInfoShouldBeFound("logoutTime.greaterOrEqualThan=" + DEFAULT_LOGOUT_TIME);
+
+        // Get all the userInfoList where logoutTime greater than or equals to UPDATED_LOGOUT_TIME
+        defaultUserInfoShouldNotBeFound("logoutTime.greaterOrEqualThan=" + UPDATED_LOGOUT_TIME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByLogoutTimeIsLessThanSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where logoutTime less than or equals to DEFAULT_LOGOUT_TIME
+        defaultUserInfoShouldNotBeFound("logoutTime.lessThan=" + DEFAULT_LOGOUT_TIME);
+
+        // Get all the userInfoList where logoutTime less than or equals to UPDATED_LOGOUT_TIME
+        defaultUserInfoShouldBeFound("logoutTime.lessThan=" + UPDATED_LOGOUT_TIME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByNationalIdIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where nationalId equals to DEFAULT_NATIONAL_ID
+        defaultUserInfoShouldBeFound("nationalId.equals=" + DEFAULT_NATIONAL_ID);
+
+        // Get all the userInfoList where nationalId equals to UPDATED_NATIONAL_ID
+        defaultUserInfoShouldNotBeFound("nationalId.equals=" + UPDATED_NATIONAL_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByNationalIdIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where nationalId in DEFAULT_NATIONAL_ID or UPDATED_NATIONAL_ID
+        defaultUserInfoShouldBeFound("nationalId.in=" + DEFAULT_NATIONAL_ID + "," + UPDATED_NATIONAL_ID);
+
+        // Get all the userInfoList where nationalId equals to UPDATED_NATIONAL_ID
+        defaultUserInfoShouldNotBeFound("nationalId.in=" + UPDATED_NATIONAL_ID);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByNationalIdIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where nationalId is not null
+        defaultUserInfoShouldBeFound("nationalId.specified=true");
+
+        // Get all the userInfoList where nationalId is null
+        defaultUserInfoShouldNotBeFound("nationalId.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdOrganizationGradeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdOrganizationGrade equals to DEFAULT_CSTD_ORGANIZATION_GRADE
+        defaultUserInfoShouldBeFound("cstdOrganizationGrade.equals=" + DEFAULT_CSTD_ORGANIZATION_GRADE);
+
+        // Get all the userInfoList where cstdOrganizationGrade equals to UPDATED_CSTD_ORGANIZATION_GRADE
+        defaultUserInfoShouldNotBeFound("cstdOrganizationGrade.equals=" + UPDATED_CSTD_ORGANIZATION_GRADE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdOrganizationGradeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdOrganizationGrade in DEFAULT_CSTD_ORGANIZATION_GRADE or UPDATED_CSTD_ORGANIZATION_GRADE
+        defaultUserInfoShouldBeFound("cstdOrganizationGrade.in=" + DEFAULT_CSTD_ORGANIZATION_GRADE + "," + UPDATED_CSTD_ORGANIZATION_GRADE);
+
+        // Get all the userInfoList where cstdOrganizationGrade equals to UPDATED_CSTD_ORGANIZATION_GRADE
+        defaultUserInfoShouldNotBeFound("cstdOrganizationGrade.in=" + UPDATED_CSTD_ORGANIZATION_GRADE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdOrganizationGradeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdOrganizationGrade is not null
+        defaultUserInfoShouldBeFound("cstdOrganizationGrade.specified=true");
+
+        // Get all the userInfoList where cstdOrganizationGrade is null
+        defaultUserInfoShouldNotBeFound("cstdOrganizationGrade.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdEmploymentTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdEmploymentType equals to DEFAULT_CSTD_EMPLOYMENT_TYPE
+        defaultUserInfoShouldBeFound("cstdEmploymentType.equals=" + DEFAULT_CSTD_EMPLOYMENT_TYPE);
+
+        // Get all the userInfoList where cstdEmploymentType equals to UPDATED_CSTD_EMPLOYMENT_TYPE
+        defaultUserInfoShouldNotBeFound("cstdEmploymentType.equals=" + UPDATED_CSTD_EMPLOYMENT_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdEmploymentTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdEmploymentType in DEFAULT_CSTD_EMPLOYMENT_TYPE or UPDATED_CSTD_EMPLOYMENT_TYPE
+        defaultUserInfoShouldBeFound("cstdEmploymentType.in=" + DEFAULT_CSTD_EMPLOYMENT_TYPE + "," + UPDATED_CSTD_EMPLOYMENT_TYPE);
+
+        // Get all the userInfoList where cstdEmploymentType equals to UPDATED_CSTD_EMPLOYMENT_TYPE
+        defaultUserInfoShouldNotBeFound("cstdEmploymentType.in=" + UPDATED_CSTD_EMPLOYMENT_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCstdEmploymentTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where cstdEmploymentType is not null
+        defaultUserInfoShouldBeFound("cstdEmploymentType.specified=true");
+
+        // Get all the userInfoList where cstdEmploymentType is null
+        defaultUserInfoShouldNotBeFound("cstdEmploymentType.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCcVersionIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where ccVersion equals to DEFAULT_CC_VERSION
+        defaultUserInfoShouldBeFound("ccVersion.equals=" + DEFAULT_CC_VERSION);
+
+        // Get all the userInfoList where ccVersion equals to UPDATED_CC_VERSION
+        defaultUserInfoShouldNotBeFound("ccVersion.equals=" + UPDATED_CC_VERSION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCcVersionIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where ccVersion in DEFAULT_CC_VERSION or UPDATED_CC_VERSION
+        defaultUserInfoShouldBeFound("ccVersion.in=" + DEFAULT_CC_VERSION + "," + UPDATED_CC_VERSION);
+
+        // Get all the userInfoList where ccVersion equals to UPDATED_CC_VERSION
+        defaultUserInfoShouldNotBeFound("ccVersion.in=" + UPDATED_CC_VERSION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCcVersionIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where ccVersion is not null
+        defaultUserInfoShouldBeFound("ccVersion.specified=true");
+
+        // Get all the userInfoList where ccVersion is null
+        defaultUserInfoShouldNotBeFound("ccVersion.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCcVersionIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where ccVersion greater than or equals to DEFAULT_CC_VERSION
+        defaultUserInfoShouldBeFound("ccVersion.greaterOrEqualThan=" + DEFAULT_CC_VERSION);
+
+        // Get all the userInfoList where ccVersion greater than or equals to UPDATED_CC_VERSION
+        defaultUserInfoShouldNotBeFound("ccVersion.greaterOrEqualThan=" + UPDATED_CC_VERSION);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByCcVersionIsLessThanSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where ccVersion less than or equals to DEFAULT_CC_VERSION
+        defaultUserInfoShouldNotBeFound("ccVersion.lessThan=" + DEFAULT_CC_VERSION);
+
+        // Get all the userInfoList where ccVersion less than or equals to UPDATED_CC_VERSION
+        defaultUserInfoShouldBeFound("ccVersion.lessThan=" + UPDATED_CC_VERSION);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        userInfo.setUser(user);
+        userInfoRepository.saveAndFlush(userInfo);
+        Long userId = user.getId();
+
+        // Get all the userInfoList where user equals to userId
+        defaultUserInfoShouldBeFound("userId.equals=" + userId);
+
+        // Get all the userInfoList where user equals to userId + 1
+        defaultUserInfoShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultUserInfoShouldBeFound(String filter) throws Exception {
+        restUserInfoMockMvc.perform(get("/api/user-infos?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(userInfo.getId().intValue())))
+            .andExpect(jsonPath("$.[*].cstdAdmSection").value(hasItem(DEFAULT_CSTD_ADM_SECTION)))
+            .andExpect(jsonPath("$.[*].cstdSecurityLevel").value(hasItem(DEFAULT_CSTD_SECURITY_LEVEL)))
+            .andExpect(jsonPath("$.[*].cstdUserType").value(hasItem(DEFAULT_CSTD_USER_TYPE)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].middleName").value(hasItem(DEFAULT_MIDDLE_NAME)))
+            .andExpect(jsonPath("$.[*].gender").value(hasItem(DEFAULT_GENDER)))
+            .andExpect(jsonPath("$.[*].phoneNum").value(hasItem(DEFAULT_PHONE_NUM)))
+            .andExpect(jsonPath("$.[*].faxNum").value(hasItem(DEFAULT_FAX_NUM)))
+            .andExpect(jsonPath("$.[*].effiectiveDate").value(hasItem(sameInstant(DEFAULT_EFFIECTIVE_DATE))))
+            .andExpect(jsonPath("$.[*].expiryDate").value(hasItem(sameInstant(DEFAULT_EXPIRY_DATE))))
+            .andExpect(jsonPath("$.[*].blocked").value(hasItem(DEFAULT_BLOCKED.booleanValue())))
+            .andExpect(jsonPath("$.[*].blockedReason").value(hasItem(DEFAULT_BLOCKED_REASON)))
+            .andExpect(jsonPath("$.[*].forcedPwdChange").value(hasItem(DEFAULT_FORCED_PWD_CHANGE.booleanValue())))
+            .andExpect(jsonPath("$.[*].cstdTitles").value(hasItem(DEFAULT_CSTD_TITLES)))
+            .andExpect(jsonPath("$.[*].cstdStatus").value(hasItem(DEFAULT_CSTD_STATUS)))
+            .andExpect(jsonPath("$.[*].cstdAdmDivsison").value(hasItem(DEFAULT_CSTD_ADM_DIVSISON)))
+            .andExpect(jsonPath("$.[*].loginStatus").value(hasItem(DEFAULT_LOGIN_STATUS)))
+            .andExpect(jsonPath("$.[*].loginTime").value(hasItem(sameInstant(DEFAULT_LOGIN_TIME))))
+            .andExpect(jsonPath("$.[*].attempt").value(hasItem(DEFAULT_ATTEMPT)))
+            .andExpect(jsonPath("$.[*].needApprove").value(hasItem(DEFAULT_NEED_APPROVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].logoutTime").value(hasItem(sameInstant(DEFAULT_LOGOUT_TIME))))
+            .andExpect(jsonPath("$.[*].nationalId").value(hasItem(DEFAULT_NATIONAL_ID)))
+            .andExpect(jsonPath("$.[*].cstdOrganizationGrade").value(hasItem(DEFAULT_CSTD_ORGANIZATION_GRADE)))
+            .andExpect(jsonPath("$.[*].cstdEmploymentType").value(hasItem(DEFAULT_CSTD_EMPLOYMENT_TYPE)))
+            .andExpect(jsonPath("$.[*].manuScriptContentType").value(hasItem(DEFAULT_MANU_SCRIPT_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].manuScript").value(hasItem(Base64Utils.encodeToString(DEFAULT_MANU_SCRIPT))))
+            .andExpect(jsonPath("$.[*].ccVersion").value(hasItem(DEFAULT_CC_VERSION)));
+
+        // Check, that the count call also returns 1
+        restUserInfoMockMvc.perform(get("/api/user-infos/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultUserInfoShouldNotBeFound(String filter) throws Exception {
+        restUserInfoMockMvc.perform(get("/api/user-infos?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restUserInfoMockMvc.perform(get("/api/user-infos/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingUserInfo() throws Exception {
         // Get the userInfo
         restUserInfoMockMvc.perform(get("/api/user-infos/{id}", Long.MAX_VALUE))
@@ -623,7 +1849,7 @@ public class UserInfoResourceIT {
     @Transactional
     public void updateUserInfo() throws Exception {
         // Initialize the database
-        userInfoRepository.saveAndFlush(userInfo);
+        userInfoService.save(userInfo);
 
         int databaseSizeBeforeUpdate = userInfoRepository.findAll().size();
 
@@ -720,7 +1946,7 @@ public class UserInfoResourceIT {
     @Transactional
     public void deleteUserInfo() throws Exception {
         // Initialize the database
-        userInfoRepository.saveAndFlush(userInfo);
+        userInfoService.save(userInfo);
 
         int databaseSizeBeforeDelete = userInfoRepository.findAll().size();
 

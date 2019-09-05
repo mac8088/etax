@@ -33,11 +33,11 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190902135645",
+    "changelogDate": "20190905091738",
     "javadoc": "The relationship of Parent office and its children.",
     "entityTableName": "adm_office_relationship",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

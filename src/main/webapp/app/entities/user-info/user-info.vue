@@ -24,39 +24,39 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdAdmSection')">Cstd Adm Section</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdSecurityLevel')">Cstd Security Level</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdUserType')">Cstd User Type</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.description')">Description</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.middleName')">Middle Name</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.gender')">Gender</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.phoneNum')">Phone Num</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.faxNum')">Fax Num</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.effiectiveDate')">Effiective Date</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.expiryDate')">Expiry Date</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.blocked')">Blocked</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.blockedReason')">Blocked Reason</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.forcedPwdChange')">Forced Pwd Change</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdTitles')">Cstd Titles</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdStatus')">Cstd Status</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdAdmDivsison')">Cstd Adm Divsison</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.loginStatus')">Login Status</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.loginTime')">Login Time</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.attempt')">Attempt</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.needApprove')">Need Approve</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.logoutTime')">Logout Time</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.nationalId')">National Id</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdOrganizationGrade')">Cstd Organization Grade</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.cstdEmploymentType')">Cstd Employment Type</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.manuScript')">Manu Script</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.ccVersion')">Cc Version</span></th>
-                    <th><span v-text="$t('etaxApp.userInfo.user')">User</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdAdmSection')"><span v-text="$t('etaxApp.userInfo.cstdAdmSection')">Cstd Adm Section</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdSecurityLevel')"><span v-text="$t('etaxApp.userInfo.cstdSecurityLevel')">Cstd Security Level</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdUserType')"><span v-text="$t('etaxApp.userInfo.cstdUserType')">Cstd User Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('description')"><span v-text="$t('etaxApp.userInfo.description')">Description</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('middleName')"><span v-text="$t('etaxApp.userInfo.middleName')">Middle Name</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('gender')"><span v-text="$t('etaxApp.userInfo.gender')">Gender</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('phoneNum')"><span v-text="$t('etaxApp.userInfo.phoneNum')">Phone Num</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('faxNum')"><span v-text="$t('etaxApp.userInfo.faxNum')">Fax Num</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('effiectiveDate')"><span v-text="$t('etaxApp.userInfo.effiectiveDate')">Effiective Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('expiryDate')"><span v-text="$t('etaxApp.userInfo.expiryDate')">Expiry Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('blocked')"><span v-text="$t('etaxApp.userInfo.blocked')">Blocked</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('blockedReason')"><span v-text="$t('etaxApp.userInfo.blockedReason')">Blocked Reason</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('forcedPwdChange')"><span v-text="$t('etaxApp.userInfo.forcedPwdChange')">Forced Pwd Change</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdTitles')"><span v-text="$t('etaxApp.userInfo.cstdTitles')">Cstd Titles</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdStatus')"><span v-text="$t('etaxApp.userInfo.cstdStatus')">Cstd Status</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdAdmDivsison')"><span v-text="$t('etaxApp.userInfo.cstdAdmDivsison')">Cstd Adm Divsison</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('loginStatus')"><span v-text="$t('etaxApp.userInfo.loginStatus')">Login Status</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('loginTime')"><span v-text="$t('etaxApp.userInfo.loginTime')">Login Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('attempt')"><span v-text="$t('etaxApp.userInfo.attempt')">Attempt</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('needApprove')"><span v-text="$t('etaxApp.userInfo.needApprove')">Need Approve</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('logoutTime')"><span v-text="$t('etaxApp.userInfo.logoutTime')">Logout Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('nationalId')"><span v-text="$t('etaxApp.userInfo.nationalId')">National Id</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdOrganizationGrade')"><span v-text="$t('etaxApp.userInfo.cstdOrganizationGrade')">Cstd Organization Grade</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('cstdEmploymentType')"><span v-text="$t('etaxApp.userInfo.cstdEmploymentType')">Cstd Employment Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('manuScript')"><span v-text="$t('etaxApp.userInfo.manuScript')">Manu Script</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('ccVersion')"><span v-text="$t('etaxApp.userInfo.ccVersion')">Cc Version</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('user.login')"><span v-text="$t('etaxApp.userInfo.user')">User</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="userInfo in userInfos"
+                <tr v-for="userInfo of orderBy(userInfos, propOrder, reverse === true ? 1 : -1)"
                     :key="userInfo.id">
                     <td>
                         <router-link :to="{name: 'UserInfoView', params: {userInfoId: userInfo.id}}">{{userInfo.id}}</router-link>
@@ -128,6 +128,14 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-userInfo" v-text="$t('entity.action.delete')" v-on:click="removeUserInfo()">Delete</button>
             </div>
         </b-modal>
+        <div v-if="userInfos && userInfos.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 
