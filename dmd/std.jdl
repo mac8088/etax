@@ -121,3 +121,27 @@ relationship OneToMany {
     StdCodesGroup{stdCodes} to StdCodes{stdCodesGroup(groupCode)},
     StdCodes{stdCodesDesc} to StdCodesDesc{stdCodes(internalCode)}
 }
+
+
+// Set pagination options
+//paginate StdCodesGroup, StdCodesProp with infinite-scroll
+paginate StdCodesGroup, StdCodes, StdCodesDesc, StdCodesProp with pagination
+
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+
+// Set service options to all except few
+//service all with serviceImpl except StdCodesProp
+
+
+// Set service options to all except few
+service all with serviceClass
+
+
+// skipClient for *
+
+filter StdCodesGroup, StdCodes, StdCodesDesc, StdCodesProp
+
+

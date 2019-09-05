@@ -2,8 +2,12 @@ package net.atos.etax.web.rest;
 
 import net.atos.etax.EtaxApp;
 import net.atos.etax.domain.StdCodesGroup;
+import net.atos.etax.domain.StdCodes;
 import net.atos.etax.repository.StdCodesGroupRepository;
+import net.atos.etax.service.StdCodesGroupService;
 import net.atos.etax.web.rest.errors.ExceptionTranslator;
+import net.atos.etax.service.dto.StdCodesGroupCriteria;
+import net.atos.etax.service.StdCodesGroupQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,6 +84,12 @@ public class StdCodesGroupResourceIT {
     private StdCodesGroupRepository stdCodesGroupRepository;
 
     @Autowired
+    private StdCodesGroupService stdCodesGroupService;
+
+    @Autowired
+    private StdCodesGroupQueryService stdCodesGroupQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -101,7 +111,7 @@ public class StdCodesGroupResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StdCodesGroupResource stdCodesGroupResource = new StdCodesGroupResource(stdCodesGroupRepository);
+        final StdCodesGroupResource stdCodesGroupResource = new StdCodesGroupResource(stdCodesGroupService, stdCodesGroupQueryService);
         this.restStdCodesGroupMockMvc = MockMvcBuilders.standaloneSetup(stdCodesGroupResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -387,6 +397,565 @@ public class StdCodesGroupResourceIT {
 
     @Test
     @Transactional
+    public void getAllStdCodesGroupsByGroupCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where groupCode equals to DEFAULT_GROUP_CODE
+        defaultStdCodesGroupShouldBeFound("groupCode.equals=" + DEFAULT_GROUP_CODE);
+
+        // Get all the stdCodesGroupList where groupCode equals to UPDATED_GROUP_CODE
+        defaultStdCodesGroupShouldNotBeFound("groupCode.equals=" + UPDATED_GROUP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByGroupCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where groupCode in DEFAULT_GROUP_CODE or UPDATED_GROUP_CODE
+        defaultStdCodesGroupShouldBeFound("groupCode.in=" + DEFAULT_GROUP_CODE + "," + UPDATED_GROUP_CODE);
+
+        // Get all the stdCodesGroupList where groupCode equals to UPDATED_GROUP_CODE
+        defaultStdCodesGroupShouldNotBeFound("groupCode.in=" + UPDATED_GROUP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByGroupCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where groupCode is not null
+        defaultStdCodesGroupShouldBeFound("groupCode.specified=true");
+
+        // Get all the stdCodesGroupList where groupCode is null
+        defaultStdCodesGroupShouldNotBeFound("groupCode.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByGroupDescIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where groupDesc equals to DEFAULT_GROUP_DESC
+        defaultStdCodesGroupShouldBeFound("groupDesc.equals=" + DEFAULT_GROUP_DESC);
+
+        // Get all the stdCodesGroupList where groupDesc equals to UPDATED_GROUP_DESC
+        defaultStdCodesGroupShouldNotBeFound("groupDesc.equals=" + UPDATED_GROUP_DESC);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByGroupDescIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where groupDesc in DEFAULT_GROUP_DESC or UPDATED_GROUP_DESC
+        defaultStdCodesGroupShouldBeFound("groupDesc.in=" + DEFAULT_GROUP_DESC + "," + UPDATED_GROUP_DESC);
+
+        // Get all the stdCodesGroupList where groupDesc equals to UPDATED_GROUP_DESC
+        defaultStdCodesGroupShouldNotBeFound("groupDesc.in=" + UPDATED_GROUP_DESC);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByGroupDescIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where groupDesc is not null
+        defaultStdCodesGroupShouldBeFound("groupDesc.specified=true");
+
+        // Get all the stdCodesGroupList where groupDesc is null
+        defaultStdCodesGroupShouldNotBeFound("groupDesc.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsBySystemIndIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where systemInd equals to DEFAULT_SYSTEM_IND
+        defaultStdCodesGroupShouldBeFound("systemInd.equals=" + DEFAULT_SYSTEM_IND);
+
+        // Get all the stdCodesGroupList where systemInd equals to UPDATED_SYSTEM_IND
+        defaultStdCodesGroupShouldNotBeFound("systemInd.equals=" + UPDATED_SYSTEM_IND);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsBySystemIndIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where systemInd in DEFAULT_SYSTEM_IND or UPDATED_SYSTEM_IND
+        defaultStdCodesGroupShouldBeFound("systemInd.in=" + DEFAULT_SYSTEM_IND + "," + UPDATED_SYSTEM_IND);
+
+        // Get all the stdCodesGroupList where systemInd equals to UPDATED_SYSTEM_IND
+        defaultStdCodesGroupShouldNotBeFound("systemInd.in=" + UPDATED_SYSTEM_IND);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsBySystemIndIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where systemInd is not null
+        defaultStdCodesGroupShouldBeFound("systemInd.specified=true");
+
+        // Get all the stdCodesGroupList where systemInd is null
+        defaultStdCodesGroupShouldNotBeFound("systemInd.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsBySecLevelRequiredIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where secLevelRequired equals to DEFAULT_SEC_LEVEL_REQUIRED
+        defaultStdCodesGroupShouldBeFound("secLevelRequired.equals=" + DEFAULT_SEC_LEVEL_REQUIRED);
+
+        // Get all the stdCodesGroupList where secLevelRequired equals to UPDATED_SEC_LEVEL_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("secLevelRequired.equals=" + UPDATED_SEC_LEVEL_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsBySecLevelRequiredIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where secLevelRequired in DEFAULT_SEC_LEVEL_REQUIRED or UPDATED_SEC_LEVEL_REQUIRED
+        defaultStdCodesGroupShouldBeFound("secLevelRequired.in=" + DEFAULT_SEC_LEVEL_REQUIRED + "," + UPDATED_SEC_LEVEL_REQUIRED);
+
+        // Get all the stdCodesGroupList where secLevelRequired equals to UPDATED_SEC_LEVEL_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("secLevelRequired.in=" + UPDATED_SEC_LEVEL_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsBySecLevelRequiredIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where secLevelRequired is not null
+        defaultStdCodesGroupShouldBeFound("secLevelRequired.specified=true");
+
+        // Get all the stdCodesGroupList where secLevelRequired is null
+        defaultStdCodesGroupShouldNotBeFound("secLevelRequired.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByValueRequiredIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where valueRequired equals to DEFAULT_VALUE_REQUIRED
+        defaultStdCodesGroupShouldBeFound("valueRequired.equals=" + DEFAULT_VALUE_REQUIRED);
+
+        // Get all the stdCodesGroupList where valueRequired equals to UPDATED_VALUE_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("valueRequired.equals=" + UPDATED_VALUE_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByValueRequiredIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where valueRequired in DEFAULT_VALUE_REQUIRED or UPDATED_VALUE_REQUIRED
+        defaultStdCodesGroupShouldBeFound("valueRequired.in=" + DEFAULT_VALUE_REQUIRED + "," + UPDATED_VALUE_REQUIRED);
+
+        // Get all the stdCodesGroupList where valueRequired equals to UPDATED_VALUE_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("valueRequired.in=" + UPDATED_VALUE_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByValueRequiredIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where valueRequired is not null
+        defaultStdCodesGroupShouldBeFound("valueRequired.specified=true");
+
+        // Get all the stdCodesGroupList where valueRequired is null
+        defaultStdCodesGroupShouldNotBeFound("valueRequired.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByValueTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where valueType equals to DEFAULT_VALUE_TYPE
+        defaultStdCodesGroupShouldBeFound("valueType.equals=" + DEFAULT_VALUE_TYPE);
+
+        // Get all the stdCodesGroupList where valueType equals to UPDATED_VALUE_TYPE
+        defaultStdCodesGroupShouldNotBeFound("valueType.equals=" + UPDATED_VALUE_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByValueTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where valueType in DEFAULT_VALUE_TYPE or UPDATED_VALUE_TYPE
+        defaultStdCodesGroupShouldBeFound("valueType.in=" + DEFAULT_VALUE_TYPE + "," + UPDATED_VALUE_TYPE);
+
+        // Get all the stdCodesGroupList where valueType equals to UPDATED_VALUE_TYPE
+        defaultStdCodesGroupShouldNotBeFound("valueType.in=" + UPDATED_VALUE_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByValueTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where valueType is not null
+        defaultStdCodesGroupShouldBeFound("valueType.specified=true");
+
+        // Get all the stdCodesGroupList where valueType is null
+        defaultStdCodesGroupShouldNotBeFound("valueType.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByDescriptionRequiredIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where descriptionRequired equals to DEFAULT_DESCRIPTION_REQUIRED
+        defaultStdCodesGroupShouldBeFound("descriptionRequired.equals=" + DEFAULT_DESCRIPTION_REQUIRED);
+
+        // Get all the stdCodesGroupList where descriptionRequired equals to UPDATED_DESCRIPTION_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("descriptionRequired.equals=" + UPDATED_DESCRIPTION_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByDescriptionRequiredIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where descriptionRequired in DEFAULT_DESCRIPTION_REQUIRED or UPDATED_DESCRIPTION_REQUIRED
+        defaultStdCodesGroupShouldBeFound("descriptionRequired.in=" + DEFAULT_DESCRIPTION_REQUIRED + "," + UPDATED_DESCRIPTION_REQUIRED);
+
+        // Get all the stdCodesGroupList where descriptionRequired equals to UPDATED_DESCRIPTION_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("descriptionRequired.in=" + UPDATED_DESCRIPTION_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByDescriptionRequiredIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where descriptionRequired is not null
+        defaultStdCodesGroupShouldBeFound("descriptionRequired.specified=true");
+
+        // Get all the stdCodesGroupList where descriptionRequired is null
+        defaultStdCodesGroupShouldNotBeFound("descriptionRequired.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeRequiredIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeRequired equals to DEFAULT_EXTERNAL_CODE_REQUIRED
+        defaultStdCodesGroupShouldBeFound("externalCodeRequired.equals=" + DEFAULT_EXTERNAL_CODE_REQUIRED);
+
+        // Get all the stdCodesGroupList where externalCodeRequired equals to UPDATED_EXTERNAL_CODE_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("externalCodeRequired.equals=" + UPDATED_EXTERNAL_CODE_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeRequiredIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeRequired in DEFAULT_EXTERNAL_CODE_REQUIRED or UPDATED_EXTERNAL_CODE_REQUIRED
+        defaultStdCodesGroupShouldBeFound("externalCodeRequired.in=" + DEFAULT_EXTERNAL_CODE_REQUIRED + "," + UPDATED_EXTERNAL_CODE_REQUIRED);
+
+        // Get all the stdCodesGroupList where externalCodeRequired equals to UPDATED_EXTERNAL_CODE_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("externalCodeRequired.in=" + UPDATED_EXTERNAL_CODE_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeRequiredIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeRequired is not null
+        defaultStdCodesGroupShouldBeFound("externalCodeRequired.specified=true");
+
+        // Get all the stdCodesGroupList where externalCodeRequired is null
+        defaultStdCodesGroupShouldNotBeFound("externalCodeRequired.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeLengthIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeLength equals to DEFAULT_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldBeFound("externalCodeLength.equals=" + DEFAULT_EXTERNAL_CODE_LENGTH);
+
+        // Get all the stdCodesGroupList where externalCodeLength equals to UPDATED_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldNotBeFound("externalCodeLength.equals=" + UPDATED_EXTERNAL_CODE_LENGTH);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeLengthIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeLength in DEFAULT_EXTERNAL_CODE_LENGTH or UPDATED_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldBeFound("externalCodeLength.in=" + DEFAULT_EXTERNAL_CODE_LENGTH + "," + UPDATED_EXTERNAL_CODE_LENGTH);
+
+        // Get all the stdCodesGroupList where externalCodeLength equals to UPDATED_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldNotBeFound("externalCodeLength.in=" + UPDATED_EXTERNAL_CODE_LENGTH);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeLengthIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeLength is not null
+        defaultStdCodesGroupShouldBeFound("externalCodeLength.specified=true");
+
+        // Get all the stdCodesGroupList where externalCodeLength is null
+        defaultStdCodesGroupShouldNotBeFound("externalCodeLength.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeLengthIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeLength greater than or equals to DEFAULT_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldBeFound("externalCodeLength.greaterOrEqualThan=" + DEFAULT_EXTERNAL_CODE_LENGTH);
+
+        // Get all the stdCodesGroupList where externalCodeLength greater than or equals to UPDATED_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldNotBeFound("externalCodeLength.greaterOrEqualThan=" + UPDATED_EXTERNAL_CODE_LENGTH);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByExternalCodeLengthIsLessThanSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where externalCodeLength less than or equals to DEFAULT_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldNotBeFound("externalCodeLength.lessThan=" + DEFAULT_EXTERNAL_CODE_LENGTH);
+
+        // Get all the stdCodesGroupList where externalCodeLength less than or equals to UPDATED_EXTERNAL_CODE_LENGTH
+        defaultStdCodesGroupShouldBeFound("externalCodeLength.lessThan=" + UPDATED_EXTERNAL_CODE_LENGTH);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByParentGroupRequiredIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where parentGroupRequired equals to DEFAULT_PARENT_GROUP_REQUIRED
+        defaultStdCodesGroupShouldBeFound("parentGroupRequired.equals=" + DEFAULT_PARENT_GROUP_REQUIRED);
+
+        // Get all the stdCodesGroupList where parentGroupRequired equals to UPDATED_PARENT_GROUP_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("parentGroupRequired.equals=" + UPDATED_PARENT_GROUP_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByParentGroupRequiredIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where parentGroupRequired in DEFAULT_PARENT_GROUP_REQUIRED or UPDATED_PARENT_GROUP_REQUIRED
+        defaultStdCodesGroupShouldBeFound("parentGroupRequired.in=" + DEFAULT_PARENT_GROUP_REQUIRED + "," + UPDATED_PARENT_GROUP_REQUIRED);
+
+        // Get all the stdCodesGroupList where parentGroupRequired equals to UPDATED_PARENT_GROUP_REQUIRED
+        defaultStdCodesGroupShouldNotBeFound("parentGroupRequired.in=" + UPDATED_PARENT_GROUP_REQUIRED);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByParentGroupRequiredIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where parentGroupRequired is not null
+        defaultStdCodesGroupShouldBeFound("parentGroupRequired.specified=true");
+
+        // Get all the stdCodesGroupList where parentGroupRequired is null
+        defaultStdCodesGroupShouldNotBeFound("parentGroupRequired.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByParentGroupCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where parentGroupCode equals to DEFAULT_PARENT_GROUP_CODE
+        defaultStdCodesGroupShouldBeFound("parentGroupCode.equals=" + DEFAULT_PARENT_GROUP_CODE);
+
+        // Get all the stdCodesGroupList where parentGroupCode equals to UPDATED_PARENT_GROUP_CODE
+        defaultStdCodesGroupShouldNotBeFound("parentGroupCode.equals=" + UPDATED_PARENT_GROUP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByParentGroupCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where parentGroupCode in DEFAULT_PARENT_GROUP_CODE or UPDATED_PARENT_GROUP_CODE
+        defaultStdCodesGroupShouldBeFound("parentGroupCode.in=" + DEFAULT_PARENT_GROUP_CODE + "," + UPDATED_PARENT_GROUP_CODE);
+
+        // Get all the stdCodesGroupList where parentGroupCode equals to UPDATED_PARENT_GROUP_CODE
+        defaultStdCodesGroupShouldNotBeFound("parentGroupCode.in=" + UPDATED_PARENT_GROUP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByParentGroupCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where parentGroupCode is not null
+        defaultStdCodesGroupShouldBeFound("parentGroupCode.specified=true");
+
+        // Get all the stdCodesGroupList where parentGroupCode is null
+        defaultStdCodesGroupShouldNotBeFound("parentGroupCode.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByTouppercaseIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where touppercase equals to DEFAULT_TOUPPERCASE
+        defaultStdCodesGroupShouldBeFound("touppercase.equals=" + DEFAULT_TOUPPERCASE);
+
+        // Get all the stdCodesGroupList where touppercase equals to UPDATED_TOUPPERCASE
+        defaultStdCodesGroupShouldNotBeFound("touppercase.equals=" + UPDATED_TOUPPERCASE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByTouppercaseIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where touppercase in DEFAULT_TOUPPERCASE or UPDATED_TOUPPERCASE
+        defaultStdCodesGroupShouldBeFound("touppercase.in=" + DEFAULT_TOUPPERCASE + "," + UPDATED_TOUPPERCASE);
+
+        // Get all the stdCodesGroupList where touppercase equals to UPDATED_TOUPPERCASE
+        defaultStdCodesGroupShouldNotBeFound("touppercase.in=" + UPDATED_TOUPPERCASE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByTouppercaseIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+
+        // Get all the stdCodesGroupList where touppercase is not null
+        defaultStdCodesGroupShouldBeFound("touppercase.specified=true");
+
+        // Get all the stdCodesGroupList where touppercase is null
+        defaultStdCodesGroupShouldNotBeFound("touppercase.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupsByStdCodesIsEqualToSomething() throws Exception {
+        // Initialize the database
+        StdCodes stdCodes = StdCodesResourceIT.createEntity(em);
+        em.persist(stdCodes);
+        em.flush();
+        stdCodesGroup.addStdCodes(stdCodes);
+        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+        Long stdCodesId = stdCodes.getId();
+
+        // Get all the stdCodesGroupList where stdCodes equals to stdCodesId
+        defaultStdCodesGroupShouldBeFound("stdCodesId.equals=" + stdCodesId);
+
+        // Get all the stdCodesGroupList where stdCodes equals to stdCodesId + 1
+        defaultStdCodesGroupShouldNotBeFound("stdCodesId.equals=" + (stdCodesId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultStdCodesGroupShouldBeFound(String filter) throws Exception {
+        restStdCodesGroupMockMvc.perform(get("/api/std-codes-groups?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(stdCodesGroup.getId().intValue())))
+            .andExpect(jsonPath("$.[*].groupCode").value(hasItem(DEFAULT_GROUP_CODE)))
+            .andExpect(jsonPath("$.[*].groupDesc").value(hasItem(DEFAULT_GROUP_DESC)))
+            .andExpect(jsonPath("$.[*].systemInd").value(hasItem(DEFAULT_SYSTEM_IND.toString())))
+            .andExpect(jsonPath("$.[*].secLevelRequired").value(hasItem(DEFAULT_SEC_LEVEL_REQUIRED.toString())))
+            .andExpect(jsonPath("$.[*].valueRequired").value(hasItem(DEFAULT_VALUE_REQUIRED.toString())))
+            .andExpect(jsonPath("$.[*].valueType").value(hasItem(DEFAULT_VALUE_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].descriptionRequired").value(hasItem(DEFAULT_DESCRIPTION_REQUIRED.toString())))
+            .andExpect(jsonPath("$.[*].externalCodeRequired").value(hasItem(DEFAULT_EXTERNAL_CODE_REQUIRED.toString())))
+            .andExpect(jsonPath("$.[*].externalCodeLength").value(hasItem(DEFAULT_EXTERNAL_CODE_LENGTH)))
+            .andExpect(jsonPath("$.[*].parentGroupRequired").value(hasItem(DEFAULT_PARENT_GROUP_REQUIRED.toString())))
+            .andExpect(jsonPath("$.[*].parentGroupCode").value(hasItem(DEFAULT_PARENT_GROUP_CODE)))
+            .andExpect(jsonPath("$.[*].touppercase").value(hasItem(DEFAULT_TOUPPERCASE.booleanValue())));
+
+        // Check, that the count call also returns 1
+        restStdCodesGroupMockMvc.perform(get("/api/std-codes-groups/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultStdCodesGroupShouldNotBeFound(String filter) throws Exception {
+        restStdCodesGroupMockMvc.perform(get("/api/std-codes-groups?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restStdCodesGroupMockMvc.perform(get("/api/std-codes-groups/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingStdCodesGroup() throws Exception {
         // Get the stdCodesGroup
         restStdCodesGroupMockMvc.perform(get("/api/std-codes-groups/{id}", Long.MAX_VALUE))
@@ -397,7 +966,7 @@ public class StdCodesGroupResourceIT {
     @Transactional
     public void updateStdCodesGroup() throws Exception {
         // Initialize the database
-        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+        stdCodesGroupService.save(stdCodesGroup);
 
         int databaseSizeBeforeUpdate = stdCodesGroupRepository.findAll().size();
 
@@ -464,7 +1033,7 @@ public class StdCodesGroupResourceIT {
     @Transactional
     public void deleteStdCodesGroup() throws Exception {
         // Initialize the database
-        stdCodesGroupRepository.saveAndFlush(stdCodesGroup);
+        stdCodesGroupService.save(stdCodesGroup);
 
         int databaseSizeBeforeDelete = stdCodesGroupRepository.findAll().size();
 

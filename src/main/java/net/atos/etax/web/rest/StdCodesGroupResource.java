@@ -1,14 +1,23 @@
 package net.atos.etax.web.rest;
 
 import net.atos.etax.domain.StdCodesGroup;
-import net.atos.etax.repository.StdCodesGroupRepository;
+import net.atos.etax.service.StdCodesGroupService;
 import net.atos.etax.web.rest.errors.BadRequestAlertException;
+import net.atos.etax.service.dto.StdCodesGroupCriteria;
+import net.atos.etax.service.StdCodesGroupQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +42,13 @@ public class StdCodesGroupResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final StdCodesGroupRepository stdCodesGroupRepository;
+    private final StdCodesGroupService stdCodesGroupService;
 
-    public StdCodesGroupResource(StdCodesGroupRepository stdCodesGroupRepository) {
-        this.stdCodesGroupRepository = stdCodesGroupRepository;
+    private final StdCodesGroupQueryService stdCodesGroupQueryService;
+
+    public StdCodesGroupResource(StdCodesGroupService stdCodesGroupService, StdCodesGroupQueryService stdCodesGroupQueryService) {
+        this.stdCodesGroupService = stdCodesGroupService;
+        this.stdCodesGroupQueryService = stdCodesGroupQueryService;
     }
 
     /**
@@ -52,7 +64,7 @@ public class StdCodesGroupResource {
         if (stdCodesGroup.getId() != null) {
             throw new BadRequestAlertException("A new stdCodesGroup cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        StdCodesGroup result = stdCodesGroupRepository.save(stdCodesGroup);
+        StdCodesGroup result = stdCodesGroupService.save(stdCodesGroup);
         return ResponseEntity.created(new URI("/api/std-codes-groups/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -73,7 +85,7 @@ public class StdCodesGroupResource {
         if (stdCodesGroup.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        StdCodesGroup result = stdCodesGroupRepository.save(stdCodesGroup);
+        StdCodesGroup result = stdCodesGroupService.save(stdCodesGroup);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, stdCodesGroup.getId().toString()))
             .body(result);
@@ -82,12 +94,30 @@ public class StdCodesGroupResource {
     /**
      * {@code GET  /std-codes-groups} : get all the stdCodesGroups.
      *
+     * @param pageable the pagination information.
+     * @param queryParams a {@link MultiValueMap} query parameters.
+     * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stdCodesGroups in body.
      */
     @GetMapping("/std-codes-groups")
-    public List<StdCodesGroup> getAllStdCodesGroups() {
-        log.debug("REST request to get all StdCodesGroups");
-        return stdCodesGroupRepository.findAll();
+    public ResponseEntity<List<StdCodesGroup>> getAllStdCodesGroups(StdCodesGroupCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get StdCodesGroups by criteria: {}", criteria);
+        Page<StdCodesGroup> page = stdCodesGroupQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * {@code GET  /std-codes-groups/count} : count all the stdCodesGroups.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/std-codes-groups/count")
+    public ResponseEntity<Long> countStdCodesGroups(StdCodesGroupCriteria criteria) {
+        log.debug("REST request to count StdCodesGroups by criteria: {}", criteria);
+        return ResponseEntity.ok().body(stdCodesGroupQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -99,7 +129,7 @@ public class StdCodesGroupResource {
     @GetMapping("/std-codes-groups/{id}")
     public ResponseEntity<StdCodesGroup> getStdCodesGroup(@PathVariable Long id) {
         log.debug("REST request to get StdCodesGroup : {}", id);
-        Optional<StdCodesGroup> stdCodesGroup = stdCodesGroupRepository.findById(id);
+        Optional<StdCodesGroup> stdCodesGroup = stdCodesGroupService.findOne(id);
         return ResponseUtil.wrapOrNotFound(stdCodesGroup);
     }
 
@@ -112,7 +142,7 @@ public class StdCodesGroupResource {
     @DeleteMapping("/std-codes-groups/{id}")
     public ResponseEntity<Void> deleteStdCodesGroup(@PathVariable Long id) {
         log.debug("REST request to delete StdCodesGroup : {}", id);
-        stdCodesGroupRepository.deleteById(id);
+        stdCodesGroupService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

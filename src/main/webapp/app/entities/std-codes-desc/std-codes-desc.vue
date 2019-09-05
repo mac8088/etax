@@ -24,20 +24,20 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.groupCode')">Group Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.internalCode')">Internal Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.langCode')">Lang Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.startDate')">Start Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.endDate')">End Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.externalCode')">External Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.codeDesc')">Code Desc</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesDesc.stdCodes')">Std Codes</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('groupCode')"><span v-text="$t('etaxApp.stdCodesDesc.groupCode')">Group Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('internalCode')"><span v-text="$t('etaxApp.stdCodesDesc.internalCode')">Internal Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('langCode')"><span v-text="$t('etaxApp.stdCodesDesc.langCode')">Lang Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('etaxApp.stdCodesDesc.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('etaxApp.stdCodesDesc.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('externalCode')"><span v-text="$t('etaxApp.stdCodesDesc.externalCode')">External Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('codeDesc')"><span v-text="$t('etaxApp.stdCodesDesc.codeDesc')">Code Desc</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('stdCodes.internalCode')"><span v-text="$t('etaxApp.stdCodesDesc.stdCodes')">Std Codes</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="stdCodesDesc in stdCodesDescs"
+                <tr v-for="stdCodesDesc of orderBy(stdCodesDescs, propOrder, reverse === true ? 1 : -1)"
                     :key="stdCodesDesc.id">
                     <td>
                         <router-link :to="{name: 'StdCodesDescView', params: {stdCodesDescId: stdCodesDesc.id}}">{{stdCodesDesc.id}}</router-link>
@@ -87,6 +87,14 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-stdCodesDesc" v-text="$t('entity.action.delete')" v-on:click="removeStdCodesDesc()">Delete</button>
             </div>
         </b-modal>
+        <div v-if="stdCodesDescs && stdCodesDescs.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

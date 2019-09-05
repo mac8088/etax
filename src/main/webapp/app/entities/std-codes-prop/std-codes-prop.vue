@@ -24,21 +24,21 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.groupCode')">Group Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.internalCode')">Internal Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.propCode')">Prop Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.startDate')">Start Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.endDate')">End Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.valueDate')">Value Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.valueString')">Value String</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.valueBool')">Value Bool</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesProp.valueNumber')">Value Number</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('groupCode')"><span v-text="$t('etaxApp.stdCodesProp.groupCode')">Group Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('internalCode')"><span v-text="$t('etaxApp.stdCodesProp.internalCode')">Internal Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('propCode')"><span v-text="$t('etaxApp.stdCodesProp.propCode')">Prop Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('etaxApp.stdCodesProp.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('etaxApp.stdCodesProp.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('valueDate')"><span v-text="$t('etaxApp.stdCodesProp.valueDate')">Value Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('valueString')"><span v-text="$t('etaxApp.stdCodesProp.valueString')">Value String</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('valueBool')"><span v-text="$t('etaxApp.stdCodesProp.valueBool')">Value Bool</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('valueNumber')"><span v-text="$t('etaxApp.stdCodesProp.valueNumber')">Value Number</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="stdCodesProp in stdCodesProps"
+                <tr v-for="stdCodesProp of orderBy(stdCodesProps, propOrder, reverse === true ? 1 : -1)"
                     :key="stdCodesProp.id">
                     <td>
                         <router-link :to="{name: 'StdCodesPropView', params: {stdCodesPropId: stdCodesProp.id}}">{{stdCodesProp.id}}</router-link>
@@ -85,6 +85,14 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-stdCodesProp" v-text="$t('entity.action.delete')" v-on:click="removeStdCodesProp()">Delete</button>
             </div>
         </b-modal>
+        <div v-if="stdCodesProps && stdCodesProps.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

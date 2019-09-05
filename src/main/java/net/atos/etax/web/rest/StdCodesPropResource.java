@@ -1,14 +1,23 @@
 package net.atos.etax.web.rest;
 
 import net.atos.etax.domain.StdCodesProp;
-import net.atos.etax.repository.StdCodesPropRepository;
+import net.atos.etax.service.StdCodesPropService;
 import net.atos.etax.web.rest.errors.BadRequestAlertException;
+import net.atos.etax.service.dto.StdCodesPropCriteria;
+import net.atos.etax.service.StdCodesPropQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +42,13 @@ public class StdCodesPropResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final StdCodesPropRepository stdCodesPropRepository;
+    private final StdCodesPropService stdCodesPropService;
 
-    public StdCodesPropResource(StdCodesPropRepository stdCodesPropRepository) {
-        this.stdCodesPropRepository = stdCodesPropRepository;
+    private final StdCodesPropQueryService stdCodesPropQueryService;
+
+    public StdCodesPropResource(StdCodesPropService stdCodesPropService, StdCodesPropQueryService stdCodesPropQueryService) {
+        this.stdCodesPropService = stdCodesPropService;
+        this.stdCodesPropQueryService = stdCodesPropQueryService;
     }
 
     /**
@@ -52,7 +64,7 @@ public class StdCodesPropResource {
         if (stdCodesProp.getId() != null) {
             throw new BadRequestAlertException("A new stdCodesProp cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        StdCodesProp result = stdCodesPropRepository.save(stdCodesProp);
+        StdCodesProp result = stdCodesPropService.save(stdCodesProp);
         return ResponseEntity.created(new URI("/api/std-codes-props/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -73,7 +85,7 @@ public class StdCodesPropResource {
         if (stdCodesProp.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        StdCodesProp result = stdCodesPropRepository.save(stdCodesProp);
+        StdCodesProp result = stdCodesPropService.save(stdCodesProp);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, stdCodesProp.getId().toString()))
             .body(result);
@@ -82,12 +94,30 @@ public class StdCodesPropResource {
     /**
      * {@code GET  /std-codes-props} : get all the stdCodesProps.
      *
+     * @param pageable the pagination information.
+     * @param queryParams a {@link MultiValueMap} query parameters.
+     * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stdCodesProps in body.
      */
     @GetMapping("/std-codes-props")
-    public List<StdCodesProp> getAllStdCodesProps() {
-        log.debug("REST request to get all StdCodesProps");
-        return stdCodesPropRepository.findAll();
+    public ResponseEntity<List<StdCodesProp>> getAllStdCodesProps(StdCodesPropCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get StdCodesProps by criteria: {}", criteria);
+        Page<StdCodesProp> page = stdCodesPropQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * {@code GET  /std-codes-props/count} : count all the stdCodesProps.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/std-codes-props/count")
+    public ResponseEntity<Long> countStdCodesProps(StdCodesPropCriteria criteria) {
+        log.debug("REST request to count StdCodesProps by criteria: {}", criteria);
+        return ResponseEntity.ok().body(stdCodesPropQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -99,7 +129,7 @@ public class StdCodesPropResource {
     @GetMapping("/std-codes-props/{id}")
     public ResponseEntity<StdCodesProp> getStdCodesProp(@PathVariable Long id) {
         log.debug("REST request to get StdCodesProp : {}", id);
-        Optional<StdCodesProp> stdCodesProp = stdCodesPropRepository.findById(id);
+        Optional<StdCodesProp> stdCodesProp = stdCodesPropService.findOne(id);
         return ResponseUtil.wrapOrNotFound(stdCodesProp);
     }
 
@@ -112,7 +142,7 @@ public class StdCodesPropResource {
     @DeleteMapping("/std-codes-props/{id}")
     public ResponseEntity<Void> deleteStdCodesProp(@PathVariable Long id) {
         log.debug("REST request to delete StdCodesProp : {}", id);
-        stdCodesPropRepository.deleteById(id);
+        stdCodesPropService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

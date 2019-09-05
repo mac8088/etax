@@ -102,13 +102,13 @@
             "otherEntityField": "groupCode"
         }
     ],
-    "changelogDate": "20190828135617",
+    "changelogDate": "20190905062622",
     "javadoc": "The StdCodes entity.\nHolds the list of elements in a group. Groups are defined in STD_CODES_GROUP.\nThe multilingual description of elements is stored in STD_CODE_DESC.\nData in this table can be modified by end users only when STD_CODES_GROUP.SYSTEM_IND = ''N'' for this group,\ni.e. it is not a system group.",
     "entityTableName": "std_codes",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

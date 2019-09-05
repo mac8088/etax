@@ -41,7 +41,7 @@ describe('Component Tests', () => {
         store,
         i18n,
         localVue,
-        stubs: { bModal: bModalStub as any },
+        stubs: { jhiItemCount: true, bPagination: true, bModal: bModalStub as any },
         provide: {
           alertService: () => new AlertService(store),
           stdCodesPropService: () => stdCodesPropServiceStub
@@ -65,6 +65,67 @@ describe('Component Tests', () => {
       // THEN
       expect(stdCodesPropServiceStub.retrieve.called).toBeTruthy();
       expect(comp.stdCodesProps[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+    });
+
+    it('should load a page', async () => {
+      // GIVEN
+      stdCodesPropServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+
+      // WHEN
+      comp.loadPage(1);
+      await comp.$nextTick();
+
+      // THEN
+      expect(stdCodesPropServiceStub.retrieve.called).toBeTruthy();
+      expect(comp.stdCodesProps[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+    });
+
+    it('should not load a page if the page is the same as the previous page', () => {
+      // GIVEN
+      stdCodesPropServiceStub.retrieve.reset();
+      comp.previousPage = 1;
+
+      // WHEN
+      comp.loadPage(1);
+
+      // THEN
+      expect(stdCodesPropServiceStub.retrieve.called).toBeFalsy();
+    });
+
+    it('should re-initialize the page', async () => {
+      // GIVEN
+      stdCodesPropServiceStub.retrieve.reset();
+      stdCodesPropServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+
+      // WHEN
+      comp.loadPage(2);
+      await comp.$nextTick();
+      comp.clear();
+      await comp.$nextTick();
+
+      // THEN
+      expect(stdCodesPropServiceStub.retrieve.callCount).toEqual(3);
+      expect(comp.page).toEqual(1);
+      expect(comp.stdCodesProps[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+    });
+
+    it('should calculate the sort attribute for an id', () => {
+      // WHEN
+      const result = comp.sort();
+
+      // THEN
+      expect(result).toEqual(['id,desc']);
+    });
+
+    it('should calculate the sort attribute for a non-id attribute', () => {
+      // GIVEN
+      comp.propOrder = 'name';
+
+      // WHEN
+      const result = comp.sort();
+
+      // THEN
+      expect(result).toEqual(['name,desc', 'id']);
     });
 
     it('Should call delete service on confirmDelete', async () => {

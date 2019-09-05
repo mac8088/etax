@@ -24,24 +24,24 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.groupCode')">Group Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.groupDesc')">Group Desc</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.systemInd')">System Ind</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.secLevelRequired')">Sec Level Required</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.valueRequired')">Value Required</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.valueType')">Value Type</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.descriptionRequired')">Description Required</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.externalCodeRequired')">External Code Required</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.externalCodeLength')">External Code Length</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.parentGroupRequired')">Parent Group Required</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.parentGroupCode')">Parent Group Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroup.touppercase')">Touppercase</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('groupCode')"><span v-text="$t('etaxApp.stdCodesGroup.groupCode')">Group Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('groupDesc')"><span v-text="$t('etaxApp.stdCodesGroup.groupDesc')">Group Desc</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('systemInd')"><span v-text="$t('etaxApp.stdCodesGroup.systemInd')">System Ind</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('secLevelRequired')"><span v-text="$t('etaxApp.stdCodesGroup.secLevelRequired')">Sec Level Required</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('valueRequired')"><span v-text="$t('etaxApp.stdCodesGroup.valueRequired')">Value Required</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('valueType')"><span v-text="$t('etaxApp.stdCodesGroup.valueType')">Value Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('descriptionRequired')"><span v-text="$t('etaxApp.stdCodesGroup.descriptionRequired')">Description Required</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('externalCodeRequired')"><span v-text="$t('etaxApp.stdCodesGroup.externalCodeRequired')">External Code Required</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('externalCodeLength')"><span v-text="$t('etaxApp.stdCodesGroup.externalCodeLength')">External Code Length</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('parentGroupRequired')"><span v-text="$t('etaxApp.stdCodesGroup.parentGroupRequired')">Parent Group Required</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('parentGroupCode')"><span v-text="$t('etaxApp.stdCodesGroup.parentGroupCode')">Parent Group Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('touppercase')"><span v-text="$t('etaxApp.stdCodesGroup.touppercase')">Touppercase</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="stdCodesGroup in stdCodesGroups"
+                <tr v-for="stdCodesGroup of orderBy(stdCodesGroups, propOrder, reverse === true ? 1 : -1)"
                     :key="stdCodesGroup.id">
                     <td>
                         <router-link :to="{name: 'StdCodesGroupView', params: {stdCodesGroupId: stdCodesGroup.id}}">{{stdCodesGroup.id}}</router-link>
@@ -91,6 +91,14 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-stdCodesGroup" v-text="$t('entity.action.delete')" v-on:click="removeStdCodesGroup()">Delete</button>
             </div>
         </b-modal>
+        <div v-if="stdCodesGroups && stdCodesGroups.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 
