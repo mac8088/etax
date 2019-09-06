@@ -103,7 +103,7 @@ public class WorkflowService {
 		return data;
 	}
 	
-	private TaskQuery buildTaskQuery(String assignee, String candidateGroup, String candidateUser, String processKey,
+	public TaskQuery buildTaskQuery(String assignee, String candidateGroup, String candidateUser, String processKey,
 			String taskKey, String processInstanceId, String businessKey, Date fromDate, Date toDate,
 			Map<String, Object> variables) {
 		TaskQuery taskQuery = taskService.createTaskQuery();

@@ -1,4 +1,4 @@
-package net.atos.etax.config;
+package net.atos.bpm.config;
 
 import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.flowable.spring.boot.EngineConfigurationConfigurer;

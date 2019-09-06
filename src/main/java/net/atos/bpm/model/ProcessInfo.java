@@ -2,7 +2,7 @@ package net.atos.bpm.model;
 
 import java.util.Date;
 
-public class Process {
+public class ProcessInfo {
 	private String executionId;
 	private String processInstanceId;
 	private String name;
