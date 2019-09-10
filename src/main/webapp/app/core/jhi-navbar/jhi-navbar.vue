@@ -42,6 +42,10 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesGroup')">StdCodesGroup</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/entity/std-codes-group-prop">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.stdCodesGroupProp')">StdCodesGroupProp</span>
+                    </b-dropdown-item>
                     <b-dropdown-item to="/entity/std-codes" v-if="hasAnyAuthority('ROLE_ADMIN')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodes')">StdCodes</span>

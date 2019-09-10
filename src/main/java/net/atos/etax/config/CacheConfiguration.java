@@ -49,6 +49,7 @@ public class CacheConfiguration {
             createCache(cm, net.atos.etax.domain.StdCodesGroup.class.getName());
             createCache(cm, net.atos.etax.domain.StdCodesGroup.class.getName() + ".stdCodes");
             createCache(cm, net.atos.etax.domain.StdCodesProp.class.getName());
+            createCache(cm, net.atos.etax.domain.StdCodesGroupProp.class.getName());
             createCache(cm, net.atos.etax.domain.ExchangeRate.class.getName());
             createCache(cm, net.atos.etax.domain.PublicHoliday.class.getName());
             createCache(cm, net.atos.etax.domain.Office.class.getName());

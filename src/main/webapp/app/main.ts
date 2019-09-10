@@ -30,6 +30,7 @@ import StdCodesService from '@/entities/std-codes/std-codes.service';
 import StdCodesDescService from '@/entities/std-codes-desc/std-codes-desc.service';
 import StdCodesGroupService from '@/entities/std-codes-group/std-codes-group.service';
 import StdCodesPropService from '@/entities/std-codes-prop/std-codes-prop.service';
+import StdCodesGroupPropService from '@/entities/std-codes-group-prop/std-codes-group-prop.service';
 import ExchangeRateService from '@/entities/exchange-rate/exchange-rate.service';
 import PublicHolidayService from '@/entities/public-holiday/public-holiday.service';
 import OfficeService from '@/entities/office/office.service';
@@ -100,6 +101,7 @@ new Vue({
     stdCodesDescService: () => new StdCodesDescService(),
     stdCodesGroupService: () => new StdCodesGroupService(),
     stdCodesPropService: () => new StdCodesPropService(),
+    stdCodesGroupPropService: () => new StdCodesGroupPropService(),
     exchangeRateService: () => new ExchangeRateService(),
     publicHolidayService: () => new PublicHolidayService(),
     officeService: () => new OfficeService(),

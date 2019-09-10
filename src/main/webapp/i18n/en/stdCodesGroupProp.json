@@ -1,0 +1,45 @@
+{
+  "etaxApp": {
+    "stdCodesGroupProp": {
+      "home": {
+        "title": "Std Codes Group Props",
+        "createLabel": "Create a new Std Codes Group Prop",
+        "createOrEditLabel": "Create or edit a Std Codes Group Prop",
+        "notFound": "No Std Codes Group Prop found"
+      },
+      "created": "A new Std Codes Group Prop is created with identifier {{ param }}",
+      "updated": "A Std Codes Group Prop is updated with identifier {{ param }}",
+      "deleted": "A Std Codes Group Prop is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Std Codes Group Prop {{ id }}?"
+      },
+      "detail": {
+        "title": "Std Codes Group Prop"
+      },
+      "groupCode": "Group Code",
+      "propCode": "Prop Code",
+      "propDesc": "Prop Desc",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "propType": "Prop Type",
+      "propMdtr": "Prop Mdtr",
+      "dfltValueDate": "Dflt Value Date",
+      "dfltValueString": "Dflt Value String",
+      "dfltValueBool": "Dflt Value Bool",
+      "dfltValueNumber": "Dflt Value Number",
+      "help": {
+        "groupCode": "Code of the group of codes",
+        "propCode": "Property code",
+        "propDesc": "Property description",
+        "startDate": "Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element.",
+        "endDate": "Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code.",
+        "propType": "Type of the prop value Can be one of &#39;&#39;D&#39;&#39; (Date), &#39;&#39;S&#39;&#39; (String), &#39;&#39;N&#39;&#39; (Number) or &#39;&#39;B&#39;&#39; (Boolean).",
+        "propMdtr": "Accessibility of Property: mandatory or not",
+        "dfltValueDate": "Default date value for the property with a date property type",
+        "dfltValueString": "Default string value for the property with a string property type",
+        "dfltValueBool": "Default boolean value for the property with a boolean property type",
+        "dfltValueNumber": "Default numeric value for the property with a numeric property type"
+      }
+    }
+  }
+}
