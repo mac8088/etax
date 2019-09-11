@@ -155,8 +155,8 @@ relationship OneToMany {
 
 
 // Set pagination options
-//paginate StdCodesGroup, StdCodesProp with infinite-scroll
-paginate StdCodesGroup, StdCodes, StdCodesDesc, StdCodesProp with pagination
+paginate StdCodesGroupProp, StdCodesProp with infinite-scroll
+paginate StdCodesGroup, StdCodes, StdCodesDesc with pagination
 
 
 // Use Data Transfert Objects (DTO)
@@ -164,7 +164,7 @@ paginate StdCodesGroup, StdCodes, StdCodesDesc, StdCodesProp with pagination
 
 
 // Set service options to all except few
-//service all with serviceImpl except StdCodesProp
+//service all with serviceImpl except StdCodesProp, StdCodesGroupProp
 
 
 // Set service options to all except few
@@ -173,6 +173,6 @@ service all with serviceClass
 
 // skipClient for *
 
-filter StdCodesGroup, StdCodes, StdCodesDesc, StdCodesProp
+filter StdCodesGroup, StdCodes, StdCodesDesc, StdCodesProp, StdCodesGroupProp
 
 
