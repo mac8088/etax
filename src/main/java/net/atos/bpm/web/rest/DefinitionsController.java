@@ -25,7 +25,7 @@ public class DefinitionsController {
 //		return "Hello " + principal.getName() + ", welcome FlowFest 2018";
 //	}
     
-    @GetMapping("/latest-definitions")
+    @GetMapping("/flow/latest-definitions")
     public List<?> latestDefinitions() {
         return repositoryService.createProcessDefinitionQuery()
             .latestVersion()
