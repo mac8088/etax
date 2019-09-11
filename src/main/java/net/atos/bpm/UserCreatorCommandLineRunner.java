@@ -1,4 +1,4 @@
-package net.atos.etax;
+package net.atos.bpm;
 
 import org.flowable.idm.api.IdmIdentityService;
 import org.flowable.idm.api.Privilege;

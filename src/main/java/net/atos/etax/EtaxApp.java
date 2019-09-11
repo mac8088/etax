@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SpringBootApplication
-//@ComponentScan({"net.atos.etax", "net.atos.bpm", "net.atos.demo"})
+@ComponentScan({"net.atos.etax", "net.atos.bpm", "net.atos.demo"})
 //@EntityScan({"net.atos.demo.domain", "net.atos.etax.domain"})
 //@EnableJpaRepositories({"net.atos.demo.repository", "net.atos.etax.repository"})
 @Configuration
