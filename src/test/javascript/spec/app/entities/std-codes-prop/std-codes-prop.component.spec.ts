@@ -80,18 +80,6 @@ describe('Component Tests', () => {
       expect(comp.stdCodesProps[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
-    it('should not load a page if the page is the same as the previous page', () => {
-      // GIVEN
-      stdCodesPropServiceStub.retrieve.reset();
-      comp.previousPage = 1;
-
-      // WHEN
-      comp.loadPage(1);
-
-      // THEN
-      expect(stdCodesPropServiceStub.retrieve.called).toBeFalsy();
-    });
-
     it('should re-initialize the page', async () => {
       // GIVEN
       stdCodesPropServiceStub.retrieve.reset();
@@ -104,7 +92,7 @@ describe('Component Tests', () => {
       await comp.$nextTick();
 
       // THEN
-      expect(stdCodesPropServiceStub.retrieve.callCount).toEqual(3);
+      expect(stdCodesPropServiceStub.retrieve.callCount).toEqual(2);
       expect(comp.page).toEqual(1);
       expect(comp.stdCodesProps[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
@@ -114,7 +102,7 @@ describe('Component Tests', () => {
       const result = comp.sort();
 
       // THEN
-      expect(result).toEqual(['id,desc']);
+      expect(result).toEqual(['id,asc']);
     });
 
     it('should calculate the sort attribute for a non-id attribute', () => {
@@ -125,7 +113,7 @@ describe('Component Tests', () => {
       const result = comp.sort();
 
       // THEN
-      expect(result).toEqual(['name,desc', 'id']);
+      expect(result).toEqual(['name,asc', 'id']);
     });
 
     it('Should call delete service on confirmDelete', async () => {

@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity BankAccount.
     -->
-    <changeSet id="20190905084516-2" author="jhipster">
+    <changeSet id="20190911040156-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="cmn_bank_account"

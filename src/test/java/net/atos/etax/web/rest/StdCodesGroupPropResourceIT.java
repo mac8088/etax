@@ -3,7 +3,10 @@ package net.atos.etax.web.rest;
 import net.atos.etax.EtaxApp;
 import net.atos.etax.domain.StdCodesGroupProp;
 import net.atos.etax.repository.StdCodesGroupPropRepository;
+import net.atos.etax.service.StdCodesGroupPropService;
 import net.atos.etax.web.rest.errors.ExceptionTranslator;
+import net.atos.etax.service.dto.StdCodesGroupPropCriteria;
+import net.atos.etax.service.StdCodesGroupPropQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -78,6 +81,12 @@ public class StdCodesGroupPropResourceIT {
     private StdCodesGroupPropRepository stdCodesGroupPropRepository;
 
     @Autowired
+    private StdCodesGroupPropService stdCodesGroupPropService;
+
+    @Autowired
+    private StdCodesGroupPropQueryService stdCodesGroupPropQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -99,7 +108,7 @@ public class StdCodesGroupPropResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StdCodesGroupPropResource stdCodesGroupPropResource = new StdCodesGroupPropResource(stdCodesGroupPropRepository);
+        final StdCodesGroupPropResource stdCodesGroupPropResource = new StdCodesGroupPropResource(stdCodesGroupPropService, stdCodesGroupPropQueryService);
         this.restStdCodesGroupPropMockMvc = MockMvcBuilders.standaloneSetup(stdCodesGroupPropResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -326,6 +335,560 @@ public class StdCodesGroupPropResourceIT {
 
     @Test
     @Transactional
+    public void getAllStdCodesGroupPropsByGroupCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where groupCode equals to DEFAULT_GROUP_CODE
+        defaultStdCodesGroupPropShouldBeFound("groupCode.equals=" + DEFAULT_GROUP_CODE);
+
+        // Get all the stdCodesGroupPropList where groupCode equals to UPDATED_GROUP_CODE
+        defaultStdCodesGroupPropShouldNotBeFound("groupCode.equals=" + UPDATED_GROUP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByGroupCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where groupCode in DEFAULT_GROUP_CODE or UPDATED_GROUP_CODE
+        defaultStdCodesGroupPropShouldBeFound("groupCode.in=" + DEFAULT_GROUP_CODE + "," + UPDATED_GROUP_CODE);
+
+        // Get all the stdCodesGroupPropList where groupCode equals to UPDATED_GROUP_CODE
+        defaultStdCodesGroupPropShouldNotBeFound("groupCode.in=" + UPDATED_GROUP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByGroupCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where groupCode is not null
+        defaultStdCodesGroupPropShouldBeFound("groupCode.specified=true");
+
+        // Get all the stdCodesGroupPropList where groupCode is null
+        defaultStdCodesGroupPropShouldNotBeFound("groupCode.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propCode equals to DEFAULT_PROP_CODE
+        defaultStdCodesGroupPropShouldBeFound("propCode.equals=" + DEFAULT_PROP_CODE);
+
+        // Get all the stdCodesGroupPropList where propCode equals to UPDATED_PROP_CODE
+        defaultStdCodesGroupPropShouldNotBeFound("propCode.equals=" + UPDATED_PROP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propCode in DEFAULT_PROP_CODE or UPDATED_PROP_CODE
+        defaultStdCodesGroupPropShouldBeFound("propCode.in=" + DEFAULT_PROP_CODE + "," + UPDATED_PROP_CODE);
+
+        // Get all the stdCodesGroupPropList where propCode equals to UPDATED_PROP_CODE
+        defaultStdCodesGroupPropShouldNotBeFound("propCode.in=" + UPDATED_PROP_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propCode is not null
+        defaultStdCodesGroupPropShouldBeFound("propCode.specified=true");
+
+        // Get all the stdCodesGroupPropList where propCode is null
+        defaultStdCodesGroupPropShouldNotBeFound("propCode.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropDescIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propDesc equals to DEFAULT_PROP_DESC
+        defaultStdCodesGroupPropShouldBeFound("propDesc.equals=" + DEFAULT_PROP_DESC);
+
+        // Get all the stdCodesGroupPropList where propDesc equals to UPDATED_PROP_DESC
+        defaultStdCodesGroupPropShouldNotBeFound("propDesc.equals=" + UPDATED_PROP_DESC);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropDescIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propDesc in DEFAULT_PROP_DESC or UPDATED_PROP_DESC
+        defaultStdCodesGroupPropShouldBeFound("propDesc.in=" + DEFAULT_PROP_DESC + "," + UPDATED_PROP_DESC);
+
+        // Get all the stdCodesGroupPropList where propDesc equals to UPDATED_PROP_DESC
+        defaultStdCodesGroupPropShouldNotBeFound("propDesc.in=" + UPDATED_PROP_DESC);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropDescIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propDesc is not null
+        defaultStdCodesGroupPropShouldBeFound("propDesc.specified=true");
+
+        // Get all the stdCodesGroupPropList where propDesc is null
+        defaultStdCodesGroupPropShouldNotBeFound("propDesc.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByStartDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where startDate equals to DEFAULT_START_DATE
+        defaultStdCodesGroupPropShouldBeFound("startDate.equals=" + DEFAULT_START_DATE);
+
+        // Get all the stdCodesGroupPropList where startDate equals to UPDATED_START_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("startDate.equals=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByStartDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where startDate in DEFAULT_START_DATE or UPDATED_START_DATE
+        defaultStdCodesGroupPropShouldBeFound("startDate.in=" + DEFAULT_START_DATE + "," + UPDATED_START_DATE);
+
+        // Get all the stdCodesGroupPropList where startDate equals to UPDATED_START_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("startDate.in=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByStartDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where startDate is not null
+        defaultStdCodesGroupPropShouldBeFound("startDate.specified=true");
+
+        // Get all the stdCodesGroupPropList where startDate is null
+        defaultStdCodesGroupPropShouldNotBeFound("startDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByStartDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where startDate greater than or equals to DEFAULT_START_DATE
+        defaultStdCodesGroupPropShouldBeFound("startDate.greaterOrEqualThan=" + DEFAULT_START_DATE);
+
+        // Get all the stdCodesGroupPropList where startDate greater than or equals to UPDATED_START_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("startDate.greaterOrEqualThan=" + UPDATED_START_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByStartDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where startDate less than or equals to DEFAULT_START_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("startDate.lessThan=" + DEFAULT_START_DATE);
+
+        // Get all the stdCodesGroupPropList where startDate less than or equals to UPDATED_START_DATE
+        defaultStdCodesGroupPropShouldBeFound("startDate.lessThan=" + UPDATED_START_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByEndDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where endDate equals to DEFAULT_END_DATE
+        defaultStdCodesGroupPropShouldBeFound("endDate.equals=" + DEFAULT_END_DATE);
+
+        // Get all the stdCodesGroupPropList where endDate equals to UPDATED_END_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("endDate.equals=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByEndDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where endDate in DEFAULT_END_DATE or UPDATED_END_DATE
+        defaultStdCodesGroupPropShouldBeFound("endDate.in=" + DEFAULT_END_DATE + "," + UPDATED_END_DATE);
+
+        // Get all the stdCodesGroupPropList where endDate equals to UPDATED_END_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("endDate.in=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByEndDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where endDate is not null
+        defaultStdCodesGroupPropShouldBeFound("endDate.specified=true");
+
+        // Get all the stdCodesGroupPropList where endDate is null
+        defaultStdCodesGroupPropShouldNotBeFound("endDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByEndDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where endDate greater than or equals to DEFAULT_END_DATE
+        defaultStdCodesGroupPropShouldBeFound("endDate.greaterOrEqualThan=" + DEFAULT_END_DATE);
+
+        // Get all the stdCodesGroupPropList where endDate greater than or equals to UPDATED_END_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("endDate.greaterOrEqualThan=" + UPDATED_END_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByEndDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where endDate less than or equals to DEFAULT_END_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("endDate.lessThan=" + DEFAULT_END_DATE);
+
+        // Get all the stdCodesGroupPropList where endDate less than or equals to UPDATED_END_DATE
+        defaultStdCodesGroupPropShouldBeFound("endDate.lessThan=" + UPDATED_END_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propType equals to DEFAULT_PROP_TYPE
+        defaultStdCodesGroupPropShouldBeFound("propType.equals=" + DEFAULT_PROP_TYPE);
+
+        // Get all the stdCodesGroupPropList where propType equals to UPDATED_PROP_TYPE
+        defaultStdCodesGroupPropShouldNotBeFound("propType.equals=" + UPDATED_PROP_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propType in DEFAULT_PROP_TYPE or UPDATED_PROP_TYPE
+        defaultStdCodesGroupPropShouldBeFound("propType.in=" + DEFAULT_PROP_TYPE + "," + UPDATED_PROP_TYPE);
+
+        // Get all the stdCodesGroupPropList where propType equals to UPDATED_PROP_TYPE
+        defaultStdCodesGroupPropShouldNotBeFound("propType.in=" + UPDATED_PROP_TYPE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propType is not null
+        defaultStdCodesGroupPropShouldBeFound("propType.specified=true");
+
+        // Get all the stdCodesGroupPropList where propType is null
+        defaultStdCodesGroupPropShouldNotBeFound("propType.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropMdtrIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propMdtr equals to DEFAULT_PROP_MDTR
+        defaultStdCodesGroupPropShouldBeFound("propMdtr.equals=" + DEFAULT_PROP_MDTR);
+
+        // Get all the stdCodesGroupPropList where propMdtr equals to UPDATED_PROP_MDTR
+        defaultStdCodesGroupPropShouldNotBeFound("propMdtr.equals=" + UPDATED_PROP_MDTR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropMdtrIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propMdtr in DEFAULT_PROP_MDTR or UPDATED_PROP_MDTR
+        defaultStdCodesGroupPropShouldBeFound("propMdtr.in=" + DEFAULT_PROP_MDTR + "," + UPDATED_PROP_MDTR);
+
+        // Get all the stdCodesGroupPropList where propMdtr equals to UPDATED_PROP_MDTR
+        defaultStdCodesGroupPropShouldNotBeFound("propMdtr.in=" + UPDATED_PROP_MDTR);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByPropMdtrIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where propMdtr is not null
+        defaultStdCodesGroupPropShouldBeFound("propMdtr.specified=true");
+
+        // Get all the stdCodesGroupPropList where propMdtr is null
+        defaultStdCodesGroupPropShouldNotBeFound("propMdtr.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate equals to DEFAULT_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldBeFound("dfltValueDate.equals=" + DEFAULT_DFLT_VALUE_DATE);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate equals to UPDATED_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueDate.equals=" + UPDATED_DFLT_VALUE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate in DEFAULT_DFLT_VALUE_DATE or UPDATED_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldBeFound("dfltValueDate.in=" + DEFAULT_DFLT_VALUE_DATE + "," + UPDATED_DFLT_VALUE_DATE);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate equals to UPDATED_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueDate.in=" + UPDATED_DFLT_VALUE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate is not null
+        defaultStdCodesGroupPropShouldBeFound("dfltValueDate.specified=true");
+
+        // Get all the stdCodesGroupPropList where dfltValueDate is null
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueDateIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate greater than or equals to DEFAULT_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldBeFound("dfltValueDate.greaterOrEqualThan=" + DEFAULT_DFLT_VALUE_DATE);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate greater than or equals to UPDATED_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueDate.greaterOrEqualThan=" + UPDATED_DFLT_VALUE_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueDateIsLessThanSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate less than or equals to DEFAULT_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueDate.lessThan=" + DEFAULT_DFLT_VALUE_DATE);
+
+        // Get all the stdCodesGroupPropList where dfltValueDate less than or equals to UPDATED_DFLT_VALUE_DATE
+        defaultStdCodesGroupPropShouldBeFound("dfltValueDate.lessThan=" + UPDATED_DFLT_VALUE_DATE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueStringIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueString equals to DEFAULT_DFLT_VALUE_STRING
+        defaultStdCodesGroupPropShouldBeFound("dfltValueString.equals=" + DEFAULT_DFLT_VALUE_STRING);
+
+        // Get all the stdCodesGroupPropList where dfltValueString equals to UPDATED_DFLT_VALUE_STRING
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueString.equals=" + UPDATED_DFLT_VALUE_STRING);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueStringIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueString in DEFAULT_DFLT_VALUE_STRING or UPDATED_DFLT_VALUE_STRING
+        defaultStdCodesGroupPropShouldBeFound("dfltValueString.in=" + DEFAULT_DFLT_VALUE_STRING + "," + UPDATED_DFLT_VALUE_STRING);
+
+        // Get all the stdCodesGroupPropList where dfltValueString equals to UPDATED_DFLT_VALUE_STRING
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueString.in=" + UPDATED_DFLT_VALUE_STRING);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueStringIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueString is not null
+        defaultStdCodesGroupPropShouldBeFound("dfltValueString.specified=true");
+
+        // Get all the stdCodesGroupPropList where dfltValueString is null
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueString.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueBoolIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueBool equals to DEFAULT_DFLT_VALUE_BOOL
+        defaultStdCodesGroupPropShouldBeFound("dfltValueBool.equals=" + DEFAULT_DFLT_VALUE_BOOL);
+
+        // Get all the stdCodesGroupPropList where dfltValueBool equals to UPDATED_DFLT_VALUE_BOOL
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueBool.equals=" + UPDATED_DFLT_VALUE_BOOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueBoolIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueBool in DEFAULT_DFLT_VALUE_BOOL or UPDATED_DFLT_VALUE_BOOL
+        defaultStdCodesGroupPropShouldBeFound("dfltValueBool.in=" + DEFAULT_DFLT_VALUE_BOOL + "," + UPDATED_DFLT_VALUE_BOOL);
+
+        // Get all the stdCodesGroupPropList where dfltValueBool equals to UPDATED_DFLT_VALUE_BOOL
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueBool.in=" + UPDATED_DFLT_VALUE_BOOL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueBoolIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueBool is not null
+        defaultStdCodesGroupPropShouldBeFound("dfltValueBool.specified=true");
+
+        // Get all the stdCodesGroupPropList where dfltValueBool is null
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueBool.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueNumberIsEqualToSomething() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueNumber equals to DEFAULT_DFLT_VALUE_NUMBER
+        defaultStdCodesGroupPropShouldBeFound("dfltValueNumber.equals=" + DEFAULT_DFLT_VALUE_NUMBER);
+
+        // Get all the stdCodesGroupPropList where dfltValueNumber equals to UPDATED_DFLT_VALUE_NUMBER
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueNumber.equals=" + UPDATED_DFLT_VALUE_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueNumberIsInShouldWork() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueNumber in DEFAULT_DFLT_VALUE_NUMBER or UPDATED_DFLT_VALUE_NUMBER
+        defaultStdCodesGroupPropShouldBeFound("dfltValueNumber.in=" + DEFAULT_DFLT_VALUE_NUMBER + "," + UPDATED_DFLT_VALUE_NUMBER);
+
+        // Get all the stdCodesGroupPropList where dfltValueNumber equals to UPDATED_DFLT_VALUE_NUMBER
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueNumber.in=" + UPDATED_DFLT_VALUE_NUMBER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllStdCodesGroupPropsByDfltValueNumberIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+
+        // Get all the stdCodesGroupPropList where dfltValueNumber is not null
+        defaultStdCodesGroupPropShouldBeFound("dfltValueNumber.specified=true");
+
+        // Get all the stdCodesGroupPropList where dfltValueNumber is null
+        defaultStdCodesGroupPropShouldNotBeFound("dfltValueNumber.specified=false");
+    }
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultStdCodesGroupPropShouldBeFound(String filter) throws Exception {
+        restStdCodesGroupPropMockMvc.perform(get("/api/std-codes-group-props?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(stdCodesGroupProp.getId().intValue())))
+            .andExpect(jsonPath("$.[*].groupCode").value(hasItem(DEFAULT_GROUP_CODE)))
+            .andExpect(jsonPath("$.[*].propCode").value(hasItem(DEFAULT_PROP_CODE)))
+            .andExpect(jsonPath("$.[*].propDesc").value(hasItem(DEFAULT_PROP_DESC)))
+            .andExpect(jsonPath("$.[*].startDate").value(hasItem(sameInstant(DEFAULT_START_DATE))))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(sameInstant(DEFAULT_END_DATE))))
+            .andExpect(jsonPath("$.[*].propType").value(hasItem(DEFAULT_PROP_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].propMdtr").value(hasItem(DEFAULT_PROP_MDTR.toString())))
+            .andExpect(jsonPath("$.[*].dfltValueDate").value(hasItem(DEFAULT_DFLT_VALUE_DATE.toString())))
+            .andExpect(jsonPath("$.[*].dfltValueString").value(hasItem(DEFAULT_DFLT_VALUE_STRING)))
+            .andExpect(jsonPath("$.[*].dfltValueBool").value(hasItem(DEFAULT_DFLT_VALUE_BOOL.booleanValue())))
+            .andExpect(jsonPath("$.[*].dfltValueNumber").value(hasItem(DEFAULT_DFLT_VALUE_NUMBER.doubleValue())));
+
+        // Check, that the count call also returns 1
+        restStdCodesGroupPropMockMvc.perform(get("/api/std-codes-group-props/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultStdCodesGroupPropShouldNotBeFound(String filter) throws Exception {
+        restStdCodesGroupPropMockMvc.perform(get("/api/std-codes-group-props?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restStdCodesGroupPropMockMvc.perform(get("/api/std-codes-group-props/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingStdCodesGroupProp() throws Exception {
         // Get the stdCodesGroupProp
         restStdCodesGroupPropMockMvc.perform(get("/api/std-codes-group-props/{id}", Long.MAX_VALUE))
@@ -336,7 +899,7 @@ public class StdCodesGroupPropResourceIT {
     @Transactional
     public void updateStdCodesGroupProp() throws Exception {
         // Initialize the database
-        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+        stdCodesGroupPropService.save(stdCodesGroupProp);
 
         int databaseSizeBeforeUpdate = stdCodesGroupPropRepository.findAll().size();
 
@@ -401,7 +964,7 @@ public class StdCodesGroupPropResourceIT {
     @Transactional
     public void deleteStdCodesGroupProp() throws Exception {
         // Initialize the database
-        stdCodesGroupPropRepository.saveAndFlush(stdCodesGroupProp);
+        stdCodesGroupPropService.save(stdCodesGroupProp);
 
         int databaseSizeBeforeDelete = stdCodesGroupPropRepository.findAll().size();
 

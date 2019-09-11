@@ -230,7 +230,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20190905091742",
+    "changelogDate": "20190911040358",
     "javadoc": "The Extension information for setting up and maintaining users.",
     "entityTableName": "adm_user_info",
     "dto": "no",

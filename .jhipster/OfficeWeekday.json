@@ -27,7 +27,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190905091741",
+    "changelogDate": "20190911040357",
     "javadoc": "Week working day.",
     "entityTableName": "adm_office_weekday",
     "dto": "no",

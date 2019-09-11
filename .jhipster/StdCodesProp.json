@@ -70,11 +70,11 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190905062624",
+    "changelogDate": "20190911040255",
     "javadoc": "The StdCodesProp entity.\nall properties have been added to the standard code",
     "entityTableName": "std_codes_prop",
     "dto": "no",
-    "pagination": "pagination",
+    "pagination": "infinite-scroll",
     "service": "serviceClass",
     "jpaMetamodelFiltering": true,
     "fluentMethods": true,

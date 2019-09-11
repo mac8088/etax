@@ -14,7 +14,7 @@ export default class StdCodesProp extends Vue {
   public page = 1;
   public previousPage: number = null;
   public propOrder = 'id';
-  public reverse = false;
+  public reverse = true;
   public totalItems = 0;
   public stdCodesProps: IStdCodesProp[] = [];
 

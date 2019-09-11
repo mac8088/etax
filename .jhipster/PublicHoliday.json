@@ -39,7 +39,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190905091736",
+    "changelogDate": "20190911040352",
     "javadoc": "Public holiday.",
     "entityTableName": "adm_public_holiday",
     "dto": "no",

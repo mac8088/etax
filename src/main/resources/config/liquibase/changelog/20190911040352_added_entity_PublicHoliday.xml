@@ -8,26 +8,34 @@
 
 
     <!--
-        Added the entity OfficeWeekday.
+        Added the entity PublicHoliday.
     -->
-    <changeSet id="20190902135648-1" author="jhipster">
-        <createTable tableName="adm_office_weekday" remarks="Week working day.">
+    <changeSet id="20190911040352-1" author="jhipster">
+        <createTable tableName="adm_public_holiday" remarks="Public holiday.">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="office_id" type="integer">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="cstd_weekworking_day" type="varchar(40)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="start_date" type="date">
+            <column name="cstd_holiday_types" type="varchar(40)">
                 <constraints nullable="true" />
             </column>
 
-            <column name="end_date" type="date">
+            <column name="description" type="varchar(70)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="working_flag" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="country_wide" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cc_version" type="integer" remarks="Version to control concurrency">
                 <constraints nullable="true" />
             </column>
 
@@ -36,7 +44,7 @@
 
     </changeSet>
 
-    <changeSet id="20190902135648-1-relations" author="jhipster">
+    <changeSet id="20190911040352-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
@@ -49,16 +57,18 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20190902135648-1-data" author="jhipster" context="faker">
+    <changeSet id="20190911040352-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/data/adm_office_weekday.csv"
+                  file="config/liquibase/data/adm_public_holiday.csv"
                   separator=";"
-                  tableName="adm_office_weekday">
+                  tableName="adm_public_holiday">
             <column name="id" type="numeric"/>
-            <column name="office_id" type="numeric"/>
-            <column name="cstd_weekworking_day" type="string"/>
-            <column name="start_date" type="date"/>
-            <column name="end_date" type="date"/>
+            <column name="cstd_holiday_types" type="string"/>
+            <column name="description" type="string"/>
+            <column name="date" type="date"/>
+            <column name="working_flag" type="boolean"/>
+            <column name="country_wide" type="boolean"/>
+            <column name="cc_version" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

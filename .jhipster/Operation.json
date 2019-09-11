@@ -37,7 +37,7 @@
             "otherEntityField": "name"
         }
     ],
-    "changelogDate": "20190905084518",
+    "changelogDate": "20190911040158",
     "entityTableName": "cmn_operation",
     "dto": "no",
     "pagination": "infinite-scroll",

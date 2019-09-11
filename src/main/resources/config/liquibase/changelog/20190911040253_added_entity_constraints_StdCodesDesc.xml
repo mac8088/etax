@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity StdCodesDesc.
     -->
-    <changeSet id="20190828135618-2" author="jhipster">
+    <changeSet id="20190911040253-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="std_codes_id"
                                  baseTableName="std_codes_desc"

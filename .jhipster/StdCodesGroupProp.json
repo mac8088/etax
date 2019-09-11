@@ -82,13 +82,13 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190910081912",
+    "changelogDate": "20190911040254",
     "javadoc": "The StdCodesGroupProp entity.\nall default stardard code properties base on group",
     "entityTableName": "std_codes_group_prop",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

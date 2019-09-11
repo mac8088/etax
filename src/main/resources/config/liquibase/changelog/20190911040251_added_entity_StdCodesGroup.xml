@@ -10,7 +10,7 @@
     <!--
         Added the entity StdCodesGroup.
     -->
-    <changeSet id="20190828135619-1" author="jhipster">
+    <changeSet id="20190911040251-1" author="jhipster">
         <createTable tableName="std_codes_group" remarks="The StdCodesGroup entity. This table holds the definition and characteristics of the groups of standard codes used throughout e-TAX. Code groups represent lists of elements. Data in this table cannot be modified by end users.">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -68,7 +68,7 @@
 
     </changeSet>
 
-    <changeSet id="20190828135619-1-relations" author="jhipster">
+    <changeSet id="20190911040251-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
@@ -81,7 +81,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20190828135619-1-data" author="jhipster" context="faker">
+    <changeSet id="20190911040251-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/data/std_codes_group.csv"
                   separator=";"

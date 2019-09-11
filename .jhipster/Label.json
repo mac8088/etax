@@ -21,7 +21,7 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20190905084517",
+    "changelogDate": "20190911040157",
     "entityTableName": "cmn_label",
     "dto": "no",
     "pagination": "pager",

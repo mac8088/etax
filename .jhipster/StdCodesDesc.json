@@ -72,7 +72,7 @@
             "otherEntityField": "internalCode"
         }
     ],
-    "changelogDate": "20190905062623",
+    "changelogDate": "20190911040253",
     "javadoc": "The StdCodesDesc entity.\nMultilingual descriptions of the codes.",
     "entityTableName": "std_codes_desc",
     "dto": "no",

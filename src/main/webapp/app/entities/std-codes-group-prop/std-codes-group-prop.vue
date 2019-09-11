@@ -24,23 +24,23 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.groupCode')">Group Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.propCode')">Prop Code</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.propDesc')">Prop Desc</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.startDate')">Start Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.endDate')">End Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.propType')">Prop Type</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.propMdtr')">Prop Mdtr</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueDate')">Dflt Value Date</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueString')">Dflt Value String</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueBool')">Dflt Value Bool</span></th>
-                    <th><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueNumber')">Dflt Value Number</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('groupCode')"><span v-text="$t('etaxApp.stdCodesGroupProp.groupCode')">Group Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('propCode')"><span v-text="$t('etaxApp.stdCodesGroupProp.propCode')">Prop Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('propDesc')"><span v-text="$t('etaxApp.stdCodesGroupProp.propDesc')">Prop Desc</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('startDate')"><span v-text="$t('etaxApp.stdCodesGroupProp.startDate')">Start Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('endDate')"><span v-text="$t('etaxApp.stdCodesGroupProp.endDate')">End Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('propType')"><span v-text="$t('etaxApp.stdCodesGroupProp.propType')">Prop Type</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('propMdtr')"><span v-text="$t('etaxApp.stdCodesGroupProp.propMdtr')">Prop Mdtr</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('dfltValueDate')"><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueDate')">Dflt Value Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('dfltValueString')"><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueString')">Dflt Value String</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('dfltValueBool')"><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueBool')">Dflt Value Bool</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('dfltValueNumber')"><span v-text="$t('etaxApp.stdCodesGroupProp.dfltValueNumber')">Dflt Value Number</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="stdCodesGroupProp in stdCodesGroupProps"
+                <tr v-for="stdCodesGroupProp of orderBy(stdCodesGroupProps, propOrder, reverse === true ? 1 : -1)"
                     :key="stdCodesGroupProp.id">
                     <td>
                         <router-link :to="{name: 'StdCodesGroupPropView', params: {stdCodesGroupPropId: stdCodesGroupProp.id}}">{{stdCodesGroupProp.id}}</router-link>

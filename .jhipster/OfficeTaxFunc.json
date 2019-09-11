@@ -28,7 +28,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190905091740",
+    "changelogDate": "20190911040356",
     "javadoc": "This entity stores relationships between Tax offices and functional offices.",
     "entityTableName": "adm_office_tax_func",
     "dto": "no",

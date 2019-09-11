@@ -85,14 +85,6 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-stdCodesProp" v-text="$t('entity.action.delete')" v-on:click="removeStdCodesProp()">Delete</button>
             </div>
         </b-modal>
-        <div v-if="stdCodesProps && stdCodesProps.length">
-            <div class="row justify-content-center">
-                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
-            </div>
-            <div class="row justify-content-center">
-                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
-            </div>
-        </div>
     </div>
 </template>
 

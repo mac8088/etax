@@ -103,7 +103,7 @@
             "relationshipName": "stdCodes"
         }
     ],
-    "changelogDate": "20190905062621",
+    "changelogDate": "20190911040251",
     "javadoc": "The StdCodesGroup entity.\nThis table holds the definition and characteristics of the groups of standard codes used throughout e-TAX.\nCode groups represent lists of elements. Data in this table cannot be modified by end users.",
     "entityTableName": "std_codes_group",
     "dto": "no",

@@ -31,7 +31,7 @@
             "otherEntityField": "login"
         }
     ],
-    "changelogDate": "20190905084516",
+    "changelogDate": "20190911040156",
     "entityTableName": "cmn_bank_account",
     "dto": "no",
     "pagination": "pagination",

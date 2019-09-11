@@ -33,7 +33,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190905091738",
+    "changelogDate": "20190911040354",
     "javadoc": "The relationship of Parent office and its children.",
     "entityTableName": "adm_office_relationship",
     "dto": "no",

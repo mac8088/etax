@@ -43,6 +43,12 @@ const OperationUpdate = () => import('../entities/operation/operation-update.vue
 // prettier-ignore
 const OperationDetails = () => import('../entities/operation/operation-details.vue');
 // prettier-ignore
+const StdCodesGroup = () => import('../entities/std-codes-group/std-codes-group.vue');
+// prettier-ignore
+const StdCodesGroupUpdate = () => import('../entities/std-codes-group/std-codes-group-update.vue');
+// prettier-ignore
+const StdCodesGroupDetails = () => import('../entities/std-codes-group/std-codes-group-details.vue');
+// prettier-ignore
 const StdCodes = () => import('../entities/std-codes/std-codes.vue');
 // prettier-ignore
 const StdCodesUpdate = () => import('../entities/std-codes/std-codes-update.vue');
@@ -55,23 +61,17 @@ const StdCodesDescUpdate = () => import('../entities/std-codes-desc/std-codes-de
 // prettier-ignore
 const StdCodesDescDetails = () => import('../entities/std-codes-desc/std-codes-desc-details.vue');
 // prettier-ignore
-const StdCodesGroup = () => import('../entities/std-codes-group/std-codes-group.vue');
+const StdCodesGroupProp = () => import('../entities/std-codes-group-prop/std-codes-group-prop.vue');
 // prettier-ignore
-const StdCodesGroupUpdate = () => import('../entities/std-codes-group/std-codes-group-update.vue');
+const StdCodesGroupPropUpdate = () => import('../entities/std-codes-group-prop/std-codes-group-prop-update.vue');
 // prettier-ignore
-const StdCodesGroupDetails = () => import('../entities/std-codes-group/std-codes-group-details.vue');
+const StdCodesGroupPropDetails = () => import('../entities/std-codes-group-prop/std-codes-group-prop-details.vue');
 // prettier-ignore
 const StdCodesProp = () => import('../entities/std-codes-prop/std-codes-prop.vue');
 // prettier-ignore
 const StdCodesPropUpdate = () => import('../entities/std-codes-prop/std-codes-prop-update.vue');
 // prettier-ignore
 const StdCodesPropDetails = () => import('../entities/std-codes-prop/std-codes-prop-details.vue');
-// prettier-ignore
-const StdCodesGroupProp = () => import('../entities/std-codes-group-prop/std-codes-group-prop.vue');
-// prettier-ignore
-const StdCodesGroupPropUpdate = () => import('../entities/std-codes-group-prop/std-codes-group-prop-update.vue');
-// prettier-ignore
-const StdCodesGroupPropDetails = () => import('../entities/std-codes-group-prop/std-codes-group-prop-details.vue');
 // prettier-ignore
 const ExchangeRate = () => import('../entities/exchange-rate/exchange-rate.vue');
 // prettier-ignore
@@ -314,6 +314,31 @@ export default new Router({
     }
     ,
     {
+      path: '/entity/std-codes-group',
+      name: 'StdCodesGroup',
+      component: StdCodesGroup,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-group/new',
+      name: 'StdCodesGroupCreate',
+      component: StdCodesGroupUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-group/:stdCodesGroupId/edit',
+      name: 'StdCodesGroupEdit',
+      component: StdCodesGroupUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/std-codes-group/:stdCodesGroupId/view',
+      name: 'StdCodesGroupView',
+      component: StdCodesGroupDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
       path: '/entity/std-codes',
       name: 'StdCodes',
       component: StdCodes,
@@ -364,27 +389,27 @@ export default new Router({
     }
     ,
     {
-      path: '/entity/std-codes-group',
-      name: 'StdCodesGroup',
-      component: StdCodesGroup,
+      path: '/entity/std-codes-group-prop',
+      name: 'StdCodesGroupProp',
+      component: StdCodesGroupProp,
       meta: { authorities: ['ROLE_USER'] }
     },
     {
-      path: '/entity/std-codes-group/new',
-      name: 'StdCodesGroupCreate',
-      component: StdCodesGroupUpdate,
+      path: '/entity/std-codes-group-prop/new',
+      name: 'StdCodesGroupPropCreate',
+      component: StdCodesGroupPropUpdate,
       meta: { authorities: ['ROLE_USER'] }
     },
     {
-      path: '/entity/std-codes-group/:stdCodesGroupId/edit',
-      name: 'StdCodesGroupEdit',
-      component: StdCodesGroupUpdate,
+      path: '/entity/std-codes-group-prop/:stdCodesGroupPropId/edit',
+      name: 'StdCodesGroupPropEdit',
+      component: StdCodesGroupPropUpdate,
       meta: { authorities: ['ROLE_USER'] }
     },
     {
-      path: '/entity/std-codes-group/:stdCodesGroupId/view',
-      name: 'StdCodesGroupView',
-      component: StdCodesGroupDetails,
+      path: '/entity/std-codes-group-prop/:stdCodesGroupPropId/view',
+      name: 'StdCodesGroupPropView',
+      component: StdCodesGroupPropDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     ,
@@ -410,31 +435,6 @@ export default new Router({
       path: '/entity/std-codes-prop/:stdCodesPropId/view',
       name: 'StdCodesPropView',
       component: StdCodesPropDetails,
-      meta: { authorities: ['ROLE_USER'] }
-    }
-    ,
-    {
-      path: '/entity/std-codes-group-prop',
-      name: 'StdCodesGroupProp',
-      component: StdCodesGroupProp,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/std-codes-group-prop/new',
-      name: 'StdCodesGroupPropCreate',
-      component: StdCodesGroupPropUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/std-codes-group-prop/:stdCodesGroupPropId/edit',
-      name: 'StdCodesGroupPropEdit',
-      component: StdCodesGroupPropUpdate,
-      meta: { authorities: ['ROLE_USER'] }
-    },
-    {
-      path: '/entity/std-codes-group-prop/:stdCodesGroupPropId/view',
-      name: 'StdCodesGroupPropView',
-      component: StdCodesGroupPropDetails,
       meta: { authorities: ['ROLE_USER'] }
     }
     ,

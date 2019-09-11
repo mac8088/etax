@@ -47,7 +47,7 @@
         }
     ],
     "relationships": [],
-    "changelogDate": "20190905091735",
+    "changelogDate": "20190911040351",
     "javadoc": "Exchange Rate.",
     "entityTableName": "adm_exchange_rate",
     "dto": "no",
