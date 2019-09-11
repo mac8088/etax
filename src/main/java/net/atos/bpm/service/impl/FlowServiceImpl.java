@@ -1,7 +1,5 @@
 package net.atos.bpm.service.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,7 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import org.apache.commons.io.IOUtils;
@@ -36,13 +33,13 @@ import org.flowable.task.api.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 //import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import net.atos.bpm.service.FlowServiceIF;
-
-
 
 //@Primary
 @Service
@@ -70,15 +67,13 @@ public class FlowServiceImpl implements FlowServiceIF {
 		Map<String, Object> res = new HashMap<>();
 		// 解析BPMN模型看是否成功
 		XMLStreamReader reader = null;
-		InputStream inputStream = null;
 		try {
 
-			File file = new File(filePath);
+			Resource cpr = new ClassPathResource(filePath);
 
 			// 读入流程文件
-			inputStream = new FileInputStream(file);
 			XMLInputFactory factory = XMLInputFactory.newInstance();
-			reader = factory.createXMLStreamReader(inputStream);
+			reader = factory.createXMLStreamReader(cpr.getInputStream());
 
 			// /把文件转换为BPMNModel来校验
 			BpmnXMLConverter bpmnXMLConverter = new BpmnXMLConverter();
@@ -92,17 +87,16 @@ public class FlowServiceImpl implements FlowServiceIF {
 
 			res.put("processes", processes);
 			curProcess = processes.get(0);
-			inputStream = new FileInputStream(file);
+	
 
 			// 通过创建DeploymentBuilder来完成部署
 			DeploymentBuilder deploymentBuilder = null;
-			deploymentBuilder = repositoryService.createDeployment().name("TEST_FLOW").addInputStream(file.getName(),
-					inputStream);
+			deploymentBuilder = repositoryService.createDeployment().name("TEST_FLOW").addInputStream(filePath, cpr.getInputStream());
 
 			Deployment deployment = deploymentBuilder.deploy();
 			res.put("deployment", deployment);
 
-			log.warn("部署流程 file: " + file.getName());
+			log.warn("部署流程 file: " + filePath);
 			log.warn("部署流程 name: " + curProcess.getName() + " / " + curProcess.getId() + " --> " + deployment);
 
 			return res;
@@ -112,7 +106,7 @@ public class FlowServiceImpl implements FlowServiceIF {
 		} finally {
 			try {
 				reader.close();
-			} catch (XMLStreamException e) {
+			} catch (Exception e) {
 				log.error("关闭异常", e);
 			}
 		}

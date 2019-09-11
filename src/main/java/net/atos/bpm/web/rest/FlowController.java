@@ -15,8 +15,6 @@ import org.flowable.engine.runtime.ProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.atos.bpm.service.FlowServiceIF;
 
+/**
+ * REST controller for 用来测试流程是否启动成功
+ */
 @Controller
 @RequestMapping(value = "flow")
-// 添加一个controller用来测试流程是否启动成功
 public class FlowController {
 
 	private static final Logger log = LoggerFactory.getLogger(FlowController.class);
@@ -42,11 +42,7 @@ public class FlowController {
 		Map<String, Object> data = new HashMap<>();
 
 		// 从类路径中加载, 测试BPMN模型2.bpmn 使用了assignee
-		Resource cpr = new ClassPathResource("测试BPMN模型.bpmn20.xml");
-		String flowPath = cpr.getFile().getCanonicalPath();
-		log.info("the file path: " + flowPath);
-
-		Map<String, Object> createRes = flowService.createFlow(flowPath);
+		Map<String, Object> createRes = flowService.createFlow("测试BPMN模型.bpmn20.xml");
 		if (null == createRes) {
 			res.put("res", "0");
 			res.put("msg", "创建流程失败");

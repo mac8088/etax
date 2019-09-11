@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST controller for expose the static business process information. 
+ */
 @RestController
 @RequestMapping("/api")
 public class DefinitionsController {
