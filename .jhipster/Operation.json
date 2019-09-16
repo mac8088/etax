@@ -37,12 +37,12 @@
             "otherEntityField": "name"
         }
     ],
-    "changelogDate": "20190813142845",
-    "entityTableName": "operation",
+    "changelogDate": "20190911040158",
+    "entityTableName": "cmn_operation",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

@@ -44,6 +44,7 @@ spring:
       hibernate.jdbc.time_zone: UTC
   liquibase:
     contexts: test
+    enabled: true
   mail:
     host: localhost
   main:
@@ -85,7 +86,7 @@ jhipster:
     use-json-format: true # By default, logs are in Json format
     # To test logstash appender
     logstash:
-      enabled: true
+      enabled: false
       host: localhost
       port: 5000
       queue-size: 512

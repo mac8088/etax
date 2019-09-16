@@ -21,10 +21,10 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20190813142844",
-    "entityTableName": "label",
+    "changelogDate": "20190911040157",
+    "entityTableName": "cmn_label",
     "dto": "no",
-    "pagination": "no",
+    "pagination": "pager",
     "service": "no",
     "jpaMetamodelFiltering": false,
     "fluentMethods": true,

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <!--
+        Added the entity Office.
+    -->
+    <changeSet id="20190911040353-1" author="jhipster">
+        <createTable tableName="adm_office" remarks="The Office data segment holds the information of all the Tax Authority&apos;s offices that access the e-tax system.">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cstd_office_type" type="varchar(40)" remarks="STD[OFFICE_TYPE]">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="name" type="varchar(50)" remarks="Office name">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="cstd_classifier_code" type="varchar(40)" remarks="STD[CLASSIFIER_CODE]">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="effective_date" type="datetime" remarks="Effective date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="expiry_date" type="datetime" remarks="Expiry date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="phone" type="varchar(50)" remarks="Office telephone">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fax" type="varchar(50)" remarks="Office fax number">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="stl" type="varchar(100)" remarks="Office manager for signature">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mng_office" type="integer" remarks="Foreign key to another office that manages users of this office, It must have office type that allows Office Administrator(ADM-CFG: Allowed Users in Offices)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="physical_adr" type="${clobType}" remarks="Physical Address">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="postal_aadr" type="${clobType}" remarks="Postal Address">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pin_code" type="varchar(15)" remarks="Postal Identification Number">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cstd_week_working_day" type="varchar(40)" remarks="Effective date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="office_code" type="varchar(7)" remarks="Unique Office codee">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cstd_office_sub_type" type="varchar(40)" remarks="STD[OFFICE_SUB_TYPE]">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cstd_office_func_type" type="varchar(40)" remarks="STD[OFFICE_FUNC_TYPE],functional office type">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cc_version" type="integer" remarks="Version to control concurrency">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+
+        <dropDefaultValue tableName="adm_office" columnName="effective_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="adm_office" columnName="expiry_date" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="20190911040353-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20190911040353-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/adm_office.csv"
+                  separator=";"
+                  tableName="adm_office">
+            <column name="id" type="numeric"/>
+            <column name="cstd_office_type" type="string"/>
+            <column name="name" type="string"/>
+            <column name="cstd_classifier_code" type="string"/>
+            <column name="effective_date" type="datetime"/>
+            <column name="expiry_date" type="datetime"/>
+            <column name="phone" type="string"/>
+            <column name="fax" type="string"/>
+            <column name="stl" type="string"/>
+            <column name="mng_office" type="numeric"/>
+            <column name="physical_adr" type="clob"/>
+            <column name="postal_aadr" type="clob"/>
+            <column name="pin_code" type="string"/>
+            <column name="cstd_week_working_day" type="string"/>
+            <column name="office_code" type="string"/>
+            <column name="cstd_office_sub_type" type="string"/>
+            <column name="cstd_office_func_type" type="string"/>
+            <column name="cc_version" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,14 +1,23 @@
 package net.atos.etax.web.rest;
 
 import net.atos.etax.domain.Operation;
-import net.atos.etax.repository.OperationRepository;
+import net.atos.etax.service.OperationService;
 import net.atos.etax.web.rest.errors.BadRequestAlertException;
+import net.atos.etax.service.dto.OperationCriteria;
+import net.atos.etax.service.OperationQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +42,13 @@ public class OperationResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final OperationRepository operationRepository;
+    private final OperationService operationService;
 
-    public OperationResource(OperationRepository operationRepository) {
-        this.operationRepository = operationRepository;
+    private final OperationQueryService operationQueryService;
+
+    public OperationResource(OperationService operationService, OperationQueryService operationQueryService) {
+        this.operationService = operationService;
+        this.operationQueryService = operationQueryService;
     }
 
     /**
@@ -52,7 +64,7 @@ public class OperationResource {
         if (operation.getId() != null) {
             throw new BadRequestAlertException("A new operation cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Operation result = operationRepository.save(operation);
+        Operation result = operationService.save(operation);
         return ResponseEntity.created(new URI("/api/operations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -73,7 +85,7 @@ public class OperationResource {
         if (operation.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Operation result = operationRepository.save(operation);
+        Operation result = operationService.save(operation);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, operation.getId().toString()))
             .body(result);
@@ -82,13 +94,30 @@ public class OperationResource {
     /**
      * {@code GET  /operations} : get all the operations.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param pageable the pagination information.
+     * @param queryParams a {@link MultiValueMap} query parameters.
+     * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of operations in body.
      */
     @GetMapping("/operations")
-    public List<Operation> getAllOperations(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get all Operations");
-        return operationRepository.findAllWithEagerRelationships();
+    public ResponseEntity<List<Operation>> getAllOperations(OperationCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get Operations by criteria: {}", criteria);
+        Page<Operation> page = operationQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * {@code GET  /operations/count} : count all the operations.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/operations/count")
+    public ResponseEntity<Long> countOperations(OperationCriteria criteria) {
+        log.debug("REST request to count Operations by criteria: {}", criteria);
+        return ResponseEntity.ok().body(operationQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -100,7 +129,7 @@ public class OperationResource {
     @GetMapping("/operations/{id}")
     public ResponseEntity<Operation> getOperation(@PathVariable Long id) {
         log.debug("REST request to get Operation : {}", id);
-        Optional<Operation> operation = operationRepository.findOneWithEagerRelationships(id);
+        Optional<Operation> operation = operationService.findOne(id);
         return ResponseUtil.wrapOrNotFound(operation);
     }
 
@@ -113,7 +142,7 @@ public class OperationResource {
     @DeleteMapping("/operations/{id}")
     public ResponseEntity<Void> deleteOperation(@PathVariable Long id) {
         log.debug("REST request to delete Operation : {}", id);
-        operationRepository.deleteById(id);
+        operationService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

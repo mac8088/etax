@@ -14,7 +14,7 @@ import java.util.Set;
  * A Label.
  */
 @Entity
-@Table(name = "label")
+@Table(name = "cmn_label")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Label implements Serializable {
 

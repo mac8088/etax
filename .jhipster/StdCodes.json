@@ -1,0 +1,115 @@
+{
+    "name": "StdCodes",
+    "fields": [
+        {
+            "fieldName": "groupCode",
+            "javadoc": "Code of the group of codes in STD_CODES_GROUP.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "internalCode",
+            "javadoc": "Identifies uniquely an element in a group. Unlike external codes, internal codes are not subject to translation and can therefore be used in programs.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "startDate",
+            "javadoc": "Date at which the code becomes valid (inclusive).",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "javadoc": "Date at which the validity of the code ends. The code is valid on that date until midnight (hours are truncated). Must be greater than (or equal to) START_DATE.",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "parentInternalCode",
+            "javadoc": "Reference of the parent code in multi-level lists. Used together with STD_CODES_GROUP.PARENT_GROUP_CODE to find the code in STD_CODES(GROUP_CODE, INTERNAL_CODE).",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "comments",
+            "javadoc": "Internal comments. Optional. Not shown to end-users.",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "secLevel",
+            "javadoc": "Security level.",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "max"
+            ],
+            "fieldValidateRulesMax": 99
+        },
+        {
+            "fieldName": "codeValueDate",
+            "javadoc": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''D'' (Date).",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "codeValueString",
+            "javadoc": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''S'' (String).",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "codeValueBool",
+            "javadoc": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''B'' (Boolean).",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "codeValueNumber",
+            "javadoc": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is ''N'' (Number)",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "stdCodesDesc",
+            "otherEntityRelationshipName": "stdCodes",
+            "relationshipName": "stdCodesDesc"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "stdCodesGroup",
+            "otherEntityRelationshipName": "stdCodes",
+            "relationshipName": "stdCodesGroup",
+            "otherEntityField": "groupCode"
+        }
+    ],
+    "changelogDate": "20190911040252",
+    "javadoc": "The StdCodes entity.\nHolds the list of elements in a group. Groups are defined in STD_CODES_GROUP.\nThe multilingual description of elements is stored in STD_CODE_DESC.\nData in this table can be modified by end users only when STD_CODES_GROUP.SYSTEM_IND = ''N'' for this group,\ni.e. it is not a system group.",
+    "entityTableName": "std_codes",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

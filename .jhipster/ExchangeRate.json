@@ -1,0 +1,60 @@
+{
+    "name": "ExchangeRate",
+    "fields": [
+        {
+            "fieldName": "cstdCurrencyA",
+            "javadoc": "STD[CURRENCY], Source currency, for conversion considerations",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdCurrencyB",
+            "javadoc": "STD[CURRENCY], Source currency, for conversion considerations",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "rate",
+            "javadoc": "Rate to apply (multiply) to the source currency amount to",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "ccVersion",
+            "javadoc": "Version to control concurrency",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190911040351",
+    "javadoc": "Exchange Rate.",
+    "entityTableName": "adm_exchange_rate",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

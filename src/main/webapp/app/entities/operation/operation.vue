@@ -24,17 +24,16 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.operation.date')">Date</span></th>
-                    <th><span v-text="$t('etaxApp.operation.description')">Description</span></th>
-                    <th><span v-text="$t('etaxApp.operation.amount')">Amount</span></th>
-                    <th><span v-text="$t('etaxApp.operation.label')">Label</span></th>
-                    <th><span v-text="$t('etaxApp.operation.bankAccount')">Bank Account</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('date')"><span v-text="$t('etaxApp.operation.date')">Date</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('description')"><span v-text="$t('etaxApp.operation.description')">Description</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('amount')"><span v-text="$t('etaxApp.operation.amount')">Amount</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('bankAccount.name')"><span v-text="$t('etaxApp.operation.bankAccount')">Bank Account</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="operation in operations"
+                <tr v-for="operation of orderBy(operations, propOrder, reverse === true ? 1 : -1)"
                     :key="operation.id">
                     <td>
                         <router-link :to="{name: 'OperationView', params: {operationId: operation.id}}">{{operation.id}}</router-link>
@@ -42,11 +41,6 @@
                     <td>{{operation.date | formatDate}}</td>
                     <td>{{operation.description}}</td>
                     <td>{{operation.amount}}</td>
-                    <td>
-                        <span v-for="(label, i) in operation.labels" :key="label.id">{{i > 0 ? ', ' : ''}}
-                            <router-link class="form-control-static" :to="{name: 'LabelView', params: {labelId: label.id}}">{{label.label}}</router-link>
-                        </span>
-                    </td>
                     <td>
                         <div v-if="operation.bankAccount">
                             <router-link :to="{name: 'BankAccountView', params: {bankAccountId: operation.bankAccount.id}}">{{operation.bankAccount.name}}</router-link>

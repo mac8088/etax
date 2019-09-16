@@ -31,12 +31,12 @@
             "otherEntityField": "login"
         }
     ],
-    "changelogDate": "20190813142843",
-    "entityTableName": "bank_account",
+    "changelogDate": "20190911040156",
+    "entityTableName": "cmn_bank_account",
     "dto": "no",
-    "pagination": "no",
-    "service": "no",
-    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
     "fluentMethods": true,
     "clientRootFolder": "",
     "applications": "*"

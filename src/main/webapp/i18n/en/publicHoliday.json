@@ -1,0 +1,30 @@
+{
+  "etaxApp": {
+    "publicHoliday": {
+      "home": {
+        "title": "Public Holidays",
+        "createLabel": "Create a new Public Holiday",
+        "createOrEditLabel": "Create or edit a Public Holiday",
+        "notFound": "No Public Holiday found"
+      },
+      "created": "A new Public Holiday is created with identifier {{ param }}",
+      "updated": "A Public Holiday is updated with identifier {{ param }}",
+      "deleted": "A Public Holiday is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Public Holiday {{ id }}?"
+      },
+      "detail": {
+        "title": "Public Holiday"
+      },
+      "cstdHolidayTypes": "Cstd Holiday Types",
+      "description": "Description",
+      "date": "Date",
+      "workingFlag": "Working Flag",
+      "countryWide": "Country Wide",
+      "ccVersion": "Cc Version",
+      "help": {
+        "ccVersion": "Version to control concurrency"
+      }
+    }
+  }
+}

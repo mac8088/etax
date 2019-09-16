@@ -1,0 +1,24 @@
+{
+  "etaxApp": {
+    "officeAreaCode": {
+      "home": {
+        "title": "Office Area Codes",
+        "createLabel": "Create a new Office Area Code",
+        "createOrEditLabel": "Create or edit a Office Area Code",
+        "notFound": "No Office Area Code found"
+      },
+      "created": "A new Office Area Code is created with identifier {{ param }}",
+      "updated": "A Office Area Code is updated with identifier {{ param }}",
+      "deleted": "A Office Area Code is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Office Area Code {{ id }}?"
+      },
+      "detail": {
+        "title": "Office Area Code"
+      },
+      "officeId": "Office Id",
+      "fromPin": "From Pin",
+      "toPin": "To Pin"
+    }
+  }
+}

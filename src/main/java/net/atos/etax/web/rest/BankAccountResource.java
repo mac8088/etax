@@ -1,14 +1,23 @@
 package net.atos.etax.web.rest;
 
 import net.atos.etax.domain.BankAccount;
-import net.atos.etax.repository.BankAccountRepository;
+import net.atos.etax.service.BankAccountService;
 import net.atos.etax.web.rest.errors.BadRequestAlertException;
+import net.atos.etax.service.dto.BankAccountCriteria;
+import net.atos.etax.service.BankAccountQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +42,13 @@ public class BankAccountResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final BankAccountRepository bankAccountRepository;
+    private final BankAccountService bankAccountService;
 
-    public BankAccountResource(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
+    private final BankAccountQueryService bankAccountQueryService;
+
+    public BankAccountResource(BankAccountService bankAccountService, BankAccountQueryService bankAccountQueryService) {
+        this.bankAccountService = bankAccountService;
+        this.bankAccountQueryService = bankAccountQueryService;
     }
 
     /**
@@ -52,7 +64,7 @@ public class BankAccountResource {
         if (bankAccount.getId() != null) {
             throw new BadRequestAlertException("A new bankAccount cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        BankAccount result = bankAccountRepository.save(bankAccount);
+        BankAccount result = bankAccountService.save(bankAccount);
         return ResponseEntity.created(new URI("/api/bank-accounts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -73,7 +85,7 @@ public class BankAccountResource {
         if (bankAccount.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        BankAccount result = bankAccountRepository.save(bankAccount);
+        BankAccount result = bankAccountService.save(bankAccount);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, bankAccount.getId().toString()))
             .body(result);
@@ -82,12 +94,30 @@ public class BankAccountResource {
     /**
      * {@code GET  /bank-accounts} : get all the bankAccounts.
      *
+     * @param pageable the pagination information.
+     * @param queryParams a {@link MultiValueMap} query parameters.
+     * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of bankAccounts in body.
      */
     @GetMapping("/bank-accounts")
-    public List<BankAccount> getAllBankAccounts() {
-        log.debug("REST request to get all BankAccounts");
-        return bankAccountRepository.findAll();
+    public ResponseEntity<List<BankAccount>> getAllBankAccounts(BankAccountCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get BankAccounts by criteria: {}", criteria);
+        Page<BankAccount> page = bankAccountQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+    * {@code GET  /bank-accounts/count} : count all the bankAccounts.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/bank-accounts/count")
+    public ResponseEntity<Long> countBankAccounts(BankAccountCriteria criteria) {
+        log.debug("REST request to count BankAccounts by criteria: {}", criteria);
+        return ResponseEntity.ok().body(bankAccountQueryService.countByCriteria(criteria));
     }
 
     /**
@@ -99,7 +129,7 @@ public class BankAccountResource {
     @GetMapping("/bank-accounts/{id}")
     public ResponseEntity<BankAccount> getBankAccount(@PathVariable Long id) {
         log.debug("REST request to get BankAccount : {}", id);
-        Optional<BankAccount> bankAccount = bankAccountRepository.findById(id);
+        Optional<BankAccount> bankAccount = bankAccountService.findOne(id);
         return ResponseUtil.wrapOrNotFound(bankAccount);
     }
 
@@ -112,7 +142,7 @@ public class BankAccountResource {
     @DeleteMapping("/bank-accounts/{id}")
     public ResponseEntity<Void> deleteBankAccount(@PathVariable Long id) {
         log.debug("REST request to delete BankAccount : {}", id);
-        bankAccountRepository.deleteById(id);
+        bankAccountService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
  * Spring Data  repository for the Operation entity.
  */
 @Repository
-public interface OperationRepository extends JpaRepository<Operation, Long> {
+public interface OperationRepository extends JpaRepository<Operation, Long>, JpaSpecificationExecutor<Operation> {
 
     @Query(value = "select distinct operation from Operation operation left join fetch operation.labels",
         countQuery = "select count(distinct operation) from Operation operation")

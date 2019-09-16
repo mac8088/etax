@@ -11,7 +11,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface BankAccountRepository extends JpaRepository<BankAccount, Long> {
+public interface BankAccountRepository extends JpaRepository<BankAccount, Long>, JpaSpecificationExecutor<BankAccount> {
 
     @Query("select bankAccount from BankAccount bankAccount where bankAccount.user.login = ?#{principal.username}")
     List<BankAccount> findByUserIsCurrentUser();

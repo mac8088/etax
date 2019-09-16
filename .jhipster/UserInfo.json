@@ -1,0 +1,243 @@
+{
+    "name": "UserInfo",
+    "fields": [
+        {
+            "fieldName": "cstdAdmSection",
+            "javadoc": "STD[ADM_SECTION], name of the administrative Section this user belongs to",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdSecurityLevel",
+            "javadoc": "STD[SECURITY_LEVEL], ID of this user\\'s Security Level",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdUserType",
+            "javadoc": "STD[USER_TYPE], type of user",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "description",
+            "javadoc": "General User Description - Free Format",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "middleName",
+            "javadoc": "Middle name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "gender",
+            "javadoc": "STD[GENDER], user gender",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "phoneNum",
+            "javadoc": "Phone number for user",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "faxNum",
+            "javadoc": "Fax number for user",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 50
+        },
+        {
+            "fieldName": "effiectiveDate",
+            "javadoc": "Date from which the user account is active, i.e. the user can login",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "expiryDate",
+            "javadoc": "Date after which the user account is no longer active, i.e. the user can no longer login",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "blocked",
+            "javadoc": "Indicates whether this user is blocked after 3 failed login attemptsn",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "blockedReason",
+            "javadoc": "Blocked reason",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "forcedPwdChange",
+            "javadoc": "Indicates user is forced to change password at login(changed by administrator)",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "cstdTitles",
+            "javadoc": "STD[TITILES], Title to address the user",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdStatus",
+            "javadoc": "STD[STATUS]",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdAdmDivsison",
+            "javadoc": "STD[ADM_DIVISON]",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "loginStatus",
+            "javadoc": "Login status",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "loginTime",
+            "javadoc": "Login time",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "attempt",
+            "javadoc": "Times of password error when logon attempts",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "max",
+                "required"
+            ],
+            "fieldValidateRulesMax": 3
+        },
+        {
+            "fieldName": "needApprove",
+            "javadoc": "Flag indicates if it need to approve the change of user profiles",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "logoutTime",
+            "javadoc": "Logout time",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "nationalId",
+            "javadoc": "National ID",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required"
+            ],
+            "fieldValidateRulesMaxlength": 10
+        },
+        {
+            "fieldName": "cstdOrganizationGrade",
+            "javadoc": "STD[ORGANIZATION_GRADE], Organizational Grade",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "cstdEmploymentType",
+            "javadoc": "STD[EMPLOYMENT_TYPE], Employment Type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "manuScript",
+            "javadoc": "Manuscript used to XAdES signature",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "ccVersion",
+            "javadoc": "Version to control concurrency",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "userInfo",
+            "relationshipName": "user",
+            "otherEntityField": "login",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190911040358",
+    "javadoc": "The Extension information for setting up and maintaining users.",
+    "entityTableName": "adm_user_info",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

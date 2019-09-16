@@ -1,0 +1,95 @@
+{
+    "name": "StdCodesGroupProp",
+    "fields": [
+        {
+            "fieldName": "groupCode",
+            "javadoc": "Code of the group of codes",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "propCode",
+            "javadoc": "Property code",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "propDesc",
+            "javadoc": "Property description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "startDate",
+            "javadoc": "Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element.",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "javadoc": "Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code.",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "propType",
+            "javadoc": "Type of the prop value Can be one of ''D'' (Date), ''S'' (String), ''N'' (Number) or ''B'' (Boolean).",
+            "fieldType": "ValueTypeIndicator",
+            "fieldValues": "D,S,N,B"
+        },
+        {
+            "fieldName": "propMdtr",
+            "javadoc": "Accessibility of Property: mandatory or not",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N"
+        },
+        {
+            "fieldName": "dfltValueDate",
+            "javadoc": "Default date value for the property with a date property type",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dfltValueString",
+            "javadoc": "Default string value for the property with a string property type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "dfltValueBool",
+            "javadoc": "Default boolean value for the property with a boolean property type",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "dfltValueNumber",
+            "javadoc": "Default numeric value for the property with a numeric property type",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190911040254",
+    "javadoc": "The StdCodesGroupProp entity.\nall default stardard code properties base on group",
+    "entityTableName": "std_codes_group_prop",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -14,11 +14,27 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190813142843_added_entity_BankAccount.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190813142844_added_entity_Label.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190813142845_added_entity_Operation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040156_added_entity_BankAccount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040157_added_entity_Label.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040158_added_entity_Operation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040251_added_entity_StdCodesGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040252_added_entity_StdCodes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040253_added_entity_StdCodesDesc.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040254_added_entity_StdCodesGroupProp.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040255_added_entity_StdCodesProp.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040351_added_entity_ExchangeRate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040352_added_entity_PublicHoliday.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040353_added_entity_Office.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040354_added_entity_OfficeRelationship.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040355_added_entity_OfficeAreaCode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040356_added_entity_OfficeTaxFunc.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040357_added_entity_OfficeWeekday.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040358_added_entity_UserInfo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
-    <include file="config/liquibase/changelog/20190813142843_added_entity_constraints_BankAccount.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190813142845_added_entity_constraints_Operation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040156_added_entity_constraints_BankAccount.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040158_added_entity_constraints_Operation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040252_added_entity_constraints_StdCodes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040253_added_entity_constraints_StdCodesDesc.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190911040358_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

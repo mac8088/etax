@@ -1,0 +1,47 @@
+{
+  "etaxApp": {
+    "stdCodes": {
+      "home": {
+        "title": "Std Codes",
+        "createLabel": "Create a new Std Codes",
+        "createOrEditLabel": "Create or edit a Std Codes",
+        "notFound": "No Std Codes found"
+      },
+      "created": "A new Std Codes is created with identifier {{ param }}",
+      "updated": "A Std Codes is updated with identifier {{ param }}",
+      "deleted": "A Std Codes is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Std Codes {{ id }}?"
+      },
+      "detail": {
+        "title": "Std Codes"
+      },
+      "groupCode": "Group Code",
+      "internalCode": "Internal Code",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "parentInternalCode": "Parent Internal Code",
+      "comments": "Comments",
+      "secLevel": "Sec Level",
+      "codeValueDate": "Code Value Date",
+      "codeValueString": "Code Value String",
+      "codeValueBool": "Code Value Bool",
+      "codeValueNumber": "Code Value Number",
+      "stdCodesDesc": "Std Codes Desc",
+      "stdCodesGroup": "Std Codes Group",
+      "help": {
+        "groupCode": "Code of the group of codes in STD_CODES_GROUP.",
+        "internalCode": "Identifies uniquely an element in a group. Unlike external codes, internal codes are not subject to translation and can therefore be used in programs.",
+        "startDate": "Date at which the code becomes valid (inclusive).",
+        "endDate": "Date at which the validity of the code ends. The code is valid on that date until midnight (hours are truncated). Must be greater than (or equal to) START_DATE.",
+        "parentInternalCode": "Reference of the parent code in multi-level lists. Used together with STD_CODES_GROUP.PARENT_GROUP_CODE to find the code in STD_CODES(GROUP_CODE, INTERNAL_CODE).",
+        "comments": "Internal comments. Optional. Not shown to end-users.",
+        "secLevel": "Security level.",
+        "codeValueDate": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is &#39;&#39;D&#39;&#39; (Date).",
+        "codeValueString": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is &#39;&#39;S&#39;&#39; (String).",
+        "codeValueBool": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is &#39;&#39;B&#39;&#39; (Boolean).",
+        "codeValueNumber": "Value of the element when the type set in STD_CODES_GROUP.VALUE_TYPE is &#39;&#39;N&#39;&#39; (Number)"
+      }
+    }
+  }
+}

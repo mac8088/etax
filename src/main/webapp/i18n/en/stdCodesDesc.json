@@ -1,0 +1,38 @@
+{
+  "etaxApp": {
+    "stdCodesDesc": {
+      "home": {
+        "title": "Std Codes Descs",
+        "createLabel": "Create a new Std Codes Desc",
+        "createOrEditLabel": "Create or edit a Std Codes Desc",
+        "notFound": "No Std Codes Desc found"
+      },
+      "created": "A new Std Codes Desc is created with identifier {{ param }}",
+      "updated": "A Std Codes Desc is updated with identifier {{ param }}",
+      "deleted": "A Std Codes Desc is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Std Codes Desc {{ id }}?"
+      },
+      "detail": {
+        "title": "Std Codes Desc"
+      },
+      "groupCode": "Group Code",
+      "internalCode": "Internal Code",
+      "langCode": "Lang Code",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "externalCode": "External Code",
+      "codeDesc": "Code Desc",
+      "stdCodes": "Std Codes",
+      "help": {
+        "groupCode": "Code of the group of codes in STD_CODES_GROUP.",
+        "internalCode": "Internal code of the element in STD_CODES.",
+        "langCode": "Language of the description.",
+        "startDate": "Date at which the description of the element becomes valid (inclusive). Must be within the validity period of the element.",
+        "endDate": "Date at which the validity of the description ends. Must be greater than START_DATE and within the validity period of the code.",
+        "externalCode": "External code displayed to the user for this language. Used in entry fields next to drop-down lists of values. Used only when STD_CODES_GROUP.EXTERNAL_CODE_REQUIRED = &#39;&#39;Y&#39;&#39;.",
+        "codeDesc": "Multilingual description of the element for this language. Used to populate lists of values."
+      }
+    }
+  }
+}

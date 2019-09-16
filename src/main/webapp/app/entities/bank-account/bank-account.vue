@@ -24,15 +24,15 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th><span v-text="$t('global.field.id')">ID</span></th>
-                    <th><span v-text="$t('etaxApp.bankAccount.name')">Name</span></th>
-                    <th><span v-text="$t('etaxApp.bankAccount.balance')">Balance</span></th>
-                    <th><span v-text="$t('etaxApp.bankAccount.user')">User</span></th>
+                    <th v-on:click="changeOrder('id')"><span v-text="$t('global.field.id')">ID</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('name')"><span v-text="$t('etaxApp.bankAccount.name')">Name</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('balance')"><span v-text="$t('etaxApp.bankAccount.balance')">Balance</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('user.login')"><span v-text="$t('etaxApp.bankAccount.user')">User</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="bankAccount in bankAccounts"
+                <tr v-for="bankAccount of orderBy(bankAccounts, propOrder, reverse === true ? 1 : -1)"
                     :key="bankAccount.id">
                     <td>
                         <router-link :to="{name: 'BankAccountView', params: {bankAccountId: bankAccount.id}}">{{bankAccount.id}}</router-link>
@@ -75,6 +75,14 @@
                 <button type="button" class="btn btn-primary" id="jhi-confirm-delete-bankAccount" v-text="$t('entity.action.delete')" v-on:click="removeBankAccount()">Delete</button>
             </div>
         </b-modal>
+        <div v-if="bankAccounts && bankAccounts.length">
+            <div class="row justify-content-center">
+                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+            </div>
+        </div>
     </div>
 </template>
 

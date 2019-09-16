@@ -16,7 +16,7 @@ import java.util.Set;
  * A Operation.
  */
 @Entity
-@Table(name = "operation")
+@Table(name = "cmn_operation")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Operation implements Serializable {
 
@@ -40,7 +40,7 @@ public class Operation implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "operation_label",
+    @JoinTable(name = "cmn_operation_label",
                joinColumns = @JoinColumn(name = "operation_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "label_id", referencedColumnName = "id"))
     private Set<Label> labels = new HashSet<>();

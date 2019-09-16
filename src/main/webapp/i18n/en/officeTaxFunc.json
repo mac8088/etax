@@ -1,0 +1,25 @@
+{
+  "etaxApp": {
+    "officeTaxFunc": {
+      "home": {
+        "title": "Office Tax Funcs",
+        "createLabel": "Create a new Office Tax Func",
+        "createOrEditLabel": "Create or edit a Office Tax Func",
+        "notFound": "No Office Tax Func found"
+      },
+      "created": "A new Office Tax Func is created with identifier {{ param }}",
+      "updated": "A Office Tax Func is updated with identifier {{ param }}",
+      "deleted": "A Office Tax Func is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Office Tax Func {{ id }}?"
+      },
+      "detail": {
+        "title": "Office Tax Func"
+      },
+      "taxOfficeId": "Tax Office Id",
+      "funcOfficeId": "Func Office Id",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    }
+  }
+}

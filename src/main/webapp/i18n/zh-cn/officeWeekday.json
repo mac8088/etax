@@ -1,0 +1,25 @@
+{
+  "etaxApp": {
+    "officeWeekday": {
+      "home": {
+        "title": "Office Weekdays",
+        "createLabel": "创建新 Office Weekday",
+        "createOrEditLabel": "创建或编辑 Office Weekday",
+        "notFound": "No Office Weekday found"
+      },
+      "created": "Office Weekday {{ param }} 创建成功",
+      "updated": "Office Weekday {{ param }} 更新成功",
+      "deleted": "Office Weekday {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Office Weekday {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Office Weekday"
+      },
+      "officeId": "Office Id",
+      "cstdWeekworkingDay": "Cstd Weekworking Day",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    }
+  }
+}

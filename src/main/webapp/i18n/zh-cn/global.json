@@ -7,9 +7,22 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "数据",
-        "bankAccount": "Bank Account",
-        "label": "Label",
-        "operation": "Operation",
+        "bankAccount": "银行账户",
+        "label": "标签",
+        "operation": "操作",
+        "stdCodesGroup": "数据分组",
+        "stdCodesGroupProp": "分组属性",
+        "stdCodes": "基础数据",
+        "stdCodesDesc": "数据描述",
+        "stdCodesProp": "数据属性",
+        "exchangeRate": "汇率管理",
+        "publicHoliday": "公共假日",
+        "userInfo": "用户信息",
+        "office": "组织机构",
+        "officeRelationship": "机构关系维护",
+        "officeAreaCode": "机构区域维护",
+        "officeTaxFunc": "机构功能维护",
+        "officeWeekday": "机构工作日维护",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -32,6 +45,7 @@
         "audits": "审核",
         "apidocs": "API",
         "database": "数据库",
+        "modeler": "流程设计器",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
       "language": "语言"
@@ -99,7 +113,7 @@
       "cancel": "取消",
       "delete": "删除",
       "edit": "编辑",
-      "open": "Open",
+      "open": "打开",
       "save": "保存",
       "view": "查看"
     },
@@ -120,11 +134,12 @@
       "maxbytes": "本字段不多余 {{max}} 字符.",
       "pattern": "本字段必须符合模式 {{pattern}}.",
       "number": "本字段必须为数字.",
-      "datetimelocal": "本字段必须为日期和时间."
+      "datetimelocal": "本字段必须为日期和时间.",
+      "patternLogin": "此字段只能包含字母、数字和电子邮件地址."
     }
   },
   "error": {
-    "internalServerError": "Internal server error",
+    "internalServerError": "服务器内部错误",
     "server.not.reachable": "服务器无法访问",
     "url.not.found": "Not found",
     "NotNull": "域 {{fieldName}} 不能为空!",

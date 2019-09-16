@@ -1,0 +1,116 @@
+{
+    "name": "StdCodesGroup",
+    "fields": [
+        {
+            "fieldName": "groupCode",
+            "javadoc": "Code of the group of codes",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 40
+        },
+        {
+            "fieldName": "groupDesc",
+            "javadoc": "Group description (name of the list of codes)",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 255
+        },
+        {
+            "fieldName": "systemInd",
+            "javadoc": "System indicator. Can hold values ''Y'' or ''N''. When ''Y'', the elements of the group cannot be modified by end-users using the system configuration module. However, their description can be changed and they can be translated.",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "secLevelRequired",
+            "javadoc": "If the elements in this group have an associated security level. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a security level in STD_CODES.SEC_LEVEL.",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valueRequired",
+            "javadoc": "If the elements in this group have a value. Can be set to ''Y'' or ''N''. When ''Y'', all the elements of the group must have a value and their type must be specified in VALUE_TYPE.",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "valueType",
+            "javadoc": "Type of the value of all the elements in this group. Can be one of ''D'' (Date), ''S'' (String), ''N'' (Number) or ''B'' (Boolean). Can be set only when CODES_VALUE_REQUIRED = ''Y''.",
+            "fieldType": "ValueTypeIndicator",
+            "fieldValues": "D,S,N,B"
+        },
+        {
+            "fieldName": "descriptionRequired",
+            "javadoc": "Can hold values ''Y'' or ''N''. When ''N'', codes are never shown to end-users and don''t require an entry in STD_CODES_DESC. When ''Y'', EXTERNAL_CODE_REQUIRED must be set.",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "externalCodeRequired",
+            "javadoc": "If the elements in this group are identified by a multilingual code shown to the user. Can hold values ''Y'' or ''N''. When set to ''Y'', the length of external codes must be specified in EXTERNAL_CODE_LENGTH. External codes are used as shortcuts in entry fields linked to drop-down lists of values.",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N"
+        },
+        {
+            "fieldName": "externalCodeLength",
+            "javadoc": "Number of characters of the external codes. Can be set only when EXTERNAL_CODE_REQUIRED is ''Y''.",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "parentGroupRequired",
+            "javadoc": "If this group has a parent group. Can be set to ''Y'' or ''N''. When ''Y'', the parent group code must be specified in PARENT_GROUP_CODE. Used for multi-level lists of values.",
+            "fieldType": "OptionIndicator",
+            "fieldValues": "Y,N",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "parentGroupCode",
+            "javadoc": "The code of the parent group. Must be set when PARENT_GROUP_REQUIRED is ''Y''.",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "touppercase",
+            "javadoc": "The shortcut code is shown by uppercase or not",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "stdCodes",
+            "otherEntityRelationshipName": "stdCodesGroup",
+            "relationshipName": "stdCodes"
+        }
+    ],
+    "changelogDate": "20190911040251",
+    "javadoc": "The StdCodesGroup entity.\nThis table holds the definition and characteristics of the groups of standard codes used throughout e-TAX.\nCode groups represent lists of elements. Data in this table cannot be modified by end users.",
+    "entityTableName": "std_codes_group",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

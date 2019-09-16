@@ -15,7 +15,7 @@ import java.util.Set;
  * A BankAccount.
  */
 @Entity
-@Table(name = "bank_account")
+@Table(name = "cmn_bank_account")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class BankAccount implements Serializable {
 

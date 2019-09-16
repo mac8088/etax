@@ -2,8 +2,13 @@ package net.atos.etax.web.rest;
 
 import net.atos.etax.EtaxApp;
 import net.atos.etax.domain.BankAccount;
+import net.atos.etax.domain.Operation;
+import net.atos.etax.domain.User;
 import net.atos.etax.repository.BankAccountRepository;
+import net.atos.etax.service.BankAccountService;
 import net.atos.etax.web.rest.errors.ExceptionTranslator;
+import net.atos.etax.service.dto.BankAccountCriteria;
+import net.atos.etax.service.BankAccountQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +49,12 @@ public class BankAccountResourceIT {
     private BankAccountRepository bankAccountRepository;
 
     @Autowired
+    private BankAccountService bankAccountService;
+
+    @Autowired
+    private BankAccountQueryService bankAccountQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -65,7 +76,7 @@ public class BankAccountResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BankAccountResource bankAccountResource = new BankAccountResource(bankAccountRepository);
+        final BankAccountResource bankAccountResource = new BankAccountResource(bankAccountService, bankAccountQueryService);
         this.restBankAccountMockMvc = MockMvcBuilders.standaloneSetup(bankAccountResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -211,6 +222,157 @@ public class BankAccountResourceIT {
 
     @Test
     @Transactional
+    public void getAllBankAccountsByNameIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bankAccountRepository.saveAndFlush(bankAccount);
+
+        // Get all the bankAccountList where name equals to DEFAULT_NAME
+        defaultBankAccountShouldBeFound("name.equals=" + DEFAULT_NAME);
+
+        // Get all the bankAccountList where name equals to UPDATED_NAME
+        defaultBankAccountShouldNotBeFound("name.equals=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByNameIsInShouldWork() throws Exception {
+        // Initialize the database
+        bankAccountRepository.saveAndFlush(bankAccount);
+
+        // Get all the bankAccountList where name in DEFAULT_NAME or UPDATED_NAME
+        defaultBankAccountShouldBeFound("name.in=" + DEFAULT_NAME + "," + UPDATED_NAME);
+
+        // Get all the bankAccountList where name equals to UPDATED_NAME
+        defaultBankAccountShouldNotBeFound("name.in=" + UPDATED_NAME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByNameIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bankAccountRepository.saveAndFlush(bankAccount);
+
+        // Get all the bankAccountList where name is not null
+        defaultBankAccountShouldBeFound("name.specified=true");
+
+        // Get all the bankAccountList where name is null
+        defaultBankAccountShouldNotBeFound("name.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByBalanceIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bankAccountRepository.saveAndFlush(bankAccount);
+
+        // Get all the bankAccountList where balance equals to DEFAULT_BALANCE
+        defaultBankAccountShouldBeFound("balance.equals=" + DEFAULT_BALANCE);
+
+        // Get all the bankAccountList where balance equals to UPDATED_BALANCE
+        defaultBankAccountShouldNotBeFound("balance.equals=" + UPDATED_BALANCE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByBalanceIsInShouldWork() throws Exception {
+        // Initialize the database
+        bankAccountRepository.saveAndFlush(bankAccount);
+
+        // Get all the bankAccountList where balance in DEFAULT_BALANCE or UPDATED_BALANCE
+        defaultBankAccountShouldBeFound("balance.in=" + DEFAULT_BALANCE + "," + UPDATED_BALANCE);
+
+        // Get all the bankAccountList where balance equals to UPDATED_BALANCE
+        defaultBankAccountShouldNotBeFound("balance.in=" + UPDATED_BALANCE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByBalanceIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bankAccountRepository.saveAndFlush(bankAccount);
+
+        // Get all the bankAccountList where balance is not null
+        defaultBankAccountShouldBeFound("balance.specified=true");
+
+        // Get all the bankAccountList where balance is null
+        defaultBankAccountShouldNotBeFound("balance.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByOperationIsEqualToSomething() throws Exception {
+        // Initialize the database
+        Operation operation = OperationResourceIT.createEntity(em);
+        em.persist(operation);
+        em.flush();
+        bankAccount.addOperation(operation);
+        bankAccountRepository.saveAndFlush(bankAccount);
+        Long operationId = operation.getId();
+
+        // Get all the bankAccountList where operation equals to operationId
+        defaultBankAccountShouldBeFound("operationId.equals=" + operationId);
+
+        // Get all the bankAccountList where operation equals to operationId + 1
+        defaultBankAccountShouldNotBeFound("operationId.equals=" + (operationId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllBankAccountsByUserIsEqualToSomething() throws Exception {
+        // Initialize the database
+        User user = UserResourceIT.createEntity(em);
+        em.persist(user);
+        em.flush();
+        bankAccount.setUser(user);
+        bankAccountRepository.saveAndFlush(bankAccount);
+        Long userId = user.getId();
+
+        // Get all the bankAccountList where user equals to userId
+        defaultBankAccountShouldBeFound("userId.equals=" + userId);
+
+        // Get all the bankAccountList where user equals to userId + 1
+        defaultBankAccountShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultBankAccountShouldBeFound(String filter) throws Exception {
+        restBankAccountMockMvc.perform(get("/api/bank-accounts?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(bankAccount.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].balance").value(hasItem(DEFAULT_BALANCE.intValue())));
+
+        // Check, that the count call also returns 1
+        restBankAccountMockMvc.perform(get("/api/bank-accounts/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultBankAccountShouldNotBeFound(String filter) throws Exception {
+        restBankAccountMockMvc.perform(get("/api/bank-accounts?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restBankAccountMockMvc.perform(get("/api/bank-accounts/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().string("0"));
+    }
+
+
+    @Test
+    @Transactional
     public void getNonExistingBankAccount() throws Exception {
         // Get the bankAccount
         restBankAccountMockMvc.perform(get("/api/bank-accounts/{id}", Long.MAX_VALUE))
@@ -221,7 +383,7 @@ public class BankAccountResourceIT {
     @Transactional
     public void updateBankAccount() throws Exception {
         // Initialize the database
-        bankAccountRepository.saveAndFlush(bankAccount);
+        bankAccountService.save(bankAccount);
 
         int databaseSizeBeforeUpdate = bankAccountRepository.findAll().size();
 
@@ -268,7 +430,7 @@ public class BankAccountResourceIT {
     @Transactional
     public void deleteBankAccount() throws Exception {
         // Initialize the database
-        bankAccountRepository.saveAndFlush(bankAccount);
+        bankAccountService.save(bankAccount);
 
         int databaseSizeBeforeDelete = bankAccountRepository.findAll().size();
 
