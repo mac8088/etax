@@ -138,8 +138,6 @@ entity StdCodesProp (std_codes_prop) {
     valueNumber Double
 }
 
-
-
 enum OptionIndicator {
     Y, N
 }
