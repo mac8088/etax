@@ -32,7 +32,7 @@ import java.util.Collection;
 @SpringBootApplication
 @ComponentScan({"net.atos.etax", "net.atos.bpm", "net.atos.demo"})
 //@EntityScan({"net.atos.demo.domain", "net.atos.etax.domain"})
-//@EnableJpaRepositories({"net.atos.demo.repository", "net.atos.etax.repository"})
+//@EnableJpaRepositories({"net.atos.demo.repository", "net.atos.bpm.repository", "net.atos.etax.repository"})
 @Configuration
 @EnableAutoConfiguration(exclude = {org.flowable.spring.boot.FlowableSecurityAutoConfiguration.class}) 
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
