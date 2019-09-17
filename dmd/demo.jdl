@@ -13,6 +13,13 @@ entity Operation (cmn_operation){
   amount BigDecimal required
 }
 
+entity Person (cmn_person){
+    userName String,
+    firstName String,
+    lastName String,
+    birthDate Instant
+}
+
 relationship OneToMany {
   BankAccount{operation} to Operation{bankAccount(name)}
 }
@@ -34,7 +41,7 @@ paginate Operation with infinite-scroll
 // dto * with mapstruct
 
 // Set service options to all except few
-service all with serviceImpl except Label
+service all with serviceImpl except Label, Person
 
 // Use JPA Criteria to filter entities
 filter BankAccount, Operation

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.atos.bpm.service.WorkflowService;
 
-
-
 @RestController
 @RequestMapping("/api")
 public class WorkflowController {
