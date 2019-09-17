@@ -1,9 +1,8 @@
 package net.atos.etax;
 
-import net.atos.demo.service.PersonService;
 import net.atos.etax.config.ApplicationProperties;
 import net.atos.etax.config.DefaultProfileUtil;
-
+import net.atos.etax.service.PersonService;
 import io.github.jhipster.config.JHipsterConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,11 +29,10 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
+//@ComponentScan({"net.atos.etax", "net.atos.bpm", "net.atos.demo"})
+//@EntityScan({"net.atos.demo.domain", "net.atos.etax.domain"})
+//@EnableJpaRepositories({"net.atos.demo.repository", "net.atos.bpm.repository", "net.atos.etax.repository"})
 @SpringBootApplication
-@ComponentScan({"net.atos.etax", "net.atos.bpm", "net.atos.demo"})
-@EntityScan({"net.atos.demo.domain", "net.atos.etax.domain"})
-@EnableJpaRepositories({"net.atos.demo.repository", "net.atos.bpm.repository", "net.atos.etax.repository"})
-@Configuration
 @EnableAutoConfiguration(exclude = {org.flowable.spring.boot.FlowableSecurityAutoConfiguration.class}) 
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 public class EtaxApp implements InitializingBean {
