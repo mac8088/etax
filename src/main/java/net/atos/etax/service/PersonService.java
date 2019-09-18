@@ -27,6 +27,13 @@ public class PersonService {
 	@Autowired
 	private PersonRepository personRepository;
 
+	/**
+	 * @return the personRepository
+	 */
+	public PersonRepository getPersonRepository() {
+		return personRepository;
+	}
+
 	public void startProcess(String assignee) {
 		Person person = personRepository.findByUserName(assignee);
 
