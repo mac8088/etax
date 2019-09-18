@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <!--
+        Added the entity DeputyToDo.
+    -->
+    <changeSet id="20190917054439-1" author="jhipster">
+        <createTable tableName="bpm_deputy_todo">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="assignor_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="owner_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="task_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="process_instance_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="business_key" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="business_class" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="status" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="20190917054439-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+</databaseChangeLog>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.atos.bpm.web.rest.vm.StartProcessRepresentation;
+import net.atos.bpm.web.rest.vm.TaskRepresentation;
 import net.atos.etax.service.PersonService;
 
 @RestController
@@ -31,50 +33,8 @@ public class PersonController {
 		List<Task> tasks = personService.getTasks(assignee);
 		List<TaskRepresentation> dtos = new ArrayList<TaskRepresentation>();
 		for (Task task : tasks) {
-			dtos.add(new TaskRepresentation(task.getId(), task.getName()));
+			dtos.add(new TaskRepresentation(task.getId(), task.getName(), null));
 		}
 		return dtos;
 	}
-
-	static class StartProcessRepresentation {
-
-		private String assignee;
-
-		public String getAssignee() {
-			return assignee;
-		}
-
-		public void setAssignee(String assignee) {
-			this.assignee = assignee;
-		}
-	}
-
-	static class TaskRepresentation {
-
-		private String id;
-		private String name;
-
-		public TaskRepresentation(String id, String name) {
-			this.id = id;
-			this.name = name;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public void setId(String id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-	}
-
 }

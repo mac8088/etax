@@ -1,24 +1,22 @@
 package net.atos.bpm.service;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.flowable.task.api.TaskQuery;
+import org.flowable.app.engine.impl.ServiceImpl;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.IdentityService;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.history.HistoricProcessInstance;
+import org.flowable.engine.impl.ProcessEngineImpl;
+import org.flowable.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.base.Strings;
-
 @Service
-public class WorkflowService {
+public class WorkflowService extends ServiceImpl {
 
 	@Autowired
 	private RuntimeService runtimeService;
@@ -27,10 +25,19 @@ public class WorkflowService {
 	private HistoryService historyService;
 
 	@Autowired
+	private IdentityService identityService;
+
+	@Autowired
 	private TaskService taskService;
 
 	@Autowired
-	private IdentityService identityService;
+	private TaskHandler TaskHandler;
+
+	@Autowired
+	private ProcessHandler processHandler;
+
+	@Autowired
+	private ProcessEngineImpl processEngine;
 
 	/**
 	 * @return the runtimeService
@@ -47,21 +54,25 @@ public class WorkflowService {
 	}
 
 	/**
-	 * @return the taskService
-	 */
-	public TaskService getTaskService() {
-		return taskService;
-	}
-
-	/**
 	 * @return the identityService
 	 */
 	public IdentityService getIdentityService() {
 		return identityService;
 	}
 
-	private HistoricProcessInstance getProcessById(String processInstanceId) {
-		return historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+	/**
+	 * @return the taskService
+	 */
+	public TaskService getTaskService() {
+		return taskService;
+	}
+
+	public ProcessHandler getProcessHandler() {
+		return processHandler;
+	}
+
+	public TaskHandler getTaskHandler() {
+		return TaskHandler;
 	}
 
 	/**
@@ -79,7 +90,7 @@ public class WorkflowService {
 		data.put("taskId", task.getId());
 		data.put("description", task.getDescription());
 		data.put("claimTime", task.getClaimTime());
-		HistoricProcessInstance instance = getProcessById(task.getProcessInstanceId());
+		HistoricProcessInstance instance = processHandler.getProcessById(task.getProcessInstanceId());
 		data.putAll(processToMap(instance));
 		return data;
 	}
@@ -102,53 +113,22 @@ public class WorkflowService {
 		data.put("deleteReason", instance.getDeleteReason());
 		return data;
 	}
-	
-	public TaskQuery buildTaskQuery(String assignee, String candidateGroup, String candidateUser, String processKey,
-			String taskKey, String processInstanceId, String businessKey, Date fromDate, Date toDate,
-			Map<String, Object> variables) {
-		TaskQuery taskQuery = taskService.createTaskQuery();
-		taskQuery = taskQuery.or();
-		if (!Strings.isNullOrEmpty(assignee)) {
-			if (assignee.indexOf(",") > -1) {
-				taskQuery = taskQuery.taskAssigneeIds(Arrays.asList(assignee.split(",")));
-			} else {
-				taskQuery = taskQuery.taskAssignee(assignee);
-			}
+
+	/**
+	 * 回滚操作
+	 * 
+	 * @param processInstanceId
+	 * @param activityId
+	 * @param variables
+	 */
+	public void rollBackTask(String processInstanceId, String activityId, Map<String, Object> variables) {
+		if (commandExecutor == null) {
+			ProcessEngineConfigurationImpl pecImpl = processEngine.getProcessEngineConfiguration();
+			// pecImpl.initService(this);
+			// TODO
+			pecImpl.init();
 		}
-		if (!Strings.isNullOrEmpty(candidateGroup)) {
-			if (candidateGroup.indexOf(",") > -1) {
-				taskQuery = taskQuery.taskCandidateGroupIn(Arrays.asList(candidateGroup.split(",")));
-			} else {
-				taskQuery = taskQuery.taskCandidateGroup(candidateGroup);
-			}
-		}
-		if (!Strings.isNullOrEmpty(candidateUser)) {
-			taskQuery = taskQuery.taskCandidateUser(candidateUser);
-		}
-		taskQuery.endOr();
-		if (!Strings.isNullOrEmpty(processKey)) {
-			taskQuery = taskQuery.processDefinitionKey(processKey);
-		}
-		if (!Strings.isNullOrEmpty(taskKey)) {
-			taskQuery = taskQuery.taskDefinitionKey(taskKey);
-		}
-		if (!Strings.isNullOrEmpty(businessKey)) {
-			taskQuery = taskQuery.processInstanceBusinessKey(taskKey);
-		}
-		if (!Strings.isNullOrEmpty(processInstanceId)) {
-			taskQuery = taskQuery.processInstanceId(processInstanceId);
-		}
-		if (fromDate != null) {
-			taskQuery.taskCreatedAfter(fromDate);
-		}
-		if (toDate != null) {
-			taskQuery.taskCreatedBefore(toDate);
-		}
-		if (variables != null && variables.size() > 0) {
-			for (Map.Entry<String, Object> entry : variables.entrySet()) {
-				taskQuery = taskQuery.processVariableValueEquals(entry.getKey(), entry.getValue());
-			}
-		}
-		return taskQuery;
+		commandExecutor.execute(new TaskCommitCmd(processInstanceId, activityId, variables));
 	}
+
 }

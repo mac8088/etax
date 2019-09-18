@@ -65,6 +65,8 @@ public class CacheConfiguration {
             createCache(cm, net.atos.etax.domain.OfficeWeekday.class.getName());
             createCache(cm, net.atos.etax.domain.UserInfo.class.getName());
             createCache(cm, net.atos.etax.domain.Person.class.getName());
+            createCache(cm, net.atos.bpm.domain.Deputy.class.getName());
+            createCache(cm, net.atos.bpm.domain.DeputyToDo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

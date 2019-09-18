@@ -31,6 +31,8 @@ import java.util.Collection;
 
 @SpringBootApplication
 @ComponentScan({"net.atos.etax", "net.atos.bpm"})
+@EntityScan({"net.atos.etax.domain", "net.atos.bpm.domain"})
+@EnableJpaRepositories({"net.atos.etax.repository", "net.atos.bpm.repository"})
 @EnableAutoConfiguration(exclude = {org.flowable.spring.boot.FlowableSecurityAutoConfiguration.class}) 
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 public class EtaxApp implements InitializingBean {
