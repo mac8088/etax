@@ -1,0 +1,40 @@
+
+entity Deputy (BPM_DEPUTY){
+    assignorId Long,
+    ownerId Long,
+    deputyType String,
+    periodFrom ZonedDateTime,
+    periodTo ZonedDateTime,
+    createdDate Instant,
+    lastModifiedDate Instant
+}
+
+entity DeputyToDo (BPM_DEPUTY_TODO){
+    assignorId Long,
+    assignorName String, 
+    ownerId Long,
+    ownerName String,
+    taskId String,
+    processInstanceId String, 
+	businessKey String,
+    businessClass String,
+    status Integer
+}
+
+
+// Set pagination options
+paginate Deputy with infinite-scroll
+paginate DeputyToDo with pagination
+
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+
+// Set service options to all except few
+service all with serviceClass
+
+
+// skipClient for *
+
+filter Deputy, DeputyToDo

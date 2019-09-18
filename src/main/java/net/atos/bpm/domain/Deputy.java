@@ -1,4 +1,5 @@
 package net.atos.bpm.domain;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

@@ -1,4 +1,5 @@
 package net.atos.bpm.domain;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,8 +22,14 @@ public class DeputyToDo implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Column(name = "assignor_id")
+    private Long assignorId;
+
     @Column(name = "assignor_name")
     private String assignorName;
+
+    @Column(name = "owner_id")
+    private Long ownerId;
 
     @Column(name = "owner_name")
     private String ownerName;
@@ -51,6 +58,19 @@ public class DeputyToDo implements Serializable {
         this.id = id;
     }
 
+    public Long getAssignorId() {
+        return assignorId;
+    }
+
+    public DeputyToDo assignorId(Long assignorId) {
+        this.assignorId = assignorId;
+        return this;
+    }
+
+    public void setAssignorId(Long assignorId) {
+        this.assignorId = assignorId;
+    }
+
     public String getAssignorName() {
         return assignorName;
     }
@@ -62,6 +82,19 @@ public class DeputyToDo implements Serializable {
 
     public void setAssignorName(String assignorName) {
         this.assignorName = assignorName;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public DeputyToDo ownerId(Long ownerId) {
+        this.ownerId = ownerId;
+        return this;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getOwnerName() {
@@ -163,7 +196,9 @@ public class DeputyToDo implements Serializable {
     public String toString() {
         return "DeputyToDo{" +
             "id=" + getId() +
+            ", assignorId=" + getAssignorId() +
             ", assignorName='" + getAssignorName() + "'" +
+            ", ownerId=" + getOwnerId() +
             ", ownerName='" + getOwnerName() + "'" +
             ", taskId='" + getTaskId() + "'" +
             ", processInstanceId='" + getProcessInstanceId() + "'" +

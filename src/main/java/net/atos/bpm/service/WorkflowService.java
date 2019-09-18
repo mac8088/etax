@@ -1,9 +1,17 @@
 package net.atos.bpm.service;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.flowable.app.engine.impl.ServiceImpl;
+import org.flowable.common.engine.api.delegate.event.FlowableEntityEvent;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.IdentityService;
 import org.flowable.engine.RuntimeService;
@@ -12,8 +20,14 @@ import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.impl.ProcessEngineImpl;
 import org.flowable.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.flowable.task.api.Task;
+import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import net.atos.bpm.domain.Deputy;
+import net.atos.bpm.repository.DeputyRepository;
+import net.atos.bpm.repository.DeputyToDoRepository;
+import net.atos.etax.domain.User;
 
 @Service
 public class WorkflowService extends ServiceImpl {
@@ -31,13 +45,19 @@ public class WorkflowService extends ServiceImpl {
 	private TaskService taskService;
 
 	@Autowired
+	private ProcessEngineImpl processEngine;
+
+	@Autowired
 	private TaskHandler TaskHandler;
 
 	@Autowired
 	private ProcessHandler processHandler;
 
 	@Autowired
-	private ProcessEngineImpl processEngine;
+	private DeputyRepository deputyRepository;
+
+	@Autowired
+	private DeputyToDoRepository deputyToDoRepository;
 
 	/**
 	 * @return the runtimeService
@@ -129,6 +149,32 @@ public class WorkflowService extends ServiceImpl {
 			pecImpl.init();
 		}
 		commandExecutor.execute(new TaskCommitCmd(processInstanceId, activityId, variables));
+	}
+
+	private void createDeputyRecord(TaskEntity taskEntity, User owner, User deputyUser) {
+		
+	}
+
+	private List<User> getCandidateUsers(TaskEntity taskEntity) {
+		return null;
+	}
+
+	public void setDeputyForTask(FlowableEntityEvent event) {
+//		// Try to add delegation Candidates
+//		TaskEntity taskEntity = (TaskEntity) event.getEntity();
+//		List<User> users = this.getCandidateUsers(taskEntity);
+//		if (users != null && users.size() > 0) {
+//			List<Long> ids = new ArrayList<Long>();
+//			for (User u : users) {
+//				ids.add(u.getId());
+//			}
+//			
+//			ZonedDateTime zdt = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+//			List<Deputy> deputies = this.deputyRepository.findByOwnerInAndPeriodFromLessThanEqualAndPeriodToGreaterThan(ids, zdt, zdt);
+//			for (Deputy deputy : deputies) {
+//				
+//			}
+//		}
 	}
 
 }

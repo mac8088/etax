@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface DeputyToDoRepository extends JpaRepository<DeputyToDo, Long> {
+public interface DeputyToDoRepository extends JpaRepository<DeputyToDo, Long>, JpaSpecificationExecutor<DeputyToDo> {
 
 }
