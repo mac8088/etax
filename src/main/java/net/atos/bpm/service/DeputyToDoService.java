@@ -2,6 +2,9 @@ package net.atos.bpm.service;
 
 import net.atos.bpm.domain.DeputyToDo;
 import net.atos.bpm.repository.DeputyToDoRepository;
+import net.atos.etax.domain.User;
+
+import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,4 +75,18 @@ public class DeputyToDoService {
         log.debug("Request to delete DeputyToDo : {}", id);
         deputyToDoRepository.deleteById(id);
     }
+    
+	public void createDeputyRecord(TaskEntity taskEntity, User owner, User deputyUser) {
+		DeputyToDo deputyRecord = new DeputyToDo();
+		deputyRecord.setAssignorId(deputyUser.getId());
+		deputyRecord.setAssignorName(deputyUser.getLogin());
+		deputyRecord.setOwnerId(owner.getId());
+		deputyRecord.setOwnerName(owner.getLogin());
+		deputyRecord.setProcessInstanceId(taskEntity.getProcessInstanceId());
+		deputyRecord.setTaskId(taskEntity.getId());
+		deputyRecord.setStatus(0);
+		deputyRecord.setBusinessKey(taskEntity.getTaskDefinitionKey()); //TODO is taskDefKey as bizKey?
+		this.deputyToDoRepository.saveAndFlush(deputyRecord);
+		log.info("deputyUser [" + deputyUser.getLogin() + "] of owner[" + owner.getLogin() + "] created in task [" + taskEntity.getName() + ":" + taskEntity.getId() + "]");
+	}
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.flowable.common.engine.impl.interceptor.Command;
 import org.flowable.common.engine.impl.interceptor.CommandContext;
 
+
 public class TaskCommitCmd implements Command<Void>, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +20,7 @@ public class TaskCommitCmd implements Command<Void>, Serializable {
 	 * 目标节点Id
 	 */
 	private String activityId;
-	
+
 	/**
 	 * 参数
 	 */
