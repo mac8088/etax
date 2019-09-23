@@ -1,4 +1,4 @@
-package net.atos.bpm.service;
+package net.atos.bpm.service.impl;
 
 import java.util.Arrays;
 import java.util.Date;

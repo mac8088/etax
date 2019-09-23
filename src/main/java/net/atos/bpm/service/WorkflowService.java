@@ -17,6 +17,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.atos.bpm.service.impl.ProcessHandler;
+import net.atos.bpm.service.impl.TaskHandler;
+
 @Service
 public class WorkflowService extends ServiceImpl {
 

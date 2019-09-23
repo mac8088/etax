@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.atos.bpm.service.ProcessHandler;
-import net.atos.bpm.service.TaskHandler;
 import net.atos.bpm.service.WorkflowService;
+import net.atos.bpm.service.impl.ProcessHandler;
+import net.atos.bpm.service.impl.TaskHandler;
 import net.atos.bpm.web.rest.vm.TaskRepresentation;
 
 @RestController

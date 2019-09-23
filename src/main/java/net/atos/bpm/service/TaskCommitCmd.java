@@ -24,9 +24,9 @@ public class TaskCommitCmd implements Command<Void>, Serializable {
 	/**
 	 * 参数
 	 */
-	protected Map variables;
+	protected Map<String, Object> variables;
 
-	public TaskCommitCmd(String _processInstanceId, String _activityId, Map _variables) {
+	public TaskCommitCmd(String _processInstanceId, String _activityId, Map<String, Object> _variables) {
 		this.processInstanceId = _processInstanceId;
 		this.activityId = _activityId;
 		this.variables = _variables;
