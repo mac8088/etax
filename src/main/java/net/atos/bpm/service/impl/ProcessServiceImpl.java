@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import net.atos.bpm.service.ProcessServiceIF;
 
-import net.atos.bpm.model.TaskInfo;
-import net.atos.bpm.model.ProcessInfo;
+import net.atos.bpm.model.TaskBean;
+import net.atos.bpm.model.ProcessBean;
 
 
 public class ProcessServiceImpl implements ProcessServiceIF {
@@ -36,7 +36,7 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 	}
 
 	@Override
-	public ProcessInstanceBuilder createProcess(ProcessInfo process) {
+	public ProcessInstanceBuilder createProcess(ProcessBean process) {
 		ProcessInstanceBuilder processInstanceBuilder = runtimeService.createProcessInstanceBuilder()
 				.processDefinitionKey(process.getProcessDefinitionKey());
 		return processInstanceBuilder;
@@ -72,7 +72,7 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		return historyService.createHistoricProcessInstanceQuery().finished().list();
 	}
 
-	protected ProcessInfo convertBasicProcessInstance(ProcessInstance processInstance, ProcessInfo process) {
+	protected ProcessBean convertBasicProcessInstance(ProcessInstance processInstance, ProcessBean process) {
 		process.setExecutionId(processInstance.getId());
 		process.setProcessDefinitionId(processInstance.getProcessDefinitionId());
 		process.setProcessDefinitionName(processInstance.getProcessDefinitionName());
@@ -85,8 +85,8 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		return process;
 	}
 
-	protected ProcessInfo convertBasicHistoricProcessInstance(HistoricProcessInstance historicProcessInstance,
-			ProcessInfo process) {
+	protected ProcessBean convertBasicHistoricProcessInstance(HistoricProcessInstance historicProcessInstance,
+			ProcessBean process) {
 		process.setExecutionId(historicProcessInstance.getId());
 		process.setProcessDefinitionId(historicProcessInstance.getProcessDefinitionId());
 		process.setProcessDefinitionName(historicProcessInstance.getProcessDefinitionName());
@@ -99,8 +99,8 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		return process;
 	}
 
-	private TaskInfo convertTask(Task task) {
-		TaskInfo taskInfo = new TaskInfo();
+	private TaskBean convertTask(Task task) {
+		TaskBean taskInfo = new TaskBean();
 
 		taskInfo.setId(task.getId());
 		taskInfo.setName(task.getName());
@@ -118,33 +118,33 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 	}
 
 	@Override
-	public List<TaskInfo> queryTasksInProcess(String pid) {
+	public List<TaskBean> queryTasksInProcess(String pid) {
 		return taskService.createTaskQuery().processInstanceId(pid).orderByTaskCreateTime().desc().list().stream()
 				.map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<TaskInfo> queryTasksByAssignee(String assignee) {
+	public List<TaskBean> queryTasksByAssignee(String assignee) {
 		return taskService.createTaskQuery().taskAssignee(assignee).orderByTaskCreateTime().desc().list().stream()
 				.map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
 	@Override
 	//查询某个组的任务
-	public List<TaskInfo> queryTasksByCandidateGroup(String candidateGroup) {
+	public List<TaskBean> queryTasksByCandidateGroup(String candidateGroup) {
 		return taskService.createTaskQuery().taskCandidateGroup(candidateGroup).orderByTaskCreateTime().desc().list()
 				.stream().map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
 	@Override
 	//查询所有组队任务
-	public List<TaskInfo> queryTasksByCandidateGroups(List<String> candidateGroups) {
+	public List<TaskBean> queryTasksByCandidateGroups(List<String> candidateGroups) {
 		return taskService.createTaskQuery().taskCandidateGroupIn(candidateGroups).orderByTaskCreateTime().desc().list()
 				.stream().map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<TaskInfo> queryTasksByTaskID(String taskId) {
+	public List<TaskBean> queryTasksByTaskID(String taskId) {
 		return taskService.createTaskQuery().taskId(taskId).orderByTaskCreateTime().desc().list().stream()
 				.map(t -> convertTask(t)).collect(Collectors.toList());
 	}

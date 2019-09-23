@@ -6,14 +6,14 @@ import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.engine.runtime.ProcessInstanceBuilder;
 
-import net.atos.bpm.model.TaskInfo;
-import net.atos.bpm.model.ProcessInfo;
+import net.atos.bpm.model.TaskBean;
+import net.atos.bpm.model.ProcessBean;
 
 public interface ProcessServiceIF {
 
 	String hello(String name);
 	
-	ProcessInstanceBuilder createProcess(ProcessInfo process);
+	ProcessInstanceBuilder createProcess(ProcessBean process);
 
 	void deleteProcessByProcessInstanceId(String processInstanceId);
 
@@ -27,15 +27,15 @@ public interface ProcessServiceIF {
 
 	List<HistoricProcessInstance> queryFinishedProcesses();
 
-	List<TaskInfo> queryTasksInProcess(String pid);
+	List<TaskBean> queryTasksInProcess(String pid);
 
-	List<TaskInfo> queryTasksByAssignee(String assignee);
+	List<TaskBean> queryTasksByAssignee(String assignee);
 
-	List<TaskInfo> queryTasksByCandidateGroup(String candidateGroup);
+	List<TaskBean> queryTasksByCandidateGroup(String candidateGroup);
 
-	List<TaskInfo> queryTasksByCandidateGroups(List<String> candidateGroups);
+	List<TaskBean> queryTasksByCandidateGroups(List<String> candidateGroups);
 
-	List<TaskInfo> queryTasksByTaskID(String taskId);
+	List<TaskBean> queryTasksByTaskID(String taskId);
 
 	void handleTask(String taskId, Boolean approve);
 	

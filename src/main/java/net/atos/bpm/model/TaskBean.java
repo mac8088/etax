@@ -2,7 +2,7 @@ package net.atos.bpm.model;
 
 import java.util.Date;
 
-public class TaskInfo {
+public class TaskBean {
     private String id;
     private String name;
     private String description;
