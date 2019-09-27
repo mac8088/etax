@@ -18,6 +18,7 @@ logging:
     ROOT: INFO
     net.atos.etax: INFO
     io.github.jhipster: INFO
+    org.flowable: INFO
 
 management:
   metrics:
