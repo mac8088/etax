@@ -2,10 +2,11 @@
   "etaxApp": {
     "stdCodesGroup": {
       "home": {
-        "title": "Std Codes Groups",
+        "title": "Standard Codes Groups",
         "createLabel": "Create a new Std Codes Group",
         "createOrEditLabel": "Create or edit a Std Codes Group",
-        "notFound": "No Std Codes Group found"
+        "notFound": "No Std Codes Group found",
+        "description": "Description"
       },
       "created": "A new Std Codes Group is created with identifier {{ param }}",
       "updated": "A Std Codes Group is updated with identifier {{ param }}",

@@ -2,7 +2,7 @@
   "etaxApp": {
     "stdCodesDesc": {
       "home": {
-        "title": "Std Codes Descs",
+        "title": "Standard Codes Descriptions",
         "createLabel": "创建新 Std Codes Desc",
         "createOrEditLabel": "创建或编辑 Std Codes Desc",
         "notFound": "No Std Codes Desc found"

@@ -2,7 +2,7 @@
   "etaxApp": {
     "stdCodesGroupProp": {
       "home": {
-        "title": "Std Codes Group Props",
+        "title": "Standard Codes Group Properties",
         "createLabel": "Create a new Std Codes Group Prop",
         "createOrEditLabel": "Create or edit a Std Codes Group Prop",
         "notFound": "No Std Codes Group Prop found"

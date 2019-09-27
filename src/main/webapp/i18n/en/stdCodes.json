@@ -2,10 +2,11 @@
   "etaxApp": {
     "stdCodes": {
       "home": {
-        "title": "Std Codes",
+        "title": "Standard Codes",
         "createLabel": "Create a new Std Codes",
         "createOrEditLabel": "Create or edit a Std Codes",
-        "notFound": "No Std Codes found"
+        "notFound": "No Std Codes found",
+        "description": "Description"
       },
       "created": "A new Std Codes is created with identifier {{ param }}",
       "updated": "A Std Codes is updated with identifier {{ param }}",

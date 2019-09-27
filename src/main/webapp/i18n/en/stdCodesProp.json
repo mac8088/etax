@@ -2,7 +2,7 @@
   "etaxApp": {
     "stdCodesProp": {
       "home": {
-        "title": "Std Codes Props",
+        "title": "Standard Codes Properties",
         "createLabel": "Create a new Std Codes Prop",
         "createOrEditLabel": "Create or edit a Std Codes Prop",
         "notFound": "No Std Codes Prop found"

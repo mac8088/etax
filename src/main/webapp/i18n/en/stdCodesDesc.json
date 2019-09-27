@@ -2,7 +2,7 @@
   "etaxApp": {
     "stdCodesDesc": {
       "home": {
-        "title": "Std Codes Descs",
+        "title": "Standard Codes Descriptions",
         "createLabel": "Create a new Std Codes Desc",
         "createOrEditLabel": "Create or edit a Std Codes Desc",
         "notFound": "No Std Codes Desc found"

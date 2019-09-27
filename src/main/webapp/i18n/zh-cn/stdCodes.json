@@ -2,10 +2,11 @@
   "etaxApp": {
     "stdCodes": {
       "home": {
-        "title": "Std Codes",
-        "createLabel": "创建新 Std Codes",
+        "title": "Standard Codes",
+        "createLabel": "创建",
         "createOrEditLabel": "创建或编辑 Std Codes",
-        "notFound": "No Std Codes found"
+        "notFound": "No Std Codes found",
+        "description": "Description"
       },
       "created": "Std Codes {{ param }} 创建成功",
       "updated": "Std Codes {{ param }} 更新成功",

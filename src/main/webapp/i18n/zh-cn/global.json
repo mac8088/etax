@@ -130,6 +130,7 @@
       "maxlength": "本字段最大长度为 {{max}} 个字符.",
       "min": "本字段不能小于 {{min}}.",
       "max": "本字段不能大于 {{max}}.",
+      "between": "本字段必须在{{min}}~{{max}}之间.",
       "minbytes": "本字段不少于 {{min}} 字符.",
       "maxbytes": "本字段不多余 {{max}} 字符.",
       "pattern": "本字段必须符合模式 {{pattern}}.",
