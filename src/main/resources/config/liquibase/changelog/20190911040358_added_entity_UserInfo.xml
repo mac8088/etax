@@ -179,6 +179,7 @@
             <column name="manu_script" type="blob"/>
             <column name="manu_script_content_type" type="string"/>
             <column name="cc_version" type="numeric"/>
+            <column name="user_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>
