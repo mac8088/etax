@@ -73,6 +73,41 @@
             <column name="authority_name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="office_code" type="varchar(7)" remarks="Belonging to which office, here is office code">
+                <constraints nullable="true" />
+            </column>
+            <column name="confirm_date" type="datetime" remarks="Date the User Assigned Profile Access was confirmed">
+                <constraints nullable="true" />
+            </column>
+            <column name="approved" type="boolean" remarks="Whether the profile assignment has been approved">
+                <constraints nullable="true" />
+            </column>
+            <column name="effective_date" type="datetime" remarks="Effective date of the assignment">
+                <constraints nullable="true" />
+            </column>
+            <column name="expiry_date" type="datetime" remarks="Date after which the assignment expires">
+                <constraints nullable="true" />
+            </column>
+            <column name="cstd_status" type="varchar(40)" remarks="STD[STATUS], indicates the ACTIVE status">
+                <constraints nullable="true" />
+            </column>
+            <column name="cstd_reason" type="varchar(40)" remarks="STD[REASON], indicates the rejection reason">
+                <constraints nullable="true" />
+            </column>
+            <column name="operation" type="varchar(1)" remarks="Indicates a profile is going to be modified,newly added to a user or deleted from a user after approval (addition:A, modification:M, deletion:D)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cstd_assign_profile_type" type="varchar(40)" remarks="STD[ASSIGN_PROFILE_TYPE] .Assignment Profile Types ,01 Primary Profile ,02 Secondary Profile,03 Temporary Profile">
+                <constraints nullable="true" />
+            </column>
+            <column name="origin_userid" type="bigint" remarks="From user ID,Set by System in use case ADM11. It is Mandatory if Profile type = Temporary [03]">
+                <constraints nullable="true"/>
+            </column>
+            <column name="cstd_position" type="varchar(40)" remarks="STD[POSITION],Position code">
+                <constraints nullable="true" />
+            </column>
+			
         </createTable>
 
         <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
