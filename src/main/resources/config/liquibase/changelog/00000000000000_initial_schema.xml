@@ -50,13 +50,22 @@
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="desc" type="varchar(200)"/>
-            <column name="module" type="varchar(40)">
-                <constraints nullable="false"/>
+            <column name="description" type="varchar(200)"/>
+            <column name="cstd_module" type="varchar(40)" remarks="STD[MODULE]">
+                <constraints nullable="false" />
             </column>
-            <column name="app_message" type="varchar(50)"/>
+            <column name="effective_date" type="datetime" remarks="Effective date">
+                <constraints nullable="false" />
+            </column>
+            <column name="expiry_date" type="datetime" remarks="Expired date">
+                <constraints nullable="true" />
+            </column>
+            <column name="cstd_status" type="varchar(40)" remarks="STD[STATUS]">
+                <constraints nullable="true" />
+            </column>
+            <column name="supvr_profile" type="varchar(50)"/>
         </createTable>
-
+		
         <createTable tableName="jhi_user_authority">
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>

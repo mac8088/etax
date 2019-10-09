@@ -1,6 +1,6 @@
-name;desc;module;app_message
-ROLE_ADMIN;Admin Role;ADM;FFM-MSG-ROLE-ADMIN
-ROLE_USER;Normal User Role;ADM;FFM-MSG-ROLE-USER
-ADM001;System Admin;ADM;FFM-MSG-ROLE-ADM001
-ADM002;System Supervisor;ADM;FFM-MSG-ROLE-ADM002
-TECHSPT;Technical support;ADM;FFM-MSG-ROLE-TECHSPT
+name;description;cstd_module;effective_date;expiry_date;cstd_status;supvr_profile
+ROLE_ADMIN;Admin Role;ADM;2019-01-01T00:00:00;null;null;null
+ROLE_USER;Normal User Role;ADM;2019-01-01T00:00:00;null;null;null
+ADM001;System Admin;ADM;2019-01-01T00:00:00;null;null;null
+ADM002;System Supervisor;ADM;2019-01-01T00:00:00;null;null;null
+TECHSPT;Technical support;ADM;2019-01-01T00:00:00;null;null;null
