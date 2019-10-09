@@ -2,8 +2,8 @@
   "etaxApp": {
     "OptionIndicator": {
       "null": "",
-      "Y": "��",
-      "N": "��"
+      "Y": "是",
+      "N": "否"
     }
   }
 }
