@@ -4,3 +4,6 @@ user_id;authority_name
 3;ROLE_ADMIN
 3;ROLE_USER
 4;ROLE_USER
+5;ADM001
+5;TECHSPT
+6;ADM002
