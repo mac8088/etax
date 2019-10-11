@@ -23,6 +23,8 @@
         "officeAreaCode": "Office Area Code",
         "officeTaxFunc": "Office Tax Func",
         "officeWeekday": "Office Weekday",
+        "adm": "ADM",
+        "std": "CFG",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -115,7 +117,10 @@
       "edit": "Edit",
       "open": "Open",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "search": "Search",
+      "searchConditions": "Search Conditions",
+      "noIdTip": "Please choose one item then operate"
     },
     "detail": {
       "field": "Field",

@@ -23,6 +23,8 @@
         "officeAreaCode": "机构区域维护",
         "officeTaxFunc": "机构功能维护",
         "officeWeekday": "机构工作日维护",
+        "adm": "管理系统",
+        "std": "配置系统",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -115,7 +117,10 @@
       "edit": "编辑",
       "open": "打开",
       "save": "保存",
-      "view": "查看"
+      "view": "查看",
+      "search": "查询",
+      "searchConditions": "查询条件",
+      "noIdTip": "操作前请先选择一条记录"
     },
     "detail": {
       "field": "字段",
