@@ -2,9 +2,6 @@ package net.atos.etax.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -48,14 +45,12 @@ public class Authority implements Serializable {
      * Effective date
      */
     @NotNull
-    @ApiModelProperty(value = "Effective date", required = true)
     @Column(name = "effective_date", nullable = false)
     private ZonedDateTime effectiveDate;
 
     /**
      * Expired date
      */
-    @ApiModelProperty(value = "Expiry date")
     @Column(name = "expiry_date")
     private ZonedDateTime expiryDate;
 	
