@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="00000000000000" author="jhipster">
-        <createSequence sequenceName="sequence_generator" startValue="1050" incrementBy="50"/>
+        <createSequence sequenceName="sequence_generator" startValue="105000" incrementBy="50"/>
     </changeSet>
 
     <!--
@@ -65,7 +65,7 @@
             </column>
             <column name="supvr_profile" type="varchar(50)"/>
         </createTable>
-		
+
         <createTable tableName="jhi_user_authority">
             <column name="user_id" type="bigint">
                 <constraints nullable="false"/>
