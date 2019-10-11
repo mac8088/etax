@@ -164,3 +164,4 @@ id;group_code;group_desc;system_ind;sec_level_required;value_required;value_type
 262;VALIDATION_STATUS;National ID Validation Status;Y;N;N;null;Y;Y;6;N;null;true
 263;VEHICLE_TYPE;Vehicle type;N;N;N;null;Y;Y;2;N;null;true
 264;WEEK_W_DAYS;Week Working Days;N;N;N;null;Y;Y;2;N;null;true
+265;FUNCTIONAL_OFFICE_TYPE;Office functionality type;N;N;N;null;Y;Y;3;N;null;true
