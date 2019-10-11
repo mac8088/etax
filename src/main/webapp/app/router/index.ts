@@ -317,225 +317,225 @@ export default new Router({
       path: '/entity/std-codes-group',
       name: 'StdCodesGroup',
       component: StdCodesGroup,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-group/new',
       name: 'StdCodesGroupCreate',
       component: StdCodesGroupUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-group/:stdCodesGroupId/edit',
       name: 'StdCodesGroupEdit',
       component: StdCodesGroupUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-group/:stdCodesGroupId/view',
       name: 'StdCodesGroupView',
       component: StdCodesGroupDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     }
     ,
     {
       path: '/entity/std-codes',
       name: 'StdCodes',
       component: StdCodes,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes/new',
       name: 'StdCodesCreate',
       component: StdCodesUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes/:stdCodesId/edit',
       name: 'StdCodesEdit',
       component: StdCodesUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes/:stdCodesId/view',
       name: 'StdCodesView',
       component: StdCodesDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     }
     ,
     {
       path: '/entity/std-codes-desc',
       name: 'StdCodesDesc',
       component: StdCodesDesc,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-desc/new',
       name: 'StdCodesDescCreate',
       component: StdCodesDescUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-desc/:stdCodesDescId/edit',
       name: 'StdCodesDescEdit',
       component: StdCodesDescUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-desc/:stdCodesDescId/view',
       name: 'StdCodesDescView',
       component: StdCodesDescDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     }
     ,
     {
       path: '/entity/std-codes-group-prop',
       name: 'StdCodesGroupProp',
       component: StdCodesGroupProp,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-group-prop/new',
       name: 'StdCodesGroupPropCreate',
       component: StdCodesGroupPropUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-group-prop/:stdCodesGroupPropId/edit',
       name: 'StdCodesGroupPropEdit',
       component: StdCodesGroupPropUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-group-prop/:stdCodesGroupPropId/view',
       name: 'StdCodesGroupPropView',
       component: StdCodesGroupPropDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     }
     ,
     {
       path: '/entity/std-codes-prop',
       name: 'StdCodesProp',
       component: StdCodesProp,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-prop/new',
       name: 'StdCodesPropCreate',
       component: StdCodesPropUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-prop/:stdCodesPropId/edit',
       name: 'StdCodesPropEdit',
       component: StdCodesPropUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     },
     {
       path: '/entity/std-codes-prop/:stdCodesPropId/view',
       name: 'StdCodesPropView',
       component: StdCodesPropDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ROLE_ADMIN'] }
     }
     ,
     {
       path: '/entity/exchange-rate',
       name: 'ExchangeRate',
       component: ExchangeRate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     },
     {
       path: '/entity/exchange-rate/new',
       name: 'ExchangeRateCreate',
       component: ExchangeRateUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     },
     {
       path: '/entity/exchange-rate/:exchangeRateId/edit',
       name: 'ExchangeRateEdit',
       component: ExchangeRateUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     },
     {
       path: '/entity/exchange-rate/:exchangeRateId/view',
       name: 'ExchangeRateView',
       component: ExchangeRateDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     }
     ,
     {
       path: '/entity/public-holiday',
       name: 'PublicHoliday',
       component: PublicHoliday,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     },
     {
       path: '/entity/public-holiday/new',
       name: 'PublicHolidayCreate',
       component: PublicHolidayUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     },
     {
       path: '/entity/public-holiday/:publicHolidayId/edit',
       name: 'PublicHolidayEdit',
       component: PublicHolidayUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     },
     {
       path: '/entity/public-holiday/:publicHolidayId/view',
       name: 'PublicHolidayView',
       component: PublicHolidayDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM002'] }
     }
     ,
     {
       path: '/entity/office',
       name: 'Office',
       component: Office,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office/new',
       name: 'OfficeCreate',
       component: OfficeUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office/:officeId/edit',
       name: 'OfficeEdit',
       component: OfficeUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office/:officeId/view',
       name: 'OfficeView',
       component: OfficeDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     }
     ,
     {
       path: '/entity/office-relationship',
       name: 'OfficeRelationship',
       component: OfficeRelationship,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-relationship/new',
       name: 'OfficeRelationshipCreate',
       component: OfficeRelationshipUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-relationship/:officeRelationshipId/edit',
       name: 'OfficeRelationshipEdit',
       component: OfficeRelationshipUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-relationship/:officeRelationshipId/view',
       name: 'OfficeRelationshipView',
       component: OfficeRelationshipDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     }
     ,
     {
@@ -548,94 +548,94 @@ export default new Router({
       path: '/entity/office-area-code/new',
       name: 'OfficeAreaCodeCreate',
       component: OfficeAreaCodeUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-area-code/:officeAreaCodeId/edit',
       name: 'OfficeAreaCodeEdit',
       component: OfficeAreaCodeUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-area-code/:officeAreaCodeId/view',
       name: 'OfficeAreaCodeView',
       component: OfficeAreaCodeDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     }
     ,
     {
       path: '/entity/office-tax-func',
       name: 'OfficeTaxFunc',
       component: OfficeTaxFunc,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-tax-func/new',
       name: 'OfficeTaxFuncCreate',
       component: OfficeTaxFuncUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-tax-func/:officeTaxFuncId/edit',
       name: 'OfficeTaxFuncEdit',
       component: OfficeTaxFuncUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-tax-func/:officeTaxFuncId/view',
       name: 'OfficeTaxFuncView',
       component: OfficeTaxFuncDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     }
     ,
     {
       path: '/entity/office-weekday',
       name: 'OfficeWeekday',
       component: OfficeWeekday,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-weekday/new',
       name: 'OfficeWeekdayCreate',
       component: OfficeWeekdayUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-weekday/:officeWeekdayId/edit',
       name: 'OfficeWeekdayEdit',
       component: OfficeWeekdayUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/office-weekday/:officeWeekdayId/view',
       name: 'OfficeWeekdayView',
       component: OfficeWeekdayDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     }
     ,
     {
       path: '/entity/user-info',
       name: 'UserInfo',
       component: UserInfo,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001', 'ADM002'] }
     },
     {
       path: '/entity/user-info/new',
       name: 'UserInfoCreate',
       component: UserInfoUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001'] }
     },
     {
       path: '/entity/user-info/:userInfoId/edit',
       name: 'UserInfoEdit',
       component: UserInfoUpdate,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001', 'ADM002'] }
     },
     {
       path: '/entity/user-info/:userInfoId/view',
       name: 'UserInfoView',
       component: UserInfoDetails,
-      meta: { authorities: ['ROLE_USER'] }
+      meta: { authorities: ['ADM001', 'ADM002'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

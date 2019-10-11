@@ -26,15 +26,15 @@
                         <font-awesome-icon icon="th-list" />
                         <span v-text="$t('global.menu.entities.main')">Entities</span>
                     </span>
-                    <b-dropdown-item to="/entity/bank-account">
+                    <b-dropdown-item to="/entity/bank-account" v-if="hasAnyAuthority('ROLE_USER')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.bankAccount')">BankAccount</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/label">
+                    <b-dropdown-item to="/entity/label" v-if="hasAnyAuthority('ROLE_USER')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.label')">Label</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/operation">
+                    <b-dropdown-item to="/entity/operation" v-if="hasAnyAuthority('ROLE_USER')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.operation')">Operation</span>
                     </b-dropdown-item>
@@ -42,7 +42,7 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesGroup')">StdCodesGroup</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/std-codes-group-prop">
+                    <b-dropdown-item to="/entity/std-codes-group-prop" v-if="hasAnyAuthority('ROLE_ADMIN')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesGroupProp')">StdCodesGroupProp</span>
                     </b-dropdown-item>
@@ -58,35 +58,35 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.stdCodesProp')">StdCodesProp</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/exchange-rate">
+                    <b-dropdown-item to="/entity/exchange-rate" v-if="hasAnyAuthority('ADM002')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.exchangeRate')">ExchangeRate</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/public-holiday">
+                    <b-dropdown-item to="/entity/public-holiday" v-if="hasAnyAuthority('ADM002')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.publicHoliday')">PublicHoliday</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/office">
+                    <b-dropdown-item to="/entity/office" v-if="hasAnyAuthority('ADM001')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.office')">Office</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/office-relationship">
+                    <b-dropdown-item to="/entity/office-relationship" v-if="hasAnyAuthority('ADM001')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.officeRelationship')">OfficeRelationship</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/office-area-code">
+                    <b-dropdown-item to="/entity/office-area-code" v-if="hasAnyAuthority('ADM001')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.officeAreaCode')">OfficeAreaCode</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/office-tax-func">
+                    <b-dropdown-item to="/entity/office-tax-func" v-if="hasAnyAuthority('ADM001')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.officeTaxFunc')">OfficeTaxFunc</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/office-weekday">
+                    <b-dropdown-item to="/entity/office-weekday" v-if="hasAnyAuthority('ADM001')">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.officeWeekday')">OfficeWeekday</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/entity/user-info">
+                    <b-dropdown-item to="/entity/user-info" v-if="hasAnyAuthority(['ADM001', 'ADM002'])">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.userInfo')">UserInfo</span>
                     </b-dropdown-item>
