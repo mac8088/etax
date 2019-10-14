@@ -2,11 +2,11 @@
   "etaxApp": {
     "stdCodesGroup": {
       "home": {
-        "title": "Standard Codes Groups",
-        "createLabel": "创建新 Std Codes Group",
-        "createOrEditLabel": "创建或编辑 Std Codes Group",
-        "notFound": "No Std Codes Group found",
-        "description": "Description"
+        "title": "码表分组",
+        "createLabel": "创建新分组",
+        "createOrEditLabel": "创建或编辑分组",
+        "notFound": "没有找到符合条件的码表分组",
+        "description": "描述"
       },
       "created": "Std Codes Group {{ param }} 创建成功",
       "updated": "Std Codes Group {{ param }} 更新成功",
@@ -17,18 +17,18 @@
       "detail": {
         "title": "Std Codes Group"
       },
-      "groupCode": "Group Code",
-      "groupDesc": "Group Desc",
-      "systemInd": "System Ind",
-      "secLevelRequired": "Sec Level Required",
-      "valueRequired": "Value Required",
-      "valueType": "Value Type",
-      "descriptionRequired": "Description Required",
-      "externalCodeRequired": "External Code Required",
-      "externalCodeLength": "External Code Length",
-      "parentGroupRequired": "Parent Group Required",
-      "parentGroupCode": "Parent Group Code",
-      "touppercase": "Touppercase",
+      "groupCode": "组代码",
+      "groupDesc": "组描述",
+      "systemInd": "系统标记",
+      "secLevelRequired": "是否需要设置安全级别",
+      "valueRequired": "是否需要设置值",
+      "valueType": "值类型",
+      "descriptionRequired": "是否需要描述信息",
+      "externalCodeRequired": "是否需要外部代码",
+      "externalCodeLength": "外部代码长度",
+      "parentGroupRequired": "是否需要设置上级代码",
+      "parentGroupCode": "父级代码",
+      "touppercase": "转换为大写",
       "stdCodes": "Std Codes",
       "help": {
         "groupCode": "Code of the group of codes",

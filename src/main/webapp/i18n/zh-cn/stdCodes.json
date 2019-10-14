@@ -2,10 +2,10 @@
   "etaxApp": {
     "stdCodes": {
       "home": {
-        "title": "Standard Codes",
+        "title": "标准代码",
         "createLabel": "创建",
         "createOrEditLabel": "创建或编辑 Std Codes",
-        "notFound": "No Std Codes found",
+        "notFound": "没有找到符合条件的标准代码",
         "description": "Description"
       },
       "created": "Std Codes {{ param }} 创建成功",
@@ -17,13 +17,13 @@
       "detail": {
         "title": "Std Codes"
       },
-      "groupCode": "Group Code",
-      "internalCode": "Internal Code",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "parentInternalCode": "Parent Internal Code",
+      "groupCode": "组代码",
+      "internalCode": "内部代码",
+      "startDate": "开始日期",
+      "endDate": "截止日期",
+      "parentInternalCode": "上级代码",
       "comments": "Comments",
-      "secLevel": "Sec Level",
+      "secLevel": "安全级别",
       "codeValueDate": "Code Value Date",
       "codeValueString": "Code Value String",
       "codeValueBool": "Code Value Bool",

@@ -2,10 +2,10 @@
   "etaxApp": {
     "stdCodesGroupProp": {
       "home": {
-        "title": "Standard Codes Group Properties",
+        "title": "码表分组 - 附加属性",
         "createLabel": "创建新 Std Codes Group Prop",
         "createOrEditLabel": "创建或编辑 Std Codes Group Prop",
-        "notFound": "No Std Codes Group Prop found"
+        "notFound": "没有找到符合条件的附加属性"
       },
       "created": "Std Codes Group Prop {{ param }} 创建成功",
       "updated": "Std Codes Group Prop {{ param }} 更新成功",
@@ -16,17 +16,17 @@
       "detail": {
         "title": "Std Codes Group Prop"
       },
-      "groupCode": "Group Code",
-      "propCode": "Prop Code",
-      "propDesc": "Prop Desc",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "propType": "Prop Type",
-      "propMdtr": "Prop Mdtr",
-      "dfltValueDate": "Dflt Value Date",
-      "dfltValueString": "Dflt Value String",
-      "dfltValueBool": "Dflt Value Bool",
-      "dfltValueNumber": "Dflt Value Number",
+      "groupCode": "组代码",
+      "propCode": "属性代码",
+      "propDesc": "属性描述",
+      "startDate": "开始日期",
+      "endDate": "截止日期",
+      "propType": "属性类型",
+      "propMdtr": "强制属性",
+      "dfltValueDate": "日期类型的缺省值",
+      "dfltValueString": "文本类型的缺省值",
+      "dfltValueBool": "布尔类型的缺省值",
+      "dfltValueNumber": "数字类型的缺省值",
       "help": {
         "groupCode": "Code of the group of codes",
         "propCode": "Property code",

@@ -15,6 +15,9 @@ id;group_code;internal_code;start_date;end_date;parent_internal_code;comments;se
 14;OFFICE_TYPE;DG;1900-01-01 00:00:00;3000-01-01 00:00:00;;GT Deputy;1;null;null;null;null;190
 15;OFFICE_TYPE;TO;1900-01-01 00:00:00;3000-01-01 00:00:00;;Tax Office;1;null;null;null;null;190
 16;OFFICE_TYPE;PM;1900-01-01 00:00:00;3000-01-01 00:00:00;;Payment Office;1;null;null;null;null;190
+50;SECURITY_LEVEL;1;1900-01-01 00:00:00;3000-01-01 00:00:00;;Low;1;null;null;null;null;222
+51;SECURITY_LEVEL;2;1900-01-01 00:00:00;3000-01-01 00:00:00;;Medium;1;null;null;null;null;222
+52;SECURITY_LEVEL;3;1900-01-01 00:00:00;3000-01-01 00:00:00;;High;1;null;null;null;null;222
 100;OFFICE_SUB_TYPE;HO;1900-01-01 00:00:00;3000-01-01 00:00:00;HO;National Tax Authority;1;null;null;null;null;188
 101;OFFICE_SUB_TYPE;DP;1900-01-01 00:00:00;3000-01-01 00:00:00;DP;FAKETA President Deputy;1;null;null;null;null;188
 102;OFFICE_SUB_TYPE;PO;1900-01-01 00:00:00;3000-01-01 00:00:00;PO;Municipality Province or City GTO manager;1;null;null;null;null;188

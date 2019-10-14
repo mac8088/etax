@@ -2,10 +2,10 @@
   "etaxApp": {
     "stdCodesProp": {
       "home": {
-        "title": "Standard Codes Properties",
+        "title": "标准代码 - 附加属性",
         "createLabel": "创建新 Std Codes Prop",
         "createOrEditLabel": "创建或编辑 Std Codes Prop",
-        "notFound": "No Std Codes Prop found"
+        "notFound": "没有找到符合条件的代码属性"
       },
       "created": "Std Codes Prop {{ param }} 创建成功",
       "updated": "Std Codes Prop {{ param }} 更新成功",
@@ -16,15 +16,15 @@
       "detail": {
         "title": "Std Codes Prop"
       },
-      "groupCode": "Group Code",
-      "internalCode": "Internal Code",
-      "propCode": "Prop Code",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "valueDate": "Value Date",
-      "valueString": "Value String",
-      "valueBool": "Value Bool",
-      "valueNumber": "Value Number",
+      "groupCode": "组代码",
+      "internalCode": "内部代码",
+      "propCode": "属性代码",
+      "startDate": "开始日期",
+      "endDate": "截止日期",
+      "valueDate": "日期值",
+      "valueString": "文本值",
+      "valueBool": "布尔值",
+      "valueNumber": "数字值",
       "help": {
         "groupCode": "Code of the group of codes",
         "internalCode": "Internal code of the element in STD_CODES.",
