@@ -61,6 +61,8 @@ public class UserInfoCriteria implements Serializable, Criteria {
 
     private StringFilter loginStatus;
 
+    private StringFilter officeCode;
+
     private ZonedDateTimeFilter loginTime;
 
     private IntegerFilter attempt;
@@ -101,6 +103,7 @@ public class UserInfoCriteria implements Serializable, Criteria {
         this.cstdStatus = other.cstdStatus == null ? null : other.cstdStatus.copy();
         this.cstdAdmDivsison = other.cstdAdmDivsison == null ? null : other.cstdAdmDivsison.copy();
         this.loginStatus = other.loginStatus == null ? null : other.loginStatus.copy();
+        this.officeCode = other.officeCode == null ? null : other.officeCode.copy();
         this.loginTime = other.loginTime == null ? null : other.loginTime.copy();
         this.attempt = other.attempt == null ? null : other.attempt.copy();
         this.needApprove = other.needApprove == null ? null : other.needApprove.copy();
@@ -261,6 +264,14 @@ public class UserInfoCriteria implements Serializable, Criteria {
         this.loginStatus = loginStatus;
     }
 
+    public StringFilter getOfficeCode() {
+        return officeCode;
+    }
+
+    public void setOfficeCode(StringFilter officeCode) {
+        this.officeCode = officeCode;
+    }
+
     public ZonedDateTimeFilter getLoginTime() {
         return loginTime;
     }
@@ -362,6 +373,7 @@ public class UserInfoCriteria implements Serializable, Criteria {
             Objects.equals(cstdStatus, that.cstdStatus) &&
             Objects.equals(cstdAdmDivsison, that.cstdAdmDivsison) &&
             Objects.equals(loginStatus, that.loginStatus) &&
+            Objects.equals(officeCode, that.officeCode) &&
             Objects.equals(loginTime, that.loginTime) &&
             Objects.equals(attempt, that.attempt) &&
             Objects.equals(needApprove, that.needApprove) &&
@@ -394,6 +406,7 @@ public class UserInfoCriteria implements Serializable, Criteria {
         cstdStatus,
         cstdAdmDivsison,
         loginStatus,
+        officeCode,
         loginTime,
         attempt,
         needApprove,
@@ -427,6 +440,7 @@ public class UserInfoCriteria implements Serializable, Criteria {
                 (cstdStatus != null ? "cstdStatus=" + cstdStatus + ", " : "") +
                 (cstdAdmDivsison != null ? "cstdAdmDivsison=" + cstdAdmDivsison + ", " : "") +
                 (loginStatus != null ? "loginStatus=" + loginStatus + ", " : "") +
+                (officeCode != null ? "officeCode=" + officeCode + ", " : "") +
                 (loginTime != null ? "loginTime=" + loginTime + ", " : "") +
                 (attempt != null ? "attempt=" + attempt + ", " : "") +
                 (needApprove != null ? "needApprove=" + needApprove + ", " : "") +

@@ -71,6 +71,9 @@ const validations: any = {
     loginStatus: {
       maxLength: maxLength(20)
     },
+    officeCode: {
+      maxLength: maxLength(7)
+    },
     loginTime: {},
     attempt: {
       required,

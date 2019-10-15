@@ -42,6 +42,7 @@
                     <th v-on:click="changeOrder('cstdStatus')"><span v-text="$t('etaxApp.userInfo.cstdStatus')">Cstd Status</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('cstdAdmDivsison')"><span v-text="$t('etaxApp.userInfo.cstdAdmDivsison')">Cstd Adm Divsison</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('loginStatus')"><span v-text="$t('etaxApp.userInfo.loginStatus')">Login Status</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
+                    <th v-on:click="changeOrder('officeCode')"><span v-text="$t('etaxApp.userInfo.officeCode')">Office Code</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('loginTime')"><span v-text="$t('etaxApp.userInfo.loginTime')">Login Time</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('attempt')"><span v-text="$t('etaxApp.userInfo.attempt')">Attempt</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
                     <th v-on:click="changeOrder('needApprove')"><span v-text="$t('etaxApp.userInfo.needApprove')">Need Approve</span> <font-awesome-icon icon="sort"></font-awesome-icon></th>
@@ -78,6 +79,7 @@
                     <td>{{userInfo.cstdStatus}}</td>
                     <td>{{userInfo.cstdAdmDivsison}}</td>
                     <td>{{userInfo.loginStatus}}</td>
+                    <td>{{userInfo.officeCode}}</td>
                     <td>{{userInfo.loginTime | formatDate}}</td>
                     <td>{{userInfo.attempt}}</td>
                     <td>{{userInfo.needApprove}}</td>

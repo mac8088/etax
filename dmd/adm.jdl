@@ -168,6 +168,8 @@ entity UserInfo(adm_user_info){
     cstdAdmDivsison String maxlength(40) required,
     /**Login status */
     loginStatus String maxlength(20),
+    /**Attached office code*/
+    officeCode String maxlength(7),
     /**Login time */
     loginTime ZonedDateTime,
     /**Times of password error when logon attempts */

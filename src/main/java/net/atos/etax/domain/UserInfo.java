@@ -169,6 +169,14 @@ public class UserInfo implements Serializable {
     private String loginStatus;
 
     /**
+     * Attached office code
+     */
+    @Size(max = 7)
+    @ApiModelProperty(value = "Attached office code")
+    @Column(name = "office_code", length = 7)
+    private String officeCode;
+
+    /**
      * Login time
      */
     @ApiModelProperty(value = "Login time")
@@ -476,6 +484,19 @@ public class UserInfo implements Serializable {
         this.loginStatus = loginStatus;
     }
 
+    public String getOfficeCode() {
+        return officeCode;
+    }
+
+    public UserInfo officeCode(String officeCode) {
+        this.officeCode = officeCode;
+        return this;
+    }
+
+    public void setOfficeCode(String officeCode) {
+        this.officeCode = officeCode;
+    }
+
     public ZonedDateTime getLoginTime() {
         return loginTime;
     }
@@ -657,6 +678,7 @@ public class UserInfo implements Serializable {
             ", cstdStatus='" + getCstdStatus() + "'" +
             ", cstdAdmDivsison='" + getCstdAdmDivsison() + "'" +
             ", loginStatus='" + getLoginStatus() + "'" +
+            ", officeCode='" + getOfficeCode() + "'" +
             ", loginTime='" + getLoginTime() + "'" +
             ", attempt=" + getAttempt() +
             ", needApprove='" + isNeedApprove() + "'" +

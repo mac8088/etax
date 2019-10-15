@@ -83,6 +83,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="office_code" type="varchar(7)" remarks="Attached office code">
+                <constraints nullable="true" />
+            </column>
+
             <column name="login_time" type="datetime" remarks="Login time">
                 <constraints nullable="true" />
             </column>
@@ -169,6 +173,7 @@
             <column name="cstd_status" type="string"/>
             <column name="cstd_adm_divsison" type="string"/>
             <column name="login_status" type="string"/>
+            <column name="office_code" type="string"/>
             <column name="login_time" type="datetime"/>
             <column name="attempt" type="numeric"/>
             <column name="need_approve" type="boolean"/>

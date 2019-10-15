@@ -136,6 +136,9 @@ public class UserInfoQueryService extends QueryService<UserInfo> {
             if (criteria.getLoginStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getLoginStatus(), UserInfo_.loginStatus));
             }
+            if (criteria.getOfficeCode() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getOfficeCode(), UserInfo_.officeCode));
+            }
             if (criteria.getLoginTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLoginTime(), UserInfo_.loginTime));
             }

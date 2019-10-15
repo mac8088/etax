@@ -19,6 +19,7 @@ export interface IUserInfo {
   cstdStatus?: string;
   cstdAdmDivsison?: string;
   loginStatus?: string;
+  officeCode?: string;
   loginTime?: Date;
   attempt?: number;
   needApprove?: boolean;
@@ -52,6 +53,7 @@ export class UserInfo implements IUserInfo {
     public cstdStatus?: string,
     public cstdAdmDivsison?: string,
     public loginStatus?: string,
+    public officeCode?: string,
     public loginTime?: Date,
     public attempt?: number,
     public needApprove?: boolean,

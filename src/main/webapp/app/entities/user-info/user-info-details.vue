@@ -107,6 +107,12 @@
                         <span>{{userInfo.loginStatus}}</span>
                     </dd>
                     <dt>
+                        <span v-text="$t('etaxApp.userInfo.officeCode')">Office Code</span>
+                    </dt>
+                    <dd>
+                        <span>{{userInfo.officeCode}}</span>
+                    </dd>
+                    <dt>
                         <span v-text="$t('etaxApp.userInfo.loginTime')">Login Time</span>
                     </dt>
                     <dd>

@@ -202,6 +202,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="form-control-label" v-text="$t('etaxApp.userInfo.officeCode')" for="user-info-officeCode">Office Code</label>
+                        <input type="text" class="form-control" name="officeCode" id="user-info-officeCode"
+                            :class="{'valid': !$v.userInfo.officeCode.$invalid, 'invalid': $v.userInfo.officeCode.$invalid }" v-model="$v.userInfo.officeCode.$model" />
+                        <div v-if="$v.userInfo.officeCode.$anyDirty && $v.userInfo.officeCode.$invalid">
+                            <small class="form-text text-danger" v-if="!$v.userInfo.officeCode.maxLength" v-bind:value="$t('entity.validation.maxlength')">
+                                This field cannot be longer than 7 characters.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-control-label" v-text="$t('etaxApp.userInfo.loginTime')" for="user-info-loginTime">Login Time</label>
                         <div class="d-flex">
                             <input id="user-info-loginTime" type="datetime-local" class="form-control" name="loginTime" :class="{'valid': !$v.userInfo.loginTime.$invalid, 'invalid': $v.userInfo.loginTime.$invalid }"

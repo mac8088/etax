@@ -94,6 +94,9 @@ public class UserInfoResourceIT {
     private static final String DEFAULT_LOGIN_STATUS = "AAAAAAAAAA";
     private static final String UPDATED_LOGIN_STATUS = "BBBBBBBBBB";
 
+    private static final String DEFAULT_OFFICE_CODE = "AAAAAAA";
+    private static final String UPDATED_OFFICE_CODE = "BBBBBBB";
+
     private static final ZonedDateTime DEFAULT_LOGIN_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_LOGIN_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
@@ -188,6 +191,7 @@ public class UserInfoResourceIT {
             .cstdStatus(DEFAULT_CSTD_STATUS)
             .cstdAdmDivsison(DEFAULT_CSTD_ADM_DIVSISON)
             .loginStatus(DEFAULT_LOGIN_STATUS)
+            .officeCode(DEFAULT_OFFICE_CODE)
             .loginTime(DEFAULT_LOGIN_TIME)
             .attempt(DEFAULT_ATTEMPT)
             .needApprove(DEFAULT_NEED_APPROVE)
@@ -225,6 +229,7 @@ public class UserInfoResourceIT {
             .cstdStatus(UPDATED_CSTD_STATUS)
             .cstdAdmDivsison(UPDATED_CSTD_ADM_DIVSISON)
             .loginStatus(UPDATED_LOGIN_STATUS)
+            .officeCode(UPDATED_OFFICE_CODE)
             .loginTime(UPDATED_LOGIN_TIME)
             .attempt(UPDATED_ATTEMPT)
             .needApprove(UPDATED_NEED_APPROVE)
@@ -275,6 +280,7 @@ public class UserInfoResourceIT {
         assertThat(testUserInfo.getCstdStatus()).isEqualTo(DEFAULT_CSTD_STATUS);
         assertThat(testUserInfo.getCstdAdmDivsison()).isEqualTo(DEFAULT_CSTD_ADM_DIVSISON);
         assertThat(testUserInfo.getLoginStatus()).isEqualTo(DEFAULT_LOGIN_STATUS);
+        assertThat(testUserInfo.getOfficeCode()).isEqualTo(DEFAULT_OFFICE_CODE);
         assertThat(testUserInfo.getLoginTime()).isEqualTo(DEFAULT_LOGIN_TIME);
         assertThat(testUserInfo.getAttempt()).isEqualTo(DEFAULT_ATTEMPT);
         assertThat(testUserInfo.isNeedApprove()).isEqualTo(DEFAULT_NEED_APPROVE);
@@ -569,6 +575,7 @@ public class UserInfoResourceIT {
             .andExpect(jsonPath("$.[*].cstdStatus").value(hasItem(DEFAULT_CSTD_STATUS.toString())))
             .andExpect(jsonPath("$.[*].cstdAdmDivsison").value(hasItem(DEFAULT_CSTD_ADM_DIVSISON.toString())))
             .andExpect(jsonPath("$.[*].loginStatus").value(hasItem(DEFAULT_LOGIN_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].officeCode").value(hasItem(DEFAULT_OFFICE_CODE.toString())))
             .andExpect(jsonPath("$.[*].loginTime").value(hasItem(sameInstant(DEFAULT_LOGIN_TIME))))
             .andExpect(jsonPath("$.[*].attempt").value(hasItem(DEFAULT_ATTEMPT)))
             .andExpect(jsonPath("$.[*].needApprove").value(hasItem(DEFAULT_NEED_APPROVE.booleanValue())))
@@ -609,6 +616,7 @@ public class UserInfoResourceIT {
             .andExpect(jsonPath("$.cstdStatus").value(DEFAULT_CSTD_STATUS.toString()))
             .andExpect(jsonPath("$.cstdAdmDivsison").value(DEFAULT_CSTD_ADM_DIVSISON.toString()))
             .andExpect(jsonPath("$.loginStatus").value(DEFAULT_LOGIN_STATUS.toString()))
+            .andExpect(jsonPath("$.officeCode").value(DEFAULT_OFFICE_CODE.toString()))
             .andExpect(jsonPath("$.loginTime").value(sameInstant(DEFAULT_LOGIN_TIME)))
             .andExpect(jsonPath("$.attempt").value(DEFAULT_ATTEMPT))
             .andExpect(jsonPath("$.needApprove").value(DEFAULT_NEED_APPROVE.booleanValue()))
@@ -1340,6 +1348,45 @@ public class UserInfoResourceIT {
 
     @Test
     @Transactional
+    public void getAllUserInfosByOfficeCodeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where officeCode equals to DEFAULT_OFFICE_CODE
+        defaultUserInfoShouldBeFound("officeCode.equals=" + DEFAULT_OFFICE_CODE);
+
+        // Get all the userInfoList where officeCode equals to UPDATED_OFFICE_CODE
+        defaultUserInfoShouldNotBeFound("officeCode.equals=" + UPDATED_OFFICE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByOfficeCodeIsInShouldWork() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where officeCode in DEFAULT_OFFICE_CODE or UPDATED_OFFICE_CODE
+        defaultUserInfoShouldBeFound("officeCode.in=" + DEFAULT_OFFICE_CODE + "," + UPDATED_OFFICE_CODE);
+
+        // Get all the userInfoList where officeCode equals to UPDATED_OFFICE_CODE
+        defaultUserInfoShouldNotBeFound("officeCode.in=" + UPDATED_OFFICE_CODE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllUserInfosByOfficeCodeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        userInfoRepository.saveAndFlush(userInfo);
+
+        // Get all the userInfoList where officeCode is not null
+        defaultUserInfoShouldBeFound("officeCode.specified=true");
+
+        // Get all the userInfoList where officeCode is null
+        defaultUserInfoShouldNotBeFound("officeCode.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllUserInfosByLoginTimeIsEqualToSomething() throws Exception {
         // Initialize the database
         userInfoRepository.saveAndFlush(userInfo);
@@ -1801,6 +1848,7 @@ public class UserInfoResourceIT {
             .andExpect(jsonPath("$.[*].cstdStatus").value(hasItem(DEFAULT_CSTD_STATUS)))
             .andExpect(jsonPath("$.[*].cstdAdmDivsison").value(hasItem(DEFAULT_CSTD_ADM_DIVSISON)))
             .andExpect(jsonPath("$.[*].loginStatus").value(hasItem(DEFAULT_LOGIN_STATUS)))
+            .andExpect(jsonPath("$.[*].officeCode").value(hasItem(DEFAULT_OFFICE_CODE)))
             .andExpect(jsonPath("$.[*].loginTime").value(hasItem(sameInstant(DEFAULT_LOGIN_TIME))))
             .andExpect(jsonPath("$.[*].attempt").value(hasItem(DEFAULT_ATTEMPT)))
             .andExpect(jsonPath("$.[*].needApprove").value(hasItem(DEFAULT_NEED_APPROVE.booleanValue())))
@@ -1875,6 +1923,7 @@ public class UserInfoResourceIT {
             .cstdStatus(UPDATED_CSTD_STATUS)
             .cstdAdmDivsison(UPDATED_CSTD_ADM_DIVSISON)
             .loginStatus(UPDATED_LOGIN_STATUS)
+            .officeCode(UPDATED_OFFICE_CODE)
             .loginTime(UPDATED_LOGIN_TIME)
             .attempt(UPDATED_ATTEMPT)
             .needApprove(UPDATED_NEED_APPROVE)
@@ -1912,6 +1961,7 @@ public class UserInfoResourceIT {
         assertThat(testUserInfo.getCstdStatus()).isEqualTo(UPDATED_CSTD_STATUS);
         assertThat(testUserInfo.getCstdAdmDivsison()).isEqualTo(UPDATED_CSTD_ADM_DIVSISON);
         assertThat(testUserInfo.getLoginStatus()).isEqualTo(UPDATED_LOGIN_STATUS);
+        assertThat(testUserInfo.getOfficeCode()).isEqualTo(UPDATED_OFFICE_CODE);
         assertThat(testUserInfo.getLoginTime()).isEqualTo(UPDATED_LOGIN_TIME);
         assertThat(testUserInfo.getAttempt()).isEqualTo(UPDATED_ATTEMPT);
         assertThat(testUserInfo.isNeedApprove()).isEqualTo(UPDATED_NEED_APPROVE);
