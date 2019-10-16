@@ -39,6 +39,10 @@ import OfficeAreaCodeService from '@/entities/office-area-code/office-area-code.
 import OfficeTaxFuncService from '@/entities/office-tax-func/office-tax-func.service';
 import OfficeWeekdayService from '@/entities/office-weekday/office-weekday.service';
 import UserInfoService from '@/entities/user-info/user-info.service';
+import UiappService from '@/entities/uiapp/uiapp.service';
+import ResourceService from '@/entities/resource/resource.service';
+import PrivilegeService from '@/entities/privilege/privilege.service';
+
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 Vue.config.productionTip = false;
@@ -110,6 +114,9 @@ new Vue({
     officeTaxFuncService: () => new OfficeTaxFuncService(),
     officeWeekdayService: () => new OfficeWeekdayService(),
     userInfoService: () => new UserInfoService(),
+    uiappService: () => new UiappService(),
+    resourceService: () => new ResourceService(),
+    privilegeService: () => new PrivilegeService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService
   },

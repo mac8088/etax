@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Uiapp.
+    -->
+    <changeSet id="20191016085742-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="uiapp_id"
+                                 baseTableName="adm_uiapp_resource"
+                                 constraintName="fk_adm_uiapp_resource_adm_uiapp_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="adm_uiapp"/>
+
+        <addForeignKeyConstraint baseColumnNames="resource_id"
+                                 baseTableName="adm_uiapp_resource"
+                                 constraintName="fk_adm_uiapp_resource_resource_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="adm_resource"/>
+        
+    </changeSet>
+</databaseChangeLog>

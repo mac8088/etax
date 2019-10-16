@@ -1,0 +1,28 @@
+{
+  "etaxApp": {
+    "resource": {
+      "home": {
+        "title": "Resources",
+        "createLabel": "创建新 Resource",
+        "createOrEditLabel": "创建或编辑 Resource",
+        "notFound": "No Resource found"
+      },
+      "created": "Resource {{ param }} 创建成功",
+      "updated": "Resource {{ param }} 更新成功",
+      "deleted": "Resource {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Resource {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Resource"
+      },
+      "resCode": "Res Code",
+      "resName": "Res Name",
+      "resType": "Res Type",
+      "appDesc": "App Desc",
+      "cstdModule": "Cstd Module",
+      "resContent": "Res Content",
+      "uiapp": "Uiapp"
+    }
+  }
+}

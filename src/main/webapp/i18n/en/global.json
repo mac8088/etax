@@ -23,6 +23,9 @@
         "officeAreaCode": "Office Area Code",
         "officeTaxFunc": "Office Tax Func",
         "officeWeekday": "Office Weekday",
+        "uiapp": "Uiapp",
+        "resource": "Resource",
+        "privilege": "Privilege",
         "adm": "ADM",
         "std": "CFG",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"

@@ -1,0 +1,70 @@
+
+/**
+* Table for defining and maintaining UI apps.
+*/
+entity Uiapp(adm_uiapp){
+    /* User Captured Application ID, uiapp unique identifier */
+    appCode String required unique maxlength(50),
+    /* Application Name */
+    appName String maxlength(200),
+    /* Description of the uiapp */
+    appDesc String maxlength(500),
+    /* STD[MODULE], name of the module this uiapp belongs to */
+    cstdModule String maxlength(40),
+    /* Application Message ID in FF_MESSAGE */
+    appMessage String maxlength(50)
+}
+
+/**
+* The Resource segment holds all data related to a "resource": a resource is a functional unit on which access is controlled. 
+*/
+entity Resource(adm_resource){
+    /* Resource unique ID */
+    resCode String required unique maxlength(100),
+    /* Resource Name */
+    resName String maxlength(200),
+    /* Resource Type */
+    resType ResourceType,
+    /* Resource Description */
+    appDesc String maxlength(500),
+    /* STD[MODULE], name of the module this resource belongs to */
+    cstdModule String maxlength(40),
+    /* Resource Content, e.g.: workflow information */
+    resContent String maxlength(500)
+}
+
+/**
+* The UIAPP to Profile Link data segment holds data related to links between applications and profiles or users. 
+*/
+entity Privilege(adm_uiapp_privilege){
+    login String required maxlength(50),
+    password_hash String required maxlength(60),
+    first_name String maxlength(50),
+    limit Integer,
+    confirmStatus String maxlength(20),
+    effectiveDate ZonedDateTime required,
+    expiryDate ZonedDateTime
+}
+
+enum ResourceType {
+    WORKFLOW, CONTROLLER, REST
+}
+
+
+relationship ManyToMany {
+  Uiapp{resource(resCode)} to Resource{uiapp(appCode)}
+}
+
+
+// Set pagination options
+paginate Uiapp with pagination
+paginate Resource, Privilege with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceClass except Privilege
+
+// Use JPA Criteria to filter entities
+filter Uiapp, Resource

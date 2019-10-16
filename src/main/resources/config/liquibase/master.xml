@@ -33,11 +33,15 @@
     <include file="config/liquibase/changelog/20190917030401_added_entity_Person.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190917054438_added_entity_Deputy.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190917054439_added_entity_DeputyToDo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191016085742_added_entity_Uiapp.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191016085743_added_entity_Resource.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191016085744_added_entity_Privilege.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190911040156_added_entity_constraints_BankAccount.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190911040158_added_entity_constraints_Operation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190911040252_added_entity_constraints_StdCodes.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190911040253_added_entity_constraints_StdCodesDesc.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190911040358_added_entity_constraints_UserInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191016085742_added_entity_constraints_Uiapp.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

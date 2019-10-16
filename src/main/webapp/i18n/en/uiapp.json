@@ -1,0 +1,27 @@
+{
+  "etaxApp": {
+    "uiapp": {
+      "home": {
+        "title": "Uiapps",
+        "createLabel": "Create a new Uiapp",
+        "createOrEditLabel": "Create or edit a Uiapp",
+        "notFound": "No Uiapp found"
+      },
+      "created": "A new Uiapp is created with identifier {{ param }}",
+      "updated": "A Uiapp is updated with identifier {{ param }}",
+      "deleted": "A Uiapp is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Uiapp {{ id }}?"
+      },
+      "detail": {
+        "title": "Uiapp"
+      },
+      "appCode": "App Code",
+      "appName": "App Name",
+      "appDesc": "App Desc",
+      "cstdModule": "Cstd Module",
+      "appMessage": "App Message",
+      "resource": "Resource"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "etaxApp": {
+    "privilege": {
+      "home": {
+        "title": "Privileges",
+        "createLabel": "创建新 Privilege",
+        "createOrEditLabel": "创建或编辑 Privilege",
+        "notFound": "No Privilege found"
+      },
+      "created": "Privilege {{ param }} 创建成功",
+      "updated": "Privilege {{ param }} 更新成功",
+      "deleted": "Privilege {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Privilege {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Privilege"
+      },
+      "appCode": "App Code",
+      "userName": "User Name",
+      "profileName": "Profile Name",
+      "limit": "Limit",
+      "confirmStatus": "Confirm Status",
+      "effectiveDate": "Effective Date",
+      "expiryDate": "Expiry Date",
+      "help": {
+        "effectiveDate": "Effective date",
+        "expiryDate": "Expiry date"
+      }
+    }
+  }
+}

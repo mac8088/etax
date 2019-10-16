@@ -90,6 +90,18 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.userInfo')">UserInfo</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/entity/uiapp"  v-if="hasAnyAuthority('ROLE_ADMIN')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.uiapp')">Uiapp</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/resource"  v-if="hasAnyAuthority('ROLE_ADMIN')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.resource')">Resource</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/privilege"  v-if="hasAnyAuthority('ROLE_ADMIN')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.privilege')">Privilege</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown

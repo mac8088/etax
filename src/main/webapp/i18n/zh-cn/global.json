@@ -23,6 +23,9 @@
         "officeAreaCode": "机构区域维护",
         "officeTaxFunc": "机构功能维护",
         "officeWeekday": "机构工作日维护",
+        "uiapp": "功能应用",
+        "resource": "资源",
+        "privilege": "权限",
         "adm": "管理系统",
         "std": "配置系统",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"

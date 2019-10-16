@@ -120,6 +120,24 @@ const UserInfo = () => import('../entities/user-info/user-info.vue');
 const UserInfoUpdate = () => import('../entities/user-info/user-info-update.vue');
 // prettier-ignore
 const UserInfoDetails = () => import('../entities/user-info/user-info-details.vue');
+// prettier-ignore
+const Uiapp = () => import('../entities/uiapp/uiapp.vue');
+// prettier-ignore
+const UiappUpdate = () => import('../entities/uiapp/uiapp-update.vue');
+// prettier-ignore
+const UiappDetails = () => import('../entities/uiapp/uiapp-details.vue');
+// prettier-ignore
+const Resource = () => import('../entities/resource/resource.vue');
+// prettier-ignore
+const ResourceUpdate = () => import('../entities/resource/resource-update.vue');
+// prettier-ignore
+const ResourceDetails = () => import('../entities/resource/resource-details.vue');
+// prettier-ignore
+const Privilege = () => import('../entities/privilege/privilege.vue');
+// prettier-ignore
+const PrivilegeUpdate = () => import('../entities/privilege/privilege-update.vue');
+// prettier-ignore
+const PrivilegeDetails = () => import('../entities/privilege/privilege-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -636,6 +654,80 @@ export default new Router({
       name: 'UserInfoView',
       component: UserInfoDetails,
       meta: { authorities: ['ADM001', 'ADM002'] }
+    },
+    {
+      path: '/entity/uiapp',
+      name: 'Uiapp',
+      component: Uiapp,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/uiapp/new',
+      name: 'UiappCreate',
+      component: UiappUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/uiapp/:uiappId/edit',
+      name: 'UiappEdit',
+      component: UiappUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/uiapp/:uiappId/view',
+      name: 'UiappView',
+      component: UiappDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/resource',
+      name: 'Resource',
+      component: Resource,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/resource/new',
+      name: 'ResourceCreate',
+      component: ResourceUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/resource/:resourceId/edit',
+      name: 'ResourceEdit',
+      component: ResourceUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/resource/:resourceId/view',
+      name: 'ResourceView',
+      component: ResourceDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    }
+    ,
+    {
+      path: '/entity/privilege',
+      name: 'Privilege',
+      component: Privilege,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/privilege/new',
+      name: 'PrivilegeCreate',
+      component: PrivilegeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/privilege/:privilegeId/edit',
+      name: 'PrivilegeEdit',
+      component: PrivilegeUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/privilege/:privilegeId/view',
+      name: 'PrivilegeView',
+      component: PrivilegeDetails,
+      meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

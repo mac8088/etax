@@ -1,0 +1,10 @@
+{
+  "etaxApp": {
+    "ResourceType": {
+      "null": "",
+      "WORKFLOW": "WORKFLOW",
+      "CONTROLLER": "CONTROLLER",
+      "REST": "REST"
+    }
+  }
+}
