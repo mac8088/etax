@@ -1,0 +1,769 @@
+/**
+* The Option (单选项目) Enumerations.
+* Y, 是
+* N, 否
+*/
+enum Option {
+    Y,N
+}
+
+/**
+* The SalesType (销售类型) Enumerations.
+* EXPORT, 出口
+* DOMESTIC, 内销
+*/
+enum SalesType {
+    EXPORT, DOMESTIC
+}
+
+/**
+* The Currency (币别) Enumerations.
+* CNY, 人民币
+* USD, 美元
+* EUR, 欧元
+* AUD, 澳元
+*/
+enum Currency {
+    CNY, USD, EUR, AUD
+}
+
+/**
+* The TerminalCT (终端客户) Enumerations.
+* C, 便利店
+* O, 散户
+* M, 国际大连锁
+* T, 连锁百强
+* LKE, 冷库设备销售
+*/
+enum TerminalCT {
+    C, O, M, T, LKE
+}
+
+
+
+/**
+* The Employee (员工基本信息) entity.
+*/
+entity Employee (qhc_employee){
+    /**编号*/
+    emp_code String,
+    /**姓名*/
+    emp_name String,
+    /**机构*/
+    emp_organ String,
+    /**性别*/
+    emp_sex String,
+    /**教育*/
+    emp_educate String,
+    /**生日*/
+    emp_birthday LocalDate,
+    /***/
+    emp_poliback String,
+    /**婚姻*/
+    emp_marry String,
+    /***/
+    emp_native String,
+    /**身份证*/
+    emp_idcard String,
+    /**手机*/
+    emp_mobile String,
+    /***/
+    emp_zw String,
+    /**删除或者禁用标志*/
+    disabled Boolean,
+    /**创建人*/
+    created_by String,
+    /**创建日期*/
+    created_date ZonedDateTime,
+    /**变更人*/
+    last_modified_by String,
+    /**变更日期*/
+    last_modified_date ZonedDateTime
+}
+
+/**
+* The UserInfo (系统用户) entity.
+*/
+entity UserInfo (qhc_system_user){
+    /**登录名*/
+    login String,
+    /**密码哈希*/
+    password_hash String,
+    /**语言代码*/
+    lang_key String,
+    /**激活标志*/
+    activated Boolean,
+    /**创建日期*/
+    created_date ZonedDateTime,
+    /**变更人*/
+    last_modified_by String,
+    /**变更日期*/
+    last_modified_date ZonedDateTime
+}
+
+relationship OneToOne {
+    UserInfo{employee} to Employee
+}
+
+/**
+* The AuthorityInfo (系统角色) entity.
+*/
+entity AuthorityInfo (qhc_system_role){
+    /**角色代码*/
+    role_code String,
+    /**角色名称*/
+    role_name String,
+    /**角色级别*/
+    role_level String,
+    /**角色描述*/
+    role_remark String,
+    /**删除或者禁用标志*/
+    disabled Boolean,
+    /**创建人*/
+    created_by String,
+    /**创建日期*/
+    created_date ZonedDateTime,
+}
+
+relationship ManyToMany {
+    AuthorityInfo{user(login)} to UserInfo{role(role_code)}
+}
+
+/**
+* The StdCodes (数据字典-码表) entity.
+*/
+entity StdCodes (std_codes){
+    /**组码*/
+    group_code String required maxlength(40),
+    /**内部代码*/
+    internal_code String required maxlength(40),
+    /**开始日期*/
+    start_date ZonedDateTime required,
+    /**截止日期*/
+    end_date ZonedDateTime,
+    /**上级代码*/
+    parent_internal_code String,
+    /**安全级别*/
+    sec_level Integer min(0) max(99),
+    /**字符类型的码值*/
+    code_value_string String maxlength(255),
+    /**数字类型的码值*/
+    code_value_number Long,
+    /**布尔类型的码值*/
+    code_value_bool Boolean,
+    /**日期类型的码值*/
+    code_value_date LocalDate,
+    /**备注*/
+    comments String maxlength(255)
+}
+
+/**
+* The StdCodesDesc (数据字典-描述表) entity.
+*/
+entity StdCodesDesc (std_codes_desc){
+    /**组码*/
+    group_code String required maxlength(40),
+    /**内部代码*/
+    internal_code String required maxlength(40),
+    /**语言*/
+    lang_code String required maxlength(2),
+    /**开始日期*/
+    start_date ZonedDateTime required,
+    /**截止日期*/
+    end_date ZonedDateTime,
+    /**外部代码*/
+    external_code String maxlength(40),
+    /**代码描述*/
+    code_desc String required maxlength(255)
+}
+
+/**
+* The StdCodesGroup (数据字典-组表) entity.
+*/
+entity StdCodesGroup (std_codes_group){
+    /**组码*/
+    group_code String required maxlength(40),
+    /**组描述*/
+    group_desc String required maxlength(255),
+    /**系统指示*/
+    system_ind String required maxlength(1),
+    /**是否需要安全级别*/
+    sec_level_required Boolean required,
+    /**是否需要值*/
+    value_required Boolean required,
+    /**值类型*/
+    value_type String maxlength(1),
+    /**是否需要描述*/
+    description_required Boolean required,
+    /**是否需要外部代码*/
+    external_code_required Boolean,
+    /**外部代码长度*/
+    external_code_length Integer,
+    /**是否需要父组*/
+    parent_group_required Boolean required,
+    /**父组代码*/
+    parent_group_code String maxlength(40),
+    /**系统指示*/
+    touppercase Option
+}
+
+/**
+* The StdCodesProp (数据字典-码属性) entity.
+*/
+entity StdCodesProp (std_codes_prop){
+    /**组码*/
+    group_code String required maxlength(40),
+    /**内部代码*/
+    internal_code String required maxlength(40),
+    /**属性码*/
+    prop_code String required maxlength(40),
+    /**开始日期*/
+    start_date ZonedDateTime required,
+    /**截止日期*/
+    end_date ZonedDateTime,
+    /**字符类型的码值*/
+    value_string String maxlength(255),
+    /**数字类型的码值*/
+    value_number Double,
+    /**布尔类型的码值*/
+    value_bool Boolean,
+    /**日期类型的码值*/
+    value_date LocalDate,
+}
+
+relationship ManyToOne {
+    StdCodesDesc{stdCodes} to StdCodes,
+    StdCodes {stdGroup} to StdCodesGroup
+}
+
+relationship ManyToMany {
+    StdCodesGroup{stdProp(prop_code)} to StdCodesProp{stdGroup(group_code)}
+}
+
+
+////////////////////////////////
+
+//entity Author
+//entity Book
+//A Book has one, required, Author, an Author has several Books
+//relationship OneToMany {
+//  Author{book} to Book{writer(name) required}
+//}
+
+//entity Owner
+//entity Car
+//Owner (1) <-----> (*) Car
+//A bidirectional one-to-many relationship
+//A owner can have many cars, and a car can have only one owner
+//from a Car instance you could find its owner, and from a Owner instance you could get all of its cars.
+//On the generated AngularJS client UI you will have a dropdown in Car to select a Owner.
+//relationship OneToMany {
+//  Owner{car} to Car{owner}
+//}
+
+//Owner (1) <----- (*) Car
+//A unidirectional many-to-one relationship means that the cars know their owner, but not the opposite.
+//you won’t be able to add or remove cars from the Owner entity.
+//On the generated AngularJS client UI you will have a dropdown in Car to select a Owner
+//relationship ManyToOne {
+//  Car{owner} to Owner
+//}
+
+//Owner (1) -----> (*) Car
+//A unidirectional one-to-many relationship means that the Owner instance can get its collection of cars, but not the opposite.
+//This type of relationship is not provided by default in JHipster at the moment, see #1569 for more information.
+//https://github.com/jhipster/generator-jhipster/issues/1569
+
+//Driver (1) <-----> (1) Car
+//a one-to-one relationship would mean that a Driver can drive only one Car, and a Car can only have one Driver.
+
+//entity Driver
+//entity Car
+
+//relationship OneToOne {
+//  Car{driver} to Driver{car}
+//}
+
+//Citizen (1) -----> (1) Passport
+//A unidirectional one-to-one relationship
+//After doing this, a Citizen possesses a passport, but no Citizen instance is defined in Passport.
+//On the generated AngularJS client UI you will have a dropdown in Citizen to select a Passport since Citizen is the owning side.
+//entity Citizen
+//entity Passport
+
+//relationship OneToOne {
+//  Citizen{passport} to Passport
+//}
+
+
+///////////////////////////////
+/**
+* The Customer (客户) entity.
+*/
+entity Customer (qhc_customer_info) {
+    /**客户代码*/
+    cust_code String maxlength(40) required,
+    /**签约单位*/
+    customer_name String maxlength(100),
+    /**性质分类*/
+    customer_type String maxlength(40),
+    /**创建人*/
+    createUser String maxlength(40),
+    /**创建日期*/
+    createTime ZonedDateTime
+}
+
+relationship OneToOne {
+    Demand{customer} to Customer{cust_code}
+}
+
+
+/**
+* The Demand (需求) entity.
+*/
+entity Demand (qhc_demand_hdr){
+    /**流水号(需求单号) */
+    demand_code String maxlength(40) required,
+    /**合同号(核算号) */
+    contract_code String maxlength(40),
+    /**原币合同金额*/
+    oricon_amount Double,
+    /**合同金额*/
+    con_amount Double,
+    /**币别 */
+    currency_name String maxlength(40),
+    /**汇率 */
+    exchange_rate Double,
+    /**汇率损益*/
+    exchange_diff Double,
+    /**汇率类型*/
+    exchange_type String maxlength(40),
+    /**签约单位*/
+    customer_name String maxlength(40),
+    /**性质分类*/
+    customer_type String maxlength(40),
+    /**是否年采客户*/
+    is_yearpurchase Boolean,
+    /**年采开始日期*/
+    yp_startDate ZonedDateTime,
+    /**年采结束日期*/
+    yp_endDate ZonedDateTime,
+    /**客户经理*/
+    cust_manager String maxlength(40),
+    /**客户经理电话*/
+    cust_manTel String maxlength(40),
+    /**项目报备编号*/
+    project_code String maxlength(40),
+    /**合同管理员*/
+    contract_admin String maxlength(40),
+    /**店名 */
+    shop_name String maxlength(100),
+    /**合同性质*/
+    contract_type String maxlength(40),
+    /**大区 */
+    own_area String maxlength(40),
+    /**中心 */
+    own_center String maxlength(40),
+    /**录入日期*/
+    record_date ZonedDateTime,
+    /**安装公司*/
+    install_company String maxlength(100),
+    /**保修年限（年） */
+    maintainee_year Double,
+    /**要求发货时间*/
+    delivery_time ZonedDateTime,
+    /**要求到货时间*/
+    arrival_time ZonedDateTime,
+    /**车次 */
+    car_number String maxlength(40),
+    /**收货方式*/
+    takegood_way String maxlength(40),
+    /**是否自提*/
+    is_takeself Boolean,
+    /**运费 */
+    transport_fee Double,
+    /**是否经销商特批折扣*/
+    is_specialdiscount Boolean,
+    /**折扣 */
+    discount_money Double,
+    /**终端客户性质*/
+    terminal_custtype String maxlength(100),
+    /**终端客户是否新客户*/
+    terminal_isnewer Boolean,
+    /**直签客户的终端客户是改造店*/
+    is_shop Boolean,
+    /**销售类型*/
+    sale_type String maxlength(40),
+    /**国际贸易条件*/
+    tradeCondition String maxlength(100),
+    /**备货类型*/
+    storeGood_type String maxlength(40),
+    /**授权人1 */
+    agent_user1 String maxlength(40),
+    /**授权人1身份证号*/
+    agent_card1 String maxlength(40),
+    /**授权人1电话 */
+    agent_phone1 String maxlength(40),
+    /**授权人2 */
+    agent_user2 String maxlength(40),
+    /**授权人2身份证号*/
+    agent_card2 String maxlength(40),
+    /**授权人2电话 */
+    agent_phone2 String maxlength(40),
+    /**授权人3 */
+    agent_user3 String maxlength(40),
+    /**授权人3身份证号*/
+    agent_card3 String maxlength(40),
+    /**授权人3电话 */
+    agent_phone3 String maxlength(40),
+    /**到货地址*/
+    arrival_address String maxlength(100),
+    /**地区 */
+    arrival_area String maxlength(40),
+    /**结算方式(填写项) */
+    account_method String maxlength(40),
+    /**折扣率*/
+    discount_rate Double,
+    /**定单类型*/
+    order_type Boolean,
+    /**是否有外购产品 */
+    has_purchase String maxlength(2),
+    /**是否全部为散件 */
+    is_allScattered Boolean,
+    /**备注 */
+    remark String maxlength(200),
+    /**拼接方式*/
+    montage_method String maxlength(100),
+    /**拼接方式附件*/
+    montage_attachurl String maxlength(100),
+    /**是否申请紧急发货 */
+    is_urgentSend Boolean,
+    /**审批状态*/
+    approve_state String maxlength(2),
+    /**是否删除标识*/
+    is_delete Boolean,
+    /**创建人*/
+    createUser String maxlength(40),
+    /**创建日期*/
+    createTime ZonedDateTime,
+    /**更新人*/
+    updateUser String maxlength(40),
+    /**更新日期*/
+    upLocalDate ZonedDateTime,
+    /**备用字段1 */
+    reserve1 String maxlength(40),
+    /**备用字段2 */
+    reserve2 String maxlength(40),
+    /**备用字段3 */
+    reserve3 String maxlength(40)
+}
+
+/**
+* The Product (产品) entity.
+*/
+entity Product (qhc_product_info){
+    /**专用号 */
+    prod_code String maxlength(40) required,
+    /**产品名称 */
+    prod_name String maxlength(100),
+    /**产品类型 */
+    prod_type String maxlength(40),
+    /**规格型号 */
+    prod_model String maxlength(100),
+    /**计量单位 */
+    unit String maxlength(10),
+    /**成本价 */
+    cost Double,
+    /**税率 */
+    tax_rate Double,
+    /**市场零售价 */
+    sale_price Double,
+    /**汽运规格 */
+    transport_spec String maxlength(40),
+    /**单位吨位 */
+    perunit_ton Double,
+    /**产品物料标识*/
+    isprod Boolean,
+    /**生产周期 */
+    prod_period Double,
+    /**采购周期 */
+    purch_period Double,
+    /**年采价格 */
+    yearpurch_price Double,
+    /**年采价格开始日期*/
+    startDate ZonedDateTime,
+    /**年采价格结束日期*/
+    endDate ZonedDateTime,
+    /**创建人 */
+    createUser String maxlength(40),
+    /**创建日期 */
+    createTime ZonedDateTime
+}
+
+/**
+* The DemandDetail (需求明细) entity.
+*/
+entity DemandDetail (qhc_demand_dtl){
+    /**专用号 */
+    prod_code String maxlength(40),
+    /**产品名称 */
+    prod_name String maxlength(100),
+    /**产品类型 */
+    prod_type String maxlength(40),
+    /**规格型号 */
+    prod_model String maxlength(100),
+    /**物料属性 */
+    material_type String maxlength(40),
+    /**数量 */
+    need_count Double,
+    /**计量单位 */
+    unit_name String maxlength(10),
+    /**实卖价 */
+    sale_price Double,
+    /**实卖金额 */
+    sale_amount Double,
+    /**转移价 */
+    transfer_price Double,
+    /**市场零售价*/
+    wholesale_price Double,
+    /**市场零售金额 */
+    wholesale_amount Double,
+    /**折扣率 */
+    discount_rate Double,
+    /**审核标记 */
+    approve_state String maxlength(2),
+    /**汽运规格 */
+    transport_spec String maxlength(40),
+    /**单位吨位 */
+    perunit_ton Double,
+    /**是否调发 */
+    is_transfer Boolean,
+    /**是否消化 */
+    is_digest Boolean,
+    /**生产周期 */
+    prod_period Double,
+    /**要求发货时间 */
+    require_deliveryDate ZonedDateTime,
+    /**生产开始时间 */
+    prod_startDate ZonedDateTime,
+    /**生产结束时间（入库时间在此基础上加两个工作日）*/
+    prod_ednDate ZonedDateTime,
+    /**采购周期（不含运输周期）*/
+    purch_period Double,
+    /**B2C备注*/
+    b2c_remark String maxlength(100),
+    /**特殊备注 */
+    spec_remark String maxlength(100),
+    /**描述 */
+    remark String maxlength(100),
+    /**创建人 */
+    createUser String maxlength(40),
+    /**创建日期 */
+    crateTime ZonedDateTime,
+    /**更新人 */
+    updateUser String maxlength(40),
+    /**更新日期 */
+    updateTime ZonedDateTime,
+    /**备用字段1 */
+    reserve1 String maxlength(40),
+    /**备用字段2 */
+    reserve2 String maxlength(40),
+    /**备用字段3 */
+    reserve3 String maxlength(40)
+}
+
+relationship OneToOne {
+    DemandDetail{product} to Product
+}
+
+relationship ManyToOne {
+    DemandDetail{demand} to Demand{demand_code}
+}
+
+
+entity Contract{
+    /**需求ID*/
+    demand_id String maxlength(40) required,
+    /**需求流水号   */
+    demand_code String maxlength(40),
+    /**收到需方付款后几日内发货   */
+    delivery_indays Double,
+    /**接货方式(盖章接货/签字接货)*/
+    receive_ways String maxlength(40),
+    /**接货人1姓名  */
+    receiver_user1 String maxlength(40),
+    /**接货人1身份证号            */
+    receiver_idcard1 String maxlength(40),
+    /**接货人2姓名  */
+    /**接货人2身份证号            */
+    receiver_user2 String maxlength(40),
+    receiver_idcard2 String maxlength(40),
+    /**接货人3姓名  */
+    receiver_user3 String maxlength(40),
+    /**接货人3身份证号            */
+    receiver_idcard3 String maxlength(40),
+    /**终端客户名称 */
+    terminal_custname String maxlength(40),
+    /**实际安装地点 */
+    install_place String maxlength(100),
+    /**质量标准     */
+    quality_standard String maxlength(100),
+    /**验收标准（方法）           */
+    acceptance_standard String maxlength(100),
+    /**结算方式     */
+    account_way String maxlength(40),
+    /**发票邮寄地址 */
+    invoice_toAddress String maxlength(100),
+    /**邮编         */
+    post_code String maxlength(10),
+    /**发票接收人   */
+    invoice_toPerson String maxlength(40),
+    /**联系电话     */
+    phone_no String maxlength(20),
+    /**是否删除标识 */
+    is_delete Boolean,
+    /**创建人       */
+    createUser String maxlength(40),
+    /**创建日期     */
+    createDate ZonedDateTime,
+    /**更新人       */
+    updateUser String maxlength(40),
+    /**更新日期     */
+    updateDate ZonedDateTime,
+    /**预留字段1    */
+    reserve1 String maxlength(40),
+    /**预留字段2    */
+    reserve2 String maxlength(40),
+    /**预留字段3    */
+    reserve3 String maxlength(40)
+}
+
+entity Order
+entity BidingDoc
+entity GrossProfit
+entity ExpenseItem
+
+/**
+* The Research (调研) entity.
+*/
+entity Research (qhc_research){
+    /**调研单号  */
+    research_number String maxlength(40) required,
+    /**需求单主表ID */
+    demand_id String maxlength(40),
+    /**detail_id */
+    detail_id String maxlength(40),
+    /**合同号(核算号) */
+    contract_code String maxlength(40),
+    /**客户ID*/
+    cust_id String maxlength(40),
+    /**签约单位  */
+    cust_name String maxlength(100),
+    /**需求单明细表ID */
+    demand_detailId String maxlength(40),
+    /**调研日期  */
+    reseach_date ZonedDateTime,
+    /**是否删除标识 */
+    is_delete Boolean,
+    /**创建人*/
+    createUser String maxlength(40),
+    /**创建时间  */
+    createDate ZonedDateTime,
+    /**更新人*/
+    updateUser String maxlength(40),
+    /**更新时间  */
+    updateDate ZonedDateTime,
+    /**预留字段1 */
+    reserve1 String maxlength(40),
+    /**预留字段2 */
+    reserve2 String maxlength(40),
+    /**预留字段3 */
+    reserve3 String maxlength(40)
+}
+
+/**
+* The Research (调研明细) entity.
+*/
+entity ResearchItem (qhc_research_item){
+    /**detail_id */
+    detail_id String maxlength(40) required,
+    /**research_id*/
+    research_id String maxlength(40),
+    /**prod_id*/
+    prod_id String maxlength(40),
+    /**param_valueid  */
+    param_valueid String maxlength(40),
+    /**产品名称  */
+    prod_name String maxlength(100),
+    /**产品系列  */
+    prod_series String maxlength(40),
+    /**产品型号  */
+    prod_model String maxlength(100),
+    /**国内定单  */
+    is_internalOrder Boolean,
+    /**出口定单  */
+    is_exportOrder Boolean,
+    /**商标要求  */
+    trademark_requires String maxlength(100),
+    /**木包装要求*/
+    packaging_requires String maxlength(100),
+    /**铭牌要求  */
+    nameplate_requires String maxlength(100),
+    /**电路图要求*/
+    circuitry_requires String maxlength(100),
+    /**标配关联关系ID */
+    standpara_id String maxlength(40),
+    /**配置值表ID*/
+    paraval_id String maxlength(40),
+    /**标准配置  */
+    stand_value String maxlength(40),
+    /**其他配置  */
+    other_value String maxlength(40),
+    /**标准配置收费*/
+    stand_fee Double,
+    /**其他配置收费*/
+    oter_fee Double,
+    /**备注  */
+    remark String maxlength(40),
+    /**拼接图*/
+    montage_name String maxlength(40),
+    /**拼接图附件*/
+    montage_attachurl String maxlength(100),
+    /**调研人*/
+    research_person String maxlength(40),
+    /**确认用户  */
+    confirm_person String maxlength(40),
+    /**是否删除标识*/
+    is_delete Boolean,
+    /**创建人*/
+    createUser String maxlength(40),
+    /**创建时间  */
+    createTime ZonedDateTime,
+    /**更新人*/
+    updateUser String maxlength(40),
+    /**更新时间  */
+    updateTime ZonedDateTime,
+    /**预留字段1 */
+    reserve1 String maxlength(40),
+    /**预留字段2 */
+    reserve2 String maxlength(40),
+    /**预留字段3 */
+    reserve3 String maxlength(40)
+}
+
+relationship OneToMany {
+    Research{item} to ResearchItem{research}
+}
+
+
+/**
+* The AAA (什么) entity.
+*/
+entity AAA (qhc_aaa){
+    /**代码*/
+    code String,
+    /**名称*/
+    role_name String
+}
+
+

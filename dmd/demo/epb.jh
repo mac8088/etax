@@ -1,0 +1,644 @@
+/**
+* The EnterpriseScale (企业规模) Enumerations.
+* 从业人员(X), 营业收入(Y), 万元
+* 大型 X >= 1000, Y >= 40000, 中型 300 =< X < 1000, 
+* 2000 =< Y < 40000,  小型 20 =< X < 300, 300 =< Y < 2000,  
+* 微型 20 < X, 300 < Y
+*/
+enum EnterpriseScale {
+    LARGESIZED, MEDIUMSIZED, SMALLSIZED, MINISIZED
+}
+
+/**
+* The AgencyType (机构类型) Enumerations.
+* 调查机构、评估机构
+*/
+enum AgencyType {
+    SURVEY, EVALUATION
+}
+
+/**
+* The LandPurpose (土地用途) Enumerations.
+* 工业类用地, 住宅类用地, 商业类用地, 其他用途, 不确定
+*/
+enum LandPurpose {
+    INDUSTRY, RESIDENCE, COMMERCE, OTHER, UNCERTAIN
+}
+
+/**
+* The LandOwnerShip (土地权属) Enumerations.
+* 原关闭搬迁企业,集体,土地储备单位,开发单位
+*/
+enum LandOwnerShip {
+    ORIGINAL_UNIT, COLLECTIVE_UNIT, LAND_RESERVE_UNIT, DEVELOPING_UNIT
+}
+
+/**
+* The LandCategory (地块类别) Enumerations.
+* 在产企业地块，关闭搬迁企业地块
+*/
+enum LandCategory {
+    PRODUCING, CLOSED_RELOCATED
+}
+
+/**
+* The LandControl (土地控制状态) Enumerations.
+* 用于简单的内部流程管理: 申报中，申报完成，审核中，审核
+*/
+enum LandControl {
+    DECLARING, DECLARED, AUDITING, APPROVED, REJECTED
+}
+
+/**
+* The LandSupervise (土地监控状态) Enumerations.
+* 拟回收，已收回，用途拟变更为居住、商业、学校、医疗、养老机构的公共设施用地
+*/
+enum LandSupervise {
+    TOBE_RECOVERED, RECOVERED, TOBE_CHANGED
+}
+
+/**
+* The LandPollute (土地污染状态) Enumerations.
+* 疑似污染, 已污染, 修复中, 已修复, 废弃
+*/
+enum LandPollute {
+    SUSPECTED, CONTAMINATED, FIXING, FIXED, ABANDONED
+}
+
+/**
+* The CleanLevel (清洁生产水平) Enumerations.
+* 按清洁生产审核的结果填写。 
+* 按清洁生产标准，一级代表国际清洁生产先进水平，二级代表国内清洁生产先进水平，三级代表国内清洁生产基本水平
+*/
+enum CleanLevel {
+    L1, L2, L3
+}
+
+/**
+* The SoilType (土壤类型) Enumerations.
+* 按地块所在区域土壤类型填写,分为砖红壤、赤红壤、红壤和黄壤、黄棕壤、棕壤、暗棕壤、寒棕壤（漂灰土）、
+* 褐土、黑钙土、栗钙土、棕钙土、黑垆土、荒漠土、高山草甸土、高山漠土
+*/
+enum SoilType {
+    LATERITE_SOIL, LATOSOLIC_RED_SOIL, RED_YELLOW_SOIL, YELLOW_BROWN_SOIL, BROWN_SOIL,
+    DARK_BROWN_SOIL, CRYO_BROWN_SOIL, CINNAMON_SOIL, CHERNOZEM_SOIL, CHESTNUT_SOIL,
+	CALCIC_BROWN_SOIL, HEILU_SOIL, DESERT_SOIL, ALPINE_MEADOW_SOIL, ALPINE_DESERT_SOIL
+}
+
+/**
+* The WellPurpose (水井用途) Enumerations.
+* 按生活/饮用、农业灌溉、工业、景观、其他填写
+*/
+enum WellPurpose {
+    DRINKING, IRRIGATION, INDUSTRIAL, LANDSCAPE, OTHER
+}
+
+/**
+* The AbnormalWaterReason (水质异常) Enumerations.
+* 根据颜色、气味、浑浊度等特征判断水质是否存在异常情况,若存在如下情况可认定为水质异常:
+* A: 颜色、气味明显异常,或者地下水中能见到油状物质；
+* B: 现场快速检查仪器检测结果表明,地下水中污染物含量异常
+*/
+enum AbnormalWaterReason {
+    MANUAL_DETECTION, INSTRUMENT_DETECTION, UNCERTAIN
+}
+
+/**
+* The SoilTexture (土壤质地) Enumerations.
+* 指表层土壤,按地块所在区域土壤质地填写,分为砂土、壤土、粘土。
+*/
+enum SoilTexture {
+    SANDY, LOAM, CLAY, UNCERTAIN
+}
+
+/**
+* The IndustryCategory (行业类别) entity.
+*/
+entity IndustryCategory(epb_industry_category){
+    /**门类代码/
+    categoryCode String required maxlength(4),
+    /**门类分类代码*/
+    categoryClassifyCode String required maxlength(3),
+    /**行业代码*/
+    industryCode String required maxlength(2),
+    /** 行业分类代码*/
+    industryClassifyCode String required maxlength(1),
+    /**行业名称/
+    categoryName String required,
+    /**备注/
+    remark String maxlength(256)
+}
+
+/**
+* The RegistrationType (登记注册类型) entity.
+*/
+entity RegistrationType(epb_registration_type){
+    /**注册代码*/
+    registerCode String required maxlength(3),
+    /**企业登记注册类型名称*/
+    registerName String required,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The ThirdPartyAgency (第三方机构) entity.
+*/
+entity ThirdPartyAgency(epb_thirdparty_agency){
+    /**机构名称*/
+    agencyName String required,
+    /**机构类型*/
+	agencyType AgencyType,
+    /**法定代表人*/
+    legalPerson String required maxlength(50),
+    /**联系人-姓名*/
+    contactPerson String,
+    /**联系人-电话*/
+    contactTelephone String,
+    /**联系人-邮箱*/
+    contactMail String,
+    /**联系人-操作员*/
+    operator String,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The LandOwner (土地使用者) entity.
+*/
+entity LandOwner(epb_land_owner){
+    /**单位名称（在产企业）或者原单位名称（关闭搬迁企业）指经有关部门批准正式使用的单位全称*/
+    unitName String required maxlength(100),
+    /**统一社会信用代码,指由国家标准委发布的一组长度为18位的用于法人和其他组织身份识别的代码,按照《营业执照》填写*/
+    socialCreditCode String required maxlength(20),
+    /**法定代表人*/
+    legalPerson String required maxlength(50),
+    /**行政区划代码:行政区划代码指调查地块实际所在地的县（区）的行政区划代码,调查地块应按照国家统计局公布的最新县及县以上行政区划代码, 填写6位行政区划代码.*/
+    regionCode String required maxlength(10),
+    /**单位所在地及行政区划: 单位所在地指调查对象生产场所实际所在地的详细地址省(自治区、直辖市)*/
+    province String required maxlength(50),
+    /**单位所在地及行政区划: 大型联合企业所属二级单位，一律按本二级单位所在地址填写 地区（市、州、盟）*/
+    district String required maxlength(100),
+    /**单位所在地及行政区划: 要求写明省(自治区、直辖市)、市(地区、州、盟)、县(区、市、旗)、乡(镇)以及具体街(村)的名称和详细的门牌号码 县(区、市、旗)/
+    county String required maxlength(100),
+    /**单位所在地及行政区划: 不能填写通讯号码或通讯信箱号码, 乡(镇)*/
+    township String required maxlength(100),
+    /**单位所在地及行政区划 街(村)、门牌号*/
+    village String required maxlength(100),
+    /**联系人-姓名: 指企业负责环保的联系人姓名 (填写人)*/
+    contactPerson String,
+    /**联系人-电话: 指企业负责环保的联系人电话*/
+    contactTelephone String,
+    /**联系人-邮箱*/
+    contactMail String,
+    /**联系人-操作员：登录系统完成数据申报*/
+    operator String,	
+    /**企业规模，针对在产企业*/
+    scale EnterpriseScale,
+    /**开业时间，针对在产企业*/
+    openingDate LocalDate,
+    /**最新改扩建时间*/
+    latestExpansionTime LocalDate,
+    /**运营开始时间，针对关闭的搬迁企业*/
+    OperatedTimeFrom LocalDate,
+    /**运营结束时间，针对关闭的搬迁企业*/
+    OperatedTimeTo LocalDate,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The LandParcel (土地地块) entity.
+*/
+entity LandParcel(epb_land_parcel){
+    /**地块编码, 由13位代码组成, 前6位行政区划代码:  1位地块类型代码, 在产企业地块为1, 关闭搬迁企业地块; 2位行业大类代码, 后4位流水号码，某区县内地块从0001开始编码.*/
+    landCode String required maxlength(20),
+    /**地块名称，根据企业名称对地块命名, 若企业存在多个厂区, 需对每个厂区地块分别命名 或者： 根据关停搬迁前的原企业名称对地块命名*/
+    landName String required maxlength(100),
+    /**地理坐标:纬度 指企业地块中心位置的经度和纬度，填报格式为度分秒，最后的秒精确到小数点后两位。 利用GPS实地测量后填报。 */
+    latitudeX Integer required max(90),
+    /**纬度分*/
+    latitudeY Integer required,
+    /**纬度秒*/
+    latitudeZ Integer required,
+    /** 地理坐标:经度 指企业地块中心位置的经度和纬度，填报格式为度分秒，最后的秒精确到小数点后两位。利用GPS实地测量后填报。*/
+    longitudeX Integer required max(180),
+    /**经度分*/
+    longitudeY Integer required,
+    /** 经度秒*/
+    longitudeZ Integer required,
+    /**地块占地面积: 根据企业平面布置图等资料及实地勘查情况，如实填写企业地块总面积; 或利用手持智能终端系统勾画出地块边界后，计算地块面积。*/
+    coveredArea Double required min(1),
+    /**地块是否位于工业园区或集聚区: 集聚区是指单个企业规模小，但分布集中，产生的累积风险高的区域。一个乡镇范围，属于重点行业的小规模企业数量达到5家以上，即可认定为集聚区。*/
+    locatedIndustryArea Boolean,
+    /**地块类别状况: 在产企业地块 or 关闭搬迁企业地块*/
+    categoryState LandCategory,
+    /**关闭搬迁企业地块: 地块现"使用权属"状况*/
+    ownershipState LandOwnerShip,
+    /**关闭搬迁企业地块: 土地规划用途状况*/
+    purposeState LandPurpose,
+    /**土地监管标记*/
+    superviseFlag LandSupervise,
+    /**土地污染标记*/
+    polluteFlag LandPollute,
+    /**土地控制标记*/
+    controlFlag LandControl,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The LandUseHistory (地块利用历史) entity.
+*/
+entity LandUseHistory(epb_land_use_history){
+    /**起始时间*/
+    startDate LocalDate required,
+    /**结束时间*/
+    endDate LocalDate,
+    /**土地用途*/
+    landUsage String,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+entity PollutedSource(qy_polluted_source){
+    /**地块名称*/
+    landName String required maxlength(100),
+    /**平面布置图,地块各区域、建筑物、设施分布图，需要有指北针、比例尺、图例。*/
+   layoutImg ImageBlob,
+	/**存在生产区*/
+	topWorkingAreaFlag Boolean,
+	/**存在存储区*/
+	topStorageAreaFlag Boolean,
+    /**储罐、储槽等储存设施*/
+    hasTankFlag Boolean,
+    /**存放产品、原材料的或其他有毒有害物质的仓库等*/
+    hasWarehouseFlag Boolean,
+    /**产品、原材料或其他有毒有害物质装卸区*/
+    hasLoadingFlag Boolean,
+	/**储存区总面积，以m2为单位*/
+    totalStorageArea Float,
+	/**存在管道*/
+	topPipelineFlag Boolean,
+    /**管道是否发生过泄漏*/
+    hasPipelineLeakFlag Boolean,
+    /**管道发生过泄漏次数*/
+    pipelineLeakNum Integer,
+    /**地下管道管线图*/
+    pipelineImg ImageBlob,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The WorkingArea (生产区) entity.
+*/
+entity WorkingArea(qy_working_area){
+    /**产品数据来源:按照产品信息的实际资料来源填写，如车间生产记录、企业生产报表、环境影响评价报告、排放污染物申报登记表、清洁生产审核报告等*/
+    productSource String,
+    /**原辅材料数据来源:按照原辅材料信息的实际资料来源填写，如车间使用原辅材料记录、企业生产报表、环境影响评价报告、排放污染物申报登记表、清洁生产审核报告等*/
+    materialSource String,
+    /**主要生产工艺描述:对生产工艺进行简要的文字描述，如原辅材料、生产环节、反应条件、中间产物、产物及副产物等*/
+    processDescription String,
+    /**主要生产工艺流程图:通过手持智能终端系统上传企业主要的生产工艺流程图*/
+    processFlowchart ImageBlob,
+    /**主要中间产物名称:指主要产品生产过程中衍生的主要的中间产物名称*/
+    intermediateName String,
+    /**总车间面积*/
+    totalShopArea Float,
+    /**企业是否开展过清洁生产审核: 按实际情况填写。若选是，则需填写第2-3项内容。（仅仅在产企业）*/
+    auditCleanFlag Boolean,
+    /**清洁生产审核时间: 填写最近一次完成清洁生产审核的时间，如某年某月。（仅仅在产企业） */
+    auditCleanDate LocalDate,
+    /**清洁生产水平: 按清洁生产审核的结果填写。（仅仅在产企业）*/
+    auditCleanLevel CleanLevel,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The WorkingProduct (主要产品) entity.
+* 指生产年度或生产周期内全年工业总产值中占比重较大或较关键工业产品。
+* 企业正在生产的产品、历史上曾生产过的产品均需一一填写
+*/
+entity WorkingProduct(qy_working_product){
+    /**产品名称: 按国家统计局最新发布的《统计用产品分类目录》填报*/
+    productName String required,
+    /**生产年代: 产品生产的起止年份*/
+    productAge String,
+    /**计量单位: 指产品近三年的计量单位*/
+    measureUnit String required,
+    /**年平均产量: 指产品近三年的年平均产量,允许保留两位小数, 若是历史上曾生产过而目前已停产的产品，填写生产时期内年平均产量。*/
+    averageOutputOfAnnual Float required,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The WorkingMaterial (原辅材料) entity.
+* 指与主要产品生产相关的主要原辅材料。 企业正在使用或历史上曾使用过的原辅材料均需一一填写
+*/
+entity WorkingMaterial(qy_working_material){
+    /**原辅材料名称: 填报与主要产品生产相关的主要原辅材料的名称，可从环评报告或从财务原材料购买支出上获知。*/
+    materialName String required,
+    /**使用年代: 原辅材料使用的起止年份*/
+    materialAge String,
+    /** 计量单位: 指原辅材料近三年的计量单位。*/
+    measureUnit String required,
+    /** 年平均使用量: 指原辅材料近三年的实际年平均使用量。允许保留两位小数。 若是历史上曾使用过而目前已停止使用的原辅材料，填写使用时期内年平均使用量。*/
+    averageUsageOfAnnual Float required,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The WorkingShop (生产车间) entity.
+*/
+entity WorkingShop(qy_working_shop){
+    /**车间名称: 按企业内部生产车间实际名称填写，且不同车间不能使用相同名称*/
+    shopName String required,
+    /**车间面积: 按车间实际占地面积填写，以m2为单位*/
+    shopArea Float required,
+    /**坐标位置: 使用手持智能终端系统在遥感影像上勾描出的该企业斑块内标出车间位置，并记录坐标*/
+    coordinates String,
+    /**生产起始日期: 按照车间开始用于生产的实际日期，填写某年某月 */
+    startDate LocalDate,
+    /**生产工艺描述: 按照对应车间生产情况，简要描述该车间内主要生产工艺*/
+    processDesc String,
+    /**设备是否跑冒滴漏现象: 根据现场勘查情况填写车间内设备是否存在跑冒滴漏现象*/
+    leakingFlag Boolean,
+    /**跑冒滴漏点照片: 如存在，需对跑冒滴漏的位置及地表情况进行现场拍照，并通过移动终端上传照片*/
+    leakingPic ImageBlob,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The StorageArea (存储区) entity.
+*/
+entity StorageArea(qy_storage_area){
+    /**5.区域名称*/
+	areaName String required,
+    /**区域面积，以m2为单位*/
+    areaSize Float,
+    /**6.区域类型*/
+	areaType String,
+    /**7.坐标位置*/
+	coordinates String,
+    /**8.储罐数量*/
+	tankAmount int,
+    /**9.储罐类型*/
+	tankType String,
+    /**10.储存物质名称*/
+	storedMaterial String required,
+    /**11.是否为危险化学品*/
+	hazardousChemicals Boolean required,
+	/**12.储存量*/
+	storedAmount Float required,
+	/**13.计量单位*/
+	measureUnit String required,
+    /**14.储存年代*/
+    storedtAge String,
+    /**15.泄漏或污染痕迹*/
+    pollutingFlag Boolean,
+    /**16.污染痕迹照片*/
+    pollutingPic ImageBlob,
+    /**17.是否拆除*/
+	dismantledFlag,
+    /**18.设施内残余物是否清除*/
+	cleanResidueFlag,
+    /**19.防护措施*/
+	preventiveMeasures String,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The Pipeline (管道) entity.
+*/
+entity Pipeline(qy_pipeline){
+    /**4.管道类型*/
+	type String,
+    /**5.泄漏点坐标位置*/
+	coordinates String,
+    /**6.储存物质名称*/
+	leakedMaterial String required,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The xxx (废气治理设施) entity.
+*/
+entity xxx(qy_pipeline){
+    /**4.管道类型*/
+	type String,
+    /**5.泄漏点坐标位置*/
+	coordinates String,
+    /**6.储存物质名称*/
+	leakedMaterial String required,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The xx (废水治理区域) entity.
+*/
+entity xxx(qy_pipeline){
+    /**4.管道类型*/
+	type String,
+    /**5.泄漏点坐标位置*/
+	coordinates String,
+    /**6.储存物质名称*/
+	leakedMaterial String required,
+    /**备注*/
+    remark String maxlength(256)
+}
+
+/**
+* The LandInitialSurvey (场地初步调查) entity.
+*/
+entity LandInitialSurvey(epb_land_initial_survey){
+    /**地块名称*/
+    landName String required maxlength(100),
+    /**填表单位(第三方)*/
+    fillingUnit String,
+    /**填写人*/
+    fillingPerson String,
+    /**填写日期*/
+    fillingDate LocalDate,
+    /**审核人*/
+    auditPerson String,
+    /**审核日期*/
+    auditDate LocalDate,
+    /**声明企业*/
+    declareUnit String,
+    /**声明日期*/
+    declareDate LocalDate,
+    /**地块基本情况 LandParcel*/
+    /**填写机构 ThirdPartyAgency*/
+    /**污染源 PollutedSource*/
+}
+
+
+
+/**
+* The PollutionType (污染类型) Enumerations.
+*/
+enum PollutionType {
+    重金属,
+	挥发性有机物,
+	半挥发性有机物,
+	重金属有机复合污染,
+	其他
+}
+
+/**
+* The PollutionCriterion (污染判别标准) Enumerations.
+*/
+enum PollutionCriterion {
+    筛选值,
+	其他标准
+}
+
+/**
+* The LandDetailedSurvey (场地详细调查) entity.
+*/
+entity LandDetailedSurvey(epb_land_detailed_survey){
+	填报单位
+	填写人
+	联系电话
+	邮箱
+一 地块基本情况
+	地块名称 (场地名称)
+	所在位置
+	场地土地利用历史
+	周边土地利用现状
+	06场地土地规划用途
+	07场地地形
+	08区域土壤类型
+	
+	09场地周边环境敏感受体分布情况
+	11场地修复相关方
+	12场地地层分布及土壤类型
+	13场地地下水埋深
+
+二 场地调查情况
+	场地污染状况
+		土壤
+		地下水
+		污染类型 (E)
+	关注污染物	
+	污染判别标准
+	详细调查报告评审 
+	详细调查报告公开
+}
+
+/**
+* The RiskAssessmentModel (风险评价模型) Enumerations.
+*/
+enum RiskAssessmentModel {
+    污染场地风险评估技术导则,
+	RBCA,
+	其他
+}
+
+/**
+* The RiskAcceptableLevel (可接受风险水平) Enumerations.
+*/
+enum RiskAcceptableLevel {
+    致癌风险 1,
+    致癌风险 2,
+    致癌风险 3,
+	非致癌风险熵,
+	其他
+}
+
+/**
+* The LandRiskAssess (场地风险评估) entity.
+*/
+entity LandRiskAssess(epb_land_risk_assess){
+一 地块基本情况
+	地块名称 (场地名称)
+	等等
+二 风险评估信息
+	风险评估单位
+	场地风险方法
+	2.1风险评价模型
+	2.2可接受风险水平
+	2.3 风险评估报告评审
+	2.4 风险评估报告公开
+三 风险评估结果
+	序号
+	污染物名称	
+	致癌物质	
+	暴露途径	
+	风险水平	
+	是否可接受	
+	风险管控与治理修复建议
+四 风险筛查 （找不到，出现在mockup界面）
+}
+
+/**
+* The LandRiskControl (场地风险管控) entity.
+*/
+entity LandRiskControl(epb_land_risk_control){
+	填报单位
+	填写人
+	联系电话
+	邮箱
+一 地块基本情况
+	地块名称 (场地名称)
+	等等
+二 风险管控方案
+	1.修复范围及工程量(土壤  地下水)
+		确定方法
+		风险管控目标
+		风险对象及范围
+	2.风险管控措施(土壤  地下水)
+		拟采用的管控措施技术
+	3.风险管控地块的长期监测
+		长期监测计划
+			监测对象	
+			监测指标	
+			监测频率
+		执行主体单位
+		监督主体单位
+	4.文件论证等相关情况
+		风险管控方案
+		方案公开情况
+}
+
+/**
+* The OneToOne relationship.
+*/
+relationship OneToOne {
+    LandUser{industryCategory} to IndustryCategory,
+    LandUser{registrationType} to RegistrationType,
+	LandInitialSurvey{landParcel} to landParcel,
+	LandDetailedSurvey{landParcel} to landParcel,
+	LandInitialSurvey{surveyAgency} to ThirdPartyAgency,
+	LandInitialSurvey{workingArea} to SurveyWorkingArea
+}
+
+/**
+* The ManyToOne relationship.
+*/
+relationship ManyToOne {
+	LandParcel{landUser} to LandUser,
+    LandUseHistory{landParcel} to LandParcel,
+    SurveyWorkingMaterial{workingArea} to SurveyWorkingArea,
+    SurveyWorkingProduct{workingArea} to SurveyWorkingArea,
+    SurveyWorkingShop{workingArea} to SurveyWorkingArea
+}
+
+// Set pagination options
+paginate IndustryCategory,RegistrationType with pager
+paginate LandOwner with pagination
+paginate LandParcel,LandUseHistory with infinite-scroll
+
+// Set DTO options
+dto * with mapstruct
+
+// Set service options
+service * with serviceClass
