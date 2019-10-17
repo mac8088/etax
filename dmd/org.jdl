@@ -2,6 +2,40 @@
 /**
 * Table for defining and maintaining UI apps.
 */
+entity User2(adm_user){
+    login String unique required maxlength(50),
+    passwordHash String required maxlength(60),
+    firstName String maxlength(50),
+    lastName String maxlength(50),
+    email String unique maxlength(191),
+    imageRrl String maxlength(256),
+    activated Boolean,
+    langKey String maxlength(10),
+    activationKey String maxlength(20),
+    resetKey String maxlength(20),
+    createdBy String required maxlength(50),
+	createdDate Instant,
+	resetDate Instant,
+	lastModifiedBy  String maxlength(50),
+	lastModifiedDate Instant
+}
+
+// Set pagination options
+//paginate User2 with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceClass
+
+// Use JPA Criteria to filter entities
+//filter User2
+
+
+/**
+* Table for defining and maintaining UI apps.
+*/
 entity Uiapp(adm_uiapp){
     /* User Captured Application ID, uiapp unique identifier */
     appCode String required unique maxlength(50),
