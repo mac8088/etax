@@ -5,7 +5,9 @@ import net.atos.etax.domain.User;
 import net.atos.etax.repository.UserRepository;
 import net.atos.etax.security.AuthoritiesConstants;
 import net.atos.etax.service.MailService;
+import net.atos.etax.service.UserQueryService;
 import net.atos.etax.service.UserService;
+import net.atos.etax.service.dto.UserCriteria;
 import net.atos.etax.service.dto.UserDTO;
 import net.atos.etax.web.rest.errors.BadRequestAlertException;
 import net.atos.etax.web.rest.errors.EmailAlreadyUsedException;
@@ -67,14 +69,16 @@ public class UserResource {
     private String applicationName;
 
     private final UserService userService;
+    
+    private final UserQueryService userQueryService;
 
     private final UserRepository userRepository;
 
     private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
-
+    public UserResource(UserService userService, UserQueryService userQueryService, UserRepository userRepository, MailService mailService) {
         this.userService = userService;
+        this.userQueryService = userQueryService;
         this.userRepository = userRepository;
         this.mailService = mailService;
     }
@@ -138,6 +142,35 @@ public class UserResource {
             HeaderUtil.createAlert(applicationName, "userManagement.updated", userDTO.getLogin()));
     }
 
+    /**
+    * {@code GET  /users/count} : count all the users.
+    *
+    * @param criteria the criteria which the requested entities should match.
+    * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+    */
+    @GetMapping("/users/count")
+    public ResponseEntity<Long> countUsers(UserCriteria criteria) {
+        log.debug("REST request to count Users by criteria: {}", criteria);
+        return ResponseEntity.ok().body(userQueryService.countByCriteria(criteria));
+    }
+    
+    /**
+     * {@code GET  /users} : get all the users.
+     *
+     * @param pageable the pagination information.
+     * @param queryParams a {@link MultiValueMap} query parameters.
+     * @param uriBuilder a {@link UriComponentsBuilder} URI builder.
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of users in body.
+     */
+    @GetMapping("/users/criteria")
+    public ResponseEntity<List<User>> getAllUsers(UserCriteria criteria, Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+        log.debug("REST request to get Users by criteria: {}", criteria);
+        Page<User> page = userQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+    
     /**
      * {@code GET /users} : get all users.
      *

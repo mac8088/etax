@@ -6,6 +6,7 @@ import net.atos.etax.domain.User;
 import net.atos.etax.repository.UserRepository;
 import net.atos.etax.security.AuthoritiesConstants;
 import net.atos.etax.service.MailService;
+import net.atos.etax.service.UserQueryService;
 import net.atos.etax.service.UserService;
 import net.atos.etax.service.dto.UserDTO;
 import net.atos.etax.service.mapper.UserMapper;
@@ -65,6 +66,9 @@ public class UserResourceIT {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserQueryService userQueryService;
 
     @Autowired
     private MailService mailService;
@@ -98,7 +102,7 @@ public class UserResourceIT {
     public void setup() {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).clear();
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).clear();
-        UserResource userResource = new UserResource(userService, userRepository, mailService);
+        UserResource userResource = new UserResource(userService, userQueryService, userRepository, mailService);
 
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
