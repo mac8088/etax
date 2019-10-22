@@ -86,6 +86,14 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.officeWeekday')">OfficeWeekday</span>
                     </b-dropdown-item>
+                    <b-dropdown-item to="/entity/office-weekday" v-if="hasAnyAuthority('ADM001')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.officeWeekday')">OfficeWeekday</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/entity/profile-setup" v-if="hasAnyAuthority('ADM001')">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.profileSetup')">ProfileSetup</span>
+                    </b-dropdown-item>
                     <b-dropdown-item to="/entity/user-info" v-if="hasAnyAuthority(['ADM001', 'ADM002'])">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.userInfo')">UserInfo</span>

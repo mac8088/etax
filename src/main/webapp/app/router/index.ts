@@ -109,11 +109,23 @@ const OfficeTaxFuncUpdate = () => import('../entities/office-tax-func/office-tax
 // prettier-ignore
 const OfficeTaxFuncDetails = () => import('../entities/office-tax-func/office-tax-func-details.vue');
 // prettier-ignore
+const OfficeHoliday = () => import('../entities/office-holiday/office-holiday.vue');
+// prettier-ignore
+const OfficeHolidayUpdate = () => import('../entities/office-holiday/office-holiday-update.vue');
+// prettier-ignore
+const OfficeHolidayDetails = () => import('../entities/office-holiday/office-holiday-details.vue');
+// prettier-ignore
 const OfficeWeekday = () => import('../entities/office-weekday/office-weekday.vue');
 // prettier-ignore
 const OfficeWeekdayUpdate = () => import('../entities/office-weekday/office-weekday-update.vue');
 // prettier-ignore
 const OfficeWeekdayDetails = () => import('../entities/office-weekday/office-weekday-details.vue');
+// prettier-ignore
+const ProfileSetup = () => import('../entities/profile-setup/profile-setup.vue');
+// prettier-ignore
+const ProfileSetupUpdate = () => import('../entities/profile-setup/profile-setup-update.vue');
+// prettier-ignore
+const ProfileSetupDetails = () => import('../entities/profile-setup/profile-setup-details.vue');
 // prettier-ignore
 const UserInfo = () => import('../entities/user-info/user-info.vue');
 // prettier-ignore
@@ -254,8 +266,7 @@ export default new Router({
       name: 'JhiConfigurationComponent',
       component: JhiConfigurationComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,
+    },
     {
       path: '/entity/bank-account',
       name: 'BankAccount',
@@ -279,8 +290,7 @@ export default new Router({
       name: 'BankAccountView',
       component: BankAccountDetails,
       meta: { authorities: ['ROLE_USER'] }
-    }
-    ,
+    },
     {
       path: '/entity/label',
       name: 'Label',
@@ -304,8 +314,7 @@ export default new Router({
       name: 'LabelView',
       component: LabelDetails,
       meta: { authorities: ['ROLE_USER'] }
-    }
-    ,
+    },
     {
       path: '/entity/operation',
       name: 'Operation',
@@ -329,8 +338,7 @@ export default new Router({
       name: 'OperationView',
       component: OperationDetails,
       meta: { authorities: ['ROLE_USER'] }
-    }
-    ,
+    },
     {
       path: '/entity/std-codes-group',
       name: 'StdCodesGroup',
@@ -354,8 +362,7 @@ export default new Router({
       name: 'StdCodesGroupView',
       component: StdCodesGroupDetails,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,
+    },
     {
       path: '/entity/std-codes',
       name: 'StdCodes',
@@ -379,8 +386,7 @@ export default new Router({
       name: 'StdCodesView',
       component: StdCodesDetails,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,
+    },
     {
       path: '/entity/std-codes-desc',
       name: 'StdCodesDesc',
@@ -404,8 +410,7 @@ export default new Router({
       name: 'StdCodesDescView',
       component: StdCodesDescDetails,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,
+    },
     {
       path: '/entity/std-codes-group-prop',
       name: 'StdCodesGroupProp',
@@ -429,8 +434,7 @@ export default new Router({
       name: 'StdCodesGroupPropView',
       component: StdCodesGroupPropDetails,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,
+    },
     {
       path: '/entity/std-codes-prop',
       name: 'StdCodesProp',
@@ -454,8 +458,7 @@ export default new Router({
       name: 'StdCodesPropView',
       component: StdCodesPropDetails,
       meta: { authorities: ['ROLE_ADMIN'] }
-    }
-    ,
+    },
     {
       path: '/entity/exchange-rate',
       name: 'ExchangeRate',
@@ -479,8 +482,7 @@ export default new Router({
       name: 'ExchangeRateView',
       component: ExchangeRateDetails,
       meta: { authorities: ['ADM002'] }
-    }
-    ,
+    },
     {
       path: '/entity/public-holiday',
       name: 'PublicHoliday',
@@ -504,8 +506,7 @@ export default new Router({
       name: 'PublicHolidayView',
       component: PublicHolidayDetails,
       meta: { authorities: ['ADM002'] }
-    }
-    ,
+    },
     {
       path: '/entity/office',
       name: 'Office',
@@ -529,8 +530,7 @@ export default new Router({
       name: 'OfficeView',
       component: OfficeDetails,
       meta: { authorities: ['ADM001'] }
-    }
-    ,
+    },
     {
       path: '/entity/office-relationship',
       name: 'OfficeRelationship',
@@ -554,8 +554,7 @@ export default new Router({
       name: 'OfficeRelationshipView',
       component: OfficeRelationshipDetails,
       meta: { authorities: ['ADM001'] }
-    }
-    ,
+    },
     {
       path: '/entity/office-area-code',
       name: 'OfficeAreaCode',
@@ -579,8 +578,7 @@ export default new Router({
       name: 'OfficeAreaCodeView',
       component: OfficeAreaCodeDetails,
       meta: { authorities: ['ADM001'] }
-    }
-    ,
+    },
     {
       path: '/entity/office-tax-func',
       name: 'OfficeTaxFunc',
@@ -629,8 +627,55 @@ export default new Router({
       name: 'OfficeWeekdayView',
       component: OfficeWeekdayDetails,
       meta: { authorities: ['ADM001'] }
-    }
-    ,
+    },
+    {
+      path: '/entity/office-holiday',
+      name: 'OfficeHoliday',
+      component: OfficeHoliday,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-holiday/new',
+      name: 'OfficeHolidayCreate',
+      component: OfficeHolidayUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-holiday/:officeHolidayId/edit',
+      name: 'OfficeHolidayEdit',
+      component: OfficeHolidayUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/office-holiday/:officeHolidayId/view',
+      name: 'OfficeHolidayView',
+      component: OfficeHolidayDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/profile-setup',
+      name: 'ProfileSetup',
+      component: ProfileSetup,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/profile-setup/new',
+      name: 'ProfileSetupCreate',
+      component: ProfileSetupUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/profile-setup/:profileSetupId/edit',
+      name: 'ProfileSetupEdit',
+      component: ProfileSetupUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/profile-setup/:profileSetupId/view',
+      name: 'ProfileSetupView',
+      component: ProfileSetupDetails,
+      meta: { authorities: ['ROLE_USER'] }
+    },
     {
       path: '/entity/user-info',
       name: 'UserInfo',
@@ -678,8 +723,7 @@ export default new Router({
       name: 'UiappView',
       component: UiappDetails,
       meta: { authorities: ['ROLE_USER'] }
-    }
-    ,
+    },
     {
       path: '/entity/resource',
       name: 'Resource',
@@ -703,8 +747,7 @@ export default new Router({
       name: 'ResourceView',
       component: ResourceDetails,
       meta: { authorities: ['ROLE_USER'] }
-    }
-    ,
+    },
     {
       path: '/entity/privilege',
       name: 'Privilege',

@@ -23,6 +23,8 @@
         "officeAreaCode": "机构区域维护",
         "officeTaxFunc": "机构功能维护",
         "officeWeekday": "机构工作日维护",
+        "officeHoliday": "机构节假日维护",
+        "profileSetup": "权限设置",
         "uiapp": "功能应用",
         "resource": "资源",
         "privilege": "权限",

@@ -1,0 +1,24 @@
+{
+  "etaxApp": {
+    "profileSetup": {
+      "home": {
+        "title": "Profile Setups",
+        "createLabel": "Create a new Profile Setup",
+        "createOrEditLabel": "Create or edit a Profile Setup",
+        "notFound": "No Profile Setup found"
+      },
+      "created": "A new Profile Setup is created with identifier {{ param }}",
+      "updated": "A Profile Setup is updated with identifier {{ param }}",
+      "deleted": "A Profile Setup is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Profile Setup {{ id }}?"
+      },
+      "detail": {
+        "title": "Profile Setup"
+      },
+      "profileCode": "Profile Code",
+      "cstdOfficeType": "Cstd Office Type",
+      "cstdUserType": "Cstd User Type"
+    }
+  }
+}

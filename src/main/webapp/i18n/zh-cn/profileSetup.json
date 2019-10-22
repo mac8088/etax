@@ -1,0 +1,24 @@
+{
+  "etaxApp": {
+    "profileSetup": {
+      "home": {
+        "title": "Profile Setups",
+        "createLabel": "创建新 Profile Setup",
+        "createOrEditLabel": "创建或编辑 Profile Setup",
+        "notFound": "No Profile Setup found"
+      },
+      "created": "Profile Setup {{ param }} 创建成功",
+      "updated": "Profile Setup {{ param }} 更新成功",
+      "deleted": "Profile Setup {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Profile Setup {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Profile Setup"
+      },
+      "profileCode": "Profile Code",
+      "cstdOfficeType": "Cstd Office Type",
+      "cstdUserType": "Cstd User Type"
+    }
+  }
+}

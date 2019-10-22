@@ -36,6 +36,8 @@
     <include file="config/liquibase/changelog/20191016085742_added_entity_Uiapp.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191016085743_added_entity_Resource.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191016085744_added_entity_Privilege.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191022063611_added_entity_OfficeHoliday.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191022063613_added_entity_ProfileSetup.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190911040156_added_entity_constraints_BankAccount.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190911040158_added_entity_constraints_Operation.xml" relativeToChangelogFile="false"/>

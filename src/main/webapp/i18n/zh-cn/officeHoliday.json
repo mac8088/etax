@@ -1,0 +1,26 @@
+{
+  "etaxApp": {
+    "officeHoliday": {
+      "home": {
+        "title": "Office Holidays",
+        "createLabel": "创建新 Office Holiday",
+        "createOrEditLabel": "创建或编辑 Office Holiday",
+        "notFound": "No Office Holiday found"
+      },
+      "created": "Office Holiday {{ param }} 创建成功",
+      "updated": "Office Holiday {{ param }} 更新成功",
+      "deleted": "Office Holiday {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Office Holiday {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Office Holiday"
+      },
+      "officeId": "Office Id",
+      "holidayId": "Holiday Id",
+      "help": {
+        "holidayId": "Holiday ID"
+      }
+    }
+  }
+}

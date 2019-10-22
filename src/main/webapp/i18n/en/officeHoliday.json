@@ -1,0 +1,26 @@
+{
+  "etaxApp": {
+    "officeHoliday": {
+      "home": {
+        "title": "Office Holidays",
+        "createLabel": "Create a new Office Holiday",
+        "createOrEditLabel": "Create or edit a Office Holiday",
+        "notFound": "No Office Holiday found"
+      },
+      "created": "A new Office Holiday is created with identifier {{ param }}",
+      "updated": "A Office Holiday is updated with identifier {{ param }}",
+      "deleted": "A Office Holiday is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Office Holiday {{ id }}?"
+      },
+      "detail": {
+        "title": "Office Holiday"
+      },
+      "officeId": "Office Id",
+      "holidayId": "Holiday Id",
+      "help": {
+        "holidayId": "Holiday ID"
+      }
+    }
+  }
+}

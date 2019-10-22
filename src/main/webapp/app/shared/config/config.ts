@@ -87,7 +87,6 @@ export function initFortAwesome(vue) {
     faTimes
   );
 }
-
 export function initI18N(vue) {
   vue.use(VueI18n);
   return new VueI18n({

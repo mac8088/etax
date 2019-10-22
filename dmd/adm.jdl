@@ -117,6 +117,16 @@ entity OfficeTaxFunc(adm_office_tax_func){
 }
 
 /**
+* The tables used for office id and holiday id relationship table..
+*/
+entity OfficeHoliday(adm_office_holiday) {
+    /*Tax Office ID */
+    officeId Integer required,
+    /**Holiday ID*/
+    HolidayId String required maxlength(7)
+}
+
+/**
 * Week working day.
 */
 entity OfficeWeekday(adm_office_weekday) {
@@ -128,6 +138,18 @@ entity OfficeWeekday(adm_office_weekday) {
     startDate LocalDate,
     /*End date */
     endDate LocalDate
+}
+
+/**
+* Defines which type of user can be created in which type of office-Allowed Profiles for User Types and Office Types.
+*/
+entity ProfileSetup(adm_profile_setup) {
+    /*Ref. to ADM[Profile:Code] that stored inside JHI_AUTHORITY */
+    profileCode String required maxlength(50),
+    /*STD[OFFICE_TYPE], type of office */
+    cstdOfficeType String required maxlength(40),
+    /*STD[USER_TYPE], type of user */
+    cstdUserType String required maxlength(40)
 }
 
 /**
@@ -196,14 +218,14 @@ relationship OneToOne{
 
 // Set pagination options
 paginate Office, UserInfo with pagination
-paginate OfficeRelationship, OfficeAreaCode, OfficeTaxFunc, OfficeWeekday with pager
+paginate OfficeRelationship, OfficeAreaCode, OfficeTaxFunc, OfficeWeekday, OfficeHoliday, ProfileSetup with pager
 paginate PublicHoliday, ExchangeRate with infinite-scroll
 
 // Use Data Transfert Objects (DTO)
 // dto * with mapstruct
 
 // Set service options to all except few
-service all with serviceImpl except OfficeRelationship, OfficeAreaCode, OfficeTaxFunc, OfficeWeekday
+service all with serviceImpl except OfficeRelationship, OfficeAreaCode, OfficeTaxFunc, OfficeWeekday, OfficeHoliday, ProfileSetup
 
 // Use JPA Criteria to filter entities
 filter PublicHoliday, ExchangeRate, Office, UserInfo

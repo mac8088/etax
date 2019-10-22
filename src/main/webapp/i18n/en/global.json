@@ -23,6 +23,8 @@
         "officeAreaCode": "Office Area Code",
         "officeTaxFunc": "Office Tax Func",
         "officeWeekday": "Office Weekday",
+        "officeHoliday": "Office Holiday",
+        "profileSetup": "Profile Setup",
         "uiapp": "Uiapp",
         "resource": "Resource",
         "privilege": "Privilege",

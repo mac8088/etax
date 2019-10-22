@@ -37,7 +37,9 @@ import OfficeService from '@/entities/office/office.service';
 import OfficeRelationshipService from '@/entities/office-relationship/office-relationship.service';
 import OfficeAreaCodeService from '@/entities/office-area-code/office-area-code.service';
 import OfficeTaxFuncService from '@/entities/office-tax-func/office-tax-func.service';
+import OfficeHolidayService from '@/entities/office-holiday/office-holiday.service';
 import OfficeWeekdayService from '@/entities/office-weekday/office-weekday.service';
+import ProfileSetupService from '@/entities/profile-setup/profile-setup.service';
 import UserInfoService from '@/entities/user-info/user-info.service';
 import UiappService from '@/entities/uiapp/uiapp.service';
 import ResourceService from '@/entities/resource/resource.service';
@@ -112,7 +114,9 @@ new Vue({
     officeRelationshipService: () => new OfficeRelationshipService(),
     officeAreaCodeService: () => new OfficeAreaCodeService(),
     officeTaxFuncService: () => new OfficeTaxFuncService(),
+    officeHolidayService: () => new OfficeHolidayService(),
     officeWeekdayService: () => new OfficeWeekdayService(),
+    profileSetupService: () => new ProfileSetupService(),
     userInfoService: () => new UserInfoService(),
     uiappService: () => new UiappService(),
     resourceService: () => new ResourceService(),

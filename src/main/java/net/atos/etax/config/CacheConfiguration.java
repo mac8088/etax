@@ -62,7 +62,9 @@ public class CacheConfiguration {
             createCache(cm, net.atos.etax.domain.OfficeRelationship.class.getName());
             createCache(cm, net.atos.etax.domain.OfficeAreaCode.class.getName());
             createCache(cm, net.atos.etax.domain.OfficeTaxFunc.class.getName());
+            createCache(cm, net.atos.etax.domain.OfficeHoliday.class.getName());
             createCache(cm, net.atos.etax.domain.OfficeWeekday.class.getName());
+            createCache(cm, net.atos.etax.domain.ProfileSetup.class.getName());
             createCache(cm, net.atos.etax.domain.UserInfo.class.getName());
             createCache(cm, net.atos.etax.domain.Person.class.getName());
             createCache(cm, net.atos.etax.domain.Uiapp.class.getName());
