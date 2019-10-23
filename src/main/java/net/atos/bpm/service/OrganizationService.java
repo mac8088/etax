@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import net.atos.etax.domain.Authority;
 import net.atos.etax.domain.User;
 import net.atos.etax.repository.AuthorityRepository;
 import net.atos.etax.repository.UserRepository;
@@ -71,6 +72,10 @@ public class OrganizationService {
 			}
 		}
 		return users;
+	}
+	
+	public List<Authority> getCandidateProfiles(String login) {
+		return authorityRepository.findAuthorityByLoginName(login);
 	}
 
 }

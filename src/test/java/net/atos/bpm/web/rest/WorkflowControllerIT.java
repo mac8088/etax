@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.flowable.engine.RuntimeService;
-import org.flowable.engine.TaskService;
 import org.flowable.engine.runtime.ProcessInstance;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -24,6 +23,7 @@ import org.springframework.validation.Validator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import net.atos.bpm.service.ToDoService;
 import net.atos.bpm.service.WorkflowService;
 import net.atos.bpm.web.rest.vm.TaskRepresentation;
 
@@ -51,10 +51,13 @@ public class WorkflowControllerIT {
 
 	@Autowired
 	private WorkflowService workflowService;
+	
+	@Autowired
+	private ToDoService toDoService;
 
 	@Before
 	public void setUp() {
-		WorkflowController workflowResource = new WorkflowController(workflowService);
+		WorkflowController workflowResource = new WorkflowController(workflowService, toDoService);
 
 		this.mockMvc = MockMvcBuilders.standaloneSetup(workflowResource)
 				.setCustomArgumentResolvers(pageableArgumentResolver).setControllerAdvice(exceptionTranslator)

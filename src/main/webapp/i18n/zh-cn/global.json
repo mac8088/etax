@@ -69,6 +69,11 @@
       "email.label": "电子邮件",
       "email.placeholder": "您的电子邮件"
     },
+    "profile": {
+      "ADM001": "系统管理",
+      "ADM002": "系统主管",
+      "TECHSPT": "技术支持"
+    },
     "messages": {
       "info": {
         "authenticated": {

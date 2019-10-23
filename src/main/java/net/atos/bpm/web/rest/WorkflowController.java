@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.atos.bpm.model.ValuePairBean;
+import net.atos.bpm.service.ToDoService;
 import net.atos.bpm.service.WorkflowService;
 import net.atos.bpm.service.impl.ProcessHandler;
 import net.atos.bpm.service.impl.TaskHandler;
 import net.atos.bpm.web.rest.vm.TaskRepresentation;
+import net.atos.etax.security.SecurityUtils;
 
 @RestController
 @RequestMapping("/api")
@@ -33,9 +36,13 @@ public class WorkflowController {
 
 	@Autowired
 	private WorkflowService workflowService;
+	
+	@Autowired
+	private ToDoService toDoService;
 
-	public WorkflowController(WorkflowService workflowService) {
+	public WorkflowController(WorkflowService workflowService, ToDoService toDoService) {
 		this.workflowService = workflowService;
+		this.toDoService = toDoService;
 	}
 
 	@ResponseBody
@@ -127,5 +134,12 @@ public class WorkflowController {
 		Task task = workflowService.getTaskService().createTaskQuery().processInstanceId(processInstanceId).singleResult();
 		workflowService.getTaskService().complete(task.getId());
 		logger.info("Task completed");
+	}
+	
+	@GetMapping("/flow/todo/profiles")
+	public List<ValuePairBean> getMyProfiles() {
+		String who = SecurityUtils.getCurrentUserLogin().get();
+		logger.info("get {} available profiles ... ", who);
+		return toDoService.getAvailableProfiles(who);
 	}
 }
