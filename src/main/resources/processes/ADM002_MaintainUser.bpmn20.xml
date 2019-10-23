@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="ADM002_MaintainUser" name="ADM002_MaintainUser" isExecutable="true">
+    <startEvent id="theStart"></startEvent>
+    <userTask id="approveUserProfile" name="Appove User Profile" xmlns:flowable="http://flowable.org/bpmn" flowable:assignee="syscontr"></userTask>
+    <endEvent id="theEnd"></endEvent>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow2" sourceRef="approveUserProfile" targetRef="exclusivegateway1"></sequenceFlow>
+    <serviceTask id="createUser" name="Create User" flowable:class="net.atos.bpm.action.SaveUserDelegate"></serviceTask>
+    <sequenceFlow id="flow5" sourceRef="theStart" targetRef="createUser"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="createUser" targetRef="approveUserProfile"></sequenceFlow>
+    <sequenceFlow id="flow9" sourceRef="exclusivegateway1" targetRef="theEnd">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='reject'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="showLetter" name="Show Letter" flowable:class="net.atos.bpm.action.SendRejectionMail"></serviceTask>
+    <sequenceFlow id="flow10" sourceRef="exclusivegateway1" targetRef="showLetter">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='approve'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow11" sourceRef="showLetter" targetRef="theEnd"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ADM002_MaintainUser">
+    <bpmndi:BPMNPlane bpmnElement="ADM002_MaintainUser" id="BPMNPlane_ADM002_MaintainUser">
+      <bpmndi:BPMNShape bpmnElement="theStart" id="BPMNShape_theStart">
+        <omgdc:Bounds height="35.0" width="35.0" x="1.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approveUserProfile" id="BPMNShape_approveUserProfile">
+        <omgdc:Bounds height="55.0" width="105.0" x="211.0" y="140.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="theEnd" id="BPMNShape_theEnd">
+        <omgdc:Bounds height="35.0" width="35.0" x="561.0" y="150.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="341.0" y="147.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="createUser" id="BPMNShape_createUser">
+        <omgdc:Bounds height="55.0" width="105.0" x="71.0" y="140.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="showLetter" id="BPMNShape_showLetter">
+        <omgdc:Bounds height="55.0" width="105.0" x="410.0" y="93.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="316.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="341.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="36.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="71.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="176.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="211.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="381.0" y="167.0"></omgdi:waypoint>
+        <omgdi:waypoint x="561.0" y="167.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="361.0" y="147.0"></omgdi:waypoint>
+        <omgdi:waypoint x="361.0" y="120.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="120.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="515.0" y="120.0"></omgdi:waypoint>
+        <omgdi:waypoint x="578.0" y="120.0"></omgdi:waypoint>
+        <omgdi:waypoint x="578.0" y="150.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
