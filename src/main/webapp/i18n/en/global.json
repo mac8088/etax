@@ -74,6 +74,15 @@
       "ADM002": "System Supervisor",
       "TECHSPT": "Technical support"
     },
+    "todolist": {
+      "FIX_COL1": "Pending Activity",
+      "FIX_COL2": "Entity Identifier",
+      "EXT_COL1": "Entity Description",
+      "EXT_COL2": "TIN",
+      "EXT_COL3": "Pending Since",
+      "EXT_COL4": "Due By",
+      "EXT_COL5": "Action"
+    },
     "messages": {
       "info": {
         "authenticated": {

@@ -3,15 +3,16 @@ package net.atos.bpm.model;
 import java.util.Date;
 
 public class ProcessBean {
-	private String executionId;
 	private String processInstanceId;
+	private String executionId;
 	private String name;
 	private String description;
+	private String businessKey;
+	private Date startTime;
+	private String startUser;
 	private String processDefinitionId;
 	private String processDefinitionName;
 	private String processDefinitionKey;
-	private Date startTime;
-	private String startUser;
 
 	public String getExecutionId() {
 		return executionId;
@@ -43,6 +44,14 @@ public class ProcessBean {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getBusinessKey() {
+		return businessKey;
+	}
+
+	public void setBusinessKey(String businessKey) {
+		this.businessKey = businessKey;
 	}
 
 	public String getProcessDefinitionId() {

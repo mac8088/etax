@@ -4,16 +4,20 @@ import java.util.Date;
 
 public class TaskBean {
     private String id;
-    private String name;
-    private String description;
-    private Integer priority;
+    private String name;  // pending activity
+    private String description; // or this store messageId
+    private Date createTime;  // pending since
     private String assignee;
+    private Integer priority;
     private String processInstanceId;
+    private String processDefinitionId;
     private String executionId;
     private String taskDefinitionId;
-    private String processDefinitionId;
-    private Date createTime;
     private String taskDefinitionKey;
+    
+    private String entityIdentifier;
+    private String pendingSince;
+    private String dueBy;
 
     public String getId() {
         return id;
@@ -103,7 +107,31 @@ public class TaskBean {
         this.taskDefinitionKey = taskDefinitionKey;
     }
 
-    @Override
+    public String getEntityIdentifier() {
+		return entityIdentifier;
+	}
+
+	public void setEntityIdentifier(String entityIdentifier) {
+		this.entityIdentifier = entityIdentifier;
+	}
+
+	public String getPendingSince() {
+		return pendingSince;
+	}
+
+	public void setPendingSince(String pendingSince) {
+		this.pendingSince = pendingSince;
+	}
+	
+	public String getDueBy() {
+		return dueBy;
+	}
+
+	public void setDueBy(String dueBy) {
+		this.dueBy = dueBy;
+	}
+
+	@Override
     public String toString() {
         return "Task{" +
                 "id='" + id + '\'' +
@@ -111,6 +139,7 @@ public class TaskBean {
                 ", description='" + description + '\'' +
                 ", priority=" + priority +
                 ", assignee='" + assignee + '\'' +
+                ", entityIdentifier='" + entityIdentifier + '\'' +
                 ", processInstanceId='" + processInstanceId + '\'' +
                 ", executionId='" + executionId + '\'' +
                 ", taskDefinitionId='" + taskDefinitionId + '\'' +

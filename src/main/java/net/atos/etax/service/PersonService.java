@@ -36,10 +36,9 @@ public class PersonService {
 
 	public void startProcess(String assignee) {
 		Person person = personRepository.findByUserName(assignee);
-
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("person", person);
-		runtimeService.startProcessInstanceByKey("oneTaskProcess", variables);
+		runtimeService.startProcessInstanceByKey("oneTaskProcess", "businessKey1", variables);
 	}
 
 	public List<Task> getTasks(String assignee) {
@@ -49,8 +48,8 @@ public class PersonService {
 	@Transactional
 	public void createDemoUsers() {
 		if (personRepository.findAll().size() == 0) {
-			personRepository.save(new Person("jbarrez", "Joram", "Barrez", Instant.now()));
-			personRepository.save(new Person("trademakers", "Tijs", "Rademakers", Instant.now()));
+			personRepository.save(new Person("sysadmin", "Joram", "Barrez", Instant.now()));
+			personRepository.save(new Person("syscontr", "Tijs", "Rademakers", Instant.now()));
 		}
 	}
 

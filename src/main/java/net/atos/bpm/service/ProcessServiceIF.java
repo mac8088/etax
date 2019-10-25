@@ -30,7 +30,9 @@ public interface ProcessServiceIF {
 	List<TaskBean> queryTasksInProcess(String pid);
 
 	List<TaskBean> queryTasksByAssignee(String assignee);
-
+	
+	List<TaskBean> queryTasksByCandidateUser(String candidateUser);
+	
 	List<TaskBean> queryTasksByCandidateGroup(String candidateGroup);
 
 	List<TaskBean> queryTasksByCandidateGroups(List<String> candidateGroups);
@@ -38,5 +40,7 @@ public interface ProcessServiceIF {
 	List<TaskBean> queryTasksByTaskID(String taskId);
 
 	void handleTask(String taskId, Boolean approve);
+
+	List<TaskBean> queryTasksByMyTasks(String who);
 	
 }

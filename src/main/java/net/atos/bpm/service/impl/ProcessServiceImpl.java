@@ -12,15 +12,16 @@ import org.flowable.engine.runtime.ProcessInstance;
 import org.flowable.engine.runtime.ProcessInstanceBuilder;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import net.atos.bpm.service.ProcessServiceIF;
 
 import net.atos.bpm.model.TaskBean;
 import net.atos.bpm.model.ProcessBean;
 
-
+@Service
 public class ProcessServiceImpl implements ProcessServiceIF {
-	
+
 	@Autowired
 	protected RuntimeService runtimeService;
 
@@ -55,6 +56,10 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 	@Override
 	public List<ProcessInstance> queryProcessesByProcessInstanceId(String processInstanceId) {
 		return runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).list();
+	}
+	
+	private ProcessInstance queryProcessByProcessInstanceId(String processInstanceId) {
+		return runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
 	}
 
 	@Override
@@ -101,7 +106,6 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 
 	private TaskBean convertTask(Task task) {
 		TaskBean taskInfo = new TaskBean();
-
 		taskInfo.setId(task.getId());
 		taskInfo.setName(task.getName());
 		taskInfo.setDescription(task.getDescription());
@@ -113,7 +117,13 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		taskInfo.setTaskDefinitionKey(task.getTaskDefinitionKey());
 		taskInfo.setPriority(task.getPriority());
 		taskInfo.setCreateTime(task.getCreateTime());
-
+		
+		//setup wfi.businessKey as entity identifier
+		ProcessInstance pi = queryProcessByProcessInstanceId(task.getProcessInstanceId());
+		if(pi != null) {
+			taskInfo.setEntityIdentifier(pi.getBusinessKey());
+		}
+		
 		return taskInfo;
 	}
 
@@ -123,21 +133,39 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 				.map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
+	public List<TaskBean> queryTasksByMyTasks(String user) {
+		return taskService.createTaskQuery().or().taskAssignee(user).taskCandidateUser(user).endOr()
+				.orderByTaskCreateTime().desc().list().stream().map(t -> convertTask(t)).collect(Collectors.toList());
+	}
+
+	protected List<TaskBean> queryTasksByUserAndGroup(String user, String group) {
+//		taskService.createNativeTaskQuery().sql("selectClause").parameter("name", "value").list();
+		return taskService.createTaskQuery().or().taskAssignee(user).taskCandidateUser(user).taskCandidateGroup(group)
+				.endOr().orderByTaskCreateTime().desc().list().stream().map(t -> convertTask(t))
+				.collect(Collectors.toList());
+	}
+
 	@Override
 	public List<TaskBean> queryTasksByAssignee(String assignee) {
 		return taskService.createTaskQuery().taskAssignee(assignee).orderByTaskCreateTime().desc().list().stream()
 				.map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
+	// 根据用户查询任务
+	public List<TaskBean> queryTasksByCandidateUser(String candidateUser) {
+		return taskService.createTaskQuery().taskCandidateUser(candidateUser).orderByTaskCreateTime().desc().list()
+				.stream().map(t -> convertTask(t)).collect(Collectors.toList());
+	}
+
 	@Override
-	//查询某个组的任务
+	// 根据用户组查询任务
 	public List<TaskBean> queryTasksByCandidateGroup(String candidateGroup) {
 		return taskService.createTaskQuery().taskCandidateGroup(candidateGroup).orderByTaskCreateTime().desc().list()
 				.stream().map(t -> convertTask(t)).collect(Collectors.toList());
 	}
 
 	@Override
-	//查询所有组队任务
+	// 查询多个组队任务
 	public List<TaskBean> queryTasksByCandidateGroups(List<String> candidateGroups) {
 		return taskService.createTaskQuery().taskCandidateGroupIn(candidateGroups).orderByTaskCreateTime().desc().list()
 				.stream().map(t -> convertTask(t)).collect(Collectors.toList());
@@ -161,5 +189,5 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		map.put("approved", approve);
 		taskService.complete(taskId, map);
 	}
-	
+
 }

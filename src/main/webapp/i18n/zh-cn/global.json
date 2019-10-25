@@ -74,6 +74,15 @@
       "ADM002": "系统主管",
       "TECHSPT": "技术支持"
     },
+    "todolist": {
+      "FIX_COL1": "代办任务",
+      "FIX_COL2": "实体标识符",
+      "EXT_COL1": "实体描述",
+      "EXT_COL2": "业务键",
+      "EXT_COL3": "创建时间",
+      "EXT_COL4": "到期日",
+      "EXT_COL5": "操作"
+    },
     "messages": {
       "info": {
         "authenticated": {

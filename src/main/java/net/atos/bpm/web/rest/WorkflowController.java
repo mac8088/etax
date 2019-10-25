@@ -1,6 +1,7 @@
 package net.atos.bpm.web.rest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.atos.bpm.model.TaskBean;
 import net.atos.bpm.model.ValuePairBean;
 import net.atos.bpm.service.ToDoService;
 import net.atos.bpm.service.WorkflowService;
@@ -136,10 +138,40 @@ public class WorkflowController {
 		logger.info("Task completed");
 	}
 	
-	@GetMapping("/flow/todo/profiles")
+	@GetMapping("/flow/todo/myprofiles")
 	public List<ValuePairBean> getMyProfiles() {
 		String who = SecurityUtils.getCurrentUserLogin().get();
-		logger.info("get {} available profiles ... ", who);
+		logger.debug("REST get {} available profiles ... ", who);
 		return toDoService.getAvailableProfiles(who);
+	}
+	
+	@GetMapping("/flow/todo/mytasks")
+	public List<TaskBean> getMyTasks() {
+		String who = SecurityUtils.getCurrentUserLogin().get();
+		logger.debug("REST get {} mytasks ... ", who);
+		return toDoService.getMyTasks(who);
+	}
+	
+	@GetMapping("/flow/todo/profiletasks/{profile}")
+	public List<TaskBean> getProfileTasks(@PathVariable String profile) {
+		String who = SecurityUtils.getCurrentUserLogin().get();
+		logger.debug("REST get {} profile {} tasks ... ", who, profile);
+		boolean allowed = SecurityUtils.isCurrentUserInRole(profile);
+		logger.debug("Security isCurrentUserInRole {} with {} ... ", profile, allowed);
+		if(allowed) {
+			return toDoService.getProfileTasks(who, profile, Boolean.FALSE);
+		} else {
+			return Collections.emptyList();
+		}
+	}
+	
+	@GetMapping("/flow/todo/release/{taskId}")
+	public void releaseTask(@PathVariable String taskId) {
+		
+	}
+	
+	@GetMapping("/flow/todo/transfer/{taskId}")
+	public void transferTask(@PathVariable String taskId) {
+
 	}
 }
