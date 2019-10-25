@@ -114,7 +114,8 @@
           "required": "Your email is required.",
           "invalid": "Your email is invalid.",
           "minlength": "Your email is required to be at least 5 characters.",
-          "maxlength": "Your email cannot be longer than 50 characters."
+          "maxlength": "Your email cannot be longer than 50 characters.",
+          "emailexists": " Your email is already in use, please choose another one."
         }
       }
     },

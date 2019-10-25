@@ -86,6 +86,7 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		process.setDescription(processInstance.getDescription());
 		process.setStartTime(processInstance.getStartTime());
 		process.setStartUser(processInstance.getStartUserId());
+		process.setBusinessKey(processInstance.getBusinessKey());
 		process.setProcessDefinitionKey(processInstance.getProcessDefinitionKey());
 		return process;
 	}
@@ -100,6 +101,7 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		process.setDescription(historicProcessInstance.getDescription());
 		process.setStartTime(historicProcessInstance.getStartTime());
 		process.setStartUser(historicProcessInstance.getStartUserId());
+		process.setBusinessKey(historicProcessInstance.getBusinessKey());
 		process.setProcessDefinitionKey(historicProcessInstance.getProcessDefinitionKey());
 		return process;
 	}
