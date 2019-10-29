@@ -3,6 +3,8 @@ package net.atos.bpm.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.flowable.engine.TaskService;
+import org.flowable.engine.runtime.ProcessInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class ToDoService {
 
 	@Autowired
 	private ProcessServiceIF processService;
+	
+	@Autowired
+	private TaskService taskService;
 
 	public List<ValuePairBean> getAvailableProfiles(String who) {
 		log.debug("Service get {} available profiles ", who);
@@ -48,6 +53,25 @@ public class ToDoService {
 		List<TaskBean> taskList = processService.queryTasksByCandidateGroup(profile);
 		log.debug("Service get {} profile {} tasks with {}", who, profile, taskList);
 		return taskList;
+	}
+	
+	public TaskBean getTaskByBusinesskey(String who, String businesskey) {
+		ProcessInstance processInstance = processService.queryProcessByBusinesskey(businesskey);
+		if (processInstance !=null && processInstance.getId()!=null) {
+			TaskBean taskBean = processService.queryTaskByProcessInstance(processInstance.getId());
+			log.debug("Service get task {} with assingee {}, businesskey {}", taskBean, who, businesskey);
+			if (taskBean !=null && taskBean.getAssignee()!=null ) {
+				if (taskBean.getAssignee().equals(who)) {
+					return taskBean;
+				}
+			}
+			return null;
+		}
+		return null;
+	}
+	
+	public void claimTaskByTaskId(String who, String taskId) {
+		taskService.claim(taskId,who); 
 	}
 
 }

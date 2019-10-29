@@ -83,6 +83,10 @@
       "EXT_COL4": "Due By",
       "EXT_COL5": "Action"
     },
+    "task": {
+      "approved": "This entity is approved",
+      "rejected": "This entity is rejected"
+    },
     "messages": {
       "info": {
         "authenticated": {
@@ -140,7 +144,10 @@
       "view": "View",
       "search": "Search",
       "searchConditions": "Search Conditions",
-      "noIdTip": "Please choose one item then operate"
+      "noIdTip": "Please choose one item then operate",
+      "accept": "Accept",
+      "reject": "Reject",
+      "todo": "Process"
     },
     "detail": {
       "field": "Field",

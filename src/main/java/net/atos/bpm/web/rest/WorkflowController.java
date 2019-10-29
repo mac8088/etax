@@ -165,13 +165,22 @@ public class WorkflowController {
 		}
 	}
 	
-	@GetMapping("/flow/todo/release/{taskId}")
-	public void releaseTask(@PathVariable String taskId) {
-		
+	@GetMapping("/flow/todo/getTask/{businesskey}")
+	public TaskBean processTask(@PathVariable String businesskey) {
+		String who = SecurityUtils.getCurrentUserLogin().get();
+		logger.debug("REST get {} task by bussinesskey {} ", who, businesskey);
+		return toDoService.getTaskByBusinesskey(who,businesskey);
 	}
 	
-	@GetMapping("/flow/todo/transfer/{taskId}")
-	public void transferTask(@PathVariable String taskId) {
-
+	@GetMapping("/flow/todo/claimTask/{taskId}")
+	public void claimTask(@PathVariable String taskId) {
+		String who = SecurityUtils.getCurrentUserLogin().get();
+		logger.debug("REST {} claim task by taskId {} ", who, taskId);
+		toDoService.claimTaskByTaskId(who,taskId);
+	}
+	
+	@GetMapping("/flow/todo/releaseTask/{taskId}")
+	public void releaseTask(@PathVariable String taskId) {
+		
 	}
 }

@@ -18,6 +18,8 @@ public class TaskBean {
     private String entityIdentifier;
     private String pendingSince;
     private String dueBy;
+    
+    private String formKey;
 
     public String getId() {
         return id;
@@ -130,6 +132,14 @@ public class TaskBean {
 	public void setDueBy(String dueBy) {
 		this.dueBy = dueBy;
 	}
+		
+	public String getFormKey() {
+		return formKey;
+	}
+
+	public void setFormKey(String formKey) {
+		this.formKey = formKey;
+	}
 
 	@Override
     public String toString() {
@@ -146,6 +156,7 @@ public class TaskBean {
                 ", processDefinitionId='" + processDefinitionId + '\'' +
                 ", createTime=" + createTime +
                 ", taskDefinitionKey='" + taskDefinitionKey + '\'' +
+				", formKey='" + formKey + '\'' +
                 '}';
     }
 }

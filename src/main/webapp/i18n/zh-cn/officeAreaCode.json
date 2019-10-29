@@ -5,7 +5,8 @@
         "title": "Office Area Codes",
         "createLabel": "创建新 Office Area Code",
         "createOrEditLabel": "创建或编辑 Office Area Code",
-        "notFound": "No Office Area Code found"
+        "notFound": "No Office Area Code found",
+        "addNewOne": "添加新的officeAreaCodes"
       },
       "created": "Office Area Code {{ param }} 创建成功",
       "updated": "Office Area Code {{ param }} 更新成功",

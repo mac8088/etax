@@ -83,6 +83,10 @@
       "EXT_COL4": "到期日",
       "EXT_COL5": "操作"
     },
+    "task": {
+      "approved": "批准",
+      "rejected": "驳回"
+    },
     "messages": {
       "info": {
         "authenticated": {
@@ -140,7 +144,10 @@
       "view": "查看",
       "search": "查询",
       "searchConditions": "查询条件",
-      "noIdTip": "操作前请先选择一条记录"
+      "noIdTip": "操作前请先选择一条记录",
+      "accept": "批准",
+      "reject": "驳回",
+      "todo": "处理"
     },
     "detail": {
       "field": "字段",

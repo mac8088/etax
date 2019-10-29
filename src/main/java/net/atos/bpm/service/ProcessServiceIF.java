@@ -43,4 +43,8 @@ public interface ProcessServiceIF {
 
 	List<TaskBean> queryTasksByMyTasks(String who);
 	
+	ProcessInstance queryProcessByBusinesskey(String businesskey);
+	
+	TaskBean queryTaskByProcessInstance(String processInsId);
+	
 }

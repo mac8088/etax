@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
   <process id="ADM002_MaintainUser" name="ADM002_MaintainUser" isExecutable="true">
     <startEvent id="theStart"></startEvent>
-    <userTask id="approveUserProfile" name="Appove User Profile" xmlns:flowable="http://flowable.org/bpmn" flowable:assignee="syscontr"></userTask>
+    <userTask id="approveUserProfile" name="Appove User Profile" flowable:candidateGroups="ADM002" flowable:formKey="${form}" xmlns:flowable="http://flowable.org/bpmn" ></userTask>
     <endEvent id="theEnd"></endEvent>
     <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
     <sequenceFlow id="flow2" sourceRef="approveUserProfile" targetRef="exclusivegateway1"></sequenceFlow>
-    <serviceTask id="createUser" name="Create User" flowable:class="net.atos.bpm.action.SaveUserDelegate"></serviceTask>
+    <serviceTask id="createUser" name="Create User" flowable:class="net.atos.etax.action.SaveUserDelegate"></serviceTask>
     <sequenceFlow id="flow5" sourceRef="theStart" targetRef="createUser"></sequenceFlow>
     <sequenceFlow id="flow6" sourceRef="createUser" targetRef="approveUserProfile"></sequenceFlow>
     <sequenceFlow id="flow9" sourceRef="exclusivegateway1" targetRef="theEnd">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='reject'}]]></conditionExpression>
     </sequenceFlow>
-    <serviceTask id="showLetter" name="Show Letter" flowable:class="net.atos.bpm.action.SendRejectionMail"></serviceTask>
+    <serviceTask id="showLetter" name="Show Letter" flowable:class="net.atos.etax.action.SendApprovalMail"></serviceTask>
     <sequenceFlow id="flow10" sourceRef="exclusivegateway1" targetRef="showLetter">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${outcome=='approve'}]]></conditionExpression>
     </sequenceFlow>

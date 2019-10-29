@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.flowable.engine.HistoryService;
+import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.history.HistoricProcessInstance;
@@ -14,10 +15,9 @@ import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.atos.bpm.service.ProcessServiceIF;
-
-import net.atos.bpm.model.TaskBean;
 import net.atos.bpm.model.ProcessBean;
+import net.atos.bpm.model.TaskBean;
+import net.atos.bpm.service.ProcessServiceIF;
 
 @Service
 public class ProcessServiceImpl implements ProcessServiceIF {
@@ -30,6 +30,9 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 
 	@Autowired
 	protected HistoryService historyService;
+	
+	@Autowired
+	protected ProcessEngine processEngine;
 
 	@Override
 	public String hello(String name) {
@@ -119,6 +122,7 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		taskInfo.setTaskDefinitionKey(task.getTaskDefinitionKey());
 		taskInfo.setPriority(task.getPriority());
 		taskInfo.setCreateTime(task.getCreateTime());
+		taskInfo.setFormKey(task.getFormKey());
 		
 		//setup wfi.businessKey as entity identifier
 		ProcessInstance pi = queryProcessByProcessInstanceId(task.getProcessInstanceId());
@@ -191,5 +195,13 @@ public class ProcessServiceImpl implements ProcessServiceIF {
 		map.put("approved", approve);
 		taskService.complete(taskId, map);
 	}
-
+	
+	public ProcessInstance queryProcessByBusinesskey(String businesskey) {
+		return runtimeService.createProcessInstanceQuery().processInstanceBusinessKey(businesskey).singleResult();
+	}
+	
+	public TaskBean queryTaskByProcessInstance(String processInsId){
+		return convertTask(processEngine.getTaskService().createTaskQuery().processInstanceId(processInsId).orderByProcessInstanceId().desc().singleResult());
+	}
+	
 }

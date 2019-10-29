@@ -127,4 +127,17 @@ public class OfficeAreaCodeResource {
         officeAreaCodeRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * {@code FIND  /office-area-codes/search-office:id} : find the "officeId" officeAreaCode.
+     *
+     * @param officeId the officeId of the officeAreaCode to find.
+     * @return the {@link ResponseEntity<List<OfficeAreaCode>>} with status {@code 204 (NO_CONTENT)}.
+     */
+    @GetMapping("/office-area-codes/search-office/{officeId}")
+    public ResponseEntity<List<OfficeAreaCode>> getAllOfficeAreaCodeByOfficeId(@PathVariable Integer officeId) {
+        log.debug("REST request to find OfficeAreaCode by officeId");
+        List<OfficeAreaCode> result = officeAreaCodeRepository.findAllByOfficeIdEquals(officeId);
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert(applicationName,"Search result",ENTITY_NAME)).body(result);
+    }
 }

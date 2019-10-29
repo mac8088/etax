@@ -3,9 +3,11 @@
     "home": {
       "title": "Users",
       "createLabel": "Create a new user",
-      "createOrEditLabel": "Create or edit a user"
+      "createOrEditLabel": "Create or edit a user",
+      "UserDetail": "User Detail"
     },
     "created": "A new user is created with identifier {{ param }}",
+    "createdByLogin": "A new user is created with login {{ param }}",
     "updated": "A user is updated with identifier {{ param }}",
     "deleted": "A user is deleted with identifier {{ param }}",
     "delete": {
@@ -25,6 +27,8 @@
     "createdBy": "Created by",
     "createdDate": "Created date",
     "lastModifiedBy": "Modified by",
-    "lastModifiedDate": "Modified date"
+    "lastModifiedDate": "Modified date",
+    "errorUserExists": "Your login name already registered, please choose another one.",
+    "cannotBeApproved": "This user cannot be approved or rejected"
   }
 }

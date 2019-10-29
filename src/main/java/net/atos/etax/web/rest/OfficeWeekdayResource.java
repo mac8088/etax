@@ -127,4 +127,17 @@ public class OfficeWeekdayResource {
         officeWeekdayRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * {@code FIND  /office-weekdays/search-office:id} : find the "officeId" office-weekdays.
+     *
+     * @param officeId the officeId of the officeAreaCode to find.
+     * @return the {@link ResponseEntity<List<OfficeWeekday>>} with status {@code 204 (NO_CONTENT)}.
+     */
+    @GetMapping("/office-weekdays/search-office/{officeId}")
+    public ResponseEntity<List<OfficeWeekday>> findAllOfficeWeekdaysByOfficeId(@PathVariable Integer officeId) {
+        log.debug("REST request to find OfficeWeekday by : {}", officeId);
+        List<OfficeWeekday> result = officeWeekdayRepository.findAllByOfficeIdEquals(officeId);
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert(applicationName,"The find result is : '"+result.toArray()+"'",ENTITY_NAME)).body(result);
+    }
 }

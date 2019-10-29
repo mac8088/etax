@@ -5,7 +5,8 @@
         "title": "Office Weekdays",
         "createLabel": "Create a new Office Weekday",
         "createOrEditLabel": "Create or edit a Office Weekday",
-        "notFound": "No Office Weekday found"
+        "notFound": "No Office Weekday found",
+        "addNewOne": "Add new OfficeWeekdays"
       },
       "created": "A new Office Weekday is created with identifier {{ param }}",
       "updated": "A Office Weekday is updated with identifier {{ param }}",

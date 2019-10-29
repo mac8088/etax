@@ -75,6 +75,10 @@ module.exports = merge(baseWebpackConfig, {
       chunks: ['vendors', 'main', 'global'],
       chunksSortMode: 'manual',
       inject: true
+    }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery'
     })
   ]
 });
